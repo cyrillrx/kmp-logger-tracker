@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="lock_size">120dp</dimen>
+
+</resources>
