@@ -19,7 +19,7 @@ public class MainActivity extends ListActivity implements AdapterView.OnItemClic
         setContentView(R.layout.activity_main);
 
         final List<Sample> samples = new ArrayList<>();
-        samples.add(new Sample("UnlockActivity", "Subtitle", UnlockActivity.class));
+        samples.add(new Sample("UnlockActivity", "Touch all the targets to complete the activity.", UnlockActivity.class));
         mAdapter = new SampleAdapter(getApplicationContext(), samples);
 
         setListAdapter(mAdapter);

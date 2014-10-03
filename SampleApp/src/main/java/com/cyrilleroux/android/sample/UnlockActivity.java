@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.cyrilleroux.android.core.toolbox.CompletionListener;
 import com.cyrilleroux.android.core.toolbox.CountDownTimer;
@@ -44,8 +45,7 @@ public class UnlockActivity extends Activity implements View.OnTouchListener, Co
     @Override
     public void onCompleted() {
         if (mTimer1.isComplete() && mTimer2.isComplete() && mTimer3.isComplete()) {
-            setResult(RESULT_OK);
-            finish();
+            Toast.makeText(getApplicationContext(), "All done !", Toast.LENGTH_SHORT).show();
         }
     }
 
