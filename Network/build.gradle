@@ -27,4 +27,8 @@ android {
 
 dependencies {
     compile project(':volley')
+    compile 'com.android.support:support-v4:21.0.0'
+
+    // Local modules
+    compile project(':Core')
 }

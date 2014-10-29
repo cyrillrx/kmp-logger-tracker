@@ -8,30 +8,30 @@
     android:gravity="center"
     android:orientation="horizontal">
 
-        <ProgressBar
-            android:id="@+id/pb_lock_1"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="@dimen/lock_size"
-            android:layout_height="@dimen/lock_size"
-            android:layout_margin="@dimen/lock_spacing"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/progress_lock" />
+    <ProgressBar
+        android:id="@+id/pb_lock_1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/lock_size"
+        android:layout_height="@dimen/lock_size"
+        android:layout_margin="@dimen/lock_spacing"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/progress_lock" />
 
-        <ProgressBar
-            android:id="@+id/pb_lock_2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="@dimen/lock_size"
-            android:layout_height="@dimen/lock_size"
-            android:layout_margin="@dimen/lock_spacing"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/progress_lock" />
+    <ProgressBar
+        android:id="@+id/pb_lock_2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/lock_size"
+        android:layout_height="@dimen/lock_size"
+        android:layout_margin="@dimen/lock_spacing"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/progress_lock" />
 
-        <ProgressBar
-            android:id="@+id/pb_lock_3"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="@dimen/lock_size"
-            android:layout_height="@dimen/lock_size"
-            android:layout_margin="@dimen/lock_spacing"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/progress_lock" />
+    <ProgressBar
+        android:id="@+id/pb_lock_3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="@dimen/lock_size"
+        android:layout_height="@dimen/lock_size"
+        android:layout_margin="@dimen/lock_spacing"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/progress_lock" />
 </LinearLayout>
