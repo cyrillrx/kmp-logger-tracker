@@ -22,16 +22,6 @@ android {
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
         versionName "1.0"
-
-        // For each application variants (release, debug, etc.)
-        applicationVariants.all { variant ->
-
-            // Create custom apk names
-            File file = variant.outputFile
-            String date = (new Date()).format('yyyy-MM-dd')
-            String filename = date + "_" + project.name + "-v" + variant.versionName + "-" + variant.buildType.name + ".apk"
-            variant.outputFile = new File(file.parent, filename)
-        }
     }
 
     signingConfigs {
@@ -56,13 +46,13 @@ android {
         debug {
             applicationIdSuffix ".debug"
 
-            jniDebugBuild true
             debuggable true
+            jniDebuggable true
             signingConfig signingConfigs.debug
         }
         release {
-            jniDebugBuild false
             debuggable false
+            jniDebuggable false
             signingConfig signingConfigs.release
         }
     }
