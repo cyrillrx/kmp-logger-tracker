@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.core.toolbox;
+package com.cyrilleroux.android.toolbox;
 
 /**
  * Created on 26/09/2014.

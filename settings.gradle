@@ -1,15 +1,8 @@
-// Sample application
-
-include ':SampleApp'
-
 // Local modules
 
 include ':Core'
-include ':Network'
-include ':Component'
 include ':Remote'
 
 // Git submodules
 
-include ':volley'
-project(':volley').projectDir = new File('libraries/volley')
+include ':libraries:volley'

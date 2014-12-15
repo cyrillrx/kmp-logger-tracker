@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.core.toolbox;
+package com.cyrilleroux.android.toolbox;
 
 import android.os.Handler;
 import android.os.Message;

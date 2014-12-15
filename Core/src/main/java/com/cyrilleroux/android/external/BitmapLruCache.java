@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.network.toolbox;
+package com.cyrilleroux.android.external;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
