@@ -25,6 +25,6 @@ android {
 }
 
 dependencies {
-    compile project(':libraries:volley')
+    compile project(':volley')
     compile 'com.android.support:support-v4:21.0.3'
 }
