@@ -25,6 +25,13 @@ android {
 }
 
 dependencies {
+
+    // Local libs
     compile project(':volley')
+
+    // Google Support libraries
     compile 'com.android.support:support-v4:21.0.3'
+
+    // External libs
+    compile 'com.google.code.gson:gson:2.3'
 }

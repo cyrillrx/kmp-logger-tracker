@@ -12,7 +12,7 @@ public class PagerItem<PageFragment extends Fragment> {
     private final int mDividerColor;
     private final PageFragment mFragment;
 
-    private PagerItem(CharSequence title, int indicatorColor, int dividerColor, PageFragment fragment) {
+    public PagerItem(CharSequence title, int indicatorColor, int dividerColor, PageFragment fragment) {
         mTitle = title;
         mIndicatorColor = indicatorColor;
         mDividerColor = dividerColor;

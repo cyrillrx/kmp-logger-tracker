@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Link the ws response to the view.
  * Created on 04/12/14.
  */
 public class WsLinker<Data> {
