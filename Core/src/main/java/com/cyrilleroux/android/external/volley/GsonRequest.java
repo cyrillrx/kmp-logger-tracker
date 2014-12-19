@@ -46,6 +46,23 @@ public class GsonRequest<T> extends Request<T> {
         mGetParams = new HashMap<>();
         mParams = null;
     }
+    /**
+     * Make a request with the given method type and return a parsed object from JSON.
+     *
+     * @param method     The request method type (one of the values from {@link Method})
+     * @param url     URL of the request to make
+     * @param clazz   Relevant class object, for Gson's reflection
+     * @param headers Map of request headers
+     */
+    public GsonRequest(int method, String url, Class<T> clazz, Map<String, String> headers,
+                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+        super(method, url, errorListener);
+        mClass = clazz;
+        mHeaders = headers;
+        mListener = listener;
+        mGetParams = new HashMap<>();
+        mParams = new HashMap<>();
+    }
 
     /**
      * Applies GET params if any.

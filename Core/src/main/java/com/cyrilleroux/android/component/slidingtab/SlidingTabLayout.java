@@ -188,8 +188,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
             if (mTabViewLayoutId != 0) {
                 // If there is a custom tab view layout id set, try and inflate it
-                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
-                        false);
+                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip, false);
                 tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
             }
 
@@ -205,6 +204,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
             tabView.setOnClickListener(tabClickListener);
 
             mTabStrip.addView(tabView);
+
+            boldSelectedTab(0);
         }
     }
 
@@ -233,6 +234,15 @@ public class SlidingTabLayout extends HorizontalScrollView {
             }
 
             scrollTo(targetScrollX, 0);
+        }
+    }
+
+    private void boldSelectedTab(int selectedTabId) {
+        //Apply bold font
+        final int tabStripChildCount = mTabStrip.getChildCount();
+        for (int i = 0; i < tabStripChildCount; i++) {
+            TextView textView = ((TextView) mTabStrip.getChildAt(i));
+            textView.setTypeface(null, (selectedTabId == i) ? Typeface.BOLD : Typeface.NORMAL);
         }
     }
 
@@ -279,6 +289,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
             if (mViewPagerPageChangeListener != null) {
                 mViewPagerPageChangeListener.onPageSelected(position);
             }
+            boldSelectedTab(position);
         }
 
     }
