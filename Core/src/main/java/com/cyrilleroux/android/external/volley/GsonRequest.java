@@ -5,6 +5,7 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -46,10 +47,11 @@ public class GsonRequest<T> extends Request<T> {
         mGetParams = new HashMap<>();
         mParams = null;
     }
+
     /**
      * Make a request with the given method type and return a parsed object from JSON.
      *
-     * @param method     The request method type (one of the values from {@link Method})
+     * @param method  The request method type (one of the values from {@link Method})
      * @param url     URL of the request to make
      * @param clazz   Relevant class object, for Gson's reflection
      * @param headers Map of request headers
@@ -109,9 +111,5 @@ public class GsonRequest<T> extends Request<T> {
         } catch (JsonSyntaxException e) {
             return Response.error(new ParseError(e));
         }
-    }
-
-    public String addGetParam(String key, String value) {
-        return mGetParams.put(key, value);
     }
 }
