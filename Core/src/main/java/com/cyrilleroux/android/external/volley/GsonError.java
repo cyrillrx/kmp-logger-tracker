@@ -1,5 +1,7 @@
 package com.cyrilleroux.android.external.volley;
 
+import android.support.annotation.NonNull;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
@@ -24,9 +26,14 @@ public class GsonError<T> {
      */
     public GsonError(Class<T> clazz) { mClass = clazz; }
 
-    public T parse(VolleyError error) { return parseNetworkResponse(error.networkResponse).result; }
+    public T parse(VolleyError error) {
+        if (error.networkResponse == null) {
+            return null;
+        }
+        return parseNetworkResponse(error.networkResponse).result;
+    }
 
-    protected Response<T> parseNetworkResponse(NetworkResponse response) {
+    protected Response<T> parseNetworkResponse(@NonNull NetworkResponse response) {
 
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));

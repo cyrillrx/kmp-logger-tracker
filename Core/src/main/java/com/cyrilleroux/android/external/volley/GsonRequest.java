@@ -5,8 +5,8 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.cyrilleroux.android.toolbox.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -20,6 +20,8 @@ import java.util.Set;
  *         Created 16/12/2014.
  */
 public class GsonRequest<T> extends Request<T> {
+
+    private static final String TAG = GsonRequest.class.getSimpleName();
 
     private final Gson mGson = new Gson();
     private final Class<T> mClass;
@@ -101,14 +103,19 @@ public class GsonRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
 
+        String json;
         try {
-            String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
-            return Response.success(mGson.fromJson(json, mClass), HttpHeaderParser.parseCacheHeaders(response));
-
+            json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
+            Logger.verbose(TAG, "Json response  : " + json);
         } catch (UnsupportedEncodingException e) {
+            Logger.error(TAG, "UnsupportedEncodingException", e);
             return Response.error(new ParseError(e));
+        }
 
+        try {
+            return Response.success(mGson.fromJson(json, mClass), HttpHeaderParser.parseCacheHeaders(response));
         } catch (JsonSyntaxException e) {
+            Logger.error(TAG, "Parsing error : " + json, e);
             return Response.error(new ParseError(e));
         }
     }
