@@ -62,7 +62,7 @@ public class TextProgressBar extends ProgressBar {
 
         try {
             mText = a.getString(R.styleable.TextProgressBar_text);
-            mTextColor = a.getInteger(R.styleable.TextProgressBar_textColor, DEFAULT_COLOR);
+            mTextColor = a.getColor(R.styleable.TextProgressBar_textColor, DEFAULT_COLOR);
             mTextSize = a.getDimension(R.styleable.TextProgressBar_textSize, DEFAULT_TEXT_SIZE);
         } finally {
             a.recycle();

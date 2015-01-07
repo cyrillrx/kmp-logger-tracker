@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class WsLinker<Data> {
 
-    protected Set<WsLinkedView<Data>> mLinkedViews;
+    protected final Set<WsLinkedView<Data>> mLinkedViews;
     protected boolean mDataChanged;
     protected Data mData;
     protected OnViewLoadedListener mViewLoadedListener;
