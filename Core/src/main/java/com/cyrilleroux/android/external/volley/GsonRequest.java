@@ -1,6 +1,7 @@
 package com.cyrilleroux.android.external.volley;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -22,6 +23,19 @@ import java.util.Set;
 public class GsonRequest<T> extends Request<T> {
 
     private static final String TAG = GsonRequest.class.getSimpleName();
+    private static final int REQUEST_TIMEOUT_MS = 3000;
+    private static final int REQUEST_MAX_RETRIES = 2;
+    private static final int REQUEST_BACKOFF_MULT = 2;
+
+    private static final DefaultRetryPolicy DEFAULT_POLICY = new DefaultRetryPolicy(
+            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+    
+    private static final DefaultRetryPolicy CUSTOM_POLICY = new DefaultRetryPolicy(
+            REQUEST_TIMEOUT_MS,
+            REQUEST_MAX_RETRIES,
+            REQUEST_BACKOFF_MULT);
 
     private final Gson mGson = new Gson();
     private final Class<T> mClass;
@@ -48,6 +62,7 @@ public class GsonRequest<T> extends Request<T> {
         mListener = listener;
         mGetParams = new HashMap<>();
         mParams = null;
+        setRetryPolicy(CUSTOM_POLICY);
     }
 
     /**
@@ -66,6 +81,7 @@ public class GsonRequest<T> extends Request<T> {
         mListener = listener;
         mGetParams = new HashMap<>();
         mParams = new HashMap<>();
+        setRetryPolicy(CUSTOM_POLICY);
     }
 
     /**
