@@ -12,7 +12,7 @@ import android.widget.ScrollView;
  */
 public class ObservableScrollView extends ScrollView {
 
-    private ScrollViewListener mScrollListener;
+    protected OnScrollChangedListener mScrollListener;
 
     public ObservableScrollView(Context context) {
         super(context);
@@ -31,8 +31,12 @@ public class ObservableScrollView extends ScrollView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setScrollViewListener(ScrollViewListener listener) {
+    public void setOnScrollChangedListener(OnScrollChangedListener listener) {
         mScrollListener = listener;
+    }
+
+    public OnScrollChangedListener getOnScrollChangedListener() {
+        return mScrollListener;
     }
 
     @Override

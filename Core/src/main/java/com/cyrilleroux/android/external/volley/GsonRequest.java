@@ -31,7 +31,7 @@ public class GsonRequest<T> extends Request<T> {
             DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
             DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
             DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-    
+
     private static final DefaultRetryPolicy CUSTOM_POLICY = new DefaultRetryPolicy(
             REQUEST_TIMEOUT_MS,
             REQUEST_MAX_RETRIES,
