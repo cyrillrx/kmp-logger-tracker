@@ -15,6 +15,11 @@ public class WsLinker<Data> {
     protected Data mData;
     protected OnViewLoadedListener mViewLoadedListener;
 
+    /**
+     * Initializes the linker with the view to update.
+     *
+     * @param views The views that will be updated when setData is called.
+     */
     public WsLinker(WsLinkedView<Data>... views) {
         mLinkedViews = new HashSet<>();
         Collections.addAll(mLinkedViews, views);
@@ -53,7 +58,7 @@ public class WsLinker<Data> {
      *
      * @param data The new data.
      */
-    public final void refreshViews(Data data) {
+    protected final void refreshViews(Data data) {
         if (!mDataChanged) {
             return;
         }
@@ -71,8 +76,26 @@ public class WsLinker<Data> {
         }
     }
 
+    public void onStartLoading() {
+        for (WsLinkedView<Data> view : mLinkedViews) {
+            view.onStartLoading();
+        }
+    }
+
+    public void onStopLoading() {
+        for (WsLinkedView<Data> view : mLinkedViews) {
+            view.onStopLoading();
+        }
+    }
+
     public Data getData() { return mData; }
 
+    /**
+     * Add a linked view that will be updated when setData is called.
+     *
+     * @param linkedView
+     * @return
+     */
     public boolean addLinkedView(WsLinkedView<Data> linkedView) {
         return mLinkedViews.add(linkedView);
     }
