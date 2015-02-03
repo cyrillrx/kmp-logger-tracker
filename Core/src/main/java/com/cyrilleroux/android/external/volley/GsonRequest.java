@@ -23,6 +23,7 @@ import java.util.Set;
 public class GsonRequest<T> extends Request<T> {
 
     private static final String TAG = GsonRequest.class.getSimpleName();
+
     private static final int REQUEST_TIMEOUT_MS = 3000;
     private static final int REQUEST_MAX_RETRIES = 2;
     private static final int REQUEST_BACKOFF_MULT = 2;
@@ -125,14 +126,14 @@ public class GsonRequest<T> extends Request<T> {
             Logger.verbose(TAG, "Json response  : " + json);
         } catch (UnsupportedEncodingException e) {
             Logger.error(TAG, "UnsupportedEncodingException", e);
-            return Response.error(new ParseError(e));
+            return Response.error(new ParseError(response));
         }
 
         try {
             return Response.success(mGson.fromJson(json, mClass), HttpHeaderParser.parseCacheHeaders(response));
         } catch (JsonSyntaxException e) {
             Logger.error(TAG, "Parsing error : " + json, e);
-            return Response.error(new ParseError(e));
+            return Response.error(new ParseError(response));
         }
     }
 }
