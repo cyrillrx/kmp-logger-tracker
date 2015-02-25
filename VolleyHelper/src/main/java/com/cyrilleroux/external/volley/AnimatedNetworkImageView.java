@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.external.volley;
+package com.cyrilleroux.external.volley;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;

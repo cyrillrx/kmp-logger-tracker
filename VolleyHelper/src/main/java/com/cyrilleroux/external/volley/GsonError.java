@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.external.volley;
+package com.cyrilleroux.external.volley;
 
 import android.support.annotation.NonNull;
 
