@@ -33,6 +33,9 @@ import com.cyrilleroux.android.component.scroll.OnScrollChangedListener;
 import com.cyrilleroux.android.component.scroll.ScrollDirectionListener;
 import com.cyrilleroux.android.component.scroll.ScrollViewThresholdListener;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * @author Cyril Leroux
  *         Created on 17/01/2015.
@@ -42,6 +45,7 @@ public class FloatingActionButton extends ImageButton {
     private static final int TRANSLATE_DURATION_MILLIS = 200;
     private static final int DEFAULT_COLOR_RIPPLE = Color.WHITE;
 
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({TYPE_NORMAL, TYPE_MINI})
     public @interface FabType {
     }
