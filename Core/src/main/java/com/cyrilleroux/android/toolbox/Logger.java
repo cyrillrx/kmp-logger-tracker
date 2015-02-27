@@ -50,6 +50,10 @@ public class Logger {
         if (sIsDebug) { android.util.Log.i(tag, message); }
     }
 
+    public static void debug(String tag, String message) {
+        if (sIsDebug) { android.util.Log.d(tag, message); }
+    }
+
     public static void warning(String tag, String message) {
         if (sIsDebug) { android.util.Log.w(tag, message); }
     }
