@@ -1,7 +1,6 @@
 package com.cyrilleroux.social;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ public class GooglePlusHelper
     public static final int RC_SIGN_IN = 1001;
 
     private Activity mActivity;
-    private Context mApplicationContext;
     private PlusCallback mPlusCallback;
 
     /** Google client to communicate with Google */
@@ -34,13 +32,11 @@ public class GooglePlusHelper
 
     public GooglePlusHelper(Activity activity, PlusCallback callback) {
         mActivity = activity;
-        mApplicationContext = activity.getApplicationContext();
         mPlusCallback = callback;
     }
 
     public void onCreate() {
         final Plus.PlusOptions plusOptions = new Plus.PlusOptions.Builder()
-//                .addActivityTypes("http://schemas.google.com/AddActivity", "http://schemas.google.com/BuyActivity")
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
