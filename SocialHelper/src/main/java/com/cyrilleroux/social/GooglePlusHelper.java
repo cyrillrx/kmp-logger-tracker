@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -19,6 +19,7 @@ import com.google.android.gms.plus.Plus;
 public class GooglePlusHelper
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    public static final String TAG = GooglePlusHelper.class.getSimpleName();
     public static final int RC_SIGN_IN = 1001;
 
     private Activity mActivity;
@@ -51,9 +52,7 @@ public class GooglePlusHelper
                 .build();
     }
 
-    public void onStart() {
-        mGoogleApiClient.connect();
-    }
+    public void onStart() { mGoogleApiClient.connect(); }
 
     public void onStop() {
         if (mGoogleApiClient.isConnected()) {
@@ -64,7 +63,7 @@ public class GooglePlusHelper
     public void onActivityResult(int requestCode, int responseCode, Intent intent) {
         switch (requestCode) {
             case RC_SIGN_IN:
-                Toast.makeText(mApplicationContext, "onActivityResult RC_SIGN_IN", Toast.LENGTH_LONG).show();
+                Log.v(TAG, "onActivityResult RC_SIGN_IN responseCode : " + responseCode);
                 if (responseCode == Activity.RESULT_OK) {
                     mSignedInUser = false;
                 }
@@ -79,27 +78,32 @@ public class GooglePlusHelper
     @Override
     public void onConnected(Bundle bundle) {
         mSignedInUser = false;
-        Toast.makeText(mApplicationContext, "Google onConnected", Toast.LENGTH_LONG).show();
+        Log.v(TAG, "onConnected");
         updateGoogleSignInState();
     }
 
     @Override
-    public void onConnectionSuspended(int i) {
-        Toast.makeText(mApplicationContext, "Google onConnectionSuspended", Toast.LENGTH_LONG).show();
+    public void onConnectionSuspended(int cause) {
+        if (cause == CAUSE_SERVICE_DISCONNECTED) {
+            Log.v(TAG, "Connection suspended (Service disconnected)");
+        } else if (cause == CAUSE_NETWORK_LOST) {
+            Log.v(TAG, "Connection suspended (Network lost)");
+        } else {
+            Log.v(TAG, "Connection suspended (Unspecified cause)");
+        }
         mGoogleApiClient.connect();
         updateGoogleSignInState();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.v(TAG, "onConnectionFailed result : " + connectionResult);
         if (!connectionResult.hasResolution()) {
-            Toast.makeText(mApplicationContext, "Google onConnectionFailed : No resolution", Toast.LENGTH_LONG).show();
             GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), mActivity, RC_SIGN_IN).show();
             updateGoogleSignInState();
             return;
         }
         if (!mIntentInProgress) {
-            Toast.makeText(mApplicationContext, "Google onConnectionFailed : no intent in progress", Toast.LENGTH_LONG).show();
             // Store the connection result
             mConnectionResult = connectionResult;
             if (mSignedInUser) {
