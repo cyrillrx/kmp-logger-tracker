@@ -2,6 +2,7 @@
 
 include ':Core'
 include ':Remote'
+include ':SocialHelper'
 include ':VolleyHelper'
 
 // Git submodules
