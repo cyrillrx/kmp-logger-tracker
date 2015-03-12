@@ -31,6 +31,14 @@ public class ErrorCode {
     public final static int NOT_FOUND = 404;
 
     /**
+     * The server timed out waiting for the request.
+     * According to HTTP specifications:
+     * "The client did not produce a request within the time that the server was prepared to wait.
+     * The client MAY repeat the request without modifications at any later time."
+     */
+    public final static int REQUEST_TIMEOUT = 408;
+
+    /**
      * A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
      */
     public final static int INTERNAL_SERVER_ERROR = 500;
