@@ -10,6 +10,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 /**
  * @author Cyril Leroux
@@ -50,11 +51,7 @@ public class GooglePlusHelper
 
     public void onStart() { mGoogleApiClient.connect(); }
 
-    public void onStop() {
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
+    public void onStop() { mGoogleApiClient.disconnect(); }
 
     public void onActivityResult(int requestCode, int responseCode, Intent intent) {
         switch (requestCode) {
@@ -67,6 +64,7 @@ public class GooglePlusHelper
                 if (!mGoogleApiClient.isConnecting()) {
                     mGoogleApiClient.connect();
                 }
+                updateGoogleSignInState();
                 break;
         }
     }
@@ -128,7 +126,9 @@ public class GooglePlusHelper
     }
 
     public void revokeAccess() {
-        Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
+        if (mGoogleApiClient.isConnected()) {
+            Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient);
+        }
     }
 
     private void resolveSignInError() {
@@ -154,19 +154,28 @@ public class GooglePlusHelper
 
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             // Signed in.
-            mPlusCallback.onPlusSignIn();
+            mPlusCallback.onConnected();
 
         } else {
             // Not signed in.
-            mPlusCallback.onPlusSignOut();
+            mPlusCallback.onDisconnected();
+        }
+    }
+
+    public Person getCurrentPerson() {
+        try {
+            return Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
+        } catch (Exception e) {
+            Log.w(TAG, "Error while getting the current person", e);
+            return null;
         }
     }
 
     public static interface PlusCallback {
 
-        void onPlusSignIn();
+        void onConnected();
 
-        void onPlusSignOut();
+        void onDisconnected();
     }
 
 }
