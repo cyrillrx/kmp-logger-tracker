@@ -88,6 +88,12 @@ public class WsLinker<Data> {
         }
     }
 
+    public void onRequestFailure() {
+        for (WsLinkedView<Data> view : mLinkedViews) {
+            view.onRequestFailure();
+        }
+    }
+
     public Data getData() { return mData; }
 
     /**

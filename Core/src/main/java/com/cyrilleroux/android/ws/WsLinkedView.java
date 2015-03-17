@@ -16,4 +16,6 @@ public interface WsLinkedView<Data> {
     void onStartLoading();
 
     void onStopLoading();
+
+    void onRequestFailure();
 }

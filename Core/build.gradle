@@ -8,7 +8,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
     }
 
     buildTypes {
