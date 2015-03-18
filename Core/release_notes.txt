@@ -1,2 +1,7 @@
+LRX Core Release Notes
+
+v1.2 2015-03-18
+- Updated to API 22
+
 v1.1 2015-03-17
 - Added onRequestFailure() to WsLinkedView and WsLinker.

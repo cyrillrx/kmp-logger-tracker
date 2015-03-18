@@ -8,7 +8,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "1.1"
+        versionName "1.2"
     }
 
     buildTypes {
@@ -29,8 +29,8 @@ dependencies {
     // Local libs
 
     // Google Support libraries
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:support-v4:22.0.0'
 
     // External libs
-    compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.code.gson:gson:2.3.1'
 }
