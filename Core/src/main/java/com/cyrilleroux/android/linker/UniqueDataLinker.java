@@ -1,28 +1,28 @@
-package com.cyrilleroux.android.ws;
+package com.cyrilleroux.android.linker;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Link the ws response to the view.
+ * Link a data set to a view.
  *
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public class WsLinker<Data> {
+public class UniqueDataLinker<Data, Context> {
 
-    protected final Set<WsLinkedView<Data>> mLinkedViews;
+    protected final Set<DataLinkedView<Data, Context>> mLinkedViews;
     protected boolean mDataChanged;
     protected Data mData;
-    protected OnViewLoadedListener mViewLoadedListener;
+    protected ViewLinkedCallback mCallback;
 
     /**
      * Initializes the linker with the view to update.
      *
      * @param views The views that will be updated when setData is called.
      */
-    public WsLinker(WsLinkedView<Data>... views) {
+    public UniqueDataLinker(DataLinkedView<Data, Context>... views) {
         mLinkedViews = new HashSet<>();
         Collections.addAll(mLinkedViews, views);
     }
@@ -34,7 +34,7 @@ public class WsLinker<Data> {
      * @param data The new data.
      * @return True if data has changed.
      */
-    public boolean setData(Data data) { return setData(data, null); }
+    public boolean setData(Data data, Context context) { return setData(data, null, null); }
 
     /**
      * Sets or updates the parent with the given data.
@@ -44,54 +44,54 @@ public class WsLinker<Data> {
      * @param data The new data.
      * @return True if data has changed.
      */
-    public boolean setData(Data data, OnViewLoadedListener listener) {
+    public boolean setData(Data data, Context context, ViewLinkedCallback callback) {
 
         mDataChanged = data != null && !data.equals(mData);
         mData = data;
-        mViewLoadedListener = listener;
+        mCallback = callback;
 
-        refreshViews(data);
+        refreshViews(data, context);
 
         return mDataChanged;
     }
 
     /**
-     * Refresh the views linked to the component using {@link #addLinkedView(WsLinkedView)}.
+     * Refresh the views linked to the component using {@link #addLinkedView(DataLinkedView)}.
      *
      * @param data The new data.
      */
-    protected final void refreshViews(Data data) {
+    protected final void refreshViews(Data data, Context context) {
         if (!mDataChanged) {
             return;
         }
 
-        for (WsLinkedView<Data> view : mLinkedViews) {
-            view.bind(data);
+        for (DataLinkedView<Data, Context> view : mLinkedViews) {
+            view.bind(data, context);
         }
 
         mDataChanged = false;
 
-        if (mViewLoadedListener != null) {
-            mViewLoadedListener.onViewLoaded();
+        if (mCallback != null) {
+            mCallback.onLinked();
             // Call only once
-            mViewLoadedListener = null;
+            mCallback = null;
         }
     }
 
     public void onStartLoading() {
-        for (WsLinkedView<Data> view : mLinkedViews) {
+        for (DataLinkedView<Data, Context> view : mLinkedViews) {
             view.onStartLoading();
         }
     }
 
     public void onStopLoading() {
-        for (WsLinkedView<Data> view : mLinkedViews) {
+        for (DataLinkedView<Data, Context> view : mLinkedViews) {
             view.onStopLoading();
         }
     }
 
     public void onRequestFailure() {
-        for (WsLinkedView<Data> view : mLinkedViews) {
+        for (DataLinkedView<Data, Context> view : mLinkedViews) {
             view.onRequestFailure();
         }
     }
@@ -104,11 +104,11 @@ public class WsLinker<Data> {
      * @param linkedView
      * @return
      */
-    public boolean addLinkedView(WsLinkedView<Data> linkedView) {
+    public boolean addLinkedView(DataLinkedView<Data, Context> linkedView) {
         return mLinkedViews.add(linkedView);
     }
 
-    public boolean removeLinkedView(WsLinkedView<Data> linkedView) {
+    public boolean removeLinkedView(DataLinkedView<Data, Context> linkedView) {
         return mLinkedViews.remove(linkedView);
     }
 }

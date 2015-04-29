@@ -1,21 +1,20 @@
-package com.cyrilleroux.android.ws;
+package com.cyrilleroux.android.linker;
 
 /**
  * Represents a view linked to a data object.
- * <p/>
- * The instances of this class are implemented in ws linked views.
  *
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public interface WsLinkedView<Data> {
+public interface DataLinkedView<Data, Context> {
 
     /**
      * Binds the data to the view.
      *
-     * @param data The data to bind.
+     * @param data    The data to bind.
+     * @param context Contextual information about the data.
      */
-    void bind(Data data);
+    void bind(Data data, Context context);
 
     void onStartLoading();
 
