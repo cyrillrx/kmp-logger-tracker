@@ -6,15 +6,14 @@ package com.cyrilleroux.android.linker;
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public interface DataLinkedView<Data, Context> {
+public interface DataLinkedView<Data> {
 
     /**
      * Binds the data to the view.
      *
-     * @param data    The data to bind.
-     * @param context Contextual information about the data.
+     * @param data The data to bind.
      */
-    void bind(Data data, Context context);
+    void bind(Data data);
 
     void onStartLoading();
 

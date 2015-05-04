@@ -10,93 +10,64 @@ import java.util.Set;
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public class DataLinker<Data, Context> {
+public class DataLinker<Data> {
 
-    protected final Set<DataLinkedView<Data, Context>> mLinkedViews;
-    protected boolean mDataChanged;
-    protected Data mData;
-    protected ViewLinkedCallback mCallback;
+    protected final Set<DataLinkedView<Data>> mLinkedViews;
 
     /**
      * Initializes the linker with the view to update.
      *
      * @param views The views that will be updated when setData is called.
      */
-    public DataLinker(DataLinkedView<Data, Context>... views) {
+    public DataLinker(DataLinkedView<Data>... views) {
         mLinkedViews = new HashSet<>();
         Collections.addAll(mLinkedViews, views);
     }
 
     /**
-     * Sets or updates the parent with the given data.
-     * Then refresh the view if necessary.
+     * Calls {@link #bindData(Object, ViewLinkedCallback)} with a null callback.
      *
      * @param data The new data.
-     * @return True if data has changed.
+     * @return True if the data has been bound.
      */
-    public boolean setData(Data data, Context context) { return setData(data, null, null); }
+    public boolean bindData(Data data) { return bindData(data, null); }
 
     /**
-     * Sets or updates the parent with the given data.
-     * Then refresh the view if necessary.
-     * The listener passed in parameter is called back when the view is loaded/refreshed
+     * Binds the given data to the linked views then trigger the callback if any.
      *
      * @param data The new data.
-     * @return True if data has changed.
+     * @return True if the data has been bound.
      */
-    public boolean setData(Data data, Context context, ViewLinkedCallback callback) {
+    public boolean bindData(Data data, ViewLinkedCallback callback) {
 
-        mDataChanged = data != null && !data.equals(mData);
-        mData = data;
-        mCallback = callback;
-
-        refreshViews(data, context);
-
-        return mDataChanged;
-    }
-
-    /**
-     * Refresh the views linked to the component using {@link #addLinkedView(DataLinkedView)}.
-     *
-     * @param data The new data.
-     */
-    protected final void refreshViews(Data data, Context context) {
-        if (!mDataChanged) {
-            return;
+        for (DataLinkedView<Data> view : mLinkedViews) {
+            view.bind(data);
         }
 
-        for (DataLinkedView<Data, Context> view : mLinkedViews) {
-            view.bind(data, context);
+        if (callback != null) {
+            callback.onLinked();
         }
 
-        mDataChanged = false;
-
-        if (mCallback != null) {
-            mCallback.onLinked();
-            // Call only once
-            mCallback = null;
-        }
+        return true;
     }
 
     public void onStartLoading() {
-        for (DataLinkedView<Data, Context> view : mLinkedViews) {
+        for (DataLinkedView<Data> view : mLinkedViews) {
             view.onStartLoading();
         }
     }
 
     public void onStopLoading() {
-        for (DataLinkedView<Data, Context> view : mLinkedViews) {
+        for (DataLinkedView<Data> view : mLinkedViews) {
             view.onStopLoading();
         }
     }
 
     public void onRequestFailure() {
-        for (DataLinkedView<Data, Context> view : mLinkedViews) {
+        for (DataLinkedView<Data> view : mLinkedViews) {
             view.onRequestFailure();
         }
     }
-
-    public Data getData() { return mData; }
 
     /**
      * Add a linked view that will be updated when setData is called.
@@ -104,11 +75,11 @@ public class DataLinker<Data, Context> {
      * @param linkedView
      * @return
      */
-    public boolean addLinkedView(DataLinkedView<Data, Context> linkedView) {
+    public boolean addLinkedView(DataLinkedView<Data> linkedView) {
         return mLinkedViews.add(linkedView);
     }
 
-    public boolean removeLinkedView(DataLinkedView<Data, Context> linkedView) {
+    public boolean removeLinkedView(DataLinkedView<Data> linkedView) {
         return mLinkedViews.remove(linkedView);
     }
 }
