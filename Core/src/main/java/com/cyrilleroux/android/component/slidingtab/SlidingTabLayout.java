@@ -46,7 +46,6 @@ public class SlidingTabLayout extends HorizontalScrollView {
          * @return return the color of the divider drawn to the right of {@code position}.
          */
         int getDividerColor(int position);
-
     }
 
     private static final int TITLE_OFFSET_DIPS = 24;
@@ -113,9 +112,9 @@ public class SlidingTabLayout extends HorizontalScrollView {
     }
 
     /**
-     * Set the {@link ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
-     * required to set any {@link ViewPager.OnPageChangeListener} through this method. This is so
-     * that the layout can update it's scroll position correctly.
+     * Set the {@link android.support.v4.view.ViewPager.OnPageChangeListener}. When using {@link SlidingTabLayout} you are
+     * required to set any {@link ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)} through this method.
+     * This is so that the layout can update it's scroll position correctly.
      *
      * @see ViewPager#setOnPageChangeListener(ViewPager.OnPageChangeListener)
      */

@@ -1,16 +1,3 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
-        classpath 'com.novoda:bintray-release:0.2.10'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
 
@@ -39,9 +26,6 @@ android {
 }
 
 dependencies {
-
-    // Local libs
-
     // Google Support libraries
     compile 'com.android.support:support-v4:22.1.1'
     compile 'com.android.support:appcompat-v7:22.1.1'
@@ -52,8 +36,8 @@ dependencies {
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrilleroux.android'
-    artifactId = 'lrxlib'
-    version = 'r0.1.3'
-    description = 'A basic Android library by Cyril Leroux.'
+    artifactId = 'core'
+    version = '0.1.3'
+    description = 'A basic library for Android containing UI components, and miscellaneous utils.'
     website = 'https://github.com/cyrillrx/android_libraries'
 }
