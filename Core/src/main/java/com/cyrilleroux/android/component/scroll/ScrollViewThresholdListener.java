@@ -4,7 +4,7 @@ import android.widget.ScrollView;
 
 /**
  * @author Cyril Leroux
- *         Created on 22/01/2015.
+ *         Created on 22/01/2015
  */
 public abstract class ScrollViewThresholdListener implements OnScrollChangedListener, ScrollDirectionListener {
 

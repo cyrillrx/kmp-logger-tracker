@@ -4,7 +4,7 @@ import android.widget.ScrollView;
 
 /**
  * @author Cyril Leroux
- *         Created on 22/11/2014.
+ *         Created on 22/11/2014
  */
 public interface OnScrollChangedListener {
 

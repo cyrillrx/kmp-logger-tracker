@@ -15,11 +15,10 @@ import android.widget.ProgressBar;
 import com.cyrilleroux.android.R;
 
 /**
- * @author cyril
- *         Created 02/01/15.
+ * @author Cyril Leroux
+ *         Created on 02/01/15
  */
 public class TextProgressBar extends ProgressBar {
-
 
     private static final String DEFAULT_TEXT = "";
     private static final int DEFAULT_COLOR = Color.BLACK;

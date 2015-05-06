@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * @deprecated use {@link com.cyrilleroux.android.linker.DataLinker}
  * or {@link com.cyrilleroux.android.linker.SingleDataLinker}

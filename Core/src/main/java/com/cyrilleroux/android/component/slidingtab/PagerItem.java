@@ -3,8 +3,10 @@ package com.cyrilleroux.android.component.slidingtab;
 import android.support.v4.app.Fragment;
 
 /**
- * A pager item for fragments
- * Created on 29/10/14.
+ * A pager item for fragments.
+ *
+ * @author Cyril Leroux
+ *         Created on 29/10/14.
  */
 public class PagerItem<PageFragment extends Fragment> {
 

@@ -8,7 +8,7 @@ import android.view.ViewTreeObserver;
  * Uses a ViewTreeObserver to resize a view just in time
  *
  * @author Cyril Leroux
- *         Created 16/12/2014.
+ *         Created on 16/12/2014
  */
 public class Resizer {
 

@@ -38,7 +38,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author Cyril Leroux
- *         Created on 17/01/2015.
+ *         Created on 17/01/2015
  */
 public class FloatingActionButton extends ImageButton {
 

@@ -12,7 +12,7 @@ import android.widget.Toast;
  * The messages are only logged if {@link #sEnabled} is true.
  *
  * @author Cyril Leroux
- *         Created on 03/09/12.
+ *         Created on 03/09/12
  */
 @SuppressWarnings("unused")
 public class Logger {

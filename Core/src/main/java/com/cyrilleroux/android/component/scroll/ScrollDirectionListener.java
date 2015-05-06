@@ -2,7 +2,7 @@ package com.cyrilleroux.android.component.scroll;
 
 /**
  * @author Cyril Leroux
- *         Created on 22/01/2015.
+ *         Created on 22/01/2015
  */
 public interface ScrollDirectionListener {
 

@@ -6,6 +6,6 @@ package com.cyrilleroux.android.ws;
 @Deprecated
 public interface OnViewLoadedListener {
 
-    public void onViewLoaded();
+    void onViewLoaded();
 
 }

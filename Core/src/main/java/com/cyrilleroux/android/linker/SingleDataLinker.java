@@ -1,7 +1,8 @@
 package com.cyrilleroux.android.linker;
 
 /**
- * Link a data set to a view.
+ * Link a single data to a view.<br />
+ * The linked data can be updated which refreshes the view.
  *
  * @author Cyril Leroux
  *         Created on 04/12/14
@@ -44,6 +45,7 @@ public class SingleDataLinker<Data> extends DataLinker<Data> {
             view.bind(data);
         }
 
+        // Reset the data changed state
         mDataChanged = false;
 
         if (callback != null) {

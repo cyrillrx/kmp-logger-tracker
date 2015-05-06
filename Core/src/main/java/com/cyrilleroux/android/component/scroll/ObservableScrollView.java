@@ -8,7 +8,7 @@ import android.widget.ScrollView;
 
 /**
  * @author Cyril Leroux
- *         Created 22/11/2014.
+ *         Created on 22/11/2014
  */
 public class ObservableScrollView extends ScrollView {
 

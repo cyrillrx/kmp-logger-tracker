@@ -51,29 +51,33 @@ public class DataLinker<Data> {
         return true;
     }
 
+    /** Start loading data (from a database, a webservice, etc.). */
     public void onStartLoading() {
         for (DataLinkedView<Data> view : mLinkedViews) {
             view.onStartLoading();
         }
     }
 
+
+    /** Stop loading data. */
     public void onStopLoading() {
         for (DataLinkedView<Data> view : mLinkedViews) {
             view.onStopLoading();
         }
     }
 
-    public void onRequestFailure() {
+    /** Failure while loading data. */
+    public void onLoadingFailure() {
         for (DataLinkedView<Data> view : mLinkedViews) {
             view.onRequestFailure();
         }
     }
 
     /**
-     * Add a linked view that will be updated when setData is called.
+     * Add a linked view that will be updated when {@link #bindData(Object, ViewLinkedCallback)} is called.
      *
-     * @param linkedView
-     * @return
+     * @param linkedView The linked view to add.
+     * @return True if the linked view  set is modified, false otherwise.
      */
     public boolean addLinkedView(DataLinkedView<Data> linkedView) {
         return mLinkedViews.add(linkedView);
