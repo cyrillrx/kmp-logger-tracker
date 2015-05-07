@@ -1,4 +1,4 @@
-package com.cyrilleroux.android.remote;
+package com.cyrillrx.android.remote;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

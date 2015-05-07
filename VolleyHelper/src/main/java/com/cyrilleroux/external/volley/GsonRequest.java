@@ -1,4 +1,4 @@
-package com.cyrilleroux.external.volley;
+package com.cyrillrx.external.volley;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -7,7 +7,7 @@ import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.cyrilleroux.android.toolbox.Logger;
+import com.cyrillrx.android.toolbox.Logger;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 

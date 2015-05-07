@@ -1,4 +1,4 @@
-package com.cyrilleroux.external.volley;
+package com.cyrillrx.external.volley;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;

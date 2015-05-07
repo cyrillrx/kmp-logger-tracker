@@ -1,4 +1,4 @@
-package com.cyrilleroux.network;
+package com.cyrillrx.network;
 
 import android.content.Context;
 import android.net.nsd.NsdManager;
