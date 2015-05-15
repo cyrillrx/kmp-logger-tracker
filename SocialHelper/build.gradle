@@ -27,5 +27,5 @@ android {
 dependencies {
 
     // External libraries
-    compile 'com.google.android.gms:play-services:7.3.0'
+    compile 'com.google.android.gms:play-services-plus:7.3.0'
 }
