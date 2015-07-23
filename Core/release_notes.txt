@@ -1,7 +1,15 @@
 LRX Core Release Notes
 
-v1.2 2015-03-18
+2015-07-22 - v0.1.5
+- Added Login and Preferences utils
+- Added Gson dependency
+- Removed deprecated classes from package com.cyrillrx.android.ws:
+    - OnViewLoadedListener
+    - WsLinkedView
+    - WsLinker
+
+2015-03-18 - v0.1.2
 - Updated to API 22
 
-v1.1 2015-03-17
+2015-03-17 - v0.1.1
 - Added onRequestFailure() to WsLinkedView and WsLinker.

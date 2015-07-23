@@ -58,7 +58,6 @@ public class DataLinker<Data> {
         }
     }
 
-
     /** Stop loading data. */
     public void onStopLoading() {
         for (DataLinkedView<Data> view : mLinkedViews) {
