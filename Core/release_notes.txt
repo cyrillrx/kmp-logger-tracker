@@ -1,5 +1,8 @@
 LRX Core Release Notes
 
+2015-07-24 - v0.1.6
+- Replaced LoginUtils by FieldUtils
+
 2015-07-22 - v0.1.5
 - Added Login and Preferences utils
 - Added Gson dependency
