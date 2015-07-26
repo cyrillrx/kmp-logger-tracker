@@ -9,7 +9,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "0.1.6"
+        versionName "0.1.7"
     }
 
     buildTypes {
@@ -34,6 +34,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:cardview-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:design:22.2.1'
 
     // External libraries
     compile 'com.google.code.gson:gson:2.3.1'
@@ -44,7 +45,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'core'
-    version = '0.1.5'
+    version = '0.1.7'
     description = 'A basic library for Android containing UI components, and miscellaneous utils.'
     website = 'https://github.com/cyrillrx/android_libraries'
 }
@@ -59,7 +60,7 @@ publish {
 //            from components.java
 //            groupId 'com.cyrillrx.android'
 //            artifactId 'core'
-//            version '0.1.5'
+//            version '0.1.7'
 //        }
 //    }
 //}
@@ -82,7 +83,7 @@ publish {
 //        userOrg = 'cyrillrx'
 //
 //        version {
-//            name = '0.1.5'
+//            name = '0.1.7'
 //            desc = 'A basic library for Android containing UI components, and miscellaneous utils.'
 //            released = new Date()
 //        }

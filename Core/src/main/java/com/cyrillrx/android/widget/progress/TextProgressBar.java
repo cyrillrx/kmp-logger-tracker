@@ -1,4 +1,4 @@
-package com.cyrillrx.android.component.progress;
+package com.cyrillrx.android.widget.progress;
 
 import android.annotation.TargetApi;
 import android.content.Context;

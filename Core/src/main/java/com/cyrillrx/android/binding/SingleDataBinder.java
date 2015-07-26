@@ -1,4 +1,4 @@
-package com.cyrillrx.android.linker;
+package com.cyrillrx.android.binding;
 
 /**
  * Link a single data to a view.<br />
@@ -7,7 +7,7 @@ package com.cyrillrx.android.linker;
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public class SingleDataLinker<Data> extends DataLinker<Data> {
+public class SingleDataBinder<Data> extends DataBinder<Data> {
 
     protected boolean mDataChanged;
     protected Data mData;
@@ -21,7 +21,7 @@ public class SingleDataLinker<Data> extends DataLinker<Data> {
      * @return True if data has changed.
      */
     @Override
-    public boolean bindData(Data data, ViewLinkedCallback callback) {
+    public boolean bindData(Data data, ViewBoundCallback callback) {
 
         mDataChanged = data != null && !data.equals(mData);
         mData = data;
@@ -36,7 +36,7 @@ public class SingleDataLinker<Data> extends DataLinker<Data> {
      *
      * @param data The new data.
      */
-    private void refreshViews(Data data, ViewLinkedCallback callback) {
+    private void refreshViews(Data data, ViewBoundCallback callback) {
         if (!mDataChanged) {
             return;
         }
@@ -49,7 +49,7 @@ public class SingleDataLinker<Data> extends DataLinker<Data> {
         mDataChanged = false;
 
         if (callback != null) {
-            callback.onLinked();
+            callback.onBound();
         }
     }
 

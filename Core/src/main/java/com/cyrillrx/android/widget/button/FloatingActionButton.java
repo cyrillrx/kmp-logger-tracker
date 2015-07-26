@@ -1,4 +1,4 @@
-package com.cyrillrx.android.component.button;
+package com.cyrillrx.android.widget.button;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -28,10 +28,10 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 
 import com.cyrillrx.android.R;
-import com.cyrillrx.android.component.scroll.ObservableScrollView;
-import com.cyrillrx.android.component.scroll.OnScrollChangedListener;
-import com.cyrillrx.android.component.scroll.ScrollDirectionListener;
-import com.cyrillrx.android.component.scroll.ScrollViewThresholdListener;
+import com.cyrillrx.android.widget.scroll.ObservableScrollView;
+import com.cyrillrx.android.widget.scroll.OnScrollChangedListener;
+import com.cyrillrx.android.widget.scroll.ScrollDirectionListener;
+import com.cyrillrx.android.widget.scroll.ScrollViewThresholdListener;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

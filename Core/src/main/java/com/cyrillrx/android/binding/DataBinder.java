@@ -1,4 +1,4 @@
-package com.cyrillrx.android.linker;
+package com.cyrillrx.android.binding;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public class DataLinker<Data> {
+public class DataBinder<Data> {
 
     protected final Set<DataLinkedView<Data>> mLinkedViews;
 
@@ -19,13 +19,13 @@ public class DataLinker<Data> {
      *
      * @param views The views that will be updated when setData is called.
      */
-    public DataLinker(DataLinkedView<Data>... views) {
+    public DataBinder(DataLinkedView<Data>... views) {
         mLinkedViews = new HashSet<>();
         Collections.addAll(mLinkedViews, views);
     }
 
     /**
-     * Calls {@link #bindData(Object, ViewLinkedCallback)} with a null callback.
+     * Calls {@link #bindData(Object, ViewBoundCallback)} with a null callback.
      *
      * @param data The new data.
      * @return True if the data has been bound.
@@ -38,14 +38,14 @@ public class DataLinker<Data> {
      * @param data The new data.
      * @return True if the data has been bound.
      */
-    public boolean bindData(Data data, ViewLinkedCallback callback) {
+    public boolean bindData(Data data, ViewBoundCallback callback) {
 
         for (DataLinkedView<Data> view : mLinkedViews) {
             view.bind(data);
         }
 
         if (callback != null) {
-            callback.onLinked();
+            callback.onBound();
         }
 
         return true;
@@ -73,7 +73,7 @@ public class DataLinker<Data> {
     }
 
     /**
-     * Add a linked view that will be updated when {@link #bindData(Object, ViewLinkedCallback)} is called.
+     * Add a linked view that will be updated when {@link #bindData(Object, ViewBoundCallback)} is called.
      *
      * @param linkedView The linked view to add.
      * @return True if the linked view  set is modified, false otherwise.

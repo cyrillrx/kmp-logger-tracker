@@ -40,7 +40,7 @@ public class FieldUtils {
             value = validateEditText(entry.getEditText(), entry.getPattern(), entry.getErrorMessage());
             values.add(value);
 
-            if (value == null) {
+            if (value == null || value.isEmpty()) {
                 if (focusView == null) { focusView = entry.getEditText(); }
                 cancel |= true;
             }
@@ -67,15 +67,16 @@ public class FieldUtils {
         // Check emptiness
         if (TextUtils.isEmpty(value)) {
             editText.setError(sErrorFieldRequired);
-            return null;
+            return "";
         }
 
-        if (pattern.matcher(value).matches()) {
+        // If there is no pattern or if the pattern matches
+        if (pattern == null || pattern.matcher(value).matches()) {
             return value;
         }
 
         editText.setError(errorMessage);
-        return null;
+        return "";
     }
 
     /**
@@ -102,6 +103,12 @@ public class FieldUtils {
             mEditText = editText;
             mPattern = pattern;
             mErrorMessage = errorMessage;
+        }
+
+        public ValidationEntry(EditText editText) {
+            mEditText = editText;
+            mPattern = null;
+            mErrorMessage = null;
         }
 
         public EditText getEditText() { return mEditText; }

@@ -1,4 +1,4 @@
-package com.cyrillrx.android.linker;
+package com.cyrillrx.android.binding;
 
 /**
  * Callback the owner when the view is loaded.
@@ -6,7 +6,7 @@ package com.cyrillrx.android.linker;
  * @author Cyril Leroux
  *         Created on 04/12/14
  */
-public interface ViewLinkedCallback {
+public interface ViewBoundCallback {
 
-    void onLinked();
+    void onBound();
 }

@@ -1,4 +1,4 @@
-package com.cyrillrx.android.component.slidingtab;
+package com.cyrillrx.android.widget.slidingtab;
 
 import android.content.Context;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package com.cyrillrx.android.component.scroll;
+package com.cyrillrx.android.widget.scroll;
 
 /**
  * @author Cyril Leroux

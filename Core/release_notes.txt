@@ -1,5 +1,11 @@
 LRX Core Release Notes
 
+2015-07-26 - v0.1.7
+- Added ItemWrapper to wrap sectioned list items
+- Added GsonModel classes that serializes and de-serializes data
+- Refactored the data binding classes (com.cyrillrx.android.binding)
+- Renamed "component" package to "widget"
+
 2015-07-24 - v0.1.6
 - Replaced LoginUtils by FieldUtils
 

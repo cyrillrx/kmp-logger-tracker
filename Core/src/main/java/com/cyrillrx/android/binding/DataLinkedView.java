@@ -1,4 +1,4 @@
-package com.cyrillrx.android.linker;
+package com.cyrillrx.android.binding;
 
 /**
  * Represents a view linked to a data object.
