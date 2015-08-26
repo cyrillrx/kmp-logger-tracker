@@ -3,8 +3,13 @@ package com.cyrillrx.android.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author Cyril Leroux
@@ -12,7 +17,7 @@ import com.google.gson.Gson;
  */
 public class PrefUtils {
 
-    private static SharedPreferences getPreferences(Context context) {
+    protected static SharedPreferences getPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
     }
 
@@ -40,8 +45,20 @@ public class PrefUtils {
      * @return The preference value if it exists, or defaultValue.
      * @throws ClassCastException if there is a preference with this name that is not a boolean.
      */
-    private static boolean getBoolean(Context context, String key, boolean defaultValue) {
+    public static boolean getBoolean(Context context, String key, boolean defaultValue) {
         return getPreferences(context).getBoolean(key, defaultValue);
+    }
+
+    /**
+     * Retrieves an integer value from the shared preferences.
+     *
+     * @param context The context.
+     * @param key     The name of the preference to retrieve.
+     * @return The preference value if it exists, or Integer.MIN_VALUE.
+     * @throws ClassCastException if there is a preference with this name that is not an int.
+     */
+    public static int getInt(Context context, String key) {
+        return getPreferences(context).getInt(key, Integer.MIN_VALUE);
     }
 
     /**
@@ -89,5 +106,26 @@ public class PrefUtils {
                     .apply();
             return null;
         }
+    }
+
+    /**
+     * Gets the serialized array from the shared preferences, de-serializes it and populates a list.
+     *
+     * @param context    The context.
+     * @param key        The name of the preference to retrieve.
+     * @param arrayClass The type of the stored array.
+     * @return The list of de-serializes object or an empty list.
+     */
+    @NonNull
+    public static <T> List<T> loadObjectList(Context context, String key, Class<T[]> arrayClass) {
+
+        final List<T> list = new ArrayList<>();
+
+        final T[] array = loadObject(context, key, arrayClass);
+        if (array != null) {
+            list.addAll(Arrays.asList(array));
+        }
+
+        return list;
     }
 }

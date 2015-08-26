@@ -1,5 +1,8 @@
 LRX Core Release Notes
 
+2015-08-26 - v0.1.8
+- Added PrefUtils.loadObjectList method
+
 2015-07-26 - v0.1.7
 - Added ItemWrapper to wrap sectioned list items
 - Added GsonModel classes that serializes and de-serializes data
