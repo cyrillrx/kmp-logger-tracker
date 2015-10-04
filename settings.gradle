@@ -1,11 +1,3 @@
-// Local modules
-
 include ':Core'
 include ':Remote'
 include ':SocialHelper'
-include ':VolleyHelper'
-
-// Git submodules
-
-include ':volley'
-project(':volley').projectDir = new File('libraries/volley')
