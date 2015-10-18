@@ -1,5 +1,10 @@
 LRX Core Release Notes
 
+2015-10-18 - v0.2.1
+- Enhanced logger and moved it to its own package
+- Added Tracker to the toolbox
+- Created an abstract section adapter
+
 2015-09-01 - v0.2.0
 - Added OnDataClickListener and NamedList to the toolbox
 

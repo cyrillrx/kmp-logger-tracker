@@ -13,25 +13,32 @@ import java.util.List;
  */
 public class NamedList<Data> {
 
-    private final String mTitle;
-    private final List<Data> mItems;
+    private final String title;
+    private final List<Data> items;
 
     public NamedList(String title) {
-        mTitle = title;
-        mItems = new ArrayList<>();
+        this.title = title;
+        items = new ArrayList<>();
     }
 
-    public String getTitle() { return mTitle; }
+    public NamedList(String title, List<Data> items) {
+        this.title = title;
+        this.items = items;
+    }
 
-    public List<Data> getItems() { return mItems; }
+    public String getTitle() { return title; }
 
-    public void add(Data data) { mItems.add(data); }
+    public List<Data> getItems() { return items; }
+
+    public Data getItem(int index) { return items.get(index); }
+
+    public void add(Data data) { items.add(data); }
 
     public void addAll(@Nullable Collection<? extends Data> data) {
-        if (data != null) { mItems.addAll(data); }
+        if (data != null) { items.addAll(data); }
     }
 
     public void addAll(@Nullable Data[] data) {
-        if (data != null) { mItems.addAll(Arrays.asList(data)); }
+        if (data != null) { items.addAll(Arrays.asList(data)); }
     }
 }

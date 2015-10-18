@@ -12,7 +12,16 @@ public class ItemWrapper<Data> {
     private Data mData;
 
     /** Constructor that wraps data. */
-    public ItemWrapper(Data data) { mData = data; }
+    public ItemWrapper(String header, Data data) {
+        mHeader = header;
+        mData = data;
+    }
+
+    /** Constructor that wraps data. */
+    public ItemWrapper(Data data) {
+        mHeader = null;
+        mData = data;
+    }
 
     /** Constructor that wraps a header. */
     public ItemWrapper(String header) { mHeader = header; }
@@ -23,5 +32,5 @@ public class ItemWrapper<Data> {
 
     public void setData(Data data) { mData = data; }
 
-    public boolean isHeader() { return mHeader != null; }
+    public boolean isHeader() { return mData == null; }
 }
