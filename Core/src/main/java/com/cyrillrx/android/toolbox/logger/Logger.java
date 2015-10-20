@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Cyril Leroux
  *         Created on 03/09/12
  */
-//@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class Logger {
 
     private static final String ERROR_INITIALIZE_FIRST = "Call initialize before using the Logger";
@@ -40,8 +40,8 @@ public class Logger {
     }
 
     /**
-     * Initializes the Logger.
-     * Provide a context to enable a simple Toast used to display debug messages to display to the developer.
+     * Initializes the Logger.<br />
+     * Provides a context to enable a simple Toast used to display debug messages to the developer.
      *
      * @param context The application context to initialize the debug toast or null.
      */
