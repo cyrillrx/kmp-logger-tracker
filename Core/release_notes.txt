@@ -1,5 +1,10 @@
 LRX Core Release Notes
 
+2015-10-20 - v0.2.2
+- Created AbstractLogger (LoggerChild aware of the log severity level)
+- LogCat now extends AbstractLogger
+- Removed default usage of LogCat in the Logger class (explicit implementation required)
+
 2015-10-18 - v0.2.1
 - Enhanced logger and moved it to its own package
 - Added Tracker to the toolbox

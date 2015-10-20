@@ -4,7 +4,9 @@ package com.cyrillrx.android.toolbox.logger;
  * @author Cyril Leroux
  *         Created on 18/10/2015.
  */
-public class LogCat implements LoggerChild {
+public class LogCat extends AbstractLogger {
+
+    public LogCat(@LogSeverity int severity) { super(severity); }
 
     /**
      * Sends a {@link android.util.Log#VERBOSE} log message.
@@ -13,7 +15,7 @@ public class LogCat implements LoggerChild {
      * @param message The message you would like to log.
      */
     @Override
-    public void verbose(String tag, String message) {
+    protected void doLogVerbose(String tag, String message) {
         android.util.Log.v(tag, message);
     }
 
@@ -25,7 +27,7 @@ public class LogCat implements LoggerChild {
      * @param throwable An exception to log.
      */
     @Override
-    public void verbose(String tag, String message, Throwable throwable) {
+    protected void doLogVerbose(String tag, String message, Throwable throwable) {
         android.util.Log.v(tag, message, throwable);
     }
 
@@ -36,7 +38,7 @@ public class LogCat implements LoggerChild {
      * @param message The message you would like to log.
      */
     @Override
-    public void debug(String tag, String message) {
+    protected void doLogDebug(String tag, String message) {
         android.util.Log.d(tag, message);
     }
 
@@ -48,7 +50,7 @@ public class LogCat implements LoggerChild {
      * @param throwable An exception to log.
      */
     @Override
-    public void debug(String tag, String message, Throwable throwable) {
+    protected void doLogDebug(String tag, String message, Throwable throwable) {
         android.util.Log.d(tag, message, throwable);
     }
 
@@ -59,7 +61,7 @@ public class LogCat implements LoggerChild {
      * @param message The message you would like to log.
      */
     @Override
-    public void info(String tag, String message) {
+    protected void doLogInfo(String tag, String message) {
         android.util.Log.i(tag, message);
     }
 
@@ -71,7 +73,7 @@ public class LogCat implements LoggerChild {
      * @param throwable An exception to log.
      */
     @Override
-    public void info(String tag, String message, Throwable throwable) {
+    protected void doLogInfo(String tag, String message, Throwable throwable) {
         android.util.Log.i(tag, message, throwable);
     }
 
@@ -82,7 +84,7 @@ public class LogCat implements LoggerChild {
      * @param message The message you would like to log.
      */
     @Override
-    public void warning(String tag, String message) {
+    protected void doLogWarning(String tag, String message) {
         android.util.Log.w(tag, message);
     }
 
@@ -94,7 +96,7 @@ public class LogCat implements LoggerChild {
      * @param throwable An exception to log.
      */
     @Override
-    public void warning(String tag, String message, Throwable throwable) {
+    protected void doLogWarning(String tag, String message, Throwable throwable) {
         android.util.Log.w(tag, message, throwable);
     }
 
@@ -105,7 +107,7 @@ public class LogCat implements LoggerChild {
      * @param message The message you would like to log.
      */
     @Override
-    public void error(String tag, String message) {
+    protected void doLogError(String tag, String message) {
         android.util.Log.e(tag, message);
     }
 
@@ -117,7 +119,7 @@ public class LogCat implements LoggerChild {
      * @param throwable An exception to log.
      */
     @Override
-    public void error(String tag, String message, Throwable throwable) {
+    protected void doLogError(String tag, String message, Throwable throwable) {
         android.util.Log.e(tag, message, throwable);
     }
 }

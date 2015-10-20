@@ -9,45 +9,48 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class class wraps Android {@link android.util.Log} class.
+ * This class wraps instances the of the {@link LoggerChild} interface.
  * It allows custom logging conditions.
- * <p/>
- * The messages are only logged if {@link #sEnabled} is true.
  *
  * @author Cyril Leroux
  *         Created on 03/09/12
  */
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class Logger {
 
-    private static final String TAG = Logger.class.getSimpleName();
-
+    private static final String ERROR_INITIALIZE_FIRST = "Call initialize before using the Logger";
     private static Logger sInstance;
-    private static boolean sEnabled;
+
+    private final Set<LoggerChild> mLoggers;
 
     private Toast mDebugToast;
-    private Set<LoggerChild> mLoggers;
 
+    /**
+     * @param context The application context to initialize the debug toast or null.
+     */
     @SuppressLint("ShowToast")
-    private Logger(Context context, boolean isEnabled) {
-        mDebugToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
-        mDebugToast.setGravity(Gravity.TOP, 0, 50);
+    private Logger(Context context) {
 
         mLoggers = new HashSet<>();
+
+        if (context != null) {
+            mDebugToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+            mDebugToast.setGravity(Gravity.TOP, 0, 50);
+        }
     }
 
     /**
-     * Initializes the Debug Toast.
-     * It's a simple Toast used for all debug message to display to the developer.
+     * Initializes the Logger.
+     * Provide a context to enable a simple Toast used to display debug messages to display to the developer.
+     *
+     * @param context The application context to initialize the debug toast or null.
      */
-    public static void initialize(Context context, boolean isEnabled) {
-        sEnabled = isEnabled;
+    public static void initialize(Context context) { sInstance = new Logger(context); }
 
-        if (!sEnabled) { return; }
-
-        sInstance = new Logger(context, true);
-        sInstance.mLoggers.add(new LogCat());
-    }
+    /**
+     * Initializes the Logger without the debug logger.
+     */
+    public static void initialize() { sInstance = new Logger(null); }
 
     /**
      * Shows a debug toast.
@@ -55,26 +58,29 @@ public class Logger {
      * @param message The message to toast.
      */
     public static void toast(String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
-        sInstance.mDebugToast.setText(message);
-        sInstance.mDebugToast.show();
+        Toast toast = sInstance.mDebugToast;
+        if (toast == null) { return; }
+
+        toast.setText(message);
+        toast.show();
     }
 
     public static void addChild(LoggerChild child) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         sInstance.mLoggers.add(child);
     }
 
     public static void removeChild(LoggerChild child) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         sInstance.mLoggers.remove(child);
     }
 
     public static void verbose(String tag, String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.verbose(tag, message);
@@ -82,7 +88,7 @@ public class Logger {
     }
 
     public static void verbose(String tag, String message, Throwable throwable) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.verbose(tag, message, throwable);
@@ -90,7 +96,7 @@ public class Logger {
     }
 
     public static void debug(String tag, String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.debug(tag, message);
@@ -98,7 +104,7 @@ public class Logger {
     }
 
     public static void debug(String tag, String message, Throwable throwable) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.debug(tag, message, throwable);
@@ -106,7 +112,7 @@ public class Logger {
     }
 
     public static void info(String tag, String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.info(tag, message);
@@ -114,7 +120,7 @@ public class Logger {
     }
 
     public static void info(String tag, String message, Throwable throwable) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.info(tag, message, throwable);
@@ -122,7 +128,7 @@ public class Logger {
     }
 
     public static void warning(String tag, String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.warning(tag, message);
@@ -130,7 +136,7 @@ public class Logger {
     }
 
     public static void warning(String tag, String message, Throwable throwable) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.warning(tag, message, throwable);
@@ -138,7 +144,7 @@ public class Logger {
     }
 
     public static void error(String tag, String message) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.error(tag, message);
@@ -146,10 +152,16 @@ public class Logger {
     }
 
     public static void error(String tag, String message, Throwable throwable) {
-        if (!sEnabled) { return; }
+        checkInitialization();
 
         for (LoggerChild log : sInstance.mLoggers) {
             log.error(tag, message, throwable);
+        }
+    }
+
+    private static void checkInitialization() {
+        if (sInstance == null) {
+            throw new IllegalStateException(ERROR_INITIALIZE_FIRST);
         }
     }
 }
