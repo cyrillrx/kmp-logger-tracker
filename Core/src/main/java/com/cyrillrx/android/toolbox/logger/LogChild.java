@@ -4,7 +4,7 @@ package com.cyrillrx.android.toolbox.logger;
  * @author Cyril Leroux
  *         Created on 18/10/2015.
  */
-public interface LoggerChild {
+public interface LogChild {
 
     /**
      * @param tag     Used to identify the source of a log message.

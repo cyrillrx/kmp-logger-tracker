@@ -1,5 +1,10 @@
 LRX Core Release Notes
 
+2015-10-20 - v0.2.3
+- Enhanced Logger implementation
+- Renamed AbstractLogger to LogWrapper and implemented wrapper logic
+- Moved severity levels in a dedicated class
+
 2015-10-20 - v0.2.2
 - Created AbstractLogger (LoggerChild aware of the log severity level)
 - LogCat now extends AbstractLogger
