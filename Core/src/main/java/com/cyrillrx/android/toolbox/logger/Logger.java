@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This class wraps instances the of the {@link LoggerChild} interface.
- * It allows custom logging conditions.
+ * This class wraps instances of the {@link LoggerChild} interface.<br />
+ * It allows to customize the logging conditions.
  *
  * @author Cyril Leroux
  *         Created on 03/09/12
