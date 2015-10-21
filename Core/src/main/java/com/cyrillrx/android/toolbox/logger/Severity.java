@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
  *         Created on 20/10/15
  */
 public class Severity {
-    
+
     public static final int FATAL = 0;
     public static final int ERROR = 1;
     public static final int WARN = 2;
