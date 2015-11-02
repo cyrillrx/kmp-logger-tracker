@@ -1,17 +1,15 @@
-# Android libraries
-A set of Android libraries.
+# Android lrx logger
+A modular logger component.
 
-## Core module
-### Logger
-### Data binder
+# Publish to Bintray
 
-## Publish to Bintray
+## Logger module
 
 ### Release note
 Update the release_note.txt
 
-### Core lib script
+### Build script
 ```
-./gradlew clean build bintrayUpload -p Core -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
+./gradlew clean build bintrayUpload -p Logger -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
 
 ```

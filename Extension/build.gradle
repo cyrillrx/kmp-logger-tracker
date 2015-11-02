@@ -1,5 +1,20 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.20.1'
+    }
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 android {
     compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
@@ -29,16 +44,19 @@ android {
 
 dependencies {
 
-    // Google Support libraries
-    compile 'com.android.support:support-annotations:23.1.0'
+    // Local libs
+    compile project(path: ':Logger')
+
+    // External libraries
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') { transitive = true; }
 }
 
 
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
-    artifactId = 'logger'
+    artifactId = 'logger-extended'
     version = '1.0.0'
-    description = 'A modular logger component.'
+    description = 'Extentions for lrx logger.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

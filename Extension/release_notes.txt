@@ -1,0 +1,11 @@
+LRX Logger Release Notes
+
+2015-11-02 - v1.0.0
+- Enhanced Logger implementation
+- Renamed AbstractLogger to LogWrapper and implemented wrapper logic
+- Moved severity levels in a dedicated class
+- Created AbstractLogger (LoggerChild aware of the log severity level)
+- LogCat now extends AbstractLogger
+- Removed default usage of LogCat in the Logger class (explicit implementation required)
+- Enhanced logger and moved it to its own package
+- Added Tracker to the toolbox
