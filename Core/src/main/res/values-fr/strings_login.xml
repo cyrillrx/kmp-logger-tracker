@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <string name="error_field_required">Ce champs doit être rempli</string>
-    <string name="error_invalid_email">Adresse email invalide</string>
-    <string name="error_invalid_password">Mot de passe invalide</string>
-    <string name="error_incorrect_password">Mot de passe incorrect</string>
-
-</resources>
