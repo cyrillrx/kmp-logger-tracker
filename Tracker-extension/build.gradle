@@ -1,5 +1,21 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.20.1'
+    }
+}
+
 apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url 'http://dl.bintray.com/cyrillrx/maven' }
+}
 
 android {
     compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
@@ -28,17 +44,18 @@ android {
 }
 
 dependencies {
+    compile project(':Tracker')
 
-    // Google Support libraries
-    compile 'com.android.support:support-annotations:23.1.1'
+    // External libraries
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') { transitive = true; }
 }
 
 
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
-    artifactId = 'tracker'
+    artifactId = 'tracker-extended'
     version = '0.1.0'
-    description = 'A modular tracker component.'
+    description = 'Extentions for lrx tracker.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

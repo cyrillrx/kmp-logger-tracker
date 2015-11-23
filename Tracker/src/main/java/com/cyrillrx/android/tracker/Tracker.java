@@ -18,17 +18,18 @@ import java.util.Set;
 public class Tracker {
 
     private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
-    private static final String ERROR_INITIALIZE_FIRST = "Call initialize() before using the Tracker.";
+    private static final String ERROR_INITIALIZE_FIRST    = "Call initialize() before using the Tracker.";
     private static Tracker sInstance;
 
     private final Set<TrackerChild> mTrackers;
-    private TrackerContext mContext;
+    private final TrackerContext    mContext;
 
     /**
      * @param context The application context.
      */
     private Tracker(Context context) {
         mTrackers = new HashSet<>();
+        mContext = new TrackerContext();
     }
 
     /**
@@ -40,6 +41,12 @@ public class Tracker {
         checkMultiInitialization();
 
         sInstance = new Tracker(context);
+    }
+
+    public static synchronized TrackerContext getTrackerContext(TrackerContext context) {
+        checkInitialized();
+
+        return sInstance.mContext;
     }
 
     public static synchronized void addChild(TrackerChild child) {

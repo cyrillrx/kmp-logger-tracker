@@ -10,9 +10,9 @@ import com.cyrillrx.android.tracker.TrackerChild;
  * @author Cyril Leroux
  *         Created on 11/11/2015.
  */
-public class FabricTracker extends TrackWrapper {
+public class AnalyticsTracker extends TrackWrapper {
 
-    public FabricTracker(TrackFilter filter, @NonNull TrackerChild tracker) {
-        super(filter, tracker);
+    public AnalyticsTracker(TrackFilter filter, @NonNull TrackerChild tracker) {
+        super(tracker, filter);
     }
 }

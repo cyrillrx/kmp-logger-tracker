@@ -19,7 +19,7 @@ import java.util.Set;
 public class Logger {
 
     private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
-    private static final String ERROR_INITIALIZE_FIRST = "Call initialize() before using the Logger.";
+    private static final String ERROR_INITIALIZE_FIRST    = "Call initialize() before using the Logger.";
     private static Logger sInstance;
 
     private final Set<LogChild> mLoggers;
