@@ -10,6 +10,7 @@ public class EntityEvent extends TrackEvent {
 
     private String id;
     private String type;
+    private String name;
     private String action;
 
     private int     intValue;
@@ -19,9 +20,14 @@ public class EntityEvent extends TrackEvent {
 
     EntityEvent() { }
 
-    public String getEntityId() { return id; }
+    public String getId() { return id; }
 
-    public String getEntityType() { return type; }
+    public String getType() { return type; }
+
+    /**
+     * @return The human-readable name of the content.
+     */
+    public String getName() { return name; }
 
     public String getAction() { return action; }
 
@@ -51,32 +57,39 @@ public class EntityEvent extends TrackEvent {
             return event;
         }
 
-        public void setEntityId(String id) {
+        public Builder setEntityId(String id) {
             event.id = id;
+            return this;
         }
 
-        public void setEntityType(String type) {
+        public Builder setEntityType(String type) {
             event.type = type;
+            return this;
         }
 
-        public void setEntityAction(String action) {
+        public Builder setEntityAction(String action) {
             event.action = action;
+            return this;
         }
 
-        public void setValue(int value) {
+        public Builder setValue(int value) {
             event.intValue = value;
+            return this;
         }
 
-        public void setValue(long value) {
+        public Builder setValue(long value) {
             event.longValue = value;
+            return this;
         }
 
-        public void setValue(float value) {
+        public Builder setValue(float value) {
             event.floatValue = value;
+            return this;
         }
 
-        public void setValue(boolean value) {
+        public Builder setValue(boolean value) {
             event.boolValue = value;
+            return this;
         }
 
     }

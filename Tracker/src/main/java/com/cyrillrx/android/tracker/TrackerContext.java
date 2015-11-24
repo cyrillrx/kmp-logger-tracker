@@ -42,16 +42,19 @@ public class TrackerContext {
         private String name;
         private String email;
 
-        public void setId(String id) {
+        public User setId(String id) {
             this.id = id;
+            return this;
         }
 
-        public void setName(String name) {
+        public User setName(String name) {
             this.name = name;
+            return this;
         }
 
-        public void setEmail(String email) {
+        public User setEmail(String email) {
             this.email = email;
+            return this;
         }
     }
 
@@ -65,28 +68,34 @@ public class TrackerContext {
         private String serial;
         private String display;
 
-        public void setOs(String os) {
+        public Device setOs(String os) {
             this.os = os;
+            return this;
         }
 
-        public void setBrand(String brand) {
+        public Device setBrand(String brand) {
             this.brand = brand;
+            return this;
         }
 
-        public void setManufacturer(String manufacturer) {
+        public Device setManufacturer(String manufacturer) {
             this.manufacturer = manufacturer;
+            return this;
         }
 
-        public void setModel(String model) {
+        public Device setModel(String model) {
             this.model = model;
+            return this;
         }
 
-        public void setSerial(String serial) {
+        public Device setSerial(String serial) {
             this.serial = serial;
+            return this;
         }
 
-        public void setDisplay(String display) {
+        public Device setDisplay(String display) {
             this.display = display;
+            return this;
         }
     }
 

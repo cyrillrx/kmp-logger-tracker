@@ -6,7 +6,7 @@ import com.cyrillrx.android.tracker.event.TrackEvent;
  * @author Cyril Leroux
  *         Created on 11/11/2015.
  */
-public abstract class TrackFilter {
+public interface TrackFilter {
 
-    abstract boolean shouldTrack(TrackEvent event);
+    boolean shouldTrack(TrackEvent event);
 }

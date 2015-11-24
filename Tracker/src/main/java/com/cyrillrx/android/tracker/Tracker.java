@@ -12,7 +12,7 @@ import java.util.Set;
  * It allows to customize the tracking conditions.
  *
  * @author Cyril Leroux
- *         Created on 11/11/15
+ *         Created on 17/04/2015
  */
 @SuppressWarnings("unused")
 public class Tracker {
@@ -24,26 +24,21 @@ public class Tracker {
     private final Set<TrackerChild> mTrackers;
     private final TrackerContext    mContext;
 
-    /**
-     * @param context The application context.
-     */
-    private Tracker(Context context) {
+    private Tracker() {
         mTrackers = new HashSet<>();
         mContext = new TrackerContext();
     }
 
     /**
      * Initializes the Tracker.
-     *
-     * @param context The application context to initialize the debug toast or null.
      */
-    public static void initialize(Context context) {
+    public static void initialize() {
         checkMultiInitialization();
 
-        sInstance = new Tracker(context);
+        sInstance = new Tracker();
     }
 
-    public static synchronized TrackerContext getTrackerContext(TrackerContext context) {
+    public static synchronized TrackerContext getTrackerContext() {
         checkInitialized();
 
         return sInstance.mContext;
