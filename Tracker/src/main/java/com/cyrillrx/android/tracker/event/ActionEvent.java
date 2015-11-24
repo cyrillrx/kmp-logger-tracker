@@ -4,9 +4,9 @@ import android.text.TextUtils;
 
 /**
  * @author Cyril Leroux
- *         Created on 11/11/2015.
+ *         Created on 24/11/2015.
  */
-public class EntityEvent extends TrackEvent {
+public class ActionEvent extends TrackEvent {
 
     private String action;
 
@@ -15,7 +15,7 @@ public class EntityEvent extends TrackEvent {
     private float   floatValue;
     private boolean boolValue;
 
-    EntityEvent() { }
+    ActionEvent() { }
 
     public String getAction() { return action; }
 
@@ -29,18 +29,16 @@ public class EntityEvent extends TrackEvent {
 
     public static class Builder {
 
-        private final EntityEvent event;
+        private final ActionEvent event;
 
         public Builder() {
-            event = new EntityEvent();
+            event = new ActionEvent();
         }
 
-        public EntityEvent build() {
+        public ActionEvent build() {
             if (TextUtils.isEmpty(event.category) ||
-                    TextUtils.isEmpty(event.id) ||
-                    TextUtils.isEmpty(event.type) ||
                     TextUtils.isEmpty(event.action)) {
-                throw new IllegalStateException("Category, id, type and action are mandatory");
+                throw new IllegalStateException("Category and action are mandatory");
             }
 
             return event;
@@ -51,17 +49,17 @@ public class EntityEvent extends TrackEvent {
             return this;
         }
 
-        public Builder setEntityId(String id) {
+        public Builder setId(String id) {
             event.id = id;
             return this;
         }
 
-        public Builder setEntityType(String type) {
+        public Builder setType(String type) {
             event.type = type;
             return this;
         }
 
-        public Builder setEntityName(String name) {
+        public Builder setName(String name) {
             event.name = name;
             return this;
         }
@@ -90,5 +88,6 @@ public class EntityEvent extends TrackEvent {
             event.boolValue = value;
             return this;
         }
+
     }
 }
