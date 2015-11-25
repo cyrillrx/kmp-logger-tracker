@@ -1,6 +1,5 @@
 package com.cyrillrx.android.tracker;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -28,7 +27,7 @@ public abstract class TrackWrapper implements TrackerChild, TrackFilter {
     }
 
     @Override
-    public void track(Context context, TrackEvent event) {
+    public void track(TrackerContext context, TrackEvent event) {
         if (shouldTrack(event)) {
             mWrapped.track(context, event);
         }

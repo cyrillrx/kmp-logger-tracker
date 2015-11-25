@@ -1,7 +1,5 @@
 package com.cyrillrx.android.tracker;
 
-import android.content.Context;
-
 import com.cyrillrx.android.tracker.event.TrackEvent;
 
 /**
@@ -10,5 +8,5 @@ import com.cyrillrx.android.tracker.event.TrackEvent;
  */
 public interface TrackerChild {
 
-    void track(Context context, TrackEvent event);
+    void track(TrackerContext context, TrackEvent event);
 }

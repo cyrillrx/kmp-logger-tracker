@@ -10,16 +10,19 @@ public class TrackerContext {
     private User   user;
     private Device device;
 
-    public void setApp(App app) {
+    public TrackerContext setApp(App app) {
         this.app = app;
+        return this;
     }
 
-    public void setUser(User user) {
+    public TrackerContext setUser(User user) {
         this.user = user;
+        return this;
     }
 
-    public void setDevice(Device device) {
+    public TrackerContext setDevice(Device device) {
         this.device = device;
+        return this;
     }
 
     //

@@ -1,5 +1,9 @@
 LRX Tracker Release Notes
 
+2015-11-25 - v0.3.0
+- Added basic attributes to TrackEvent
+- Created ActionEvent
+
 2015-11-24 - v0.2.0
 - Chained EntityEvent.Builder and TrackerContext setters
 - Cleaned Tracker constructor up

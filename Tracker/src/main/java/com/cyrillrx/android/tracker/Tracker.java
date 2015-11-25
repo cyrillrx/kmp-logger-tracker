@@ -1,7 +1,5 @@
 package com.cyrillrx.android.tracker;
 
-import android.content.Context;
-
 import com.cyrillrx.android.tracker.event.TrackEvent;
 
 import java.util.HashSet;
@@ -56,11 +54,11 @@ public class Tracker {
         sInstance.mTrackers.remove(child);
     }
 
-    public static synchronized void track(Context context, TrackEvent event) {
+    public static synchronized void track(TrackEvent event) {
         checkInitialized();
 
         for (TrackerChild tracker : sInstance.mTrackers) {
-            tracker.track(context, event);
+            tracker.track(sInstance.mContext, event);
         }
     }
 
