@@ -1,0 +1,4 @@
+LRX Tracker extension Release Notes
+
+2015-11-25 - v0.1.0
+- Added implementation for Answer (Fabric) and Google Analytics trackers
