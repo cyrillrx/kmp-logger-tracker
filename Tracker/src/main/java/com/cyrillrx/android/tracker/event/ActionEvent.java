@@ -8,12 +8,12 @@ import android.text.TextUtils;
  */
 public class ActionEvent extends TrackEvent {
 
-    private String action;
+    protected String action;
 
-    private int     intValue;
-    private long    longValue;
-    private float   floatValue;
-    private boolean boolValue;
+    protected int     intValue;
+    protected long    longValue;
+    protected float   floatValue;
+    protected boolean boolValue;
 
     ActionEvent() { }
 
@@ -31,9 +31,7 @@ public class ActionEvent extends TrackEvent {
 
         private final ActionEvent event;
 
-        public Builder() {
-            event = new ActionEvent();
-        }
+        public Builder() { event = new ActionEvent(); }
 
         public ActionEvent build() {
             if (TextUtils.isEmpty(event.category) ||

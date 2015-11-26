@@ -1,0 +1,66 @@
+package com.cyrillrx.android.tracker.event;
+
+import android.text.TextUtils;
+
+/**
+ * @author Cyril Leroux
+ *         Created on 11/11/2015.
+ */
+public class RateEvent extends TrackEvent {
+
+    protected int rating;
+
+    RateEvent() { }
+
+    public int getRating() { return rating; }
+
+    public static class Builder {
+
+        private final RateEvent event;
+
+        private boolean isRated;
+
+        public Builder() {
+            event = new RateEvent();
+            isRated = false;
+        }
+
+        public RateEvent build() {
+            if (TextUtils.isEmpty(event.category) ||
+                    TextUtils.isEmpty(event.id) ||
+                    TextUtils.isEmpty(event.type) ||
+                    isRated) {
+                throw new IllegalStateException("Category, id, type and rating are mandatory");
+            }
+
+            return event;
+        }
+
+        public Builder setCategory(String category) {
+            event.category = category;
+            return this;
+        }
+
+        public Builder setId(String id) {
+            event.id = id;
+            return this;
+        }
+
+        public Builder setType(String type) {
+            event.type = type;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            event.name = name;
+            return this;
+        }
+
+        public Builder setRating(int rating) {
+            isRated = true;
+            event.rating = rating;
+            return this;
+        }
+
+    }
+}

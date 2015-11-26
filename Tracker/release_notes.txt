@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2015-11-26 - v0.4.0
+- Added ViewEvent and RatingEvent
+
 2015-11-25 - v0.3.0
 - Added basic attributes to TrackEvent
 - Created ActionEvent
