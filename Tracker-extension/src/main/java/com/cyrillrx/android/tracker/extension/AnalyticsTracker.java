@@ -14,13 +14,9 @@ import com.cyrillrx.android.tracker.event.TrackEvent;
  */
 public class AnalyticsTracker extends TrackWrapper {
 
-    public AnalyticsTracker(TrackFilter filter) {
-        super(new AnalyticsTrackChild(), filter);
-    }
+    public AnalyticsTracker(TrackFilter filter) { super(new AnalyticsTrackChild(), filter); }
 
-    public AnalyticsTracker() {
-        super(new AnalyticsTrackChild());
-    }
+    public AnalyticsTracker() { super(new AnalyticsTrackChild()); }
 
     private static class AnalyticsTrackChild implements TrackerChild {
 

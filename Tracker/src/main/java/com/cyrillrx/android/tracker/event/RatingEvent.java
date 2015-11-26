@@ -6,26 +6,26 @@ import android.text.TextUtils;
  * @author Cyril Leroux
  *         Created on 11/11/2015.
  */
-public class RateEvent extends TrackEvent {
+public class RatingEvent extends TrackEvent {
 
     protected int rating;
 
-    RateEvent() { }
+    RatingEvent() { }
 
     public int getRating() { return rating; }
 
     public static class Builder {
 
-        private final RateEvent event;
+        private final RatingEvent event;
 
         private boolean isRated;
 
         public Builder() {
-            event = new RateEvent();
+            event = new RatingEvent();
             isRated = false;
         }
 
-        public RateEvent build() {
+        public RatingEvent build() {
             if (TextUtils.isEmpty(event.category) ||
                     TextUtils.isEmpty(event.id) ||
                     TextUtils.isEmpty(event.type) ||

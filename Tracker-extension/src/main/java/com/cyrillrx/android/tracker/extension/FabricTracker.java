@@ -1,14 +1,15 @@
 package com.cyrillrx.android.tracker.extension;
 
 import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
-import com.crashlytics.android.answers.RatingEvent;
 import com.cyrillrx.android.tracker.TrackFilter;
 import com.cyrillrx.android.tracker.TrackWrapper;
 import com.cyrillrx.android.tracker.TrackerChild;
 import com.cyrillrx.android.tracker.TrackerContext;
-import com.cyrillrx.android.tracker.event.EntityEvent;
+import com.cyrillrx.android.tracker.event.RatingEvent;
 import com.cyrillrx.android.tracker.event.TrackEvent;
+import com.cyrillrx.android.tracker.event.ViewEvent;
 
 /**
  * A {@link TrackWrapper} wrapping a Answer (Fabric) {@link TrackerChild}.
@@ -18,31 +19,40 @@ import com.cyrillrx.android.tracker.event.TrackEvent;
  */
 public class FabricTracker extends TrackWrapper {
 
-    public FabricTracker(TrackFilter filter) {
-        super(new FabricTrackChild(), filter);
-    }
+    public FabricTracker(TrackFilter filter) { super(new FabricTrackChild(), filter); }
 
-    public FabricTracker() {
-        super(new FabricTrackChild());
-    }
+    public FabricTracker() { super(new FabricTrackChild()); }
 
     private static class FabricTrackChild implements TrackerChild {
 
         @Override
         public void track(TrackerContext context, TrackEvent event) {
 
-            if (event instanceof EntityEvent) {
-                trackRating((EntityEvent) event);
+            if (event instanceof ViewEvent) {
+                trackView((ViewEvent) event);
+
+            } else if (event instanceof RatingEvent) {
+                trackRating((RatingEvent) event);
 
             } else {
                 trackCustom(event);
             }
         }
 
-        private void trackRating(EntityEvent event) {
+        private void trackView(ViewEvent event) {
+            Answers.getInstance().logContentView(
+                    new ContentViewEvent()
+                            .putContentId(event.getId())
+                            .putContentType(event.getType())
+                            .putContentName(event.getName())
+                            .putCustomAttribute("createdAt", event.getCreatedAt())
+            );
+        }
+
+        private void trackRating(RatingEvent event) {
             Answers.getInstance().logRating(
-                    new RatingEvent()
-                            .putRating(event.getIntValue())
+                    new com.crashlytics.android.answers.RatingEvent()
+                            .putRating(event.getRating())
                             .putContentName(event.getName())
                             .putContentType(event.getType())
                             .putContentId(event.getId())
@@ -60,5 +70,6 @@ public class FabricTracker extends TrackWrapper {
                             .putCustomAttribute("createdAt", event.getCreatedAt())
             );
         }
+
     }
 }
