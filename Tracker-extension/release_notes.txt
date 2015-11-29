@@ -1,5 +1,11 @@
 LRX Tracker extension Release Notes
 
+2015-11-29 - v0.2.3
+- Made FabricTracker more flexible with missing data
+
+2015-11-29 - v0.2.2
+- Implemented trackAction in FabricTracker
+
 2015-11-26 - v0.2.0
 - Updated FabricTracker with ViewEvent and RatingEvent
 

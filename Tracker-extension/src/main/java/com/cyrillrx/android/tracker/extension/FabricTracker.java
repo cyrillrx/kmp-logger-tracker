@@ -44,38 +44,76 @@ public class FabricTracker extends TrackWrapper {
         }
 
         private void trackView(ViewEvent event) {
-            Answers.getInstance().logContentView(
-                    new ContentViewEvent()
-                            .putContentId(event.getId())
-                            .putContentType(event.getType())
-                            .putContentName(event.getName())
-                            .putCustomAttribute("createdAt", event.getCreatedAt())
-            );
+
+            final ContentViewEvent contentViewEvent = new ContentViewEvent()
+                    .putContentName(event.getName())
+                    .putCustomAttribute("category", event.getCategory())
+                    .putCustomAttribute("createdAt", event.getCreatedAt());
+
+            if (event.getId() != null) {
+                contentViewEvent.putCustomAttribute("id", event.getId());
+            }
+            if (event.getType() != null) {
+                contentViewEvent.putCustomAttribute("type", event.getType());
+            }
+
+            Answers.getInstance().logContentView(contentViewEvent);
         }
 
+        /**
+         * Tracks an action event.<br />
+         * Adds id, type and name metadata if available.
+         *
+         * @param event The event to forward to Fabric.
+         */
         private void trackAction(ActionEvent event) {
-            Answers.getInstance().logCustom(
-                    new CustomEvent(event.getAction())
-                            .putCustomAttribute("category", event.getCategory())
-                            .putCustomAttribute("id", event.getId())
-                            .putCustomAttribute("type", event.getType())
-                            .putCustomAttribute("name", event.getName())
-                            .putCustomAttribute("action", event.getAction())
-                            .putCustomAttribute("createdAt", event.getCreatedAt())
-            );
+
+            final CustomEvent customEvent = new CustomEvent(event.getAction())
+                    .putCustomAttribute("action", event.getAction())
+                    .putCustomAttribute("category", event.getCategory())
+                    .putCustomAttribute("createdAt", event.getCreatedAt());
+
+            if (event.getId() != null) {
+                customEvent.putCustomAttribute("id", event.getId());
+            }
+            if (event.getType() != null) {
+                customEvent.putCustomAttribute("type", event.getType());
+            }
+            if (event.getName() != null) {
+                customEvent.putCustomAttribute("name", event.getName());
+            }
+
+            Answers.getInstance().logCustom(customEvent);
         }
 
+        /**
+         * Tracks a rating event.<br />
+         * Adds name metadata if available.
+         *
+         * @param event The event to forward to Fabric.
+         */
         private void trackRating(RatingEvent event) {
-            Answers.getInstance().logRating(
-                    new com.crashlytics.android.answers.RatingEvent()
-                            .putRating(event.getRating())
-                            .putContentName(event.getName())
-                            .putContentType(event.getType())
-                            .putContentId(event.getId())
-                            .putCustomAttribute("createdAt", event.getCreatedAt())
-            );
+
+            final com.crashlytics.android.answers.RatingEvent ratingEvent = new com.crashlytics.android.answers.RatingEvent()
+                    .putRating(event.getRating())
+                    .putContentType(event.getType())
+                    .putContentId(event.getId())
+                    .putCustomAttribute("category", event.getCategory())
+                    .putCustomAttribute("createdAt", event.getCreatedAt());
+
+            if (event.getName() != null) {
+                ratingEvent.putCustomAttribute("name", event.getName());
+            }
+
+            Answers.getInstance().logRating(ratingEvent);
         }
 
+        /**
+         * Tracks a custom event.<br />
+         * Adds name metadata if available.
+         *
+         * @param event The event to forward to Fabric.
+         */
         private void trackCustom(TrackEvent event) {
 
             String eventName = event.getName();
@@ -88,14 +126,21 @@ public class FabricTracker extends TrackWrapper {
                 }
             }
 
-            Answers.getInstance().logCustom(
-                    new CustomEvent(eventName)
-                            .putCustomAttribute("category", event.getCategory())
-                            .putCustomAttribute("id", event.getId())
-                            .putCustomAttribute("type", event.getType())
-                            .putCustomAttribute("name", event.getName())
-                            .putCustomAttribute("createdAt", event.getCreatedAt())
-            );
+            final CustomEvent customEvent = new CustomEvent(eventName)
+                    .putCustomAttribute("category", event.getCategory())
+                    .putCustomAttribute("createdAt", event.getCreatedAt());
+
+            if (event.getId() != null) {
+                customEvent.putCustomAttribute("id", event.getId());
+            }
+            if (event.getType() != null) {
+                customEvent.putCustomAttribute("type", event.getType());
+            }
+            if (event.getName() != null) {
+                customEvent.putCustomAttribute("name", event.getName());
+            }
+
+            Answers.getInstance().logCustom(customEvent);
         }
     }
 }
