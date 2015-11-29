@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2015-11-29 - v0.4.2
+- Fixed RatingEvent Builder
+
 2015-11-26 - v0.4.0
 - Added ViewEvent and RatingEvent
 

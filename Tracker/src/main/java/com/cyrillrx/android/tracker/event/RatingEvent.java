@@ -29,7 +29,7 @@ public class RatingEvent extends TrackEvent {
             if (TextUtils.isEmpty(event.category) ||
                     TextUtils.isEmpty(event.id) ||
                     TextUtils.isEmpty(event.type) ||
-                    isRated) {
+                    !isRated) {
                 throw new IllegalStateException("Category, id, type and rating are mandatory");
             }
 
