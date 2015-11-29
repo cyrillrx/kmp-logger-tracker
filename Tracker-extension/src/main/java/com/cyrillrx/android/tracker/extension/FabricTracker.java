@@ -7,6 +7,7 @@ import com.cyrillrx.android.tracker.TrackFilter;
 import com.cyrillrx.android.tracker.TrackWrapper;
 import com.cyrillrx.android.tracker.TrackerChild;
 import com.cyrillrx.android.tracker.TrackerContext;
+import com.cyrillrx.android.tracker.event.ActionEvent;
 import com.cyrillrx.android.tracker.event.RatingEvent;
 import com.cyrillrx.android.tracker.event.TrackEvent;
 import com.cyrillrx.android.tracker.event.ViewEvent;
@@ -31,6 +32,9 @@ public class FabricTracker extends TrackWrapper {
             if (event instanceof ViewEvent) {
                 trackView((ViewEvent) event);
 
+            } else if (event instanceof ActionEvent) {
+                trackAction((ActionEvent) event);
+
             } else if (event instanceof RatingEvent) {
                 trackRating((RatingEvent) event);
 
@@ -49,6 +53,18 @@ public class FabricTracker extends TrackWrapper {
             );
         }
 
+        private void trackAction(ActionEvent event) {
+            Answers.getInstance().logCustom(
+                    new CustomEvent(event.getAction())
+                            .putCustomAttribute("category", event.getCategory())
+                            .putCustomAttribute("id", event.getId())
+                            .putCustomAttribute("type", event.getType())
+                            .putCustomAttribute("name", event.getName())
+                            .putCustomAttribute("action", event.getAction())
+                            .putCustomAttribute("createdAt", event.getCreatedAt())
+            );
+        }
+
         private void trackRating(RatingEvent event) {
             Answers.getInstance().logRating(
                     new com.crashlytics.android.answers.RatingEvent()
@@ -61,15 +77,25 @@ public class FabricTracker extends TrackWrapper {
         }
 
         private void trackCustom(TrackEvent event) {
+
+            String eventName = event.getName();
+            if (eventName == null) {
+                // Fallback on event category if no name is found
+                eventName = event.getCategory();
+                if (event.getType() != null && event.getId() != null) {
+                    // Add event type and id if available
+                    eventName += "_" + event.getType() + "_" + event.getId();
+                }
+            }
+
             Answers.getInstance().logCustom(
-                    new CustomEvent(event.getName())
+                    new CustomEvent(eventName)
                             .putCustomAttribute("category", event.getCategory())
                             .putCustomAttribute("id", event.getId())
                             .putCustomAttribute("type", event.getType())
-                            .putCustomAttribute("name", event.getType())
+                            .putCustomAttribute("name", event.getName())
                             .putCustomAttribute("createdAt", event.getCreatedAt())
             );
         }
-
     }
 }
