@@ -45,5 +45,9 @@ public class ViewEvent extends TrackEvent {
             return this;
         }
 
+        public Builder putCustomAttribute(String key, String value) {
+            event.customAttributes.put(key, value);
+            return this;
+        }
     }
 }
