@@ -1,7 +1,7 @@
 LRX Tracker Release Notes
 
 2015-12-31 - v0.4.4
-- Added customAttributes map to TrackEvent children
+- Added customAttributes map to TrackEvent's children
 
 2015-12-31 - v0.4.3
 - Added customAttributes map to TrackEvent data model

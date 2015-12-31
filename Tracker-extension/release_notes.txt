@@ -1,7 +1,10 @@
 LRX Tracker extension Release Notes
 
+2015-12-31 - v0.2.5
+- Updated tracker lib to v0.4.4 : Added customAttributes map to TrackEvent's children
+
 2015-12-31 - v0.2.4
-- Updated tracker lib to 0.4.3 : Added customAttributes map to TrackEvent data model
+- Updated tracker lib to v0.4.3 : Added customAttributes map to TrackEvent data model
 
 2015-11-29 - v0.2.3
 - Made FabricTracker more flexible with missing data
