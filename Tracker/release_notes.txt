@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2015-12-31 - v0.4.3
+- Added customAttributes map to TrackEvent data model
+
 2015-11-29 - v0.4.2
 - Fixed RatingEvent Builder
 
