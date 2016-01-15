@@ -41,9 +41,7 @@ public class TrackEvent {
 
         private final TrackEvent event;
 
-        public Builder() {
-            event = new TrackEvent();
-        }
+        public Builder() { event = new TrackEvent(); }
 
         public TrackEvent build() {
             if (TextUtils.isEmpty(event.category)) {
@@ -75,6 +73,11 @@ public class TrackEvent {
 
         public Builder putCustomAttribute(String key, String value) {
             event.customAttributes.put(key, value);
+            return this;
+        }
+
+        public Builder putCustomAttributes(Map<String, String> values) {
+            event.customAttributes.putAll(values);
             return this;
         }
     }

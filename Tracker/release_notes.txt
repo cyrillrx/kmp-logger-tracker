@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2016-01-15 - v0.4.5
+- Improved TrackEvent's builders
+
 2015-12-31 - v0.4.4
 - Added customAttributes map to TrackEvent's children
 

@@ -2,6 +2,8 @@ package com.cyrillrx.android.tracker.event;
 
 import android.text.TextUtils;
 
+import java.util.Map;
+
 /**
  * @author Cyril Leroux
  *         Created on 11/11/2015.
@@ -64,6 +66,11 @@ public class RatingEvent extends TrackEvent {
 
         public Builder putCustomAttribute(String key, String value) {
             event.customAttributes.put(key, value);
+            return this;
+        }
+
+        public Builder putCustomAttributes(Map<String, String> values) {
+            event.customAttributes.putAll(values);
             return this;
         }
     }
