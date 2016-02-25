@@ -36,7 +36,7 @@ public class Tracker {
         sInstance = new Tracker();
     }
 
-    public static synchronized TrackerContext getTrackerContext() {
+    public static synchronized TrackerContext getContext() {
         checkInitialized();
 
         return sInstance.mContext;

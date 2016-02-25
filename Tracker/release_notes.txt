@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2016-02-25 - v0.4.6
+- Added getter methods to TrackerContext class
+
 2016-01-15 - v0.4.5
 - Improved TrackEvent's builders
 

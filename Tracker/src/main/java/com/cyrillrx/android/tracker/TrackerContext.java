@@ -25,6 +25,12 @@ public class TrackerContext {
         return this;
     }
 
+    public App getApp() { return app; }
+
+    public User getUser() { return user; }
+
+    public Device getDevice() { return device; }
+
     //
     // Inner classes
     //
