@@ -9,7 +9,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "0.4.6"
+        versionName "0.4.7"
     }
 
     buildTypes {
@@ -30,7 +30,7 @@ android {
 dependencies {
 
     // Google Support libraries
-    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support:support-annotations:23.2.0'
 }
 
 
@@ -38,7 +38,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'tracker'
-    version = '0.4.6'
+    version = '0.4.7'
     description = 'A modular tracker component.'
     website = 'https://github.com/cyrillrx/android_logger'
 }
