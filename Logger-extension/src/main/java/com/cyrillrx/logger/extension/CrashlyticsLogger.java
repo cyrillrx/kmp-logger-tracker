@@ -1,8 +1,8 @@
-package com.cyrillrx.android.logger.extension;
+package com.cyrillrx.logger.extension;
 
 import com.crashlytics.android.Crashlytics;
-import com.cyrillrx.android.logger.LogChild;
-import com.cyrillrx.android.logger.LogWrapper;
+import com.cyrillrx.logger.LogChild;
+import com.cyrillrx.logger.LogWrapper;
 
 /**
  * A ready-to-use severity-aware {@link LogChild} wrapping {@link Crashlytics} logger class.

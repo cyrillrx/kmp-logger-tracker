@@ -1,16 +1,16 @@
-package com.cyrillrx.android.tracker.extension;
+package com.cyrillrx.tracker.extension;
 
 import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
-import com.cyrillrx.android.tracker.TrackFilter;
-import com.cyrillrx.android.tracker.TrackWrapper;
-import com.cyrillrx.android.tracker.TrackerChild;
-import com.cyrillrx.android.tracker.TrackerContext;
-import com.cyrillrx.android.tracker.event.ActionEvent;
-import com.cyrillrx.android.tracker.event.RatingEvent;
-import com.cyrillrx.android.tracker.event.TrackEvent;
-import com.cyrillrx.android.tracker.event.ViewEvent;
+import com.cyrillrx.tracker.TrackFilter;
+import com.cyrillrx.tracker.TrackWrapper;
+import com.cyrillrx.tracker.TrackerChild;
+import com.cyrillrx.tracker.TrackerContext;
+import com.cyrillrx.tracker.event.ActionEvent;
+import com.cyrillrx.tracker.event.RatingEvent;
+import com.cyrillrx.tracker.event.TrackEvent;
+import com.cyrillrx.tracker.event.ViewEvent;
 
 /**
  * A {@link TrackWrapper} wrapping a Answer (Fabric) {@link TrackerChild}.

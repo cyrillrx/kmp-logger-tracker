@@ -1,10 +1,10 @@
-package com.cyrillrx.android.tracker.extension;
+package com.cyrillrx.tracker.extension;
 
-import com.cyrillrx.android.tracker.TrackFilter;
-import com.cyrillrx.android.tracker.TrackWrapper;
-import com.cyrillrx.android.tracker.TrackerChild;
-import com.cyrillrx.android.tracker.TrackerContext;
-import com.cyrillrx.android.tracker.event.TrackEvent;
+import com.cyrillrx.tracker.TrackFilter;
+import com.cyrillrx.tracker.TrackWrapper;
+import com.cyrillrx.tracker.TrackerChild;
+import com.cyrillrx.tracker.TrackerContext;
+import com.cyrillrx.tracker.event.TrackEvent;
 
 /**
  * A {@link TrackWrapper} wrapping a Google Analytics {@link TrackerChild}.
