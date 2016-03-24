@@ -1,7 +1,8 @@
 LRX Tracker extension Release Notes
 
-2016-03-23 - v0.2.7
-- Updated tracker lib to v0.4.5 : Improved TrackEvent's builders
+2016-03-24 - v0.3.0
+- Switched Tracker lib from android module to java module => 'com.cyrillrx:tracker:0.4.8'
+
 2016-01-15 - v0.2.6
 - Updated tracker lib to v0.4.5 : Improved TrackEvent's builders
 
