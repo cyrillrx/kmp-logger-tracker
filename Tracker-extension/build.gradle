@@ -35,7 +35,7 @@ android {
 
 dependencies {
     // External libraries
-    compile 'com.cyrillrx:tracker:0.4.8'
+    compile 'com.cyrillrx:tracker:0.4.9'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') { transitive = true; }
 }
 

@@ -1,4 +1,7 @@
 LRX Logger extension Release Notes
 
+2016-03-29 - v1.2.0
+- Created Toaster class
+
 2016-03-24 - v1.1.0
 - Switched Logger lib from android module to java module => 'com.cyrillrx:logger:1.1.0'
