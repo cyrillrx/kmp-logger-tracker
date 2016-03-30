@@ -1,4 +1,4 @@
-package com.cyrillrx.logger.extension;
+package com.cyrillrx.notifier;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

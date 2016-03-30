@@ -1,5 +1,8 @@
 LRX Logger extension Release Notes
 
+2016-03-30 - v1.2.1
+- Moved Toaster class into Notifier module
+
 2016-03-29 - v1.2.0
 - Created Toaster class
 

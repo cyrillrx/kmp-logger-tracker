@@ -1,0 +1,4 @@
+A toolbox to visualy notify the developer or end user.
+
+2016-03-30 - v0.1.0
+- Moved Toaster class into Notifier module

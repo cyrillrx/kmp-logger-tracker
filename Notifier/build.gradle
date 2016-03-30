@@ -1,20 +1,5 @@
-buildscript {
-    repositories {
-        maven { url 'https://maven.fabric.io/public' }
-    }
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.21.2'
-    }
-}
-
 apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url 'http://dl.bintray.com/cyrillrx/maven' }
-}
 
 android {
     compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
@@ -24,7 +9,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "1.2.1"
+        versionName "0.1.0"
     }
 
     buildTypes {
@@ -44,17 +29,15 @@ android {
 
 dependencies {
     // External libraries
-    compile 'com.cyrillrx:logger:1.1.0'
     compile 'com.android.support:support-annotations:23.2.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') { transitive = true; }
 }
 
 
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
-    artifactId = 'logger-extended'
-    version = '1.2.1'
-    description = 'Extentions for lrx logger.'
+    artifactId = 'notifier'
+    version = '0.1.0'
+    description = 'A toolbox to visualy notify the developer or end user.'
     website = 'https://github.com/cyrillrx/android_logger'
 }
