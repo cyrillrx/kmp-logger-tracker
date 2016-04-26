@@ -6,11 +6,12 @@ import com.crashlytics.android.answers.CustomEvent;
 import com.cyrillrx.tracker.TrackFilter;
 import com.cyrillrx.tracker.TrackWrapper;
 import com.cyrillrx.tracker.TrackerChild;
-import com.cyrillrx.tracker.TrackerContext;
 import com.cyrillrx.tracker.event.ActionEvent;
 import com.cyrillrx.tracker.event.RatingEvent;
 import com.cyrillrx.tracker.event.TrackEvent;
 import com.cyrillrx.tracker.event.ViewEvent;
+
+import java.util.Collection;
 
 /**
  * A {@link TrackWrapper} wrapping a Answer (Fabric) {@link TrackerChild}.
@@ -27,7 +28,7 @@ public class FabricTracker extends TrackWrapper {
     private static class FabricTrackChild implements TrackerChild {
 
         @Override
-        public void track(TrackerContext context, TrackEvent event) {
+        public void track(TrackEvent event) {
 
             if (event instanceof ViewEvent) {
                 trackView((ViewEvent) event);
@@ -40,6 +41,13 @@ public class FabricTracker extends TrackWrapper {
 
             } else {
                 trackCustom(event);
+            }
+        }
+
+        @Override
+        public void track(Collection<TrackEvent> events) {
+            for (TrackEvent event : events) {
+                track(event);
             }
         }
 
