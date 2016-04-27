@@ -24,7 +24,7 @@ android {
         minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
         versionCode 1
-        versionName "0.3.1"
+        versionName "0.3.2"
     }
 
     buildTypes {
@@ -44,7 +44,7 @@ android {
 
 dependencies {
     // External libraries
-    compile 'com.cyrillrx:tracker:0.6.0'
+    compile 'com.cyrillrx:tracker:0.6.1'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') { transitive = true; }
 }
 
@@ -53,7 +53,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'tracker-extended'
-    version = '0.3.1'
+    version = '0.3.2'
     description = 'Extentions for lrx tracker.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

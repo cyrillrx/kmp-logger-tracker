@@ -1,7 +1,14 @@
 LRX Tracker extension Release Notes
 
+2016-04-27 - v0.3.2
+- Bumped Tracker lib to v0.6.1
+- Fixed event builder's inheritance
+
 2016-04-26 - v0.3.1
-- Bumped to 'com.cyrillrx:tracker:0.6.0'
+- Bumped Tracker lib to v0.6.0
+- Tracker can either stream or scheduled event consumption
+- Streaming tracker has a retry policy implementation
+- Added more unit tests
 
 2016-03-24 - v0.3.0
 - Switched Tracker lib from android module to java module => 'com.cyrillrx:tracker:0.4.8'
