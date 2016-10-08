@@ -66,7 +66,7 @@ public class Toaster {
     }
 
     /**
-     * Shows a debug toast (for the developer).
+     * Shows a classical toast (for the user).
      *
      * @param message The message to toast.
      */
@@ -76,13 +76,55 @@ public class Toaster {
     }
 
     /**
-     * Shows a debug toast (for the developer).
+     * Shows a classical toast (for the user).
      *
      * @param messageRes The resource of the message to toast.
      */
     public static synchronized void toast(int messageRes) {
         checkInitialized();
         toast(sInstance.mUserToast, messageRes);
+    }
+
+    /**
+     * Shows a classical toast (for the user).
+     *
+     * @param message The message to toast.
+     */
+    public static synchronized void toast(String message, int tempDuration) {
+        checkInitialized();
+
+        // Save the initial duration
+        final int oldDuration = sInstance.mUserToast.getDuration();
+
+        // Set the temp duration
+        sInstance.mUserToast.setDuration(tempDuration);
+
+        // Toast the message
+        toast(sInstance.mUserToast, message);
+
+        // Restore the initial duration
+        sInstance.mUserToast.setDuration(oldDuration);
+    }
+
+    /**
+     * Shows a classical toast (for the user).
+     *
+     * @param messageRes The resource of the message to toast.
+     */
+    public static synchronized void toast(int messageRes, int tempDuration) {
+        checkInitialized();
+
+        // Save the initial duration
+        final int oldDuration = sInstance.mUserToast.getDuration();
+
+        // Set the temp duration
+        sInstance.mUserToast.setDuration(tempDuration);
+
+        // Toast the message
+        toast(sInstance.mUserToast, messageRes);
+
+        // Restore the initial duration
+        sInstance.mUserToast.setDuration(oldDuration);
     }
 
     /**

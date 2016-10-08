@@ -36,7 +36,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'notifier'
-    version = '0.1.1'
+    version = '0.1.2'
     description = 'A toolbox to visualy notify the developer or end user.'
     website = 'https://github.com/cyrillrx/android_logger'
 }
