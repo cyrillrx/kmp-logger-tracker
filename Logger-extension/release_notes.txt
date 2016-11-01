@@ -1,16 +1,16 @@
 LRX Logger extension Release Notes
 
 2016-11-01 - v1.3.1
-- Refactored (simplified) loggers implementations
-- Updated logger : 'com.cyrillrx:logger:1.2.0'
+- Bumped Logger lib to v1.2.0
+- Simplified loggers implementations
 
 2016-09-18 - v1.3.0
+- Bumped Logger lib to v1.1.4
 - Created a logger for Firebase Crash Reporter
-- Updated logger : 'com.cyrillrx:logger:1.1.4'
 
 2016-03-30 - v1.2.1
+- Bumped Logger lib to v1.1.3
 - Moved Toaster class into Notifier module
-- Updated logger : 'com.cyrillrx:logger:1.1.3'
 
 2016-03-29 - v1.2.0
 - Created Toaster class

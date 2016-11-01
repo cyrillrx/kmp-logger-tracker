@@ -13,5 +13,11 @@ Update the release notes: Logger/release_notes.txt
 ./gradlew clean build bintrayUpload -p Logger-extension -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
 ./gradlew clean build bintrayUpload -p Tracker-extension -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
 ./gradlew clean build bintrayUpload -p Notifier -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
+```
 
+### Available scripts
+```
+../scripts/logger_ext.sh
+../scripts/tracker_ext.sh
+../scripts/notifier.sh
 ```
