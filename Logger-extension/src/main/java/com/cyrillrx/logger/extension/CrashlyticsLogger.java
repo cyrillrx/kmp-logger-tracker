@@ -10,66 +10,22 @@ import com.cyrillrx.logger.LogWrapper;
  * @author Cyril Leroux
  *         Created on 19/10/15
  */
+@SuppressWarnings("unused")
 public class CrashlyticsLogger extends LogWrapper {
 
-    public CrashlyticsLogger(int severity) {
-        super(severity, new WrappedLogger());
-    }
+    public CrashlyticsLogger(int severity) { super(severity, new WrappedLogger()); }
 
     private static class WrappedLogger implements LogChild {
-        @Override
-        public void verbose(String tag, String message) {
-            Crashlytics.log(message);
-        }
 
         @Override
-        public void verbose(String tag, String message, Throwable throwable) {
+        public void log(int severity, String tag, String message, Throwable throwable) {
             Crashlytics.log(message);
             Crashlytics.logException(throwable);
         }
 
         @Override
-        public void debug(String tag, String message) {
+        public void log(int severity, String tag, String message) {
             Crashlytics.log(message);
-        }
-
-        @Override
-        public void debug(String tag, String message, Throwable throwable) {
-            Crashlytics.log(message);
-            Crashlytics.logException(throwable);
-        }
-
-        @Override
-        public void info(String tag, String message) {
-            Crashlytics.log(message);
-        }
-
-        @Override
-        public void info(String tag, String message, Throwable throwable) {
-            Crashlytics.log(message);
-            Crashlytics.logException(throwable);
-        }
-
-        @Override
-        public void warning(String tag, String message) {
-            Crashlytics.log(message);
-        }
-
-        @Override
-        public void warning(String tag, String message, Throwable throwable) {
-            Crashlytics.log(message);
-            Crashlytics.logException(throwable);
-        }
-
-        @Override
-        public void error(String tag, String message) {
-            Crashlytics.log(message);
-        }
-
-        @Override
-        public void error(String tag, String message, Throwable throwable) {
-            Crashlytics.log(message);
-            Crashlytics.logException(throwable);
         }
     }
 }
