@@ -37,18 +37,23 @@ public class LogCat extends LogWrapper {
 
                 case Severity.VERBOSE:
                     Log.println(Log.VERBOSE, tag, msg + '\n' + Log.getStackTraceString(th));
+                    break;
 
                 case Severity.DEBUG:
                     Log.println(Log.DEBUG, tag, msg + '\n' + Log.getStackTraceString(th));
+                    break;
 
                 case Severity.INFO:
                     Log.println(Log.INFO, tag, msg + '\n' + Log.getStackTraceString(th));
+                    break;
 
                 case Severity.WARN:
                     Log.println(Log.WARN, tag, msg + '\n' + Log.getStackTraceString(th));
+                    break;
 
                 case Severity.ERROR:
                     Log.println(Log.ERROR, tag, msg + '\n' + Log.getStackTraceString(th));
+                    break;
             }
         }
 
@@ -66,18 +71,23 @@ public class LogCat extends LogWrapper {
 
                 case Severity.VERBOSE:
                     Log.println(Log.VERBOSE, tag, msg);
+                    break;
 
                 case Severity.DEBUG:
                     Log.println(Log.DEBUG, tag, msg);
+                    break;
 
                 case Severity.INFO:
                     Log.println(Log.INFO, tag, msg);
+                    break;
 
                 case Severity.WARN:
                     Log.println(Log.WARN, tag, msg);
+                    break;
 
                 case Severity.ERROR:
                     Log.println(Log.ERROR, tag, msg);
+                    break;
             }
         }
     }

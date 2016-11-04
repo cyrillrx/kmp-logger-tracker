@@ -1,5 +1,8 @@
 LRX Logger extension Release Notes
 
+2016-11-04 - v1.3.2
+- Fixed Logcat extension
+
 2016-11-01 - v1.3.1
 - Bumped Logger lib to v1.2.0
 - Simplified loggers implementations
