@@ -1,6 +1,7 @@
 package com.cyrillrx.tracker.extension;
 
 import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.AnswersEvent;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
 import com.cyrillrx.tracker.TrackFilter;
@@ -73,10 +74,7 @@ public class AnswerTracker extends TrackWrapper {
                 contentViewEvent.putContentName(source.getName());
             }
 
-            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-            for (Map.Entry<String, String> entry : entries) {
-                contentViewEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-            }
+            addCustomAttributes(source, contentViewEvent);
 
             Answers.getInstance().logContentView(contentViewEvent);
         }
@@ -104,10 +102,7 @@ public class AnswerTracker extends TrackWrapper {
                 customEvent.putCustomAttribute("name", source.getName());
             }
 
-            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-            for (Map.Entry<String, String> entry : entries) {
-                customEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-            }
+            addCustomAttributes(source, customEvent);
 
             Answers.getInstance().logCustom(customEvent);
         }
@@ -131,10 +126,7 @@ public class AnswerTracker extends TrackWrapper {
                 ratingEvent.putCustomAttribute("name", source.getName());
             }
 
-            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-            for (Map.Entry<String, String> entry : entries) {
-                ratingEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-            }
+            addCustomAttributes(source, ratingEvent);
 
             Answers.getInstance().logRating(ratingEvent);
         }
@@ -171,12 +163,28 @@ public class AnswerTracker extends TrackWrapper {
                 customEvent.putCustomAttribute("name", source.getName());
             }
 
-            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-            for (Map.Entry<String, String> entry : entries) {
-                customEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-            }
+            addCustomAttributes(source, customEvent);
 
             Answers.getInstance().logCustom(customEvent);
+        }
+    }
+
+    private static void addCustomAttributes(TrackEvent source, AnswersEvent dest) {
+
+        String key;
+        String value;
+        final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
+
+        for (Map.Entry<String, String> entry : entries) {
+
+            // Check null values
+            key = entry.getKey();
+            value = entry.getValue();
+            if (key == null || value == null) {
+                continue;
+            }
+
+            dest.putCustomAttribute(key, value);
         }
     }
 }
