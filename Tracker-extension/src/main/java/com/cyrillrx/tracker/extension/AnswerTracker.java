@@ -25,11 +25,11 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class AnswerTracker extends TrackWrapper {
 
-    public AnswerTracker(TrackFilter filter) { super(new FabricTrackChild(), filter); }
+    public AnswerTracker(TrackFilter filter) { super(new AnswersTrackChild(), filter); }
 
-    public AnswerTracker() { super(new FabricTrackChild()); }
+    public AnswerTracker() { super(new AnswersTrackChild()); }
 
-    private static class FabricTrackChild implements TrackerChild {
+    private static class AnswersTrackChild implements TrackerChild {
 
         @Override
         public void track(TrackEvent event) {
@@ -57,24 +57,30 @@ public class AnswerTracker extends TrackWrapper {
 
         private void trackView(ViewEvent source) {
 
+            int attributeCount = 0;
+
             final ContentViewEvent contentViewEvent = new ContentViewEvent()
                     .putContentName(source.getName())
                     .putCustomAttribute("category", source.getCategory())
                     .putCustomAttribute("createdAt", source.getCreatedAt());
+            attributeCount += 3;
 
             if (source.getId() != null) {
                 contentViewEvent.putContentId(source.getId());
+                attributeCount++;
             }
 
             if (source.getType() != null) {
                 contentViewEvent.putContentType(source.getType());
+                attributeCount++;
             }
 
             if (source.getName() != null) {
                 contentViewEvent.putContentName(source.getName());
+                attributeCount++;
             }
 
-            addCustomAttributes(source, contentViewEvent);
+            addCustomAttributes(source, contentViewEvent, attributeCount);
 
             Answers.getInstance().logContentView(contentViewEvent);
         }
@@ -87,22 +93,20 @@ public class AnswerTracker extends TrackWrapper {
          */
         private void trackAction(ActionEvent source) {
 
+            int attributeCount = 0;
+
             final CustomEvent customEvent = new CustomEvent(source.getAction())
                     .putCustomAttribute("action", source.getAction())
                     .putCustomAttribute("category", source.getCategory())
                     .putCustomAttribute("createdAt", source.getCreatedAt());
+            attributeCount += 3;
 
-            if (source.getId() != null) {
-                customEvent.putCustomAttribute("id", source.getId());
-            }
-            if (source.getType() != null) {
-                customEvent.putCustomAttribute("type", source.getType());
-            }
             if (source.getName() != null) {
                 customEvent.putCustomAttribute("name", source.getName());
+                attributeCount++;
             }
 
-            addCustomAttributes(source, customEvent);
+            addCustomAttributes(source, customEvent, attributeCount);
 
             Answers.getInstance().logCustom(customEvent);
         }
@@ -115,18 +119,22 @@ public class AnswerTracker extends TrackWrapper {
          */
         private void trackRating(RatingEvent source) {
 
+            int attributeCount = 0;
+
             final com.crashlytics.android.answers.RatingEvent ratingEvent = new com.crashlytics.android.answers.RatingEvent()
                     .putRating(source.getRating())
                     .putContentType(source.getType())
                     .putContentId(source.getId())
                     .putCustomAttribute("category", source.getCategory())
                     .putCustomAttribute("createdAt", source.getCreatedAt());
+            attributeCount += 5;
 
             if (source.getName() != null) {
                 ratingEvent.putCustomAttribute("name", source.getName());
+                attributeCount++;
             }
 
-            addCustomAttributes(source, ratingEvent);
+            addCustomAttributes(source, ratingEvent, attributeCount);
 
             Answers.getInstance().logRating(ratingEvent);
         }
@@ -139,37 +147,31 @@ public class AnswerTracker extends TrackWrapper {
          */
         private void trackCustom(TrackEvent source) {
 
+            int attributeCount = 0;
+
             String eventName = source.getName();
             if (eventName == null) {
                 // Fallback on event category if no name is found
                 eventName = source.getCategory();
-                if (source.getType() != null && source.getId() != null) {
-                    // Add event type and id if available
-                    eventName += "_" + source.getType() + "_" + source.getId();
-                }
             }
 
             final CustomEvent customEvent = new CustomEvent(eventName)
                     .putCustomAttribute("category", source.getCategory())
                     .putCustomAttribute("createdAt", source.getCreatedAt());
+            attributeCount += 2;
 
-            if (source.getId() != null) {
-                customEvent.putCustomAttribute("id", source.getId());
-            }
-            if (source.getType() != null) {
-                customEvent.putCustomAttribute("type", source.getType());
-            }
             if (source.getName() != null) {
                 customEvent.putCustomAttribute("name", source.getName());
+                attributeCount++;
             }
 
-            addCustomAttributes(source, customEvent);
+            addCustomAttributes(source, customEvent, attributeCount);
 
             Answers.getInstance().logCustom(customEvent);
         }
     }
 
-    private static void addCustomAttributes(TrackEvent source, AnswersEvent dest) {
+    private static void addCustomAttributes(TrackEvent source, AnswersEvent dest, int attributeCount) {
 
         String key;
         String value;
@@ -184,7 +186,16 @@ public class AnswerTracker extends TrackWrapper {
                 continue;
             }
 
+            if (value.length() > AnswersEvent.MAX_STRING_LENGTH) {
+                value = value.substring(0, AnswersEvent.MAX_STRING_LENGTH);
+            }
             dest.putCustomAttribute(key, value);
+            attributeCount++;
+
+            if (attributeCount > AnswersEvent.MAX_NUM_ATTRIBUTES) {
+                return;
+            }
         }
     }
+
 }
