@@ -1,4 +1,7 @@
-LRX Tracker extension Release Notes
+Fabric's Answers tracker-extension Release Notes
+
+2016-11-16 - v0.4.0
+- Extracted Fabric Answers extension in a standalone module
 
 2016-11-14 - v0.3.5
 - Prevented AnswerTracker from exceeding the limits (attributes length and count)

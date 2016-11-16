@@ -4,6 +4,6 @@ include ':logger-logcat'
 include ':logger-crashlytics'
 include ':logger-firebase'
 
-include ':tracker-answer'
 include ':tracker-firebase'
+include ':tracker-answers'
 include ':tracker-google-analytics'
