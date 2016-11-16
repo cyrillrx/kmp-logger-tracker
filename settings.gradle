@@ -1,6 +1,8 @@
 include ':Notifier'
 
-include ':Logger-extension'
+include ':logger-logcat'
+include ':logger-crashlytics'
+include ':logger-firebase'
 
 include ':tracker-answer'
 include ':tracker-firebase'

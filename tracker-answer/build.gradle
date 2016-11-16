@@ -49,20 +49,20 @@ android {
         lintConfig file('../lint.xml')
     }
 
-//    testOptions.unitTests {
-//        returnDefaultValues = true
-//        all {
-//            // Configure whether failing tests should fail the build
-//            ignoreFailures false
-//
-//            testLogging {
-//                events "passed", "skipped", "failed", "standardOut", "standardError"
-//            }
-//        }
-//    }
     testOptions {
         unitTests {
             returnDefaultValues = true
+
+            all {
+                // Configure whether failing tests should fail the build
+                ignoreFailures false
+
+                testLogging {
+                    events "passed", "skipped", "failed", "standardOut", "standardError"
+                    outputs.upToDateWhen { false }
+                    showStandardStreams = true
+                }
+            }
         }
     }
 }

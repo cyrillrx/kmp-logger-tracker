@@ -173,6 +173,10 @@ public class AnswerTracker extends TrackWrapper {
 
     private static void addCustomAttributes(TrackEvent source, AnswersEvent dest, int attributeCount) {
 
+        if (attributeCount >= AnswersEvent.MAX_NUM_ATTRIBUTES) {
+            return;
+        }
+
         String key;
         String value;
         final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();

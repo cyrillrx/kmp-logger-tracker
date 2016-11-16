@@ -3,6 +3,7 @@ package com.cyrillrx.tracker.extension;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.crashlytics.android.answers.AnswersEvent;
 import com.cyrillrx.tracker.event.TrackEvent;
 
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ public class AnswerTrackerTest {
         final AnswerTracker tracker = new AnswerTracker();
 
         final Map<String, String> attributes = new HashMap<>();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {
             attributes.put(String.valueOf(i), String.valueOf(i));
         }
 
