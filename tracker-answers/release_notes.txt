@@ -1,4 +1,5 @@
-Fabric's Answers tracker-extension Release Notes
+Release notes
+Fabric's Answers tracker-extension
 
 2016-11-16 - v0.4.0
 - Extracted Fabric Answers extension in a standalone module
@@ -50,4 +51,4 @@ Fabric's Answers tracker-extension Release Notes
 - Updated FabricTracker with ViewEvent and RatingEvent
 
 2015-11-25 - v0.1.0
-- Added implementation for Answer (Fabric) and Google Analytics trackers
+- Added implementation for Answers (Fabric) and Google Analytics trackers

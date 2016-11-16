@@ -7,6 +7,8 @@ import com.cyrillrx.tracker.event.ActionEvent;
 import com.cyrillrx.tracker.event.RatingEvent;
 import com.cyrillrx.tracker.event.TrackEvent;
 import com.cyrillrx.tracker.event.ViewEvent;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.Collection;
 
@@ -19,11 +21,21 @@ import java.util.Collection;
 @SuppressWarnings("unused")
 public class GoogleAnalyticsTracker extends TrackWrapper {
 
-    public GoogleAnalyticsTracker(TrackFilter filter) { super(new NestedTrackChild(), filter); }
+    public GoogleAnalyticsTracker(Tracker tracker, TrackFilter filter) {
+        super(new GoogleAnalyticsTrackChild(tracker), filter);
+    }
 
-    public GoogleAnalyticsTracker() { super(new NestedTrackChild()); }
+    public GoogleAnalyticsTracker(Tracker tracker) {
+        super(new GoogleAnalyticsTrackChild(tracker));
+    }
 
-    private static class NestedTrackChild implements TrackerChild {
+    private static class GoogleAnalyticsTrackChild implements TrackerChild {
+
+        private Tracker tracker;
+
+        public GoogleAnalyticsTrackChild(Tracker tracker) {
+            this.tracker = tracker;
+        }
 
         @Override
         public void track(TrackEvent event) {
@@ -51,29 +63,10 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
 
         private void trackView(ViewEvent source) {
 
-//            final ContentViewEvent contentViewEvent = new ContentViewEvent()
-//                    .putContentName(source.getName())
-//                    .putCustomAttribute("category", source.getCategory())
-//                    .putCustomAttribute("createdAt", source.getCreatedAt());
-//
-//            if (source.getId() != null) {
-//                contentViewEvent.putContentId(source.getId());
-//            }
-//
-//            if (source.getType() != null) {
-//                contentViewEvent.putContentType(source.getType());
-//            }
-//
-//            if (source.getName() != null) {
-//                contentViewEvent.putContentName(source.getName());
-//            }
-//
-//            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-//            for (Map.Entry<String, String> entry : entries) {
-//                contentViewEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-//            }
-//
-//            Answers.getInstance().logContentView(contentViewEvent);
+            final HitBuilders.ScreenViewBuilder screenViewBuilder = new HitBuilders.ScreenViewBuilder();
+
+            tracker.setScreenName(source.getName());
+            tracker.send(screenViewBuilder.build());
         }
 
         /**
@@ -84,27 +77,10 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
          */
         private void trackAction(ActionEvent source) {
 
-//            final CustomEvent customEvent = new CustomEvent(source.getAction())
-//                    .putCustomAttribute("action", source.getAction())
-//                    .putCustomAttribute("category", source.getCategory())
-//                    .putCustomAttribute("createdAt", source.getCreatedAt());
-//
-//            if (source.getId() != null) {
-//                customEvent.putCustomAttribute("id", source.getId());
-//            }
-//            if (source.getType() != null) {
-//                customEvent.putCustomAttribute("type", source.getType());
-//            }
-//            if (source.getName() != null) {
-//                customEvent.putCustomAttribute("name", source.getName());
-//            }
-//
-//            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-//            for (Map.Entry<String, String> entry : entries) {
-//                customEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-//            }
-//
-//            Answers.getInstance().logCustom(customEvent);
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(source.getCategory())
+                    .setAction(source.getAction())
+                    .build());
         }
 
         /**
@@ -115,23 +91,12 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
          */
         private void trackRating(RatingEvent source) {
 
-//            final com.crashlytics.android.answers.RatingEvent ratingEvent = new com.crashlytics.android.answers.RatingEvent()
-//                    .putRating(source.getRating())
-//                    .putContentType(source.getType())
-//                    .putContentId(source.getId())
-//                    .putCustomAttribute("category", source.getCategory())
-//                    .putCustomAttribute("createdAt", source.getCreatedAt());
-//
-//            if (source.getName() != null) {
-//                ratingEvent.putCustomAttribute("name", source.getName());
-//            }
-//
-//            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-//            for (Map.Entry<String, String> entry : entries) {
-//                ratingEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-//            }
-//
-//            Answers.getInstance().logRating(ratingEvent);
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(source.getCategory())
+                    .setAction(source.getName())
+                    .setLabel("rating")
+                    .setValue(source.getRating())
+                    .build());
         }
 
         /**
@@ -142,36 +107,10 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
          */
         private void trackCustom(TrackEvent source) {
 
-//            String eventName = source.getName();
-//            if (eventName == null) {
-//                // Fallback on event category if no name is found
-//                eventName = source.getCategory();
-//                if (source.getType() != null && source.getId() != null) {
-//                    // Add event type and id if available
-//                    eventName += "_" + source.getType() + "_" + source.getId();
-//                }
-//            }
-//
-//            final CustomEvent customEvent = new CustomEvent(eventName)
-//                    .putCustomAttribute("category", source.getCategory())
-//                    .putCustomAttribute("createdAt", source.getCreatedAt());
-//
-//            if (source.getId() != null) {
-//                customEvent.putCustomAttribute("id", source.getId());
-//            }
-//            if (source.getType() != null) {
-//                customEvent.putCustomAttribute("type", source.getType());
-//            }
-//            if (source.getName() != null) {
-//                customEvent.putCustomAttribute("name", source.getName());
-//            }
-//
-//            final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
-//            for (Map.Entry<String, String> entry : entries) {
-//                customEvent.putCustomAttribute(entry.getKey(), entry.getValue());
-//            }
-//
-//            Answers.getInstance().logCustom(customEvent);
+            tracker.send(new HitBuilders.EventBuilder()
+                    .setCategory(source.getCategory())
+                    .setAction(source.getName())
+                    .build());
         }
     }
 }

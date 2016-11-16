@@ -1,8 +1,10 @@
 package com.cyrillrx.tracker.extension;
 
+import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.cyrillrx.tracker.event.TrackEvent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 
 import org.junit.runner.RunWith;
 
@@ -18,7 +20,8 @@ public class GoogleAnalyticsTrackerTest {
 
     public void testTracker() {
 
-        final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker();
+        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(InstrumentationRegistry.getContext());
+        final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker(analytics.newTracker(null));
 
         final Map<String, String> attributes = new HashMap<>();
         for (int i = 0; i < 25; i++) {
