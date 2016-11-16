@@ -192,10 +192,9 @@ public class AnswerTracker extends TrackWrapper {
             dest.putCustomAttribute(key, value);
             attributeCount++;
 
-            if (attributeCount > AnswersEvent.MAX_NUM_ATTRIBUTES) {
+            if (attributeCount == AnswersEvent.MAX_NUM_ATTRIBUTES) {
                 return;
             }
         }
     }
-
 }

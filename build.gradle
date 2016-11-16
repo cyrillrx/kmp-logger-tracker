@@ -16,8 +16,12 @@ allprojects {
     }
 
     ext {
-        supportLibVersion = project.SUPPORT_LIB_VERSION
-        firebaseVersion = project.FIREBASE_VERSION
+        supportLibVersion = '25.0.0'
+        firebaseVersion = '9.6.0'
+        gmsVersion = '9.8.0'
+
+        loggerVersion ='1.2.0'
+        trackerVersion ='0.6.4'
     }
 
     if (JavaVersion.current().isJava8Compatible()) {

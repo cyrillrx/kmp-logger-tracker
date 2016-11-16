@@ -10,14 +10,15 @@ import android.widget.Toast;
  * @author Cyril Leroux
  *         Created on 29/03/16
  */
+@SuppressWarnings("unused")
 public class Toaster {
 
     private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
     private static final String ERROR_INITIALIZE_FIRST    = "Call initialize() before using the Toaster.";
 
-    private static Toaster sInstance;
-    private        Toast   mDebugToast;
-    private        Toast   mUserToast;
+    private static Toaster instance;
+    private        Toast   debugToast;
+    private        Toast   userToast;
 
     /**
      * @param context The application context to initialize the debug toast or null.
@@ -26,11 +27,11 @@ public class Toaster {
     private Toaster(@NonNull Context context, boolean debug) {
 
         if (debug) {
-            mDebugToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
-            mDebugToast.setGravity(Gravity.TOP, 0, 50);
+            debugToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+            debugToast.setGravity(Gravity.TOP, 0, 50);
         }
 
-        mUserToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+        userToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
     }
 
     /**
@@ -42,7 +43,7 @@ public class Toaster {
     public static void initialize(@NonNull Context context, boolean debug) {
         checkMultiInitialization();
 
-        sInstance = new Toaster(context, debug);
+        instance = new Toaster(context, debug);
     }
 
     /**
@@ -52,7 +53,7 @@ public class Toaster {
      */
     public static synchronized void debug(String message) {
         checkInitialized();
-        toast(sInstance.mDebugToast, message);
+        toast(instance.debugToast, message);
     }
 
     /**
@@ -62,7 +63,7 @@ public class Toaster {
      */
     public static synchronized void debug(int messageRes) {
         checkInitialized();
-        toast(sInstance.mDebugToast, messageRes);
+        toast(instance.debugToast, messageRes);
     }
 
     /**
@@ -72,7 +73,7 @@ public class Toaster {
      */
     public static synchronized void toast(String message) {
         checkInitialized();
-        toast(sInstance.mUserToast, message);
+        toast(instance.userToast, message);
     }
 
     /**
@@ -82,7 +83,7 @@ public class Toaster {
      */
     public static synchronized void toast(int messageRes) {
         checkInitialized();
-        toast(sInstance.mUserToast, messageRes);
+        toast(instance.userToast, messageRes);
     }
 
     /**
@@ -94,16 +95,16 @@ public class Toaster {
         checkInitialized();
 
         // Save the initial duration
-        final int oldDuration = sInstance.mUserToast.getDuration();
+        final int oldDuration = instance.userToast.getDuration();
 
         // Set the temp duration
-        sInstance.mUserToast.setDuration(tempDuration);
+        instance.userToast.setDuration(tempDuration);
 
         // Toast the message
-        toast(sInstance.mUserToast, message);
+        toast(instance.userToast, message);
 
         // Restore the initial duration
-        sInstance.mUserToast.setDuration(oldDuration);
+        instance.userToast.setDuration(oldDuration);
     }
 
     /**
@@ -115,16 +116,16 @@ public class Toaster {
         checkInitialized();
 
         // Save the initial duration
-        final int oldDuration = sInstance.mUserToast.getDuration();
+        final int oldDuration = instance.userToast.getDuration();
 
         // Set the temp duration
-        sInstance.mUserToast.setDuration(tempDuration);
+        instance.userToast.setDuration(tempDuration);
 
         // Toast the message
-        toast(sInstance.mUserToast, messageRes);
+        toast(instance.userToast, messageRes);
 
         // Restore the initial duration
-        sInstance.mUserToast.setDuration(oldDuration);
+        instance.userToast.setDuration(oldDuration);
     }
 
     /**
@@ -156,7 +157,7 @@ public class Toaster {
      * Throws if not.
      */
     private static void checkInitialized() {
-        if (sInstance == null) {
+        if (instance == null) {
             throw new IllegalStateException(ERROR_INITIALIZE_FIRST);
         }
     }
@@ -166,7 +167,7 @@ public class Toaster {
      * Throws if the component has already been initialized.
      */
     private static void checkMultiInitialization() {
-        if (sInstance != null) {
+        if (instance != null) {
             throw new IllegalStateException(ERROR_ALREADY_INITIALIZED);
         }
     }

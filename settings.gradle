@@ -1,3 +1,7 @@
 include ':Notifier'
+
 include ':Logger-extension'
-include ':Tracker-extension'
+
+include ':tracker-answer'
+include ':tracker-firebase'
+include ':tracker-google-analytics'
