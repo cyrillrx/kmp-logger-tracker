@@ -16,7 +16,7 @@ repositories {
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
-def moduleVersion = '0.4.1'
+def moduleVersion = '0.4.2'
 
 android {
     compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int

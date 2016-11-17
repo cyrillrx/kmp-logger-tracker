@@ -1,6 +1,9 @@
 Release notes
 Fabric's Answers tracker-extension
 
+2016-11-17 - v0.4.2
+- Renamed tracker to AnswersTracker
+
 2016-11-17 - v0.4.1
 - Changed package name
 

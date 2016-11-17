@@ -23,11 +23,11 @@ import java.util.Set;
  *         Created on 11/11/2015.
  */
 @SuppressWarnings("unused")
-public class AnswerTracker extends TrackWrapper {
+public class AnswersTracker extends TrackWrapper {
 
-    public AnswerTracker(TrackFilter filter) { super(new AnswersTrackChild(), filter); }
+    public AnswersTracker(TrackFilter filter) { super(new AnswersTrackChild(), filter); }
 
-    public AnswerTracker() { super(new AnswersTrackChild()); }
+    public AnswersTracker() { super(new AnswersTrackChild()); }
 
     private static class AnswersTrackChild implements TrackerChild {
 

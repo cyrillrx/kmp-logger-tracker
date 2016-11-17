@@ -19,7 +19,7 @@ import io.fabric.sdk.android.Fabric;
  *         Created 15/11/2016.
  */
 @RunWith(AndroidJUnit4.class)
-public class AnswerTrackerInstrumentationTest {
+public class AnswersTrackerInstrumentationTest {
 
     public void testTracker() {
 
@@ -29,7 +29,7 @@ public class AnswerTrackerInstrumentationTest {
                 .build();
         Fabric.with(fabric);
 
-        final AnswerTracker tracker = new AnswerTracker();
+        final AnswersTracker tracker = new AnswersTracker();
 
         final Map<String, String> attributes = new HashMap<>();
         for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {

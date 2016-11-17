@@ -21,7 +21,7 @@ import io.fabric.sdk.android.Fabric;
  *         Created 17/11/2016.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AnswerTrackerTest {
+public class AnswersTrackerTest {
 
     @Mock
     Context context;
@@ -35,7 +35,7 @@ public class AnswerTrackerTest {
                 .build();
         Fabric.with(fabric);
 
-        final AnswerTracker tracker = new AnswerTracker();
+        final AnswersTracker tracker = new AnswersTracker();
 
         final Map<String, String> attributes = new HashMap<>();
         for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {
