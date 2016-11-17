@@ -1,6 +1,9 @@
 Release notes
 Google Analytics tracker-extension
 
+2016-11-17 - v0.2.0
+- Changed package name
+
 2016-11-16 - v0.1.0
 - Created the Google Analytics extension for lrx-tracker lib
 - Implemented default tracking (TrackEvent)

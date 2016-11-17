@@ -15,7 +15,7 @@ import java.util.Map;
  *         Created 15/11/2016.
  */
 @RunWith(AndroidJUnit4.class)
-public class FirebaseTrackerTest {
+public class FirebaseTrackerInstrumentationTest {
 
     public void testTracker() {
 
@@ -33,5 +33,4 @@ public class FirebaseTrackerTest {
 
         tracker.track(trackEvent);
     }
-
 }

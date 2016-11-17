@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<manifest package="com.cyrillrx.android.tracker.extension"
+<manifest package="com.cyrillrx.tracker.answers"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <application>
 
-    <application />
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4c26ecfad47d31e58ea1da48a1b8d88273bc11ce" />
+    </application>
 
 </manifest>

@@ -1,4 +1,8 @@
-LRX Tracker extension Release Notes
+Release notes
+Firebase tracker-extension
+
+2016-11-17 - v0.4.1
+- Changed package name
 
 2016-11-01 - v0.3.3
 - Bumped Tracker lib to v0.6.4
