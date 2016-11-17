@@ -1,6 +1,9 @@
 Release notes
 Google Analytics tracker-extension
 
+2016-11-17 - v0.3.0
+- Removed Fabric test key from the manifest
+
 2016-11-17 - v0.2.0
 - Changed package name
 
