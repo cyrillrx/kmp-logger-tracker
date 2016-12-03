@@ -16,9 +16,9 @@ allprojects {
     }
 
     ext {
-        supportLibVersion = '25.0.0'
-        firebaseVersion = '9.6.0'
-        gmsVersion = '9.8.0'
+        supportLibVersion = '25.0.1'
+        firebaseVersion = '10.0.0'
+        gmsVersion = '10.0.0'
 
         loggerVersion ='1.2.0'
         trackerVersion ='0.6.4'

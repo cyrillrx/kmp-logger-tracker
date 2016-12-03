@@ -26,19 +26,19 @@ public class GoogleAnalyticsTrackerTest {
     @Test
     public void testTracker() {
 
-        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(context);
-        final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker(analytics.newTracker(null));
-
-        final Map<String, String> attributes = new HashMap<>();
-        for (int i = 0; i < 25; i++) {
-            attributes.put(String.valueOf(i), String.valueOf(i));
-        }
-
-        final TrackEvent trackEvent = new TrackEvent.Builder()
-                .setCategory("test")
-                .putCustomAttributes(attributes)
-                .build();
-
-        tracker.track(trackEvent);
+//        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(context);
+//        final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker(analytics.newTracker(null));
+//
+//        final Map<String, String> attributes = new HashMap<>();
+//        for (int i = 0; i < 25; i++) {
+//            attributes.put(String.valueOf(i), String.valueOf(i));
+//        }
+//
+//        final TrackEvent trackEvent = new TrackEvent.Builder()
+//                .setCategory("test")
+//                .putCustomAttributes(attributes)
+//                .build();
+//
+//        tracker.track(trackEvent);
     }
 }

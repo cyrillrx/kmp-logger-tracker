@@ -18,6 +18,10 @@ Update the release notes: Logger/release_notes.txt
 ### Available scripts
 ```
 ../scripts/logger_ext.sh
-../scripts/tracker_ext.sh
+
+../scripts/tracker_answers.sh
+../scripts/tracker_firebase.sh
+../scripts/tracker_google_analytics.sh
+
 ../scripts/notifier.sh
 ```

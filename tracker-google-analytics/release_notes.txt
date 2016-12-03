@@ -1,6 +1,11 @@
 Release notes
 Google Analytics tracker-extension
 
+2016-12-03 - v0.3.1
+- Added INTERNET and ACCESS_NETWORK_STATE permissions to the tracker manifest
+- Updated support lib version to 25.0.1
+- Updated firebase and gms version to 10.0.0
+
 2016-11-17 - v0.3.0
 - Removed Fabric test key from the manifest
 
