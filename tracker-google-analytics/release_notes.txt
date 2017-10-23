@@ -1,6 +1,9 @@
 Release notes
 Google Analytics tracker-extension
 
+2017-10-24 - v0.3.3
+- Added data mapping of eventBuilder.setAll() and eventBuilder.setLabel()
+
 2016-12-03 - v0.3.1
 - Added INTERNET and ACCESS_NETWORK_STATE permissions to the tracker manifest
 - Updated support lib version to 25.0.1
