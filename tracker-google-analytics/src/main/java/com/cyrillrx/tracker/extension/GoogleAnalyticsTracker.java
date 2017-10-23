@@ -11,6 +11,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * A {@link TrackWrapper} wrapping a Google Analytics {@link TrackerChild}.
@@ -20,6 +21,8 @@ import java.util.Collection;
  */
 @SuppressWarnings("unused")
 public class GoogleAnalyticsTracker extends TrackWrapper {
+
+    public static final String KEY_LABEL = "label";
 
     public GoogleAnalyticsTracker(Tracker tracker, TrackFilter filter) {
         super(new GoogleAnalyticsTrackChild(tracker), filter);
@@ -66,6 +69,12 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
             final HitBuilders.ScreenViewBuilder screenViewBuilder = new HitBuilders.ScreenViewBuilder();
 
             tracker.setScreenName(source.getName());
+
+            final Map<String, String> customAttributes = source.getCustomAttributes();
+            if (customAttributes != null) {
+                screenViewBuilder.setAll(customAttributes);
+            }
+
             tracker.send(screenViewBuilder.build());
         }
 
@@ -73,44 +82,65 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
          * Tracks an action event.<br />
          * Adds id, type and name metadata if available.
          *
-         * @param source The event to forward to Fabric.
+         * @param source The event to forward to Google Analytics.
          */
         private void trackAction(ActionEvent source) {
 
-            tracker.send(new HitBuilders.EventBuilder()
+            final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
                     .setCategory(source.getCategory())
-                    .setAction(source.getAction())
-                    .build());
+                    .setAction(source.getAction());
+
+            addCustomAttributes(source, eventBuilder);
+
+            tracker.send(eventBuilder.build());
         }
 
         /**
          * Tracks a rating event.<br />
          * Adds name metadata if available.
          *
-         * @param source The event to forward to Fabric.
+         * @param source The event to forward to Google Analytics.
          */
         private void trackRating(RatingEvent source) {
 
-            tracker.send(new HitBuilders.EventBuilder()
+            final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
                     .setCategory(source.getCategory())
                     .setAction(source.getName())
                     .setLabel("rating")
-                    .setValue(source.getRating())
-                    .build());
+                    .setValue(source.getRating());
+
+            addCustomAttributes(source, eventBuilder);
+
+            tracker.send(eventBuilder.build());
         }
 
         /**
          * Tracks a custom event.<br />
          * Adds name metadata if available.
          *
-         * @param source The event to forward to Fabric.
+         * @param source The event to forward to Google Analytics.
          */
         private void trackCustom(TrackEvent source) {
 
-            tracker.send(new HitBuilders.EventBuilder()
+            final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
                     .setCategory(source.getCategory())
-                    .setAction(source.getName())
-                    .build());
+                    .setAction(source.getName());
+
+            addCustomAttributes(source, eventBuilder);
+
+            tracker.send(eventBuilder.build());
+        }
+
+        private static void addCustomAttributes(TrackEvent event, HitBuilders.EventBuilder eventBuilder) {
+
+            final Map<String, String> customAttributes = event.getCustomAttributes();
+            if (customAttributes == null) { return; }
+
+            if (customAttributes.containsKey(KEY_LABEL)) {
+                eventBuilder.setLabel(customAttributes.get(KEY_LABEL));
+            }
+
+            eventBuilder.setAll(customAttributes);
         }
     }
 }
