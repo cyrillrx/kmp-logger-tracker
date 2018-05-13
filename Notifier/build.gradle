@@ -2,12 +2,11 @@ apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
 
 android {
-    compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion project.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
-        targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "0.1.1"
     }
@@ -28,15 +27,14 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:support-annotations:${supportLibVersion}"
+    implementation "com.android.support:support-annotations:$supportLibVersion"
 }
-
 
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'notifier'
-    version = '0.1.2'
-    description = 'A toolbox to visualy notify the developer or end user.'
+    publishVersion = '0.1.3'
+    desc = 'A toolbox to visualy notify the developer or end user.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

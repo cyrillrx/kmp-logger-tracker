@@ -15,17 +15,14 @@ repositories {
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
-def moduleVersion = '0.3.3'
-
 android {
-    compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
-    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+    compileSdkVersion project.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.ANDROID_BUILD_MIN_SDK_VERSION as int
-        targetSdkVersion project.ANDROID_BUILD_TARGET_SDK_VERSION as int
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
-        versionName moduleVersion
+        versionName project.ext.trackerVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -50,15 +47,15 @@ android {
 }
 
 dependencies {
-    compile "com.cyrillrx:tracker:${trackerVersion}"
-    compile "com.google.android.gms:play-services-analytics:${gmsVersion}"
+    compile "com.cyrillrx:tracker:$trackerVersion"
+    compile "com.google.android.gms:play-services-analytics:$gmsVersion"
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.15.0'
 
-    androidTestCompile 'com.android.support:support-annotations:25.0.1'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support.test:rules:0.5'
+    androidTestImplementation "com.android.support:support-annotations:$supportLibVersion"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
 
 
@@ -66,7 +63,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'tracker-google-analytics'
-    version = moduleVersion
-    description = 'Google Analytics extention for lrx tracker.'
+    publishVersion = project.ext.trackerVersion
+    desc = 'Google Analytics extention for lrx tracker.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

@@ -1,4 +1,4 @@
-include ':Notifier'
+include ':notifier'
 
 include ':logger-logcat'
 include ':logger-crashlytics'
