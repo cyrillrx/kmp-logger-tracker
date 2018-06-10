@@ -31,7 +31,7 @@ public class AnswersTrackerInstrumentationTest {
 
         final AnswersTracker tracker = new AnswersTracker();
 
-        final Map<String, String> attributes = new HashMap<>();
+        final Map<String, Object> attributes = new HashMap<>();
         for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {
             attributes.put(String.valueOf(i), String.valueOf(i));
         }

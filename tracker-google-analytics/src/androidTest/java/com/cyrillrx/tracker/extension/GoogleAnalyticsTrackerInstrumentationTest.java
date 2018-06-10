@@ -23,7 +23,7 @@ public class GoogleAnalyticsTrackerInstrumentationTest {
         final GoogleAnalytics analytics = GoogleAnalytics.getInstance(InstrumentationRegistry.getContext());
         final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker(analytics.newTracker(null));
 
-        final Map<String, String> attributes = new HashMap<>();
+        final Map<String, Object> attributes = new HashMap<>();
         for (int i = 0; i < 25; i++) {
             attributes.put(String.valueOf(i), String.valueOf(i));
         }

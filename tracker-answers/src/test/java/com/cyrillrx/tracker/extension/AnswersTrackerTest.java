@@ -20,33 +20,33 @@ import io.fabric.sdk.android.Fabric;
  * @author Cyril Leroux
  *         Created 17/11/2016.
  */
-@RunWith(MockitoJUnitRunner.class)
-public class AnswersTrackerTest {
-
-    @Mock
-    Context context;
-
-    @Test
-    public void testTracker() {
-
-        final Fabric fabric = new Fabric.Builder(context)
-                .kits(new Crashlytics())
-                .appIdentifier("com.cyrillrx.test")
-                .build();
-        Fabric.with(fabric);
-
-        final AnswersTracker tracker = new AnswersTracker();
-
-        final Map<String, String> attributes = new HashMap<>();
-        for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {
-            attributes.put(String.valueOf(i), String.valueOf(i));
-        }
-
-        final TrackEvent trackEvent = new TrackEvent.Builder()
-                .setCategory("test")
-                .putCustomAttributes(attributes)
-                .build();
-
-        tracker.track(trackEvent);
-    }
-}
+//@RunWith(MockitoJUnitRunner.class)
+//public class AnswersTrackerTest {
+//
+//    @Mock
+//    Context context;
+//
+//    @Test
+//    public void testTracker() {
+//
+//        final Fabric fabric = new Fabric.Builder(context)
+//                .kits(new Crashlytics())
+//                .appIdentifier("com.cyrillrx.test")
+//                .build();
+//        Fabric.with(fabric);
+//
+//        final AnswersTracker tracker = new AnswersTracker();
+//
+//        final Map<String, Object> attributes = new HashMap<>();
+//        for (int i = 0; i < AnswersEvent.MAX_NUM_ATTRIBUTES + 1; i++) {
+//            attributes.put(String.valueOf(i), String.valueOf(i));
+//        }
+//
+//        final TrackEvent trackEvent = new TrackEvent.Builder()
+//                .setCategory("test")
+//                .putCustomAttributes(attributes)
+//                .build();
+//
+//        tracker.track(trackEvent);
+//    }
+//}

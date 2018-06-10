@@ -2,6 +2,7 @@ package com.cyrillrx.tracker.extension;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.cyrillrx.tracker.TrackFilter;
 import com.cyrillrx.tracker.TrackWrapper;
@@ -10,6 +11,7 @@ import com.cyrillrx.tracker.event.TrackEvent;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,7 +44,9 @@ public class FirebaseTracker extends TrackWrapper {
         public void track(TrackEvent event) {
 
             final Bundle bundle = new Bundle();
-            final Set<Map.Entry<String, String>> entries = event.getCustomAttributes().entrySet();
+
+            final Map<String, String> customAttributes = toStringMap(event.getCustomAttributes());
+            final Set<Map.Entry<String, String>> entries = customAttributes.entrySet();
             for (Map.Entry<String, String> entry : entries) {
                 bundle.putString(entry.getKey(), entry.getValue());
             }
@@ -54,6 +58,26 @@ public class FirebaseTracker extends TrackWrapper {
             for (TrackEvent event : events) {
                 track(event);
             }
+        }
+
+        @NonNull
+        private static Map<String, String> toStringMap(Map<String, Object> input) {
+
+            final Map<String, String> output = new HashMap<>();
+
+            if (input == null) { return output; }
+
+            for (String key : input.keySet()) {
+                final Object value = input.get(key);
+                if (value instanceof String) {
+                    output.put(key, (String) value);
+                } else {
+                    // TODO serialize value instead
+                    output.put(key, String.valueOf(value));
+                }
+            }
+
+            return output;
         }
     }
 }

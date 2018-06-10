@@ -29,7 +29,7 @@ allprojects {
         gmsVersion = '15.0.2'
 
         loggerVersion = '1.5.0'
-        trackerVersion = '0.7.0'
+        trackerVersion = '0.8.0'
     }
 
     if (JavaVersion.current().isJava8Compatible()) {

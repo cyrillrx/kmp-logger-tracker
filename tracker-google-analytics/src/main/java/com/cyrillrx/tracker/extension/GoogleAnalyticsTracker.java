@@ -1,16 +1,16 @@
 package com.cyrillrx.tracker.extension;
 
+import android.support.annotation.NonNull;
+
 import com.cyrillrx.tracker.TrackFilter;
 import com.cyrillrx.tracker.TrackWrapper;
 import com.cyrillrx.tracker.TrackerChild;
-import com.cyrillrx.tracker.event.ActionEvent;
-import com.cyrillrx.tracker.event.RatingEvent;
 import com.cyrillrx.tracker.event.TrackEvent;
-import com.cyrillrx.tracker.event.ViewEvent;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +22,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public class GoogleAnalyticsTracker extends TrackWrapper {
 
+    public static final String CATEGORY_SCREEN_VIEW = "screen_view";
     public static final String KEY_LABEL = "label";
 
     public GoogleAnalyticsTracker(Tracker tracker, TrackFilter filter) {
@@ -43,15 +44,8 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
         @Override
         public void track(TrackEvent event) {
 
-            if (event instanceof ViewEvent) {
-                trackView((ViewEvent) event);
-
-            } else if (event instanceof ActionEvent) {
-                trackAction((ActionEvent) event);
-
-            } else if (event instanceof RatingEvent) {
-                trackRating((RatingEvent) event);
-
+            if (CATEGORY_SCREEN_VIEW.equals(event.getCategory())) {
+                trackView(event);
             } else {
                 trackCustom(event);
             }
@@ -64,52 +58,16 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
             }
         }
 
-        private void trackView(ViewEvent source) {
+        private void trackView(TrackEvent source) {
 
-            final HitBuilders.ScreenViewBuilder screenViewBuilder = new HitBuilders.ScreenViewBuilder();
+            final HitBuilders.ScreenViewBuilder eventBuilder = new HitBuilders.ScreenViewBuilder();
 
             tracker.setScreenName(source.getName());
 
-            final Map<String, String> customAttributes = source.getCustomAttributes();
-            if (customAttributes != null) {
-                screenViewBuilder.setAll(customAttributes);
+            final Map<String, String> customAttributes = toStringMap(source.getCustomAttributes());
+            if (!customAttributes.isEmpty()) {
+                eventBuilder.setAll(customAttributes);
             }
-
-            tracker.send(screenViewBuilder.build());
-        }
-
-        /**
-         * Tracks an action event.<br />
-         * Adds id, type and name metadata if available.
-         *
-         * @param source The event to forward to Google Analytics.
-         */
-        private void trackAction(ActionEvent source) {
-
-            final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
-                    .setCategory(source.getCategory())
-                    .setAction(source.getAction());
-
-            addCustomAttributes(source, eventBuilder);
-
-            tracker.send(eventBuilder.build());
-        }
-
-        /**
-         * Tracks a rating event.<br />
-         * Adds name metadata if available.
-         *
-         * @param source The event to forward to Google Analytics.
-         */
-        private void trackRating(RatingEvent source) {
-
-            final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
-                    .setCategory(source.getCategory())
-                    .setAction(source.getName())
-                    .setLabel("rating")
-                    .setValue(source.getRating());
-
-            addCustomAttributes(source, eventBuilder);
 
             tracker.send(eventBuilder.build());
         }
@@ -118,29 +76,46 @@ public class GoogleAnalyticsTracker extends TrackWrapper {
          * Tracks a custom event.<br />
          * Adds name metadata if available.
          *
-         * @param source The event to forward to Google Analytics.
+         * @param event The event to forward to Google Analytics.
          */
-        private void trackCustom(TrackEvent source) {
+        private void trackCustom(TrackEvent event) {
+
+            final String category = event.getCategory();
 
             final HitBuilders.EventBuilder eventBuilder = new HitBuilders.EventBuilder()
-                    .setCategory(source.getCategory())
-                    .setAction(source.getName());
+                    .setCategory(category)
+                    .setLabel(event.getName());
 
-            addCustomAttributes(source, eventBuilder);
-
-            tracker.send(eventBuilder.build());
-        }
-
-        private static void addCustomAttributes(TrackEvent event, HitBuilders.EventBuilder eventBuilder) {
-
-            final Map<String, String> customAttributes = event.getCustomAttributes();
-            if (customAttributes == null) { return; }
+            final Map<String, String> customAttributes = toStringMap(event.getCustomAttributes());
+            if (customAttributes.isEmpty()) { return; }
 
             if (customAttributes.containsKey(KEY_LABEL)) {
                 eventBuilder.setLabel(customAttributes.get(KEY_LABEL));
             }
 
             eventBuilder.setAll(customAttributes);
+
+            tracker.send(eventBuilder.build());
+        }
+
+        @NonNull
+        private static Map<String, String> toStringMap(Map<String, Object> input) {
+
+            final Map<String, String> output = new HashMap<>();
+
+            if (input == null) { return output; }
+
+            for (String key : input.keySet()) {
+                final Object value = input.get(key);
+                if (value instanceof String) {
+                    output.put(key, (String) value);
+                } else {
+                    // TODO serialize value instead
+                    output.put(key, String.valueOf(value));
+                }
+            }
+
+            return output;
         }
     }
 }

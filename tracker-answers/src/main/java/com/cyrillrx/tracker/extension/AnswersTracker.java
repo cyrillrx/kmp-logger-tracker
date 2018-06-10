@@ -7,12 +7,10 @@ import com.crashlytics.android.answers.CustomEvent;
 import com.cyrillrx.tracker.TrackFilter;
 import com.cyrillrx.tracker.TrackWrapper;
 import com.cyrillrx.tracker.TrackerChild;
-import com.cyrillrx.tracker.event.ActionEvent;
-import com.cyrillrx.tracker.event.RatingEvent;
 import com.cyrillrx.tracker.event.TrackEvent;
-import com.cyrillrx.tracker.event.ViewEvent;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,6 +23,8 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class AnswersTracker extends TrackWrapper {
 
+    public static final String CATEGORY_SCREEN_VIEW = "screen_view";
+
     public AnswersTracker(TrackFilter filter) { super(new AnswersTrackChild(), filter); }
 
     public AnswersTracker() { super(new AnswersTrackChild()); }
@@ -34,15 +34,8 @@ public class AnswersTracker extends TrackWrapper {
         @Override
         public void track(TrackEvent event) {
 
-            if (event instanceof ViewEvent) {
-                trackView((ViewEvent) event);
-
-            } else if (event instanceof ActionEvent) {
-                trackAction((ActionEvent) event);
-
-            } else if (event instanceof RatingEvent) {
-                trackRating((RatingEvent) event);
-
+            if (CATEGORY_SCREEN_VIEW.equals(event.getCategory())) {
+                trackView(event);
             } else {
                 trackCustom(event);
             }
@@ -55,7 +48,7 @@ public class AnswersTracker extends TrackWrapper {
             }
         }
 
-        private void trackView(ViewEvent source) {
+        private void trackView(TrackEvent source) {
 
             int attributeCount = 0;
 
@@ -65,16 +58,6 @@ public class AnswersTracker extends TrackWrapper {
                     .putCustomAttribute("createdAt", source.getCreatedAt());
             attributeCount += 3;
 
-            if (source.getId() != null) {
-                contentViewEvent.putContentId(source.getId());
-                attributeCount++;
-            }
-
-            if (source.getType() != null) {
-                contentViewEvent.putContentType(source.getType());
-                attributeCount++;
-            }
-
             if (source.getName() != null) {
                 contentViewEvent.putContentName(source.getName());
                 attributeCount++;
@@ -83,60 +66,6 @@ public class AnswersTracker extends TrackWrapper {
             addCustomAttributes(source, contentViewEvent, attributeCount);
 
             Answers.getInstance().logContentView(contentViewEvent);
-        }
-
-        /**
-         * Tracks an action event.<br />
-         * Adds id, type and name metadata if available.
-         *
-         * @param source The event to forward to Fabric.
-         */
-        private void trackAction(ActionEvent source) {
-
-            int attributeCount = 0;
-
-            final CustomEvent customEvent = new CustomEvent(source.getAction())
-                    .putCustomAttribute("action", source.getAction())
-                    .putCustomAttribute("category", source.getCategory())
-                    .putCustomAttribute("createdAt", source.getCreatedAt());
-            attributeCount += 3;
-
-            if (source.getName() != null) {
-                customEvent.putCustomAttribute("name", source.getName());
-                attributeCount++;
-            }
-
-            addCustomAttributes(source, customEvent, attributeCount);
-
-            Answers.getInstance().logCustom(customEvent);
-        }
-
-        /**
-         * Tracks a rating event.<br />
-         * Adds name metadata if available.
-         *
-         * @param source The event to forward to Fabric.
-         */
-        private void trackRating(RatingEvent source) {
-
-            int attributeCount = 0;
-
-            final com.crashlytics.android.answers.RatingEvent ratingEvent = new com.crashlytics.android.answers.RatingEvent()
-                    .putRating(source.getRating())
-                    .putContentType(source.getType())
-                    .putContentId(source.getId())
-                    .putCustomAttribute("category", source.getCategory())
-                    .putCustomAttribute("createdAt", source.getCreatedAt());
-            attributeCount += 5;
-
-            if (source.getName() != null) {
-                ratingEvent.putCustomAttribute("name", source.getName());
-                attributeCount++;
-            }
-
-            addCustomAttributes(source, ratingEvent, attributeCount);
-
-            Answers.getInstance().logRating(ratingEvent);
         }
 
         /**
@@ -179,7 +108,8 @@ public class AnswersTracker extends TrackWrapper {
 
         String key;
         String value;
-        final Set<Map.Entry<String, String>> entries = source.getCustomAttributes().entrySet();
+        final Map<String, String> customAttributes = toStringMap(source.getCustomAttributes());
+        final Set<Map.Entry<String, String>> entries = customAttributes.entrySet();
 
         for (Map.Entry<String, String> entry : entries) {
 
@@ -200,5 +130,24 @@ public class AnswersTracker extends TrackWrapper {
                 return;
             }
         }
+    }
+
+    private static Map<String, String> toStringMap(Map<String, Object> input) {
+
+        final Map<String, String> output = new HashMap<>();
+
+        if (input == null) { return output; }
+
+        for (String key : input.keySet()) {
+            final Object value = input.get(key);
+            if (value instanceof String) {
+                output.put(key, (String) value);
+            } else {
+                // TODO serialize value instead
+                output.put(key, String.valueOf(value));
+            }
+        }
+
+        return output;
     }
 }

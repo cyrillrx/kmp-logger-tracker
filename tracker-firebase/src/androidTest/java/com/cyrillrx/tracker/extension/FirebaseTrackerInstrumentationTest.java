@@ -21,7 +21,7 @@ public class FirebaseTrackerInstrumentationTest {
 
         final FirebaseTracker tracker = new FirebaseTracker(InstrumentationRegistry.getContext());
 
-        final Map<String, String> attributes = new HashMap<>();
+        final Map<String, Object> attributes = new HashMap<>();
         for (int i = 0; i < 25; i++) {
             attributes.put(String.valueOf(i), String.valueOf(i));
         }

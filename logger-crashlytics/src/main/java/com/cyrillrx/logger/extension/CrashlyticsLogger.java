@@ -24,8 +24,6 @@ public class CrashlyticsLogger extends LogWrapper {
         }
 
         @Override
-        public void log(int severity, String tag, String message) {
-            Crashlytics.log(message);
-        }
+        public void log(int severity, String tag, String message) { Crashlytics.log(message); }
     }
 }
