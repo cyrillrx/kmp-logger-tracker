@@ -48,8 +48,8 @@ android {
 }
 
 dependencies {
-    compile "com.cyrillrx:tracker:$trackerVersion"
-    compile "com.google.android.gms:play-services-analytics:$gmsVersion"
+    implementation "com.cyrillrx:tracker:$trackerVersion"
+    implementation 'com.google.android.gms:play-services-analytics:16.0.5'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
