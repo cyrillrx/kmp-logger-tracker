@@ -14,11 +14,11 @@ import android.widget.Toast;
 public class Toaster {
 
     private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
-    private static final String ERROR_INITIALIZE_FIRST    = "Call initialize() before using the Toaster.";
+    private static final String ERROR_INITIALIZE_FIRST = "Call initialize() before using the Toaster.";
 
     private static Toaster instance;
-    private        Toast   debugToast;
-    private        Toast   userToast;
+    private Toast debugToast;
+    private Toast userToast;
 
     /**
      * @param context The application context to initialize the debug toast or null.

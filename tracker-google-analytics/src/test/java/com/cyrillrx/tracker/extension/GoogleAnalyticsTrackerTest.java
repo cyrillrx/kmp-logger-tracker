@@ -8,7 +8,7 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +21,12 @@ import java.util.Map;
 public class GoogleAnalyticsTrackerTest {
 
     @Mock
-    Context context;
+    Context mockContext;
 
     @Test
     public void testTracker() {
 
-//        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(context);
+//        final GoogleAnalytics analytics = GoogleAnalytics.getInstance(mockContext);
 //        final GoogleAnalyticsTracker tracker = new GoogleAnalyticsTracker(analytics.newTracker(null));
 //
 //        final Map<String, String> attributes = new HashMap<>();

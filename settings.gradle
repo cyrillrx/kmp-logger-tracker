@@ -2,7 +2,6 @@ include ':notifier'
 
 include ':logger-logcat'
 include ':logger-crashlytics'
-include ':logger-firebase'
 
 include ':tracker-firebase'
 include ':tracker-answers'

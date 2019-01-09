@@ -3,8 +3,9 @@ package com.cyrillrx.logger.extension;
 import android.util.Log;
 
 import com.cyrillrx.logger.LogChild;
-import com.cyrillrx.logger.LogWrapper;
+import com.cyrillrx.logger.LogHelper;
 import com.cyrillrx.logger.Severity;
+import com.cyrillrx.logger.SeverityLogChild;
 
 /**
  * A ready-to-use severity-aware {@link LogChild} wrapping {@link Log} class.
@@ -13,82 +14,52 @@ import com.cyrillrx.logger.Severity;
  *         Created on 18/10/2015.
  */
 @SuppressWarnings("unused")
-public class LogCat extends LogWrapper {
+public class LogCat extends SeverityLogChild {
 
-    public LogCat(int severity) { super(severity, new LogKitten()); }
+    private final boolean detailedLogs;
 
-    /**
-     * Log cat child
-     */
-    private static class LogKitten implements LogChild {
+    public LogCat(int severity, boolean detailedLogs) {
+        super(severity);
+        this.detailedLogs = detailedLogs;
+    }
 
-        /**
-         * Sends a log message.
-         *
-         * @param tag Used to identify the source of a log message.
-         *            It usually identifies the class or activity where the log call occurs.
-         * @param msg The message you would like to log.
-         * @param th  An exception to log.
-         */
-        @Override
-        public void log(int severity, String tag, String msg, Throwable th) {
+    public LogCat(int severity) { this(severity, false); }
 
-            switch (severity) {
+    @Override
+    protected void doLog(int severity, String tag, String rawMessage, Throwable throwable) {
 
-                case Severity.VERBOSE:
-                    Log.println(Log.VERBOSE, tag, msg + '\n' + Log.getStackTraceString(th));
-                    break;
+        // Detail the log if needed
+        final String detailedMessage = detailedLogs ? LogHelper.getDetailedLog(rawMessage) : rawMessage;
 
-                case Severity.DEBUG:
-                    Log.println(Log.DEBUG, tag, msg + '\n' + Log.getStackTraceString(th));
-                    break;
-
-                case Severity.INFO:
-                    Log.println(Log.INFO, tag, msg + '\n' + Log.getStackTraceString(th));
-                    break;
-
-                case Severity.WARN:
-                    Log.println(Log.WARN, tag, msg + '\n' + Log.getStackTraceString(th));
-                    break;
-
-                case Severity.ERROR:
-                    Log.println(Log.ERROR, tag, msg + '\n' + Log.getStackTraceString(th));
-                    break;
-            }
+        // Add throwable trace
+        final String message;
+        if (throwable == null) {
+            message = detailedMessage;
+        } else {
+            message = rawMessage + '\n' + Log.getStackTraceString(throwable);
         }
 
-        /**
-         * Sends a log message.
-         *
-         * @param tag Used to identify the source of a log message.
-         *            It usually identifies the class or activity where the log call occurs.
-         * @param msg The message you would like to log.
-         */
-        @Override
-        public void log(int severity, String tag, String msg) {
+        switch (severity) {
 
-            switch (severity) {
+            case Severity.VERBOSE:
+                Log.println(Log.VERBOSE, tag, message);
+                break;
 
-                case Severity.VERBOSE:
-                    Log.println(Log.VERBOSE, tag, msg);
-                    break;
+            case Severity.DEBUG:
+                Log.println(Log.DEBUG, tag, message);
+                break;
 
-                case Severity.DEBUG:
-                    Log.println(Log.DEBUG, tag, msg);
-                    break;
+            case Severity.INFO:
+                Log.println(Log.INFO, tag, message);
+                break;
 
-                case Severity.INFO:
-                    Log.println(Log.INFO, tag, msg);
-                    break;
+            case Severity.WARN:
+                Log.println(Log.WARN, tag, message);
+                break;
 
-                case Severity.WARN:
-                    Log.println(Log.WARN, tag, msg);
-                    break;
-
-                case Severity.ERROR:
-                    Log.println(Log.ERROR, tag, msg);
-                    break;
-            }
+            case Severity.ERROR:
+                Log.println(Log.ERROR, tag, message);
+                break;
         }
     }
 }

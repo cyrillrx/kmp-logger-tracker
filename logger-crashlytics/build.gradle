@@ -17,13 +17,11 @@ repositories {
 }
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.ext.minSdkVersion
-        targetSdkVersion project.ext.targetSdkVersion
-        versionCode 1
-        versionName project.ext.loggerVersion
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
     }
 
     buildTypes {

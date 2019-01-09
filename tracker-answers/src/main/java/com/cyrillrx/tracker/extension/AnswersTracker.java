@@ -4,100 +4,82 @@ import com.crashlytics.android.answers.Answers;
 import com.crashlytics.android.answers.AnswersEvent;
 import com.crashlytics.android.answers.ContentViewEvent;
 import com.crashlytics.android.answers.CustomEvent;
-import com.cyrillrx.tracker.TrackFilter;
-import com.cyrillrx.tracker.TrackWrapper;
 import com.cyrillrx.tracker.TrackerChild;
 import com.cyrillrx.tracker.event.TrackEvent;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * A {@link TrackWrapper} wrapping a Answer (Fabric) {@link TrackerChild}.
+ * An Answer (Fabric) {@link TrackerChild}.
  *
  * @author Cyril Leroux
  *         Created on 11/11/2015.
  */
 @SuppressWarnings("unused")
-public class AnswersTracker extends TrackWrapper {
+public class AnswersTracker extends TrackerChild {
 
-    public static final String CATEGORY_SCREEN_VIEW = "screen_view";
+    private static final String CATEGORY_SCREEN_VIEW = "screen_view";
 
-    public AnswersTracker(TrackFilter filter) { super(new AnswersTrackChild(), filter); }
+    @Override
+    protected void doTrack(TrackEvent event) {
+        if (CATEGORY_SCREEN_VIEW.equals(event.getCategory())) {
+            trackView(event);
+        } else {
+            trackCustom(event);
+        }
+    }
 
-    public AnswersTracker() { super(new AnswersTrackChild()); }
+    private void trackView(TrackEvent source) {
 
-    private static class AnswersTrackChild implements TrackerChild {
+        int attributeCount = 0;
 
-        @Override
-        public void track(TrackEvent event) {
+        final ContentViewEvent contentViewEvent = new ContentViewEvent()
+                .putContentName(source.getName())
+                .putCustomAttribute("category", source.getCategory())
+                .putCustomAttribute("createdAt", source.getCreatedAt());
+        attributeCount += 3;
 
-            if (CATEGORY_SCREEN_VIEW.equals(event.getCategory())) {
-                trackView(event);
-            } else {
-                trackCustom(event);
-            }
+        if (source.getName() != null) {
+            contentViewEvent.putContentName(source.getName());
+            attributeCount++;
         }
 
-        @Override
-        public void track(Collection<TrackEvent> events) {
-            for (TrackEvent event : events) {
-                track(event);
-            }
+        addCustomAttributes(source, contentViewEvent, attributeCount);
+
+        Answers.getInstance().logContentView(contentViewEvent);
+    }
+
+    /**
+     * Tracks a custom event.<br />
+     * Adds name metadata if available.
+     *
+     * @param source The event to forward to Fabric.
+     */
+    private void trackCustom(TrackEvent source) {
+
+        int attributeCount = 0;
+
+        String eventName = source.getName();
+        if (eventName == null) {
+            // Fallback on event category if no name is found
+            eventName = source.getCategory();
         }
 
-        private void trackView(TrackEvent source) {
+        final CustomEvent customEvent = new CustomEvent(eventName)
+                .putCustomAttribute("category", source.getCategory())
+                .putCustomAttribute("createdAt", source.getCreatedAt());
+        attributeCount += 2;
 
-            int attributeCount = 0;
-
-            final ContentViewEvent contentViewEvent = new ContentViewEvent()
-                    .putContentName(source.getName())
-                    .putCustomAttribute("category", source.getCategory())
-                    .putCustomAttribute("createdAt", source.getCreatedAt());
-            attributeCount += 3;
-
-            if (source.getName() != null) {
-                contentViewEvent.putContentName(source.getName());
-                attributeCount++;
-            }
-
-            addCustomAttributes(source, contentViewEvent, attributeCount);
-
-            Answers.getInstance().logContentView(contentViewEvent);
+        if (source.getName() != null) {
+            customEvent.putCustomAttribute("name", source.getName());
+            attributeCount++;
         }
 
-        /**
-         * Tracks a custom event.<br />
-         * Adds name metadata if available.
-         *
-         * @param source The event to forward to Fabric.
-         */
-        private void trackCustom(TrackEvent source) {
+        addCustomAttributes(source, customEvent, attributeCount);
 
-            int attributeCount = 0;
-
-            String eventName = source.getName();
-            if (eventName == null) {
-                // Fallback on event category if no name is found
-                eventName = source.getCategory();
-            }
-
-            final CustomEvent customEvent = new CustomEvent(eventName)
-                    .putCustomAttribute("category", source.getCategory())
-                    .putCustomAttribute("createdAt", source.getCreatedAt());
-            attributeCount += 2;
-
-            if (source.getName() != null) {
-                customEvent.putCustomAttribute("name", source.getName());
-                attributeCount++;
-            }
-
-            addCustomAttributes(source, customEvent, attributeCount);
-
-            Answers.getInstance().logCustom(customEvent);
-        }
+        Answers.getInstance().logCustom(customEvent);
     }
 
     private static void addCustomAttributes(TrackEvent source, AnswersEvent dest, int attributeCount) {

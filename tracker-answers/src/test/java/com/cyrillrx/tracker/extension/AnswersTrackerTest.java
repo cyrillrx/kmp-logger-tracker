@@ -9,7 +9,7 @@ import com.cyrillrx.tracker.event.TrackEvent;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +20,16 @@ import io.fabric.sdk.android.Fabric;
  * @author Cyril Leroux
  *         Created 17/11/2016.
  */
-//@RunWith(MockitoJUnitRunner.class)
-//public class AnswersTrackerTest {
-//
-//    @Mock
-//    Context context;
-//
-//    @Test
-//    public void testTracker() {
-//
-//        final Fabric fabric = new Fabric.Builder(context)
+@RunWith(MockitoJUnitRunner.class)
+public class AnswersTrackerTest {
+
+    @Mock
+    Context mockContext;
+
+    @Test
+    public void testTracker() {
+
+//        final Fabric fabric = new Fabric.Builder(mockContext)
 //                .kits(new Crashlytics())
 //                .appIdentifier("com.cyrillrx.test")
 //                .build();
@@ -48,5 +48,5 @@ import io.fabric.sdk.android.Fabric;
 //                .build();
 //
 //        tracker.track(trackEvent);
-//    }
-//}
+    }
+}

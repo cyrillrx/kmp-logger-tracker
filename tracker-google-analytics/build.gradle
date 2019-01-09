@@ -9,20 +9,17 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'bintray-release'
-//apply plugin: 'com.google.gms.google-services'
 
 repositories {
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.ext.minSdkVersion
-        targetSdkVersion project.ext.targetSdkVersion
-        versionCode 1
-        versionName project.ext.trackerVersion
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -49,7 +46,7 @@ android {
 
 dependencies {
     implementation "com.cyrillrx:tracker:$trackerVersion"
-    implementation 'com.google.android.gms:play-services-analytics:16.0.5'
+    implementation 'com.google.android.gms:play-services-analytics:16.0.6'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.15.0'
