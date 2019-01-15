@@ -6,6 +6,7 @@ import android.support.test.runner.AndroidJUnit4;
 import com.cyrillrx.tracker.event.TrackEvent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.Map;
 @RunWith(AndroidJUnit4.class)
 public class GoogleAnalyticsTrackerInstrumentationTest {
 
+    @Test
     public void testTracker() {
 
         final GoogleAnalytics analytics = GoogleAnalytics.getInstance(InstrumentationRegistry.getContext());
