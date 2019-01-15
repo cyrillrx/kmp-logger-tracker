@@ -36,7 +36,7 @@ public class LogCat extends SeverityLogChild {
         if (throwable == null) {
             message = detailedMessage;
         } else {
-            message = rawMessage + '\n' + Log.getStackTraceString(throwable);
+            message = rawMessage + '\n' + LogHelper.getStackTrace(throwable);
         }
 
         switch (severity) {

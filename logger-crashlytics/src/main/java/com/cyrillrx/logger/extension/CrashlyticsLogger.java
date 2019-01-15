@@ -21,22 +21,23 @@ public class CrashlyticsLogger extends SeverityLogChild {
 
     /**
      * The ISO-like date-time formatter that formats or parses a date-time with
-     * offset and zone, such as '2011-12-03T10:15:30+01:00[Europe/Paris]'
+     * offset and zone, such as '2011-12-03T10:15:30+01:00[CET]'
      */
-    private static final String ISO_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZZZZZ'['zzzz']'";
+    static final String ISO_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZZZZZ'['zzz']'";
 
     private final SimpleDateFormat dateFormatter;
 
-    public CrashlyticsLogger(int severity, String datePattern) {
+    public CrashlyticsLogger(int severity, String dateTimePattern) {
         super(severity);
-        this.dateFormatter = new SimpleDateFormat(datePattern, Locale.getDefault());
+        this.dateFormatter = new SimpleDateFormat(dateTimePattern, Locale.getDefault());
     }
 
-    // The ISO-like date-time formatter that formats or parses a date-time with
-    // offset and zone, such as '2011-12-03T10:15:30+01:00[Europe/Paris]'
-    public CrashlyticsLogger(int severity) {
-        this(severity, ISO_DATE_TIME);
-    }
+    /**
+     * Builds the {@link CrashlyticsLogger} with {@link #ISO_DATE_TIME} as default date-time pattern.
+     *
+     * @param severity The log severity level.
+     */
+    public CrashlyticsLogger(int severity) { this(severity, ISO_DATE_TIME); }
 
     @Override
     protected void doLog(int severity, String tag, String message, Throwable throwable) {

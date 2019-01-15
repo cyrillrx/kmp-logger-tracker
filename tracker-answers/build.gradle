@@ -8,6 +8,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'bintray-release'
 
 repositories {
@@ -62,6 +63,8 @@ android {
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     implementation "com.cyrillrx:tracker:$trackerVersion"
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.6@aar') { transitive = true }
 
