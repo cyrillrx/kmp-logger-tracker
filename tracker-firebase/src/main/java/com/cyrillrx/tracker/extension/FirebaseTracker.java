@@ -2,7 +2,6 @@ package com.cyrillrx.tracker.extension;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
 import com.cyrillrx.tracker.TrackerChild;
 import com.cyrillrx.tracker.event.TrackEvent;
@@ -11,6 +10,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
 
 /**
  * A Firebase Analytics {@link TrackerChild}.

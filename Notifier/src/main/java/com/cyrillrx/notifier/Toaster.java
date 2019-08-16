@@ -2,9 +2,10 @@ package com.cyrillrx.notifier;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 /**
  * @author Cyril Leroux

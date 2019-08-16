@@ -6,12 +6,14 @@ repositories {
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
+def trackerVersion = '0.9.0'
+
 android {
-    compileSdkVersion project.compileSdkVersion
+    compileSdkVersion project.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.minSdkVersion
-        targetSdkVersion project.targetSdkVersion
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
     }
 
     buildTypes {
@@ -37,14 +39,23 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "com.cyrillrx:logger:$loggerVersion"
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation "com.cyrillrx:tracker:$trackerVersion"
+
+    implementation 'com.amplitude:android-sdk:2.16.0'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.25.0'
+
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 }
 
 publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
-    artifactId = 'logger-logcat'
-    publishVersion = project.ext.loggerVersion
-    desc = 'Logcat extention for lrx logger.'
+    artifactId = 'tracker-amplitude'
+    publishVersion = trackerVersion
+    desc = 'Amplitude extention for lrx tracker.'
     website = 'https://github.com/cyrillrx/android_logger'
 }

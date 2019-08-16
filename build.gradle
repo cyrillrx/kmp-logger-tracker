@@ -25,8 +25,6 @@ allprojects {
         compileSdkVersion = 29
         targetSdkVersion = 29
 
-        supportLibVersion = '29.0.0'
-
         loggerVersion = '1.6.1'
         trackerVersion = '0.9.0'
     }
