@@ -1,14 +1,14 @@
 package com.cyrillrx.tracker.extension;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
-
 import com.cyrillrx.tracker.event.TrackEvent;
 
 import org.junit.runner.RunWith;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 
 /**
  * @author Cyril Leroux

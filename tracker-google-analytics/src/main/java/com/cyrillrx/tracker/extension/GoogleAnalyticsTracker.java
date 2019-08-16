@@ -1,7 +1,5 @@
 package com.cyrillrx.tracker.extension;
 
-import android.support.annotation.NonNull;
-
 import com.cyrillrx.tracker.TrackerChild;
 import com.cyrillrx.tracker.event.TrackEvent;
 import com.google.android.gms.analytics.HitBuilders;
@@ -9,6 +7,8 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 /**
  * A Google Analytics {@link TrackerChild}.
