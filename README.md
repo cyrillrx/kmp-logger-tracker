@@ -9,19 +9,8 @@ A modular logger component.
 Update the release notes: Logger/release_notes.txt
 
 ### Build scripts
-```
-./gradlew clean build bintrayUpload -p Logger-extension -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
-./gradlew clean build bintrayUpload -p Tracker-extension -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
-./gradlew clean build bintrayUpload -p Notifier -PbintrayUser=cyrillrx -PbintrayKey=KEY -PdryRun=false
-```
-
-### Available scripts
-```
-../scripts/logger_ext.sh
-
-../scripts/tracker_answers.sh
-../scripts/tracker_firebase.sh
-../scripts/tracker_google_analytics.sh
-
-../scripts/notifier.sh
+```./gradlew clean build bintrayUpload -p tracker-firebase -PbintrayUser=USER -PbintrayKey=KEY -PdryRun=false
+   ./gradlew clean build bintrayUpload -p tracker-answers -PbintrayUser=USER -PbintrayKey=KEY -PdryRun=false
+   ./gradlew clean build bintrayUpload -p tracker-google-analytics -PbintrayUser=USER -PbintrayKey=KEY -PdryRun=false
+   ./gradlew clean build bintrayUpload -p tracker-amplitude -PbintrayUser=USER -PbintrayKey=KEY -PdryRun=false
 ```

@@ -6,8 +6,6 @@ repositories {
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
-def trackerVersion = '0.9.0'
-
 android {
     compileSdkVersion project.ext.compileSdkVersion
 
@@ -55,7 +53,7 @@ publish {
     userOrg = 'cyrillrx'
     groupId = 'com.cyrillrx.android'
     artifactId = 'tracker-amplitude'
-    publishVersion = trackerVersion
+    publishVersion = project.ext.trackerVersion
     desc = 'Amplitude extention for lrx tracker.'
     website = 'https://github.com/cyrillrx/android_logger'
 }
