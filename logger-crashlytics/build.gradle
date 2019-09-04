@@ -58,8 +58,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'logger-crashlytics'
     publishVersion = project.ext.loggerVersion
     desc = 'Crashlytics extention for lrx logger.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }

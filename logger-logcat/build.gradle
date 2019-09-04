@@ -39,8 +39,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'logger-logcat'
     publishVersion = project.ext.loggerVersion
     desc = 'Logcat extention for lrx logger.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }

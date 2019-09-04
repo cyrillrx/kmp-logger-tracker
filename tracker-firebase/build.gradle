@@ -48,8 +48,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'tracker-firebase'
     publishVersion = project.ext.trackerVersion
     desc = 'Firebase extention for lrx tracker.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }

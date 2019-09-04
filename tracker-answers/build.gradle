@@ -75,8 +75,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'tracker-answers'
     publishVersion = project.ext.trackerVersion
     desc = 'Answer extention for lrx tracker.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }

@@ -48,8 +48,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'tracker-amplitude'
     publishVersion = project.ext.trackerVersion
     desc = 'Amplitude extention for lrx tracker.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }

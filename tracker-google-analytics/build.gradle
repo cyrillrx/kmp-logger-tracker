@@ -58,8 +58,8 @@ publish {
     // Repository config
     userOrg = project.ext.moduleUser
     groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
     artifactId = 'tracker-google-analytics'
     publishVersion = project.ext.trackerVersion
     desc = 'Google Analytics extention for lrx tracker.'
-    website = 'https://github.com/cyrillrx/android_logger'
 }
