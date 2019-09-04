@@ -14,15 +14,6 @@ android {
         targetSdkVersion project.targetSdkVersion
     }
 
-    buildTypes {
-        release {
-            debuggable false
-            jniDebuggable false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -41,8 +32,13 @@ dependencies {
 }
 
 publish {
-    userOrg = 'cyrillrx'
-    groupId = 'com.cyrillrx.android'
+    // Bintray credentials
+    bintrayUser = project.ext.bintrayKey
+    bintrayKey = project.ext.bintrayKey
+
+    // Repository config
+    userOrg = project.ext.moduleUser
+    groupId = project.ext.moduleGroupId
     artifactId = 'logger-logcat'
     publishVersion = project.ext.loggerVersion
     desc = 'Logcat extention for lrx logger.'

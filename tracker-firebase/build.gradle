@@ -16,15 +16,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildTypes {
-        release {
-            debuggable false
-            jniDebuggable false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -50,8 +41,13 @@ dependencies {
 }
 
 publish {
-    userOrg = 'cyrillrx'
-    groupId = 'com.cyrillrx.android'
+    // Bintray credentials
+    bintrayUser = project.ext.bintrayKey
+    bintrayKey = project.ext.bintrayKey
+
+    // Repository config
+    userOrg = project.ext.moduleUser
+    groupId = project.ext.moduleGroupId
     artifactId = 'tracker-firebase'
     publishVersion = project.ext.trackerVersion
     desc = 'Firebase extention for lrx tracker.'

@@ -3,7 +3,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.27.0'
+        classpath 'io.fabric.tools:gradle:1.31.0'
     }
 }
 
@@ -24,15 +24,6 @@ android {
         targetSdkVersion project.targetSdkVersion
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            debuggable false
-            jniDebuggable false
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
     compileOptions {
@@ -77,8 +68,13 @@ dependencies {
 }
 
 publish {
-    userOrg = 'cyrillrx'
-    groupId = 'com.cyrillrx.android'
+    // Bintray credentials
+    bintrayUser = project.ext.bintrayKey
+    bintrayKey = project.ext.bintrayKey
+
+    // Repository config
+    userOrg = project.ext.moduleUser
+    groupId = project.ext.moduleGroupId
     artifactId = 'tracker-answers'
     publishVersion = project.ext.trackerVersion
     desc = 'Answer extention for lrx tracker.'
