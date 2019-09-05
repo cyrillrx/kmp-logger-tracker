@@ -73,7 +73,7 @@ publish {
     bintrayKey = project.ext.bintrayKey
 
     // Repository config
-    userOrg = project.ext.moduleUser
+    userOrg = project.ext.moduleOrg
     groupId = project.ext.moduleGroupId
     website = project.ext.moduleWebsite
     artifactId = 'tracker-answers'

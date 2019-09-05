@@ -33,7 +33,7 @@ allprojects {
         bintrayUser = publishConf['user']
         bintrayKey = publishConf['key']
 
-        moduleUser = 'cyrillrx'
+        moduleOrg = 'cyrillrx'
         moduleGroupId = 'com.cyrillrx.android'
         moduleWebsite = 'https://github.com/cyrillrx/android_logger'
 
