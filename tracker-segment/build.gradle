@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'bintray-release'
+
+repositories {
+    maven { url 'http://dl.bintray.com/cyrillrx/maven' }
+}
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        lintConfig file('../lint.xml')
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation project(':device')
+
+    implementation "com.cyrillrx:logger:$loggerVersion"
+    implementation "com.cyrillrx:tracker:$trackerVersion"
+
+    implementation 'com.segment.analytics.android:analytics:4.3.1'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
+
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+}
+
+publish {
+    // Bintray credentials
+    bintrayUser = project.ext.bintrayKey
+    bintrayKey = project.ext.bintrayKey
+
+    // Repository config
+    userOrg = project.ext.moduleOrg
+    groupId = project.ext.moduleGroupId
+    website = project.ext.moduleWebsite
+    artifactId = 'tracker-segment'
+    publishVersion = project.ext.trackerVersion
+    desc = 'Segment extention for lrx tracker.'
+}

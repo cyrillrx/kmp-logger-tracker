@@ -19,9 +19,9 @@ class AmplitudeTracker(app: Application, apiKey: String) : TrackerChild() {
 
     init {
         Amplitude
-                .getInstance()
-                .initialize(app, apiKey)
-                .enableForegroundTracking(app)
+            .getInstance()
+            .initialize(app, apiKey)
+            .enableForegroundTracking(app)
     }
 
     override fun doTrack(event: TrackEvent?) {
@@ -93,15 +93,8 @@ class AmplitudeTracker(app: Application, apiKey: String) : TrackerChild() {
 
         private fun Identify.addDeviceProperties(context: Context): Identify {
 
-            set("platform", "Android")
-            set("device_type", HardwareUtils.getDeviceTypeLabel(context))
-            set("rooted", if (HardwareUtils.isDeviceRooted()) {
-                "yes"
-            } else {
-                "no"
-            })
-            set("ram", HardwareUtils.getDeviceMemoryString(context))
-
+            HardwareUtils.getDeviceProperties(context)
+                .forEach { entry -> set(entry.key, entry.value) }
             return this
         }
     }

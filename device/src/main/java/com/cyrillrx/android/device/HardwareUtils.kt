@@ -21,14 +21,28 @@ object HardwareUtils {
 
     private val TAG = HardwareUtils::class.java.simpleName
 
+    private const val KEY_PLATFORM = "device_platform"
+    private const val KEY_DEVICE_TYPE = "device_type"
+    private const val KEY_DEVICE_ROOTED = "device_rooted"
+    private const val KEY_DEVICE_RAM = "device_ram"
+
+    private const val VALUE_PLATFORM = "Android"
+
     private const val TYPE_TABLET = "tablet"
     private const val TYPE_PHONE = "phone"
     private const val TYPE_TV = "tv"
 
     enum class Type { PHONE, TABLET, TV }
 
+    fun getDeviceProperties(context: Context): Map<String, String> = mapOf(
+        KEY_PLATFORM to VALUE_PLATFORM,
+        KEY_DEVICE_TYPE to getDeviceTypeLabel(context),
+        KEY_DEVICE_ROOTED to (if (isDeviceRooted()) "yes" else "no"),
+        KEY_DEVICE_RAM to getDeviceMemoryString(context)
+    )
+
     fun getDeviceMemoryString(context: Context): String =
-            "%.1f".format(Locale.US, getDeviceMemoryGb(context))
+        "%.1f".format(Locale.US, getDeviceMemoryGb(context))
 
     /** @return The RAM size of the device in gigabytes. */
     private fun getDeviceMemoryGb(context: Context): Double {
@@ -58,7 +72,10 @@ object HardwareUtils {
         }
 
         val packageManager = context.packageManager
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_TELEVISION) || packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_TELEVISION) || packageManager.hasSystemFeature(
+                PackageManager.FEATURE_LEANBACK
+            )
+        ) {
             return Type.TV
         }
 
