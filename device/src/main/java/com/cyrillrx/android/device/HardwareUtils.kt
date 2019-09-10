@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.amplitude
+package com.cyrillrx.android.device
 
 import android.app.ActivityManager
 import android.app.UiModeManager
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
-import com.cyrillrx.logger.Logger
+import android.util.Log
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -43,7 +43,7 @@ object HardwareUtils {
             memInfo.totalMem / bytesInGb
 
         } catch (e: Exception) {
-            Logger.error(TAG, "Error while getting device memory.", e)
+            Log.e(TAG, "Error while getting device memory.", e)
             0.0
         }
     }
@@ -66,34 +66,35 @@ object HardwareUtils {
     }
 
     fun getDeviceTypeLabel(context: Context): String =
-            when (getDeviceType(context)) {
-                HardwareUtils.Type.TABLET -> TYPE_TABLET
-                HardwareUtils.Type.TV -> TYPE_TV
-                HardwareUtils.Type.PHONE -> TYPE_PHONE
-            }
+        when (getDeviceType(context)) {
+            Type.TABLET -> TYPE_TABLET
+            Type.TV -> TYPE_TV
+            Type.PHONE -> TYPE_PHONE
+        }
 
     fun isDeviceRooted(): Boolean =
-            try {
-                checkRootMethod1() || checkRootMethod2() || checkRootMethod3()
-            } catch (e: Exception) {
-                Logger.error(TAG, "Error while checking root access.", e)
-                false
-            }
+        try {
+            checkRootMethod1() || checkRootMethod2() || checkRootMethod3()
+        } catch (e: Exception) {
+            Log.e(TAG, "Error while checking root access.", e)
+            false
+        }
 
     private fun checkRootMethod1(): Boolean = Build.TAGS?.contains("test-keys") == true
 
     private fun checkRootMethod2(): Boolean {
         val paths = arrayOf(
-                "/system/app/Superuser.apk",
-                "/sbin/su",
-                "/system/bin/su",
-                "/system/xbin/su",
-                "/data/local/xbin/su",
-                "/data/local/bin/su",
-                "/system/sd/xbin/su",
-                "/system/bin/failsafe/su",
-                "/data/local/su",
-                "/su/bin/su")
+            "/system/app/Superuser.apk",
+            "/sbin/su",
+            "/system/bin/su",
+            "/system/xbin/su",
+            "/data/local/xbin/su",
+            "/data/local/bin/su",
+            "/system/sd/xbin/su",
+            "/system/bin/failsafe/su",
+            "/data/local/su",
+            "/su/bin/su"
+        )
         return paths.any { File(it).exists() }
     }
 

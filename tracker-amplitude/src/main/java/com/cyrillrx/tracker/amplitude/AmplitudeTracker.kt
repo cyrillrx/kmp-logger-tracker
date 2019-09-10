@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.amplitude.api.Amplitude
 import com.amplitude.api.Identify
+import com.cyrillrx.android.device.HardwareUtils
 import com.cyrillrx.logger.Logger
 import com.cyrillrx.tracker.TrackerChild
 import com.cyrillrx.tracker.event.TrackEvent

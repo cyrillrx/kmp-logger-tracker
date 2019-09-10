@@ -27,13 +27,15 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation project(':device')
+
     implementation "com.cyrillrx:logger:$loggerVersion"
     implementation "com.cyrillrx:tracker:$trackerVersion"
 
     implementation 'com.amplitude:android-sdk:2.16.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.25.0'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
 
     androidTestImplementation 'androidx.annotation:annotation:1.1.0'
     androidTestImplementation 'androidx.test:runner:1.2.0'
