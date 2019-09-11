@@ -69,14 +69,14 @@ dependencies {
 
 publish {
     // Bintray credentials
-    bintrayUser = project.ext.bintrayKey
-    bintrayKey = project.ext.bintrayKey
+    bintrayUser = project.bintrayKey
+    bintrayKey = project.bintrayKey
 
     // Repository config
-    userOrg = project.ext.moduleOrg
-    groupId = project.ext.moduleGroupId
-    website = project.ext.moduleWebsite
+    userOrg = project.moduleOrg
+    groupId = project.moduleGroupId
+    website = project.moduleWebsite
     artifactId = 'tracker-answers'
-    publishVersion = project.ext.trackerVersion
+    publishVersion = project.trackerVersion
     desc = 'Answer extention for lrx tracker.'
 }

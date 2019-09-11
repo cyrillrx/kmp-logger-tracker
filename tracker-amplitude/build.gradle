@@ -7,11 +7,11 @@ repositories {
 }
 
 android {
-    compileSdkVersion project.ext.compileSdkVersion
+    compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion project.ext.minSdkVersion
-        targetSdkVersion project.ext.targetSdkVersion
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
     }
 
     compileOptions {
@@ -44,14 +44,14 @@ dependencies {
 
 publish {
     // Bintray credentials
-    bintrayUser = project.ext.bintrayKey
-    bintrayKey = project.ext.bintrayKey
+    bintrayUser = project.bintrayKey
+    bintrayKey = project.bintrayKey
 
     // Repository config
-    userOrg = project.ext.moduleOrg
-    groupId = project.ext.moduleGroupId
-    website = project.ext.moduleWebsite
+    userOrg = project.moduleOrg
+    groupId = project.moduleGroupId
+    website = project.moduleWebsite
     artifactId = 'tracker-amplitude'
-    publishVersion = project.ext.trackerVersion
+    publishVersion = project.trackerVersion
     desc = 'Amplitude extention for lrx tracker.'
 }

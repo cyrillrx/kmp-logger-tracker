@@ -52,14 +52,14 @@ dependencies {
 
 publish {
     // Bintray credentials
-    bintrayUser = project.ext.bintrayKey
-    bintrayKey = project.ext.bintrayKey
+    bintrayUser = project.bintrayKey
+    bintrayKey = project.bintrayKey
 
     // Repository config
-    userOrg = project.ext.moduleOrg
-    groupId = project.ext.moduleGroupId
-    website = project.ext.moduleWebsite
+    userOrg = project.moduleOrg
+    groupId = project.moduleGroupId
+    website = project.moduleWebsite
     artifactId = 'logger-crashlytics'
-    publishVersion = project.ext.loggerVersion
+    publishVersion = project.loggerVersion
     desc = 'Crashlytics extention for lrx logger.'
 }
