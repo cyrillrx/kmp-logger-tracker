@@ -2,10 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'bintray-release'
 
-def moduleName = 'notifier'
-def moduleVersion = '0.1.3'
-def moduleDesc = 'A toolbox to visualy notify the developer or end user.'
-
 android {
     compileSdkVersion project.compileSdkVersion
 

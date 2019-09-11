@@ -44,7 +44,7 @@ dependencies {
     implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') { transitive = true }
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.25.0'
+    testImplementation 'org.mockito:mockito-core:2.28.2'
 
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test:rules:1.2.0'
