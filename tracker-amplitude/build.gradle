@@ -29,8 +29,8 @@ dependencies {
 
     implementation project(':device')
 
-    implementation "com.cyrillrx:logger:$loggerVersion"
-    implementation "com.cyrillrx:tracker:$trackerVersion"
+    implementation "com.cyrillrx:logger:1.6.1"
+    implementation "com.cyrillrx:tracker:0.9.0"
 
     implementation 'com.amplitude:android-sdk:2.16.0'
 

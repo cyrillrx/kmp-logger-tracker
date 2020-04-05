@@ -1,17 +1,17 @@
 package com.cyrillrx.logger.extension;
 
-import com.crashlytics.android.Crashlytics;
 import com.cyrillrx.logger.LogChild;
 import com.cyrillrx.logger.LogHelper;
 import com.cyrillrx.logger.Severity;
 import com.cyrillrx.logger.SeverityLogChild;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 /**
- * A ready-to-use severity-aware {@link LogChild} wrapping {@link Crashlytics} logger class.
+ * A ready-to-use severity-aware {@link LogChild} wrapping {@link FirebaseCrashlytics} logger class.
  *
  * @author Cyril Leroux
  *         Created on 19/10/15
@@ -26,10 +26,12 @@ public class CrashlyticsLogger extends SeverityLogChild {
     static final String ISO_DATE_TIME = "yyyy-MM-dd'T'HH:mm:ssZZZZZ'['zzz']'";
 
     private final SimpleDateFormat dateFormatter;
+    private final FirebaseCrashlytics crashlytics;
 
     public CrashlyticsLogger(int severity, String dateTimePattern) {
         super(severity);
-        this.dateFormatter = new SimpleDateFormat(dateTimePattern, Locale.getDefault());
+        crashlytics = FirebaseCrashlytics.getInstance();
+        dateFormatter = new SimpleDateFormat(dateTimePattern, Locale.getDefault());
     }
 
     /**
@@ -54,15 +56,14 @@ public class CrashlyticsLogger extends SeverityLogChild {
         }
 
         logWithStackTrace(severity, tag, message, stackTrace);
-        Crashlytics.logException(throwable);
     }
 
     private void simpleLog(int severity, String tag, String message) {
-        println("%s - %s - %s - %s", getCurrentDateTime(), Severity.getLabel(severity), tag, message);
+        println("%s/%s : %s - %s", severityLabel(severity), tag, getCurrentDateTime(), message);
     }
 
     private void logWithStackTrace(int severity, String tag, String message, String stackTrace) {
-        println("%s - %s - %s - %s\n%s", getCurrentDateTime(), Severity.getLabel(severity), tag, message, stackTrace);
+        println("%s/%s : %s - %s\n%s", severityLabel(severity), tag, getCurrentDateTime(), message, stackTrace);
     }
 
     /** Formats data, prints into the "standard" output stream and then terminate the line. */
@@ -71,12 +72,33 @@ public class CrashlyticsLogger extends SeverityLogChild {
     /**
      * Formats data, prints into the "standard" output stream and then terminate the line.
      */
-    private static void println(String format, Object... args) { println(String.format(format, args)); }
+    private void println(String format, Object... args) { println(String.format(format, args)); }
 
     /**
      * Prints a String into the "standard" output stream and then terminate the line.
      *
      * @param x The <code>String</code> to be printed.
      */
-    private static void println(String x) { Crashlytics.log(x); }
+    private void println(String x) { crashlytics.log(x); }
+
+    private static String severityLabel(int severity) {
+
+        final String prefix;
+        switch (severity) {
+            case Severity.VERBOSE:
+                return "V";
+
+            case Severity.DEBUG:
+                return "D";
+
+            case Severity.INFO:
+                return "I";
+
+            case Severity.WARN:
+                return "W";
+
+            default:
+                return "E";
+        }
+    }
 }

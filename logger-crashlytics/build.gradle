@@ -1,9 +1,9 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
+        google()
     }
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.31.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta03'
     }
 }
 
@@ -12,7 +12,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'bintray-release'
 
 repositories {
-    maven { url 'https://maven.fabric.io/public' }
     maven { url 'http://dl.bintray.com/cyrillrx/maven' }
 }
 
@@ -39,9 +38,9 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.cyrillrx:logger:$loggerVersion"
+    implementation "com.cyrillrx:logger:1.6.1"
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') { transitive = true }
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta03'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.28.2'
