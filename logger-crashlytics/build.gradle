@@ -3,7 +3,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta03'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.0'
     }
 }
 
@@ -40,7 +40,7 @@ dependencies {
 
     implementation "com.cyrillrx:logger:1.6.1"
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta03'
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.28.2'

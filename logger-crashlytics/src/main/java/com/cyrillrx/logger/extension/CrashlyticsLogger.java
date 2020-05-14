@@ -56,6 +56,7 @@ public class CrashlyticsLogger extends SeverityLogChild {
         }
 
         logWithStackTrace(severity, tag, message, stackTrace);
+        crashlytics.recordException(throwable);
     }
 
     private void simpleLog(int severity, String tag, String message) {

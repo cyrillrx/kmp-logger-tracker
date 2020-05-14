@@ -37,7 +37,7 @@ allprojects {
         moduleGroupId = 'com.cyrillrx.android'
         moduleWebsite = 'https://github.com/cyrillrx/android_logger'
 
-        loggerVersion = '1.7'
+        loggerVersion = '1.7.1'
         trackerVersion = '0.9.1'
     }
 
