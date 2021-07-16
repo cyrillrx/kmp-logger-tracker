@@ -1,0 +1,83 @@
+LRX Tracker Release Notes
+
+2019-01-09 - v0.9.0
+- Changed TrackerChild interface into an abstract class
+- Merged TrackerChild and TrackWrapper
+- Deleted TrackFilter
+
+2018-06-28 - v0.8.1
+- Made EventBuilder.putCustomAttributes accept any Map<String, T>
+
+2018-06-09 - v0.8.0
+- Bumped Tracker to 0.8.0
+- Removed useless track types (should be defined by the caller)
+- Updated tests accordingly
+
+2018-05-13 - v0.7.0
+- Bumped gradle wrapper to 4.4
+- Updated dependencies
+
+2016-10-25 - v0.6.4
+- Added customAttributes to TrackerContext
+- Added Connectivity to TrackerContext.Device
+
+2016-09-16 - v0.6.3
+- Added an exception catcher to prevent trackers from crashing the host application
+
+2016-05-03 - v0.6.2
+- Deprecated event's attributes type and id
+- Changed event's constructors visibility from package to protected
+- Removed abstract keyword from TrackerWrapper class
+- Implemented com.cyrillrx:logger lib to log StreamingConsumer errors
+
+2016-04-27 - v0.6.1
+- Fixed event builder's inheritance
+
+2016-04-26 - v0.6.0
+- The hub tracker now injects his context into tracked events
+- Tracker can either stream or scheduled event consumption
+- Streaming tracker has a retry policy implementation
+- Added more unit tests
+
+2016-04-21 - v0.5.0
+- Implemented queues and consumers
+- Added unit tests
+
+2016-03-29 - v0.4.10
+- Added compatibility to java 1.7 for Android users
+- Implemented UserChangedListener
+
+2016-03-29 - v0.4.9
+- Renamed method getTrackerContext() to getContext()
+
+2016-03-23 - v0.4.8
+2016-02-26 - v0.4.7
+2016-02-25 - v0.4.6
+- Added getter methods to TrackerContext class
+
+2016-01-15 - v0.4.5
+- Improved TrackEvent's builders
+
+2015-12-31 - v0.4.4
+- Added customAttributes map to TrackEvent's children
+
+2015-12-31 - v0.4.3
+- Added customAttributes map to TrackEvent data model
+
+2015-11-29 - v0.4.2
+- Fixed RatingEvent Builder
+
+2015-11-26 - v0.4.0
+- Added ViewEvent and RatingEvent
+
+2015-11-25 - v0.3.0
+- Added basic attributes to TrackEvent
+- Created ActionEvent
+
+2015-11-24 - v0.2.0
+- Chained EntityEvent.Builder and TrackerContext setters
+- Cleaned Tracker constructor up
+- Changed TrackFilter from class to interface
+
+2015-11-23 - v0.1.0
+- Initialized tracker component
