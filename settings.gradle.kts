@@ -1,0 +1,12 @@
+include(
+    ":notifier",
+    ":device",
+    ":logger",
+    ":logger-logcat",
+    ":logger-crashlytics",
+    ":tracker",
+    ":tracker-firebase",
+    ":tracker-google-analytics",
+    ":tracker-amplitude",
+    ":tracker-segment",
+)
