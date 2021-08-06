@@ -9,6 +9,6 @@ object Version {
     const val minSdk = 21
     const val targetSdk = 30
 
-    val java = JavaVersion.VERSION_11
     const val jvmTarget = "11"
+    val java = JavaVersion.VERSION_11
 }
