@@ -7,36 +7,31 @@ android {
     defaultConfig {
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     lintOptions {
-        lintConfig file('../lint.xml')
+        lintConfig file("${project.rootDir}/lint.xml")
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(':logger')
-    implementation project(':tracker')
-    implementation project(':device')
+    implementation project(':tracker:lib')
 
-    implementation 'com.segment.analytics.android:analytics:4.3.1'
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'com.google.firebase:firebase-core:19.0.0'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:2.28.2'
 
-    androidTestImplementation 'androidx.annotation:annotation:1.2.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
 }

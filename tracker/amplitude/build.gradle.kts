@@ -11,6 +11,10 @@ android {
         targetSdkVersion(Version.targetSdk)
     }
 
+    kotlinOptions {
+        jvmTarget = Version.jvmTarget
+    }
+
     lintOptions {
         lintConfig = file("../lint.xml")
     }
@@ -20,8 +24,8 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    implementation(project(":logger"))
-    implementation(project(":tracker"))
+    implementation(project(":logger:lib"))
+    implementation(project(":tracker:lib"))
     implementation(project(":device"))
 
     implementation("com.amplitude:android-sdk:2.16.0")

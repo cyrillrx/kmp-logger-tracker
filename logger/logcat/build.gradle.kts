@@ -1,6 +1,3 @@
-val moduleVersion = "0.9.0"
-project.version = moduleVersion
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -8,12 +5,18 @@ plugins {
 
 android {
     compileSdkVersion(Version.compileSdk)
-    buildToolsVersion(Version.buildToolsVersion)
 
     defaultConfig {
         minSdkVersion(Version.minSdk)
         targetSdkVersion(Version.targetSdk)
-        versionName(moduleVersion)
+    }
+
+    lintOptions {
+        lintConfig = file("../lint.xml")
+    }
+
+    kotlinOptions {
+        jvmTarget = Version.jvmTarget
     }
 }
 
@@ -21,7 +24,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
-    implementation(project(":logger"))
+    implementation(project(":logger:lib"))
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    implementation("androidx.annotation:annotation:1.2.0")
 }

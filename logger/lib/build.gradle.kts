@@ -1,3 +1,6 @@
+val moduleVersion = "1.6.1"
+project.version = moduleVersion
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -5,13 +8,17 @@ plugins {
 
 android {
     compileSdkVersion(Version.compileSdk)
+    buildToolsVersion(Version.buildToolsVersion)
 
     defaultConfig {
         minSdkVersion(Version.minSdk)
         targetSdkVersion(Version.targetSdk)
+        versionName(moduleVersion)
     }
 
     kotlinOptions {
+        // Needed for all xxx.lib modules to prevent duplicate file "META-INF/*lib.kotlin_module"
+        moduleName = "com.cyrillrx.logger"
         jvmTarget = Version.jvmTarget
     }
 }
@@ -19,6 +26,6 @@ android {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    
-    implementation("androidx.annotation:annotation:1.2.0")
+
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
