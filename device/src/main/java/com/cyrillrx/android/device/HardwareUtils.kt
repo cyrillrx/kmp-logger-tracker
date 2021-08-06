@@ -72,12 +72,9 @@ object HardwareUtils {
         }
 
         val packageManager = context.packageManager
-        if (packageManager.hasSystemFeature(PackageManager.FEATURE_TELEVISION) || packageManager.hasSystemFeature(
-                PackageManager.FEATURE_LEANBACK
-            )
-        ) {
-            return Type.TV
-        }
+        if (packageManager.hasSystemFeature(PackageManager.FEATURE_TELEVISION) ||
+            packageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)
+        ) return Type.TV
 
         return if (context.resources.getBoolean(R.bool.is_tablet)) Type.TABLET else Type.PHONE
     }

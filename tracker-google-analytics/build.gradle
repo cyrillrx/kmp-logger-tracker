@@ -1,19 +1,15 @@
 buildscript {
     repositories {
-        jcenter()
+        google()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.google.gms:google-services:3.1.0'
+        classpath 'com.google.gms:google-services:4.3.8'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'bintray-release'
-
-repositories {
-    maven { url 'http://dl.bintray.com/cyrillrx/maven' }
-}
 
 android {
     compileSdkVersion project.compileSdkVersion
@@ -39,27 +35,14 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.cyrillrx:tracker:0.9.0"
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation project(':tracker')
+
+    implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:2.28.2'
 
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-}
-
-publish {
-    // Bintray credentials
-    bintrayUser = project.bintrayKey
-    bintrayKey = project.bintrayKey
-
-    // Repository config
-    userOrg = project.moduleOrg
-    groupId = project.moduleGroupId
-    website = project.moduleWebsite
-    artifactId = 'tracker-google-analytics'
-    publishVersion = project.trackerVersion
-    desc = 'Google Analytics extention for lrx tracker.'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
 }
