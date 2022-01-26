@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Version.compileSdk)
+    compileSdk = Version.compileSdk
 
     defaultConfig {
-        minSdkVersion(Version.minSdk)
-        targetSdkVersion(Version.targetSdk)
+        minSdk = Version.minSdk
+        targetSdk = Version.targetSdk
 
         testInstrumentationRunner("androidx.test.runner.AndroidJUnitRunner")
     }
@@ -28,11 +28,11 @@ dependencies {
 
     implementation(project(":tracker:lib"))
 
-    implementation("androidx.annotation:annotation:1.2.0")
-    implementation("com.google.firebase:firebase-core:19.0.0")
+    implementation("androidx.annotation:annotation:1.3.0")
+    implementation("com.google.firebase:firebase-core:20.0.2")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:2.28.2")
+    testImplementation("org.mockito:mockito-core:3.7.7")
 
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")

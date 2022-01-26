@@ -7,13 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Version.compileSdk)
-    buildToolsVersion(Version.buildToolsVersion)
+    compileSdk = Version.compileSdk
 
     defaultConfig {
-        minSdkVersion(Version.minSdk)
-        targetSdkVersion(Version.targetSdk)
-        versionName(moduleVersion)
+        minSdk = Version.minSdk
+        targetSdk = Version.targetSdk
+        version = moduleVersion
     }
 
     kotlinOptions {

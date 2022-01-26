@@ -32,9 +32,9 @@ dependencies {
     implementation("com.segment.analytics.android:analytics:4.3.1")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:2.28.2")
+    testImplementation("org.mockito:mockito-core:3.7.7")
 
-    androidTestImplementation("androidx.annotation:annotation:1.2.0")
+    androidTestImplementation("androidx.annotation:annotation:1.3.0")
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
 }

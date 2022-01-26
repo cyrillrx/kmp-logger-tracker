@@ -26,5 +26,5 @@ dependencies {
 
     implementation(project(":logger:lib"))
 
-    implementation("androidx.annotation:annotation:1.2.0")
+    implementation("androidx.annotation:annotation:1.3.0")
 }

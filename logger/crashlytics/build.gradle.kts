@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
     }
 }
 
@@ -37,11 +37,11 @@ dependencies {
 
     implementation(project(":logger:lib"))
 
-    implementation("androidx.annotation:annotation:1.2.0")
-    implementation("com.google.firebase:firebase-crashlytics:18.2.0")
+    implementation("androidx.annotation:annotation:1.3.0")
+    implementation("com.google.firebase:firebase-crashlytics:18.2.7")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-core:2.28.2")
+    testImplementation("org.mockito:mockito-core:3.7.7")
 
     androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation("androidx.test:rules:1.4.0")
