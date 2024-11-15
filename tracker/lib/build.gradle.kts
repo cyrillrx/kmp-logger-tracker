@@ -1,32 +1,51 @@
-val moduleVersion = "0.9.0"
-project.version = moduleVersion
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+}
+
+project.version = Version.TRACKER_VERSION
+
+kotlin {
+    androidTarget {
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_17)
+                }
+            }
+        }
+    }
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "tracker"
+            isStatic = true
+        }
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            //put your multiplatform dependencies here
+            implementation(projects.logger.lib)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+        }
+    }
 }
 
 android {
-    compileSdk = Version.compileSdk
+    namespace = "com.cyrillrx.tracker"
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-        version = moduleVersion
+        minSdk = Version.MIN_SDK
+        version = Version.TRACKER_VERSION
     }
-
-    kotlinOptions {
-        // Needed for all xxx.lib modules to prevent duplicate file "META-INF/*lib.kotlin_module"
-        moduleName = "com.cyrillrx.traker"
-        jvmTarget = Version.jvmTarget
-    }
-}
-
-dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    implementation(project(":logger:lib"))
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 }
