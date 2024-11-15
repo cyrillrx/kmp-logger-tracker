@@ -42,6 +42,11 @@ proguard/
 *.ipr
 *.iws
 .idea/
+.fleet/
+.gradle/
+.kotlin/
 
-# Gradle
-.gradle
+# iOS
+.externalNativeBuild
+.cxx
+xcuserdata
