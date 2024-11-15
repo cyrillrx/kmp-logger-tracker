@@ -6,8 +6,8 @@ package com.cyrillrx.logger
  * @author Cyril Leroux
  *         Created on 20/10/2015.
  */
-abstract class SeverityLogChild(private val severity: Int) : LogChild() {
+abstract class SeverityLogChild(private val maxSeverity: Int) : LogChild() {
 
     override fun shouldLog(severity: Int, tag: String, message: String, throwable: Throwable?): Boolean =
-        this.severity >= severity
+        maxSeverity >= severity
 }
