@@ -1,33 +1,22 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    compileSdkVersion(Version.compileSdk)
+    namespace = "com.cyrillrx.tracker.segment"
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdkVersion(Version.minSdk)
-        targetSdkVersion(Version.targetSdk)
-    }
-
-    kotlinOptions {
-        jvmTarget = Version.jvmTarget
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    }
-
-    lintOptions {
-        lintConfig = file("${project.rootDir}/lint.xml")
+        minSdk = Version.MIN_SDK
     }
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(projects.logger.lib)
+    implementation(projects.tracker.lib)
+    implementation(projects.device)
 
-    implementation(project(":logger:lib"))
-    implementation(project(":tracker:lib"))
-    implementation(project(":device"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     implementation("com.segment.analytics.android:analytics:4.3.1")
 

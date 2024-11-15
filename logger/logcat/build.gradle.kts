@@ -1,30 +1,16 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    compileSdkVersion(Version.compileSdk)
+    namespace = "logger.logcat"
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdkVersion(Version.minSdk)
-        targetSdkVersion(Version.targetSdk)
-    }
-
-    lintOptions {
-        lintConfig = file("../lint.xml")
-    }
-
-    kotlinOptions {
-        jvmTarget = Version.jvmTarget
+        minSdk = Version.MIN_SDK
     }
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    implementation(project(":logger:lib"))
-
-    implementation("androidx.annotation:annotation:1.3.0")
+    implementation(projects.logger.lib)
 }

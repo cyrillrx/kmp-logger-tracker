@@ -9,33 +9,22 @@ buildscript {
 }
 
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    compileSdk = Version.compileSdk
+    namespace = "com.cyrillrx.tracker.googleanalytics"
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-    }
-
-    kotlinOptions {
-        jvmTarget = Version.jvmTarget
-        freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    }
-
-    lintOptions {
-        lintConfig = file("${project.rootDir}/lint.xml")
+        minSdk = Version.MIN_SDK
     }
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(projects.tracker.lib)
 
-    implementation(project(":tracker:lib"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     implementation("androidx.annotation:annotation:1.3.0")
     implementation("com.google.android.gms:play-services-analytics:18.0.1")

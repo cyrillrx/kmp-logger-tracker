@@ -1,33 +1,22 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.androidLibrary)
 }
 
 android {
-    compileSdk = Version.compileSdk
+    namespace = "com.cyrillrx.tracker.amplitude"
+    compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Version.minSdk
-        targetSdk = Version.targetSdk
-    }
-
-    kotlinOptions {
-        jvmTarget = Version.jvmTarget
-    }
-
-    lintOptions {
-        lintConfig = file("../lint.xml")
+        minSdk = Version.MIN_SDK
     }
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    implementation(projects.logger.lib)
+    implementation(projects.tracker.lib)
+    implementation(projects.device)
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-
-    implementation(project(":logger:lib"))
-    implementation(project(":tracker:lib"))
-    implementation(project(":device"))
-
     implementation("com.amplitude:android-sdk:2.35.2")
 
     testImplementation("junit:junit:4.13.2")

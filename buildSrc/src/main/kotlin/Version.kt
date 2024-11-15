@@ -1,12 +1,12 @@
 import org.gradle.api.JavaVersion
 
 object Version {
-    const val kotlin = "1.6.10"
+    const val MIN_SDK = 23
+    const val COMPILE_SDK = 34
 
-    const val compileSdk = 31
+    val java = JavaVersion.VERSION_17
+    const val JVM_TARGET = "17"
 
-    const val minSdk = 21
-    const val targetSdk = 31
-
-    const val jvmTarget = "11"
+    const val LOGGER_VERSION = "1.6.1"
+    const val TRACKER_VERSION = "0.9.0"
 }
