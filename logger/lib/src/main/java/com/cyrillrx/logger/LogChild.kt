@@ -7,11 +7,10 @@ package com.cyrillrx.logger
 abstract class LogChild {
 
     /**
-     * @param severity  The severity level. See {@link Severity}
-     * @param tag       Used to identify the source of a log message.
-     *                  It usually identifies the class or activity where the log call occurs.
-     * @param message   The message you would like to log.
-     * @param throwable An exception to log. Might be null.
+     * @param severity The severity level. See {@link Severity}
+     * @param tag Used to identify the source of a log message. It usually identifies the class where the log call occurs.
+     * @param message The message you would like to log.
+     * @param throwable An optional exception linked to the log message.
      */
     fun log(severity: Int, tag: String, message: String, throwable: Throwable? = null) {
         if (shouldLog(severity, tag, message, throwable)) {
@@ -19,26 +18,7 @@ abstract class LogChild {
         }
     }
 
-    /**
-     * @param severity The severity level. See {@link Severity}
-     * @param tag      Used to identify the source of a log message.
-     *                 It usually identifies the class or activity where the log call occurs.
-     * @param message  The message you would like to log.
-     */
-    fun log(severity: Int, tag: String, message: String) {
-        if (shouldLog(severity, tag, message)) {
-            doLog(severity, tag, message)
-        }
-    }
+    protected open fun shouldLog(severity: Int, tag: String, message: String, throwable: Throwable? = null) = true
 
-    protected open fun shouldLog(severity: Int, tag: String, message: String, throwable: Throwable? = null): Boolean = true
-
-    /**
-     * @param severity  The severity level. See {@link Severity}
-     * @param tag       Used to identify the source of a log message.
-     *                  It usually identifies the class or activity where the log call occurs.
-     * @param message   The message you would like to log.
-     * @param throwable An exception to log. Might be null.
-     */
     protected abstract fun doLog(severity: Int, tag: String, message: String, throwable: Throwable? = null)
 }
