@@ -34,9 +34,4 @@ class SystemOutLog(maxSeverity: Severity, private val detailedLogs: Boolean = fa
     private fun logWithStackTrace(severity: Severity, tag: String, message: String, stackTrace: String) {
         println(LogHelper.logWithStackTrace(severity, tag, message, stackTrace))
     }
-
-    /** Prints a String into the "standard" output stream and then terminate the line. */
-    private fun println(message: String) {
-        kotlin.io.println(message)
-    }
 }

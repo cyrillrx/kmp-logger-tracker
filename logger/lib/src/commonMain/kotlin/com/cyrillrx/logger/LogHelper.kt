@@ -10,11 +10,6 @@ import kotlinx.datetime.Clock
 object LogHelper {
     private val LOGGER_CLASS_NAME = Logger::class.java.name
 
-    private fun currentDateTime(): String {
-        val instantNow = Clock.System.now()
-        return instantNow.toString()
-    }
-
     fun simpleLog(severity: Severity, tag: String?, message: String?): String {
         return "${currentDateTime()} - ${severity.label} - $tag - $message"
     }
@@ -41,6 +36,11 @@ object LogHelper {
         sb.append("${trace.linkableMethod()} [thread: ${currentThread.name}]")
 
         return sb.toString()
+    }
+
+    private fun currentDateTime(): String {
+        val instantNow = Clock.System.now()
+        return instantNow.toString()
     }
 
     private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
