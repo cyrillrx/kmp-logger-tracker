@@ -70,7 +70,9 @@ public class LogHelper {
         if (trace == null) {
             return "trace is null";
         }
-        return String.format("%s.%s(%s:%d)",
+        return String.format(
+                Locale.ROOT,
+                "%s.%s(%s:%d)",
                 trace.getClassName(),
                 trace.getMethodName(),
                 trace.getFileName(),
@@ -81,7 +83,7 @@ public class LogHelper {
         if (trace == null) {
             return "trace is null";
         }
-        return String.format("(%s:%d)", trace.getFileName(), trace.getLineNumber());
+        return String.format(Locale.ROOT, "(%s:%d)", trace.getFileName(), trace.getLineNumber());
     }
 
     /**
