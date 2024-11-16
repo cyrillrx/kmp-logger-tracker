@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
+        classpath(libs.logger.crashlytics.gradle)
     }
 }
 
@@ -24,5 +24,5 @@ android {
 dependencies {
     implementation(projects.logger.lib)
 
-    implementation(libs.firebase.crashlytics)
+    implementation(libs.logger.crashlytics)
 }

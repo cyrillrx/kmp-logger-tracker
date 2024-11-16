@@ -1,15 +1,20 @@
 [versions]
+kotlin = "2.0.20"
 agp = "8.7.2"
 annotation = "1.9.1"
+compose = "1.7.5"
+compose-material3 = "1.3.1"
+androidx-activityCompose = "1.9.3"
+
+# Tracker/logger extensions
+firebaseCrashlyticsGradle = "3.0.2"
 firebaseCrashlytics = "19.2.1"
-kotlin = "2.0.0"
-compose = "1.5.4"
-compose-material3 = "1.1.2"
-androidx-activityCompose = "1.8.0"
+firebaseCore = "21.1.1"
+playServicesAnalytics = "18.1.1"
+segment = "4.10.1"
 
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
@@ -20,6 +25,13 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
+
+# Tracker/logger extensions
+logger-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
+logger-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+tracker-firebase = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
+tracker-google-analytics = { module = "com.google.android.gms:play-services-analytics", version.ref = "playServicesAnalytics" }
+tracker-segment = { module = "com.segment.analytics.android:analytics", version.ref = "segment" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
