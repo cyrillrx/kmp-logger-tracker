@@ -1,10 +1,9 @@
-package com.cyrillrx.logger;
+package com.cyrillrx.logger
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashSet
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.jvm.JvmStatic
+import kotlin.native.ObjCName
 
 /**
  * This class wraps instances of the {@link LogChild} interface.
@@ -13,141 +12,73 @@ import java.util.Set;
  * @author Cyril Leroux
  *         Created on 03/09/2012.
  */
-@SuppressWarnings("unused")
-public class Logger {
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("KMPLogger")
+class Logger private constructor() {
+    private val loggers: MutableSet<LogChild> = HashSet()
 
-    private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
-    private static final String ERROR_INITIALIZE_FIRST = "Call initialize() before using the Logger.";
+    private var catcher: ExceptionCatcher? = null
 
-    private static Logger instance;
-
-    private final Set<LogChild> loggers;
-
-    @Nullable
-    private ExceptionCatcher catcher;
-
-    protected Logger() { loggers = new HashSet<>(); }
-
-    public static void initialize() {
-        checkMultiInitialization();
-
-        instance = new Logger();
+    interface ExceptionCatcher {
+        fun catchException(t: Throwable?)
     }
 
-    public static void release() { instance = null; }
+    companion object {
+        private val loggerHub: Logger by lazy { Logger() }
 
-    public static synchronized ExceptionCatcher setCatcher(@NotNull ExceptionCatcher catcher) {
-        checkInitialized();
+        fun release() {
+            loggerHub.loggers.clear()
+        }
 
-        return instance.catcher = catcher;
-    }
+        fun setCatcher(catcher: ExceptionCatcher) {
+            loggerHub.catcher = catcher
+        }
 
-    public static synchronized void addChild(@NotNull LogChild child) {
-        checkInitialized();
+        fun addChild(child: LogChild) {
+            loggerHub.loggers.add(child)
+        }
 
-        instance.loggers.add(child);
-    }
+        fun removeChild(child: LogChild) {
+            loggerHub.loggers.remove(child)
+        }
 
-    public static synchronized void removeChild(@NotNull LogChild child) {
-        checkInitialized();
-
-        instance.loggers.remove(child);
-    }
-
-    public static synchronized void log(int severity, String tag, @NotNull String message, @NotNull Throwable throwable) {
-        checkInitialized();
-
-        for (LogChild logger : instance.loggers) {
-            try {
-                logger.log(severity, tag, message, throwable);
-            } catch (Throwable t) {
-                gracefulCatch(t);
+        fun log(severity: Int, tag: String, message: String, throwable: Throwable? = null) {
+            for (logger in loggerHub.loggers) {
+                try {
+                    logger.log(severity, tag, message, throwable)
+                } catch (t: Throwable) {
+                    try {
+                        loggerHub.catcher?.catchException(t)
+                    } catch (ignored: Exception) {
+                        // Prevent the catcher from throwing an exception
+                    }
+                }
             }
         }
-    }
 
-    public static synchronized void log(int severity, @NotNull String tag, @NotNull String message) {
-        checkInitialized();
+        @JvmStatic
+        fun verbose(tag: String, message: String, throwable: Throwable? = null) {
+            log(Severity.VERBOSE, tag, message, throwable)
+        }
 
-        for (LogChild logger : instance.loggers) {
-            try {
-                logger.log(severity, tag, message, null);
-            } catch (Throwable t) {
-                gracefulCatch(t);
-            }
+        @JvmStatic
+        fun debug(tag: String, message: String, throwable: Throwable? = null) {
+            log(Severity.DEBUG, tag, message, throwable)
+        }
+
+        @JvmStatic
+        fun info(tag: String, message: String, throwable: Throwable? = null) {
+            log(Severity.INFO, tag, message, throwable)
+        }
+
+        @JvmStatic
+        fun warning(tag: String, message: String, throwable: Throwable? = null) {
+            log(Severity.WARN, tag, message, throwable)
+        }
+
+        @JvmStatic
+        fun error(tag: String, message: String, throwable: Throwable? = null) {
+            log(Severity.ERROR, tag, message, throwable)
         }
     }
-
-    private static void gracefulCatch(@NotNull Throwable t) {
-
-        final ExceptionCatcher catcher = instance.catcher;
-        if (catcher == null) { return; }
-
-        try {
-            catcher.catchException(t);
-        } catch (Exception ignored) {
-            // Prevent the catcher from throwing an exception
-        }
-    }
-
-    public static synchronized void verbose(@NotNull String tag, @NotNull String message, @NotNull Throwable throwable) {
-        log(Severity.VERBOSE, tag, message, throwable);
-    }
-
-    public static synchronized void verbose(@NotNull String tag, @NotNull String message) {
-        log(Severity.VERBOSE, tag, message);
-    }
-
-    public static synchronized void debug(@NotNull String tag, @NotNull String message, @NotNull Throwable throwable) {
-        log(Severity.DEBUG, tag, message, throwable);
-    }
-
-    public static synchronized void debug(@NotNull String tag, @NotNull String message) {
-        log(Severity.DEBUG, tag, message);
-    }
-
-    public static synchronized void info(@NotNull String tag, @NotNull String message, @NotNull Throwable throwable) {
-        log(Severity.INFO, tag, message, throwable);
-    }
-
-    public static synchronized void info(@NotNull String tag, @NotNull String message) {
-        log(Severity.INFO, tag, message);
-    }
-
-    public static synchronized void warning(@NotNull String tag, @NotNull String message, @NotNull Throwable throwable) {
-        log(Severity.WARN, tag, message, throwable);
-    }
-
-    public static synchronized void warning(@NotNull String tag, @NotNull String message) {
-        log(Severity.WARN, tag, message);
-    }
-
-    public static synchronized void error(@NotNull String tag, @NotNull String message, @NotNull Throwable throwable) {
-        log(Severity.ERROR, tag, message, throwable);
-    }
-
-    public static synchronized void error(@NotNull String tag, @NotNull String message) {
-        log(Severity.ERROR, tag, message);
-    }
-
-    /**
-     * Checks whether the component has been initialized.<br />
-     * Throws if not.
-     */
-    private static void checkInitialized() {
-        if (instance == null) {
-            throw new IllegalStateException(ERROR_INITIALIZE_FIRST);
-        }
-    }
-
-    /**
-     * Prevents multiple initialization of the component.<br />
-     * Throws if the component has already been initialized.
-     */
-    private static void checkMultiInitialization() {
-        if (instance != null) {
-            throw new IllegalStateException(ERROR_ALREADY_INITIALIZED);
-        }
-    }
-
 }
