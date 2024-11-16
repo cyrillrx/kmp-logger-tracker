@@ -13,53 +13,29 @@ import com.cyrillrx.logger.SeverityLogChild;
  * @author Cyril Leroux
  *         Created on 18/10/2015.
  */
-@SuppressWarnings("unused")
-public class LogCat extends SeverityLogChild {
+/** A ready-to-use severity-aware [LogChild] wrapping [Log] class. */
+class LogCat(severity: Severity, private val detailedLogs: Boolean) : SeverityLogChild(severity) {
 
-    private final boolean detailedLogs;
+    override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
+        val finalMessage = createMessageWithTrace(message, throwable)
 
-    public LogCat(int severity, boolean detailedLogs) {
-        super(severity);
-        this.detailedLogs = detailedLogs;
+        when (severity) {
+            Severity.VERBOSE -> Log.println(Log.VERBOSE, tag, finalMessage)
+            Severity.DEBUG -> Log.println(Log.DEBUG, tag, finalMessage)
+            Severity.INFO -> Log.println(Log.INFO, tag, finalMessage)
+            Severity.WARN -> Log.println(Log.WARN, tag, finalMessage)
+            Severity.ERROR -> Log.println(Log.ERROR, tag, finalMessage)
+            Severity.FATAL -> Log.println(Log.ASSERT, tag, finalMessage)
+        }
     }
 
-    public LogCat(int severity) { this(severity, false); }
-
-    @Override
-    protected void doLog(int severity, String tag, String rawMessage, Throwable throwable) {
-
-        // Detail the log if needed
-        final String detailedMessage = detailedLogs ? LogHelper.getDetailedLog(rawMessage) : rawMessage;
-
-        // Add throwable trace
-        final String message;
-        if (throwable == null) {
-            message = detailedMessage;
+    private fun createMessageWithTrace(message: String, throwable: Throwable?): String {
+        return if (throwable != null) {
+            "$message\n+${LogHelper.getStackTrace(throwable)}"
+        } else if (detailedLogs) {
+            LogHelper.getDetailedLog(message)
         } else {
-            message = rawMessage + '\n' + LogHelper.getStackTrace(throwable);
-        }
-
-        switch (severity) {
-
-            case Severity.VERBOSE:
-                Log.println(Log.VERBOSE, tag, message);
-                break;
-
-            case Severity.DEBUG:
-                Log.println(Log.DEBUG, tag, message);
-                break;
-
-            case Severity.INFO:
-                Log.println(Log.INFO, tag, message);
-                break;
-
-            case Severity.WARN:
-                Log.println(Log.WARN, tag, message);
-                break;
-
-            case Severity.ERROR:
-                Log.println(Log.ERROR, tag, message);
-                break;
+            message
         }
     }
 }
