@@ -4,172 +4,106 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.Gravity;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
+import androidx.annotation.StringRes
 
 /**
+ * Util that relies on the app context to toast messages to the user.
+ * It also provides a developer toast feature displayed at the top of the screen (dev-mode only).
+ *
  * @author Cyril Leroux
  *         Created on 29/03/16
  */
-@SuppressWarnings("unused")
-public class Toaster {
+object Toaster {
 
-    private static final String ERROR_ALREADY_INITIALIZED = "initialize() has already been called.";
-    private static final String ERROR_INITIALIZE_FIRST = "Call initialize() before using the Toaster.";
+    private var debugToast: Toast? = null
+    private lateinit var userToast: Toast
 
-    private static Toaster instance;
-    private Toast debugToast;
-    private Toast userToast;
-
-    /**
-     * @param context The application context to initialize the debug toast or null.
-     */
     @SuppressLint("ShowToast")
-    private Toaster(@NonNull Context context, boolean debug) {
+    fun initUserToast(context: Context) {
+        userToast = Toast.makeText(context, "", Toast.LENGTH_SHORT)
+    }
 
-        if (debug) {
-            debugToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
-            debugToast.setGravity(Gravity.TOP, 0, 50);
-        }
+    @SuppressLint("ShowToast")
+    fun initDeveloperToast(context: Context) {
+        debugToast = Toast.makeText(context, "", Toast.LENGTH_LONG)
+            .apply { setGravity(Gravity.TOP, 0, 50) }
+    }
 
-        userToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+    @Synchronized
+    fun showMessage(message: String) {
+        toastLong(message)
+    }
+
+    @Synchronized
+    fun showMessage(@StringRes messageRes: Int) {
+        toastLong(messageRes)
+    }
+
+    @Synchronized
+    fun showDevMessage(message: String) {
+        debugToast?.show(message)
+    }
+
+    @Synchronized
+    fun showDevMessage(@StringRes messageRes: Int) {
+        debugToast?.show(messageRes)
     }
 
     /**
-     * Initializes the Toaster.<br />
-     * Provides a context to enable a simple Toast used to display debug messages to the developer.
-     *
-     * @param context The application context to initialize the debug toast or null.
-     */
-    public static void initialize(@NonNull Context context, boolean debug) {
-        checkMultiInitialization();
-
-        instance = new Toaster(context, debug);
-    }
-
-    /**
-     * Shows a debug toast (for the developer).
-     *
+     * Shows a classical toast (for the user).
      * @param message The message to toast.
      */
-    public static synchronized void debug(String message) {
-        checkInitialized();
-        toast(instance.debugToast, message);
-    }
-
-    /**
-     * Shows a debug toast (for the developer).
-     *
-     * @param messageRes The resource of the message to toast.
-     */
-    public static synchronized void debug(int messageRes) {
-        checkInitialized();
-        toast(instance.debugToast, messageRes);
+    @Synchronized
+    private fun toastShort(message: String) {
+        userToast.duration = Toast.LENGTH_SHORT
+        userToast.show(message)
     }
 
     /**
      * Shows a classical toast (for the user).
-     *
+     * @param messageRes The resource of the message to toast.
+     */
+    @Synchronized
+    private fun toastShort(@StringRes messageRes: Int) {
+        userToast.duration = Toast.LENGTH_SHORT
+        userToast.show(messageRes)
+    }
+
+    /**
+     * Shows a classical toast (for the user).
      * @param message The message to toast.
      */
-    public static synchronized void toast(String message) {
-        checkInitialized();
-        toast(instance.userToast, message);
+    @Synchronized
+    private fun toastLong(message: String) {
+        userToast.duration = Toast.LENGTH_LONG
+        userToast.show(message)
     }
 
     /**
      * Shows a classical toast (for the user).
-     *
      * @param messageRes The resource of the message to toast.
      */
-    public static synchronized void toast(int messageRes) {
-        checkInitialized();
-        toast(instance.userToast, messageRes);
-    }
-
-    /**
-     * Shows a classical toast (for the user).
-     *
-     * @param message The message to toast.
-     */
-    public static synchronized void toast(String message, int tempDuration) {
-        checkInitialized();
-
-        // Save the initial duration
-        final int oldDuration = instance.userToast.getDuration();
-
-        // Set the temp duration
-        instance.userToast.setDuration(tempDuration);
-
-        // Toast the message
-        toast(instance.userToast, message);
-
-        // Restore the initial duration
-        instance.userToast.setDuration(oldDuration);
-    }
-
-    /**
-     * Shows a classical toast (for the user).
-     *
-     * @param messageRes The resource of the message to toast.
-     */
-    public static synchronized void toast(int messageRes, int tempDuration) {
-        checkInitialized();
-
-        // Save the initial duration
-        final int oldDuration = instance.userToast.getDuration();
-
-        // Set the temp duration
-        instance.userToast.setDuration(tempDuration);
-
-        // Toast the message
-        toast(instance.userToast, messageRes);
-
-        // Restore the initial duration
-        instance.userToast.setDuration(oldDuration);
+    @Synchronized
+    private fun toastLong(@StringRes messageRes: Int) {
+        userToast.duration = Toast.LENGTH_LONG
+        userToast.show(messageRes)
     }
 
     /**
      * Shows a toast.
-     *
      * @param message The message to toast.
      */
-    private static synchronized void toast(Toast toast, String message) {
-        if (toast == null) { return; }
-
-        toast.setText(message);
-        toast.show();
+    private fun Toast.show(message: String) {
+        setText(message)
+        show()
     }
 
     /**
      * Shows a toast.
-     *
      * @param messageRes The resource of the message to toast.
      */
-    private static synchronized void toast(Toast toast, int messageRes) {
-        if (toast == null) { return; }
-
-        toast.setText(messageRes);
-        toast.show();
-    }
-
-    /**
-     * Checks whether the component has been initialized.<br />
-     * Throws if not.
-     */
-    private static void checkInitialized() {
-        if (instance == null) {
-            throw new IllegalStateException(ERROR_INITIALIZE_FIRST);
-        }
-    }
-
-    /**
-     * Prevents multiple initialization of the component.<br />
-     * Throws if the component has already been initialized.
-     */
-    private static void checkMultiInitialization() {
-        if (instance != null) {
-            throw new IllegalStateException(ERROR_ALREADY_INITIALIZED);
-        }
+    private fun Toast.show(@StringRes messageRes: Int) {
+        setText(messageRes)
+        show()
     }
 }
