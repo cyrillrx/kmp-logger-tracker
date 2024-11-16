@@ -12,13 +12,13 @@ abstract class LogChild {
      * @param message The message you would like to log.
      * @param throwable An optional exception linked to the log message.
      */
-    fun log(severity: Int, tag: String, message: String, throwable: Throwable? = null) {
+    fun log(severity: Severity, tag: String, message: String, throwable: Throwable? = null) {
         if (shouldLog(severity, tag, message, throwable)) {
             doLog(severity, tag, message, throwable)
         }
     }
 
-    protected open fun shouldLog(severity: Int, tag: String, message: String, throwable: Throwable? = null) = true
+    protected open fun shouldLog(severity: Severity, tag: String, message: String, throwable: Throwable? = null) = true
 
-    protected abstract fun doLog(severity: Int, tag: String, message: String, throwable: Throwable? = null)
+    protected abstract fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable? = null)
 }

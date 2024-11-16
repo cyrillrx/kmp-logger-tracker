@@ -5,6 +5,5 @@ package com.cyrillrx.logger
  *         Created on 26/10/2016.
  */
 interface ExceptionCatcher {
-
     fun catchException(t: Throwable)
 }

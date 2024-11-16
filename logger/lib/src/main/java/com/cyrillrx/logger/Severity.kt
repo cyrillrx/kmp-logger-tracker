@@ -1,40 +1,19 @@
 package com.cyrillrx.logger;
 
+import kotlin.experimental.ExperimentalObjCName
+
 /**
  * @author Cyril Leroux
  *         Created on 20/10/2015.
  */
-public class Severity {
+enum class Severity(val level: Int, val label: String) {
+    FATAL(0, "FATAL"),
+    ERROR(1, "ERROR"),
+    WARN(2, "WARN"),
+    INFO(3, "INFO"),
 
-    public static final int FATAL = 0;
-    public static final int ERROR = 1;
-    public static final int WARN = 2;
-    public static final int INFO = 3;
-    public static final int DEBUG = 4;
-    public static final int VERBOSE = 5;
-
-    public static String getLabel(int severity) {
-
-        switch (severity) {
-
-            case FATAL:
-                return "FATAL";
-
-            case ERROR:
-                return "ERROR";
-
-            case WARN:
-                return "WARN";
-
-            case INFO:
-                return "INFO";
-
-            case DEBUG:
-                return "DEBUG";
-
-            default:
-            case VERBOSE:
-                return "VERBOSE";
-        }
-    }
+    @OptIn(ExperimentalObjCName::class)
+    @ObjCName("_DEBUG")
+    DEBUG(4, "DEBUG"),
+    VERBOSE(5, "VERBOSE");
 }

@@ -19,10 +19,6 @@ class Logger private constructor() {
 
     private var catcher: ExceptionCatcher? = null
 
-    interface ExceptionCatcher {
-        fun catchException(t: Throwable?)
-    }
-
     companion object {
         private val loggerHub: Logger by lazy { Logger() }
 
@@ -42,7 +38,7 @@ class Logger private constructor() {
             loggerHub.loggers.remove(child)
         }
 
-        fun log(severity: Int, tag: String, message: String, throwable: Throwable? = null) {
+        fun log(severity: Severity, tag: String, message: String, throwable: Throwable? = null) {
             for (logger in loggerHub.loggers) {
                 try {
                     logger.log(severity, tag, message, throwable)
