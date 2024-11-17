@@ -3,7 +3,7 @@ package com.cyrillrx.logger.extension;
 import android.util.Log;
 
 import com.cyrillrx.logger.LogChild;
-import com.cyrillrx.logger.LogHelper;
+import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity;
 import com.cyrillrx.logger.SeverityLogChild;
 
@@ -14,7 +14,7 @@ import com.cyrillrx.logger.SeverityLogChild;
  *         Created on 18/10/2015.
  */
 /** A ready-to-use severity-aware [LogChild] wrapping [Log] class. */
-class LogCat(severity: Severity, private val detailedLogs: Boolean) : SeverityLogChild(severity) {
+class LogCat(severity: Severity, private val clickableLogs: Boolean) : SeverityLogChild(severity) {
 
     override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
         val finalMessage = createMessageWithTrace(message, throwable)
@@ -31,9 +31,9 @@ class LogCat(severity: Severity, private val detailedLogs: Boolean) : SeverityLo
 
     private fun createMessageWithTrace(message: String, throwable: Throwable?): String {
         return if (throwable != null) {
-            "$message\n+${LogHelper.getStackTrace(throwable)}"
-        } else if (detailedLogs) {
-            LogHelper.getDetailedLog(message)
+            LogHelper.addClickableStackTrace(message, throwable)
+        } else if (clickableLogs) {
+            LogHelper.addLinkToCurrentMethod(message)
         } else {
             message
         }
