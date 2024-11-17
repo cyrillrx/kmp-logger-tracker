@@ -24,15 +24,12 @@ public class StreamingTrackerTest {
 
     @BeforeClass
     public static void initLogger() {
-
-        Logger.initialize();
         Logger.addChild(new SystemOutLog(Severity.VERBOSE, false));
     }
 
     @Test
     public void testConsistency() {
-
-        Logger.info(TAG, "Started testConsistency");
+        Logger.info(TAG, "Started testConsistency", null);
 
         final DummyStreamingTracker tracker = new DummyStreamingTracker(10);
 
