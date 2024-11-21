@@ -48,4 +48,8 @@ android {
         minSdk = Version.MIN_SDK
         version = Version.TRACKER_VERSION
     }
+    compileOptions {
+        sourceCompatibility = Version.java
+        targetCompatibility = Version.java
+    }
 }
