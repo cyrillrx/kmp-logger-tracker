@@ -24,7 +24,6 @@ include(
     ":logger:crashlytics",
     ":tracker:lib",
     ":tracker:firebase",
-    ":tracker:google-analytics",
     ":tracker:amplitude",
     ":tracker:segment",
 )
