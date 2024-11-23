@@ -1,6 +1,7 @@
 package com.cyrillrx.logger
 
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 /**
  * @author Cyril Leroux
@@ -16,11 +17,12 @@ object LogHelper {
         return "$message\n$linkToCurrentMethod"
     }
 
-    fun formatLogWithDate(severity: Severity, tag: String, message: String): String {
-        return "${currentDateTime()} - ${severity.label} - $tag - $message"
-    }
-
-    private fun currentDateTime(): String = Clock.System.now().toString()
+    fun formatLogWithDate(
+        severity: Severity,
+        tag: String,
+        message: String,
+        instant: Instant = Clock.System.now(),
+    ): String = "$instant - ${severity.label} - $tag - $message"
 }
 
 expect fun getLinkToCurrentMethod(): String?
