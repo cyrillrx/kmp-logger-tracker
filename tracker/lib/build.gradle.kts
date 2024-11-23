@@ -37,9 +37,6 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        androidUnitTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
     }
 }
 
