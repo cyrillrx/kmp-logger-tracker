@@ -25,14 +25,11 @@ class MainActivity : ComponentActivity() {
         Logger.addChild(SystemOutLog(Severity.DEBUG))
         Logger.addChild(LogCat(Severity.DEBUG, true))
 
-        Logger.info("MainActivity", "Enter")
+        Logger.info("MainActivity", "onCreate")
 
         Tracker.setupExceptionCatcher { t -> Logger.error("Tracker", "Caught exception", t) }
         Tracker.addChild(createTracker())
-        val event = TrackEvent.Builder()
-            .setName("DummyEvent")
-            .build()
-
+        val event = TrackEvent("Event name")
         Tracker.track(event)
 
         setContent {
