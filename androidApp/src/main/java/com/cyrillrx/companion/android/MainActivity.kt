@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.cyrillrx.logger.Logger
 import com.cyrillrx.logger.Severity
+import com.cyrillrx.logger.extension.LogCat
 import com.cyrillrx.logger.extension.SystemOutLog
 import com.cyrillrx.tracker.Tracker
 import com.cyrillrx.tracker.TrackerChild
@@ -22,13 +23,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         Logger.addChild(SystemOutLog(Severity.DEBUG))
-        Logger.info("Android MainActivity", "Enter")
+        Logger.addChild(LogCat(Severity.DEBUG, true))
 
-        Tracker.initialize()
+        Logger.info("MainActivity", "Enter")
+
+        Tracker.setupExceptionCatcher { t -> Logger.error("Tracker", "Caught exception", t) }
         Tracker.addChild(createTracker())
         val event = TrackEvent.Builder()
-            .setName("Dummy")
-            .setCategory("test")
+            .setName("DummyEvent")
             .build()
 
         Tracker.track(event)
@@ -45,9 +47,9 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun createTracker() = object : TrackerChild() {
-        override fun doTrack(event: TrackEvent?) {
-            TODO("Not yet implemented")
+    private fun createTracker() = object : TrackerChild("dummy_tracker") {
+        override fun doTrack(event: TrackEvent) {
+            Logger.info("MainActivity", "Tracking event: $event")
         }
     }
 }
