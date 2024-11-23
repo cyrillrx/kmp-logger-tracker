@@ -1,11 +1,10 @@
-package com.cyrillrx.logger.extension;
+package com.cyrillrx.logger.extension
 
-import android.util.Log;
-
-import com.cyrillrx.logger.LogChild;
+import android.util.Log
+import com.cyrillrx.logger.LogChild
 import com.cyrillrx.logger.LogHelper
-import com.cyrillrx.logger.Severity;
-import com.cyrillrx.logger.SeverityLogChild;
+import com.cyrillrx.logger.Severity
+import com.cyrillrx.logger.SeverityLogChild
 
 /**
  * A ready-to-use severity-aware {@link LogChild} wrapping {@link Log} class.

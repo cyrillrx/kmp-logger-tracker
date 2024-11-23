@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.ktlint)
 }
 
 project.version = Version.TRACKER_VERSION
@@ -52,4 +53,13 @@ android {
         sourceCompatibility = Version.java
         targetCompatibility = Version.java
     }
+}
+
+ktlint {
+    debug.set(true)
+    verbose.set(true)
+    android.set(false)
+    outputToConsole.set(true)
+    ignoreFailures.set(false)
+    disabledRules.set(listOf("(trailing-comma-on-call-site"))
 }

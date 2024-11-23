@@ -27,7 +27,7 @@ private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
 
 private fun StackTraceElement?.linkableMethod(): String {
     if (this == null) return "trace is null"
-    return "${className}.${methodName}(${fileName}:${lineNumber})"
+    return "$className.$methodName($fileName:$lineNumber)"
 }
 
 private fun StackTraceElement?.linkableLine(): String {

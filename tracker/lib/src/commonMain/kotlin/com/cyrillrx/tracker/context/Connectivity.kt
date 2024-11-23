@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.context;
+package com.cyrillrx.tracker.context
 
 /**
  * @author Cyril Leroux

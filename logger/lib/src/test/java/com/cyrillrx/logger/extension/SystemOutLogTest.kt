@@ -3,9 +3,7 @@ package com.cyrillrx.logger.extension
 import com.cyrillrx.logger.L
 import com.cyrillrx.logger.LogChild
 import com.cyrillrx.logger.Severity
-
 import org.junit.AfterClass
-import org.junit.BeforeClass
 import org.junit.Test
 
 /**
@@ -55,7 +53,6 @@ class SystemOutLogTest {
         }
 
         private fun testLogger(child: LogChild, message: String) {
-
             L.addChild(child)
 
             val dummyException = Exception("This is an exception")
@@ -70,35 +67,30 @@ class SystemOutLogTest {
         }
 
         private fun logVerbose(message: String, e: Exception) {
-
             L.verbose(TAG, message)
             L.verbose(TAG, "$message with exception", e)
             logWithSeverity(Severity.VERBOSE, message, e)
         }
 
         private fun logDebug(message: String, e: Exception) {
-
             L.debug(TAG, message)
             L.debug(TAG, "$message with exception", e)
             logWithSeverity(Severity.DEBUG, message, e)
         }
 
         private fun logInfo(message: String, e: Exception) {
-
             L.info(TAG, message)
             L.info(TAG, "$message with exception", e)
             logWithSeverity(Severity.INFO, message, e)
         }
 
         private fun logWarning(message: String, e: Exception) {
-
             L.warning(TAG, message)
             L.warning(TAG, "$message with exception", e)
             logWithSeverity(Severity.WARN, message, e)
         }
 
         private fun logError(message: String, e: Exception) {
-
             L.error(TAG, message)
             L.error(TAG, "$message with exception", e)
             logWithSeverity(Severity.ERROR, message, e)

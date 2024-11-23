@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.event;
+package com.cyrillrx.tracker.event
 
 import com.cyrillrx.tracker.context.TrackerContext
 import com.cyrillrx.tracker.event.TrackEvent.Builder.Companion.requireNotBlank

@@ -1,4 +1,4 @@
-package com.cyrillrx.logger;
+package com.cyrillrx.logger
 
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName

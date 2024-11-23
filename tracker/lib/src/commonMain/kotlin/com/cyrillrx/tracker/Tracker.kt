@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker;
+package com.cyrillrx.tracker
 
 import com.cyrillrx.tracker.context.Connectivity
 import com.cyrillrx.tracker.context.TrackerContext
