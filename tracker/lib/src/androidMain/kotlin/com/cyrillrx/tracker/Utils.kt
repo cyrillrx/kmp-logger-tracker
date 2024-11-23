@@ -6,13 +6,11 @@ import java.util.concurrent.TimeUnit;
  * @author Cyril Leroux
  *         Created on 23/04/2016.
  */
-public class Utils {
-
-    public static void wait(long timeDuration, TimeUnit timeUnit) {
-
+object Utils {
+    fun wait(timeDuration: Long, timeUnit: java.util.concurrent.TimeUnit) {
         try {
-            timeUnit.sleep(timeDuration);
-        } catch (InterruptedException e) {
+            timeUnit.sleep(timeDuration)
+        } catch (e: java.lang.InterruptedException) {
             // TODO log error
         }
     }
