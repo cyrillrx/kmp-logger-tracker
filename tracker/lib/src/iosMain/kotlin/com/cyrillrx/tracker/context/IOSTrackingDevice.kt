@@ -1,7 +1,6 @@
-package com.cyrillrx.tracker.event.context
+package com.cyrillrx.tracker.context
 
 import platform.UIKit.UIDevice
-import com.cyrillrx.tracker.event.context.TrackingDevice
 
 class IOSTrackingDevice : TrackingDevice(
     os = UIDevice.currentDevice.systemName(),

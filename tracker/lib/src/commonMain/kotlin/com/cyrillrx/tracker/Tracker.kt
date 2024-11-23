@@ -1,12 +1,12 @@
 package com.cyrillrx.tracker;
 
+import com.cyrillrx.tracker.context.Connectivity
+import com.cyrillrx.tracker.context.TrackerContext
+import com.cyrillrx.tracker.context.TrackingApp
+import com.cyrillrx.tracker.context.TrackingDeviceFactory
+import com.cyrillrx.tracker.context.TrackingUser
+import com.cyrillrx.tracker.context.UnknownUser
 import com.cyrillrx.tracker.event.TrackEvent
-import com.cyrillrx.tracker.event.context.Connectivity
-import com.cyrillrx.tracker.event.context.TrackerContext;
-import com.cyrillrx.tracker.event.context.TrackingApp
-import com.cyrillrx.tracker.event.context.TrackingDeviceFactory
-import com.cyrillrx.tracker.event.context.TrackingUser
-import com.cyrillrx.tracker.event.context.UnknownUser
 
 /**
  * This class is the main entry point of the library.
@@ -22,7 +22,7 @@ object Tracker {
     private val trackers = HashMap<String, TrackerChild>()
 
     val context: TrackerContext = TrackerContext(
-        app = TrackingApp(),
+        app = TrackingApp.UNDEFINED,
         user = UnknownUser,
         device = TrackingDeviceFactory().create(),
         connectivity = Connectivity.UNKNOWN,
@@ -66,13 +66,17 @@ object Tracker {
         children.filterNotNull().forEach(::addChild)
     }
 
+    fun removeChild(child: TrackerChild) {
+        removeChild(child.name)
+    }
+
     fun removeChild(name: String) {
         val tracker = trackers.remove(name)
         tracker?.onTrackerRemoved()
     }
 
     fun track(event: TrackEvent) {
-        // Update event before passing it to each trackers.
+        // Update event's context before passing it to each tracker child.
         event.context = context
 
         trackers.values.forEach { tracker ->
@@ -102,5 +106,11 @@ object Tracker {
 
     fun logoutUser() {
         updateUser(UnknownUser)
+    }
+
+    fun getTrackerCount(): Int = trackers.size
+
+    fun clear() {
+        trackers.clear()
     }
 }

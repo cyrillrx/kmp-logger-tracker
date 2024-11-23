@@ -1,6 +1,7 @@
 package com.cyrillrx.tracker.event;
 
-import com.cyrillrx.tracker.event.context.TrackerContext
+import com.cyrillrx.tracker.context.TrackerContext
+import com.cyrillrx.tracker.event.TrackEvent.Builder.Companion.requireNotBlank
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
@@ -10,12 +11,16 @@ import kotlin.contracts.contract
  */
 open class TrackEvent(
     val name: String,
-    val attributes: HashMap<String, Any> = HashMap(),
+    val attributes: MutableMap<String, Any> = HashMap(),
 ) {
     lateinit var context: TrackerContext
 
     /** Convenience method for iOS */
     constructor(name: String) : this(name = name, attributes = HashMap())
+
+    init {
+        requireNotBlank(name) { "Event name is mandatory." }
+    }
 
     /** Validates that an event is ready to be sent. */
     fun isValid(): Boolean = try {
@@ -40,7 +45,7 @@ open class TrackEvent(
 
     class Builder {
         private var name: String? = null
-        private val attributes: HashMap<String, Any> = HashMap()
+        private val attributes = HashMap<String, Any>()
 
         fun build(): TrackEvent {
             val name = requireNotBlank(name) { "Event name is mandatory." }

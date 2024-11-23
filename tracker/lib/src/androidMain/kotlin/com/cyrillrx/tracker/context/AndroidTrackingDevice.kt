@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.event.context
+package com.cyrillrx.tracker.context
 
 import android.os.Build
 

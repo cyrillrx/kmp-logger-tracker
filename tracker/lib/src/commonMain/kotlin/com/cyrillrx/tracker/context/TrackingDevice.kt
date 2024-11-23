@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.event.context
+package com.cyrillrx.tracker.context
 
 abstract class TrackingDevice(val os: String, val model: String)
 

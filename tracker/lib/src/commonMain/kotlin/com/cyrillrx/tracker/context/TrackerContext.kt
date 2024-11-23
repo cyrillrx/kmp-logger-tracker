@@ -1,4 +1,4 @@
-package com.cyrillrx.tracker.event.context;
+package com.cyrillrx.tracker.context;
 
 /**
  * @author Cyril Leroux
@@ -9,4 +9,6 @@ class TrackerContext(
     var user: TrackingUser,
     val device: TrackingDevice,
     var connectivity: Connectivity,
-)
+) {
+    fun isValid(): Boolean = app != TrackingApp.UNDEFINED
+}

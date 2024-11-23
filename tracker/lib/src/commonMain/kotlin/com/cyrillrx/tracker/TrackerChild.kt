@@ -1,8 +1,8 @@
 package com.cyrillrx.tracker;
 
 import com.cyrillrx.tracker.event.TrackEvent
-import com.cyrillrx.tracker.event.context.Connectivity
-import com.cyrillrx.tracker.event.context.TrackingUser
+import com.cyrillrx.tracker.context.Connectivity
+import com.cyrillrx.tracker.context.TrackingUser
 
 /**
  * A basic tracker able to filter events before processing them.
