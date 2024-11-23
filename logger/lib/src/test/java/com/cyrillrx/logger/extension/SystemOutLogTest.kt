@@ -49,12 +49,6 @@ class SystemOutLogTest {
         private val TAG = SystemOutLogTest::class.java.simpleName
 
         @JvmStatic
-        @BeforeClass
-        fun initLogger() {
-            L.initialize()
-        }
-
-        @JvmStatic
         @AfterClass
         fun releaseLogger() {
             L.release()
@@ -110,7 +104,7 @@ class SystemOutLogTest {
             logWithSeverity(Severity.ERROR, message, e)
         }
 
-        private fun logWithSeverity(severity: Int, message: String, e: Exception) {
+        private fun logWithSeverity(severity: Severity, message: String, e: Exception) {
             L.log(severity, TAG, message)
             L.log(severity, TAG, "$message with exception", e)
         }
