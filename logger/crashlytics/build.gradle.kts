@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.logger.lib)
+    implementation(projects.logger.logger)
 
     implementation(libs.logger.crashlytics)
 }

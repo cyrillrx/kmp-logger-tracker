@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.ktlint)
 }
 
-project.version = Version.TRACKER_VERSION
+project.version = Version.LOGGER_VERSION
 
 kotlin {
     androidTarget {
@@ -25,7 +25,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "tracker"
+            baseName = "logger"
             isStatic = true
         }
     }
@@ -33,7 +33,6 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
-            implementation(projects.logger.lib)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -42,12 +41,12 @@ kotlin {
 }
 
 android {
-    namespace = "com.cyrillrx.tracker"
+    namespace = "com.cyrillrx.logger"
     compileSdk = Version.COMPILE_SDK
 
     defaultConfig {
         minSdk = Version.MIN_SDK
-        version = Version.TRACKER_VERSION
+        version = Version.LOGGER_VERSION
     }
     compileOptions {
         sourceCompatibility = Version.java
@@ -61,5 +60,4 @@ ktlint {
     android.set(false)
     outputToConsole.set(true)
     ignoreFailures.set(false)
-    disabledRules.set(listOf("(trailing-comma-on-call-site"))
 }
