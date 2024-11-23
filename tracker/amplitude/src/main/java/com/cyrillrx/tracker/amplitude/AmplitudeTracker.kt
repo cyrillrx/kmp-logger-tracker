@@ -15,7 +15,7 @@ import org.json.JSONObject
  * @author Cyril Leroux
  *          Created on 08/06/2018.
  */
-class AmplitudeTracker(app: Application, apiKey: String) : TrackerChild() {
+class AmplitudeTracker(app: Application, apiKey: String) : TrackerChild("Amplitude") {
 
     init {
         Amplitude
@@ -24,26 +24,17 @@ class AmplitudeTracker(app: Application, apiKey: String) : TrackerChild() {
             .enableForegroundTracking(app)
     }
 
-    override fun doTrack(event: TrackEvent?) {
-
-        val name = event?.name ?: return
+    override fun doTrack(event: TrackEvent) {
         val properties = JSONObject()
 
-        try {
-            properties.put("category", event.category)
-            properties.put("source", event.source)
-            properties.put("created_at", event.createdAt)
-        } catch (exception: JSONException) {
-        }
-
-        event.customAttributes.forEach {
+        event.attributes.forEach {
             try {
                 properties.put(it.key, it.value)
             } catch (exception: JSONException) {
             }
         }
 
-        Amplitude.getInstance().logEvent(name, properties)
+        Amplitude.getInstance().logEvent(event.name, properties)
     }
 
     companion object {

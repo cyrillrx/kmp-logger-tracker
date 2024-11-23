@@ -18,6 +18,7 @@ firebaseCrashlytics = "19.2.1"
 firebaseCore = "21.1.1"
 playServicesAnalytics = "18.1.1"
 segment = "4.10.1"
+amplitude = "2.35.2"
 
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -44,6 +45,7 @@ logger-crashlytics = { module = "com.google.firebase:firebase-crashlytics", vers
 tracker-firebase = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
 tracker-google-analytics = { module = "com.google.android.gms:play-services-analytics", version.ref = "playServicesAnalytics" }
 tracker-segment = { module = "com.segment.analytics.android:analytics", version.ref = "segment" }
+tracker-amplitude = { module = "com.amplitude:android-sdk", version.ref = "amplitude" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

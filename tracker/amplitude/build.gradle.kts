@@ -15,4 +15,6 @@ dependencies {
     implementation(projects.logger.lib)
     implementation(projects.tracker.lib)
     implementation(projects.device)
+
+    implementation(libs.tracker.amplitude)
 }
