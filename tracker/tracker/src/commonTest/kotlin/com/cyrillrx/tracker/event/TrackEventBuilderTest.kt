@@ -34,7 +34,7 @@ class TrackEventBuilderTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -48,7 +48,7 @@ class TrackEventBuilderTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -64,7 +64,7 @@ class TrackEventBuilderTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 }

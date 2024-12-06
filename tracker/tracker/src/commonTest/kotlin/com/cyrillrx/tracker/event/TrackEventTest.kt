@@ -46,7 +46,7 @@ class TrackEventTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -58,7 +58,7 @@ class TrackEventTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -72,7 +72,7 @@ class TrackEventTest {
         assertEquals(
             expected = "string_value",
             actual = dictionary["string"] ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -84,7 +84,7 @@ class TrackEventTest {
         assertEquals(
             expected = "string_value",
             actual = event.getAttribute("string") ?: fail("String attribute is missing."),
-            message = "String attribute is inconsistent."
+            message = "String attribute is inconsistent.",
         )
     }
 
@@ -97,7 +97,7 @@ class TrackEventTest {
             expected = 2f,
             actual = event.getAttribute("float") ?: fail("Float attribute is missing."),
             absoluteTolerance = 0.1f,
-            message = "Float attribute is inconsistent."
+            message = "Float attribute is inconsistent.",
         )
     }
 
@@ -109,7 +109,7 @@ class TrackEventTest {
         assertEquals(
             expected = 1L,
             actual = event.getAttribute("long") ?: fail("Long attribute is missing."),
-            message = "Long attribute is inconsistent."
+            message = "Long attribute is inconsistent.",
         )
     }
 
@@ -121,7 +121,7 @@ class TrackEventTest {
         assertEquals(
             expected = 1,
             actual = event.getAttribute("int") ?: fail("Int attribute is missing."),
-            message = "Int attribute is inconsistent."
+            message = "Int attribute is inconsistent.",
         )
     }
 
@@ -145,14 +145,14 @@ class TrackEventTest {
         assertEquals(
             expected = "string_value",
             actual = stringValue,
-            message = "Attribute 'string_key' is inconsistent."
+            message = "Attribute 'string_key' is inconsistent.",
         )
 
         val stringWrapper: StringWrapper = event.getAttribute("any_key") ?: fail("Attribute 'any_key' is missing.")
         assertEquals(
             expected = "nested_Value",
             actual = stringWrapper.string,
-            message = "Attribute 'complex_1' is inconsistent."
+            message = "Attribute 'complex_1' is inconsistent.",
         )
     }
 

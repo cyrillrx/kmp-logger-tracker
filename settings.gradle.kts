@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "logger_tracker"
+rootProject.name = "kmp-logger-tracker"
 
 include(
     ":androidApp",

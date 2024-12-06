@@ -7,6 +7,8 @@ import com.cyrillrx.tracker.context.TrackingDeviceFactory
 import com.cyrillrx.tracker.context.TrackingUser
 import com.cyrillrx.tracker.context.UnknownUser
 import com.cyrillrx.tracker.event.TrackEvent
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
 
 /**
  * This class is the main entry point of the library.
@@ -18,6 +20,8 @@ import com.cyrillrx.tracker.event.TrackEvent
  * @author Cyril Leroux
  *         Created on 17/04/2015
  */
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("KMPTracker")
 object Tracker {
     private val trackers = HashMap<String, TrackerChild>()
 

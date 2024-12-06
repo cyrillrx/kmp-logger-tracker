@@ -16,5 +16,6 @@ enum class Severity(val level: Int, val label: String, val emoji: String) {
     @OptIn(ExperimentalObjCName::class)
     @ObjCName("_DEBUG")
     DEBUG(4, "DEBUG", "🐞"),
-    VERBOSE(5, "VERBOSE", "🔍");
+    VERBOSE(5, "VERBOSE", "🔍"),
+    ;
 }
