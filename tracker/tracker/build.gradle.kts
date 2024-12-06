@@ -26,7 +26,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "KMPTracker"
-            isStatic = true
+            isStatic = false
         }
     }
 
