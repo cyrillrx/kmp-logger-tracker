@@ -19,7 +19,7 @@ firebaseCrashlytics = "19.3.0"
 firebaseCore = "21.1.1"
 playServicesAnalytics = "18.1.1"
 segment = "4.10.1"
-amplitude = "2.35.2"
+amplitude = "3.35.1"
 
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
