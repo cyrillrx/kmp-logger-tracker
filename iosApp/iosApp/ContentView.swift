@@ -1,6 +1,6 @@
 import SwiftUI
 import KMPLogger
-import KMPracker
+import KMPTracker
 
 struct ContentView: View {
     @State private var showContent = false
