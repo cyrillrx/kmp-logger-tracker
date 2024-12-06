@@ -5,5 +5,7 @@ package com.cyrillrx.tracker.context
  *         Created on 26/10/2016.
  */
 enum class Connectivity {
-    UNKNOWN, INTERNET, NO_CONNECTION
+    UNKNOWN,
+    INTERNET,
+    NO_CONNECTION,
 }

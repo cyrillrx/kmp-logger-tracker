@@ -43,7 +43,6 @@ class SystemOutLogTest {
     }
 
     companion object {
-
         private val TAG = SystemOutLogTest::class.java.simpleName
 
         @JvmStatic
