@@ -20,7 +20,7 @@ class OsLogger(severity: Severity) : SeverityLogChild(severity) {
 
         log(
             osLogSeverity = severity.toOsSeverity(),
-            message = "${severity.emoji} $tag - $enhancedMessage}",
+            message = "${severity.emoji} $tag - $enhancedMessage",
         )
     }
 
