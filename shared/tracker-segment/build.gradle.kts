@@ -12,9 +12,9 @@ android {
 }
 
 dependencies {
-    implementation(projects.logger.logger)
-    implementation(projects.tracker.tracker)
-    implementation(projects.device)
+    implementation(projects.shared.logger)
+    implementation(projects.shared.tracker)
+    implementation(projects.shared.device)
 
     implementation(libs.tracker.segment)
 }

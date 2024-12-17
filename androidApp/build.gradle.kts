@@ -35,8 +35,8 @@ android {
 }
 
 dependencies {
-    implementation(projects.logger.logger)
-    implementation(projects.tracker.tracker)
+    implementation(projects.shared.logger)
+    implementation(projects.shared.tracker)
 
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)

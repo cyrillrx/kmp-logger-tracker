@@ -12,6 +12,6 @@ android {
 }
 
 dependencies {
-    implementation(projects.tracker.tracker)
+    implementation(projects.shared.tracker)
     implementation(libs.tracker.firebase)
 }

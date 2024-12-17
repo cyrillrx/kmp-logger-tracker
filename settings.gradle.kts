@@ -18,12 +18,12 @@ rootProject.name = "kmp-logger-tracker"
 
 include(
     ":androidApp",
-    ":notifier",
-    ":device",
-    ":logger:logger",
-    ":logger:crashlytics",
-    ":tracker:tracker",
-    ":tracker:firebase",
-    ":tracker:amplitude",
-    ":tracker:segment",
+    ":shared:notifier",
+    ":shared:device",
+    ":shared:logger",
+    ":shared:logger-crashlytics",
+    ":shared:tracker",
+    ":shared:tracker-firebase",
+    ":shared:tracker-amplitude",
+    ":shared:tracker-segment",
 )
