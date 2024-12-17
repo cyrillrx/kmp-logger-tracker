@@ -26,7 +26,7 @@ struct iOSApp: App {
         KMPLogger.shared.addChild(child: OsLogger(severity: logSeverity))
         KMPLogger.shared.addChild(child: NsLogger(severity: logSeverity))
 
-        KMPLogger.shared.info(tag: "iOSApp", message: "Logger initialized", throwable: nil)
+        KMPLogger.shared.info(tag: "Demo", message: "Logger initialized", throwable: nil)
     }
 
     private func initTracker() {
@@ -37,10 +37,22 @@ struct iOSApp: App {
         KMPTracker.shared.setupApp(app: app)
         KMPTracker.shared.setupExceptionCatcher(
             catchException: { e in
-                KMPLogger.shared.info(tag: "iOSApp", message: "Tracker failed", throwable: nil)
+                KMPLogger.shared.info(tag: "Demo", message: "Tracker failed", throwable: nil)
             }
         )
         
-        KMPLogger.shared.info(tag: "iOSApp", message: "Tracker initialized", throwable: nil)
+        KMPTracker.shared.addChild(child: DummyTracker())
+        
+        KMPLogger.shared.info(tag: "Demo", message: "Tracker initialized", throwable: nil)
+    }
+
+    class DummyTracker: TrackerChild {
+        init() {
+            super.init(name: "dummy_tracker")
+        }
+        
+        override func doTrack(event: TrackEvent) {
+            KMPLogger.shared.info(tag: "Demo", message: "Tracking event: \(event.name)", throwable: nil)
+        }
     }
 }

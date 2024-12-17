@@ -10,8 +10,10 @@ struct ContentView: View {
                 withAnimation {
                     showContent = !showContent
                 }
+
+                KMPTracker.shared.track(event: TrackEvent(name: "button_clicked"))
             }.onAppear {
-                KMPLogger.shared.info(tag:"ContentView", message:"ContentView appeared", throwable: nil)
+                KMPLogger.shared.info(tag:"Demo", message:"ContentView appeared", throwable: nil)
                 
                 let event = TrackEvent(name: "ScreenView", attributes: ["screen": "ContentView"])
                 KMPTracker.shared.track(event: event)

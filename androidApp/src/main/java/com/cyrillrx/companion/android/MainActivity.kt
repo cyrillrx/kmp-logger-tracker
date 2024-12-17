@@ -23,9 +23,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         Logger.addChild(SystemOutLog(Severity.DEBUG))
-        Logger.addChild(LogCat(Severity.DEBUG, true))
+        Logger.addChild(LogCat(Severity.DEBUG, clickableLogs = false))
 
-        Logger.info("MainActivity", "onCreate")
+        Logger.info("Demo", "Logging onCreate")
 
         Tracker.setupExceptionCatcher { t -> Logger.error("Tracker", "Caught exception", t) }
         Tracker.addChild(createTracker())
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     GreetingView("Hello Logger and Tracker")
                 }
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
     private fun createTracker() = object : TrackerChild("dummy_tracker") {
         override fun doTrack(event: TrackEvent) {
-            Logger.info("MainActivity", "Tracking event: $event")
+            Logger.info("Demo", "Tracking event: $event")
         }
     }
 }
