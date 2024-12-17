@@ -1,5 +1,8 @@
 LRX Tracker Release Notes
 
+2024-12-07 - v1.0.0
+- Tracker is now a Kotlin Multiplatform library
+
 2019-01-09 - v0.9.0
 - Changed TrackerChild interface into an abstract class
 - Merged TrackerChild and TrackWrapper

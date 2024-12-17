@@ -1,5 +1,8 @@
 LRX Logger Release Notes
 
+2024-12-07 - v2.0.0
+- Logger is now a Kotlin Multiplatform library
+
 2019-01-15 - v1.6.1
 - Moved code from SystemOutLog.java to LogHelper.java
 - Changed getDetailedLog() to print the linkableMethod on the same line as the message
