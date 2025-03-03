@@ -15,7 +15,7 @@ androidx-activityCompose = "1.9.3"
 
 # Tracker/logger extensions
 firebaseCrashlyticsGradle = "3.0.2"
-firebaseCrashlytics = "19.3.0"
+firebaseCrashlytics = "19.4.1"
 firebaseCore = "21.1.1"
 playServicesAnalytics = "18.1.1"
 segment = "4.11.3"
