@@ -59,6 +59,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Immutable `TrackerContext` snapshotted per event.
 - [ ] `ConsentCategory` (`ANALYTICS`, `CRASH_REPORTING`), denied by default.
 - [ ] `Redactor` pipeline applied before third-party children, with a sensitive-keys redactor provided.
+- [ ] Pattern-based redactor (emails, code formats) applied to messages and throwables too, since key-based redaction misses values written in free text; amend ADR-003 accordingly.
 - [ ] `LogEvent` removed; the logger-to-tracker bridge becomes a breadcrumb child in `:logger:sentry`.
 - [ ] `RamTracker` replaces `InMemoryTracker` and `FakeUser`; tests isolated and extended.
 
