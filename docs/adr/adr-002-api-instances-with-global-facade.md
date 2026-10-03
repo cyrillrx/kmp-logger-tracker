@@ -106,3 +106,5 @@ Building a debug message costs string formatting on every call even when debug l
 **Instances only, no facade** — Rejected: forces injection into every call site, including pure functions where a logger parameter is noise.
 
 **Lock around the registry** — Rejected: a lock on every log call for an event that happens a handful of times per process; `Mutex` is not reentrant, so a child registering another child would deadlock.
+
+**`LoggerHub` / `TrackerHub`** — Rejected: "hub" names a central, stateful access point rather than the substitutable fan-out these classes are, and collides with Sentry's `Hub`, met in `:logger:sentry`.
