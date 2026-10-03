@@ -15,7 +15,6 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 0 — Hygiene and documents (~1 day)
 
-- [x] Restore the staged `shared/logger/build.gradle.kts`.
 - [x] Align the AI tooling with the consumers: `.claude/CLAUDE.md`, `.claude/settings.json`, `AGENTS.md`, `docs/conventions/`.
 - [x] Write the audit, this roadmap and ADR-001 to ADR-004.
 - [x] Open [cyrillrx/coding-conventions#42](https://github.com/cyrillrx/coding-conventions/issues/42) for a project audit skill.
