@@ -37,9 +37,9 @@ The repository carried eight modules besides the two libraries ([audit](../audit
 
 The consumers' needs:
 
-1. `kmp-ttrpg-companion` and `family-planner` ship on Android, iOS and Desktop; `family-planner` also runs a Ktor server.
-2. `family-planner`'s ADR-003 already chose Firebase, through `firebase-kotlin-sdk`.
-3. Both are personal showcase projects: free tiers matter, and Kotlin Multiplatform coverage is part of the showcase.
+1. They ship on Android, iOS and Desktop; at least one also runs a Ktor server.
+2. Firebase is already the backend of choice, through `firebase-kotlin-sdk`.
+3. They are personal showcase projects: free tiers matter, and Kotlin Multiplatform coverage is part of the showcase.
 
 The conventions say module names are lower case and discourage multi-word names.
 
@@ -51,7 +51,7 @@ Its official Kotlin Multiplatform SDK covers Android, iOS and the JVM, so the sa
 
 ### Why Firebase Analytics
 
-`family-planner` already depends on Firebase, analytics is free without volume limits, and `dev.gitlive:firebase-analytics` exposes it to common code, consistent with the `firebase-kotlin-sdk` that ADR-003 of `family-planner` selected. Whether `:tracker:firebase` uses it or a native implementation per platform is settled by a spike at the start of its phase, and recorded here.
+Consumers already depend on Firebase, analytics is free without volume limits, and `dev.gitlive:firebase-analytics` exposes it to common code, consistent with the `firebase-kotlin-sdk` they already use. Whether `:tracker:firebase` uses it or a native implementation per platform is settled by a spike at the start of its phase, and recorded here.
 
 ### Why remove rather than repair
 
@@ -67,7 +67,7 @@ The two native demos duplicated each other, and the iOS one embedded two Kotlin 
 
 ## Consequences
 
-- Sentry on iOS requires the Sentry Cocoa framework to be linked in the consumer's Xcode project, through SPM since neither consumer uses CocoaPods. A spike validates the setup and each integration's README documents it.
+- Sentry on iOS requires the Sentry Cocoa framework to be linked in the consumer's Xcode project, through SPM since the consumers do not use CocoaPods. A spike validates the setup and each integration's README documents it.
 - Firebase on iOS requires the Firebase iOS SDK to be linked the same way, and a `GoogleService-Info.plist` in the app.
 - `:tracker:firebase` has no JVM target; a Desktop build that wants analytics has no backend until PostHog is integrated.
 - Accessors become `projects.logger.core` and `projects.tracker.firebase`.

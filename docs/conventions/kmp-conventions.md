@@ -7,7 +7,7 @@ The canonical document applies as-is. Its application-oriented sections (MVVM, n
 
 ## Project-specific additions
 
-- **Targets** — Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. These cover every consumer: Android, iOS, Desktop, and the Ktor server of `family-planner`.
+- **Targets** — Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. These cover every consumer: Android, iOS, Desktop and JVM servers.
 - **Toolchain** — always the latest stable Kotlin, AGP, Gradle and JDK LTS. Consumers align on it ([ADR-001](../adr/adr-001-distribution-via-maven-central.md)).
 - **Public API** — `explicitApi()` is on, every public declaration carries KDoc, and the ABI dump is checked in CI.
 - **Module naming** — nested modules instead of compound names: `:tracker:firebase`, not `:tracker-firebase`. The published `artifactId` is set explicitly ([ADR-004](../adr/adr-004-supported-backends-and-module-layout.md)).

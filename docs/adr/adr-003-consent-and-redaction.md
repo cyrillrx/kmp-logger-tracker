@@ -27,7 +27,7 @@ public fun interface Redactor<T> {
 ```
 
 - Redactors run, in order, on every `LogEntry` and `TrackEvent` before they reach a categorised child. Local children receive the original, so debugging on the device stays complete.
-- A `SensitiveKeysRedactor(keys)` is provided: it masks the value of every listed attribute key, and is the means for `family-planner` to keep invitation codes out of every log, event and crash report, as its ADR-003 requires.
+- A `SensitiveKeysRedactor(keys)` is provided: it masks the value of every listed attribute key, so a consumer can keep a secret — an invitation code, a token — out of every log, event and crash report.
 
 **Privacy-preserving SDK defaults.**
 
@@ -36,7 +36,7 @@ public fun interface Redactor<T> {
 
 ## Context
 
-`family-planner` handles family data and its ADR-003 forbids writing invitation codes to any log, analytics event or crash report. GDPR requires prior consent for analytics, and both apps are showcase projects distributed in the EU.
+Consumers handle personal data, and some of them forbid specific values — invitation codes, for instance — from reaching any log, analytics event or crash report. GDPR requires prior consent for analytics, and the consumers are showcase projects distributed in the EU.
 
 The old tracker had an `applyConsent(hasConsent, tracker)` helper that added or removed a child; nothing prevented a child from sending data before consent, and nothing filtered the data itself. The logger had no notion of consent at all.
 

@@ -4,7 +4,7 @@ Central reference for all contributors (human or AI). For the project pitch and 
 
 ## 1. Product Context
 
-This repository publishes two Kotlin Multiplatform libraries meant to be shared by every personal project (`kmp-ttrpg-companion`, `family-planner` and the ones that follow):
+This repository publishes two Kotlin Multiplatform libraries meant to be shared by several personal projects, each in its own repository:
 
 - **Logger** — severity-based logging, dispatched to pluggable children (console, Logcat, `os_log`, Sentry).
 - **Tracker** — analytics event tracking, dispatched to pluggable children (Firebase Analytics), with an enriched context.

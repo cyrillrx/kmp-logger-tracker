@@ -15,7 +15,7 @@ The libraries are published to **Maven Central** under the `groupId` **`io.githu
 
 - **One version for every module.** A `vX.Y.Z` tag on `main` publishes all of them. Versioning follows semver and restarts at `1.0.0`, since the coordinates are new. A module joins the train at the version it is first published with: the logger at `1.0.0`, the tracker and the integrations at `1.1.0`.
 - **Tooling.** The `com.vanniktech.maven.publish` plugin, applied through the `published-library` convention plugin in `buildSrc`, publishes to the Central Portal and signs in memory. `.github/workflows/release.yml` runs `publishAndReleaseToMavenCentral` on tags and creates the GitHub Release from `CHANGELOG.md` (Keep a Changelog).
-- **Latest toolchain.** The libraries are always built with the latest stable Kotlin, AGP, Gradle and JDK LTS (Kotlin 2.4.x, JVM target 21 today). Consumers align on it rather than the libraries tracking the oldest consumer. Dependabot keeps the build current.
+- **Latest toolchain.** The libraries are always built with the latest stable Kotlin, AGP, Gradle and JDK LTS. Consumers align on it; the libraries never level down to the oldest consumer. Dependabot keeps the build current.
 
 Consumers add nothing to their repositories block:
 
@@ -27,14 +27,14 @@ dependencies {
 
 ## Context
 
-The libraries must be shared by `kmp-ttrpg-companion`, `family-planner` and every personal project to come, each in its own repository. None of them depends on the libraries today, and nothing was ever published.
+The libraries must be shared by several personal projects, present and future, each in its own repository. None of them depends on the libraries today, and nothing was ever published.
 
 Constraints found in the consumers:
 
-1. Both resolve dependencies from `google()` and `mavenCentral()` only; `family-planner` filters `google()` by group.
-2. Both embed a single umbrella iOS framework through `embedAndSignAppleFrameworkForXcode`, so the libraries are consumed as Kotlin dependencies (klibs), not as XCFrameworks.
-3. `family-planner`'s ADR-005 rejected sharing code across Gradle builds through a composite build.
-4. Their toolchains differ: Kotlin 2.3.20 and Java 17 in ttrpg, Kotlin 2.4.10 and Java 21 in family-planner.
+1. They resolve dependencies from `google()` and `mavenCentral()` only, sometimes with `google()` filtered by group.
+2. They embed a single umbrella iOS framework through `embedAndSignAppleFrameworkForXcode`, so the libraries are consumed as Kotlin dependencies (klibs), not as XCFrameworks.
+3. Sharing code across Gradle builds through a composite build has already been rejected in a consumer.
+4. Their toolchains drift apart over time, depending on which project was touched last.
 
 The questions to settle were: where to publish, under which namespace, how to version, and which toolchain to target.
 
@@ -61,7 +61,7 @@ Kotlin/Native klibs compiled with a newer compiler are not guaranteed to be read
 - **Manual prerequisites** before the first release: a Central Portal account, the `io.github.cyrillrx` namespace verified, a GPG key published on a keyserver, and the repository secrets `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_IN_MEMORY_KEY` and `SIGNING_IN_MEMORY_KEY_PASSWORD`.
 - **Nested modules need an explicit `artifactId`**, otherwise `:logger:core` and `:tracker:core` would both publish as `core`. The `published-library` plugin sets it ([ADR-004](adr-004-supported-backends-and-module-layout.md)).
 - **A release is irreversible.** A version published to Central cannot be deleted. Each release is rehearsed with a release candidate tag (`v1.0.0-rc1`), and `publishToMavenLocal` is inspected first.
-- **ttrpg-companion must upgrade** to the latest Kotlin and to JDK 21 before it adopts the libraries.
+- **A consumer behind the latest toolchain upgrades first**, before it adopts the libraries or a new release of them.
 - **A Kotlin release can force a library release** when a consumer moves first. Dependabot pull requests on the build are merged promptly for that reason.
 - **Public API changes are versioned**: the ABI dump checked in CI makes a breaking change visible, and a breaking change means a major version.
 
@@ -71,7 +71,7 @@ Kotlin/Native klibs compiled with a newer compiler are not guaranteed to be read
 
 **JitPack** — Rejected: building Kotlin/Native artifacts on JitPack is unreliable, builds happen on first request, and consumers need an extra repository.
 
-**Composite build or git submodule** — Rejected: couples every consumer to a local checkout of this repository, and `family-planner`'s ADR-005 already rejected this model.
+**Composite build or git submodule** — Rejected: couples every consumer to a local checkout of this repository, and a consumer already rejected this model.
 
 **`com.cyrillrx` as `groupId`** — Rejected: ties a permanent identifier to a domain that may not be renewed.
 

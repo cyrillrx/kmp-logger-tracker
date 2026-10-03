@@ -1,6 +1,6 @@
 # Roadmap
 
-Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026-10.md) to two published, convention-aligned libraries consumed by `kmp-ttrpg-companion` and `family-planner`. The logger ships first; the tracker and the integrations follow.
+Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026-10.md) to two published, convention-aligned libraries shared by several projects. The logger ships first; the tracker and the integrations follow.
 
 ## Decisions
 
@@ -22,7 +22,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 1 — Build modernisation (~2-3 days)
 
-- [ ] Latest stable Kotlin, AGP, Gradle, ktlint plugin and Kover; JDK and JVM target 21; compileSdk 36.
+- [ ] Latest stable Kotlin, AGP, Gradle, ktlint plugin and Kover; latest JDK LTS supported by every target; latest compileSdk.
 - [ ] `com.android.kotlin.multiplatform.library` instead of `com.android.library`.
 - [ ] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
 - [ ] Convention plugins in `buildSrc`: `kmp-library` (targets, ktlint, Kover, `explicitApi()`, ABI validation, Dokka) and `published-library` (vanniktech, POM, signing, explicit `artifactId`).
@@ -69,7 +69,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 6 — `:tracker:firebase` (~2-3 days)
 
-- [ ] Spike: `dev.gitlive:firebase-analytics` (preferred, matches family-planner's ADR-003) against a native Android implementation with an iOS bridge; record the outcome in ADR-004.
+- [ ] Spike: `dev.gitlive:firebase-analytics` (preferred, matches the consumers' `firebase-kotlin-sdk`) against a native Android implementation with an iOS bridge; record the outcome in ADR-004.
 - [ ] Firebase limits enforced by truncation and a logged warning, never by a swallowed exception.
 - [ ] Collection disabled until `ANALYTICS` consent is granted.
 
@@ -82,5 +82,4 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 ## Phase 8 — Conventions and consumers (~3-4 days)
 
 - [ ] PR to `cyrillrx/coding-conventions`: `logging-conventions.md`, library publishing rules, the latest-toolchain policy, nested module naming.
-- [ ] `kmp-ttrpg-companion`: bump to the latest Kotlin and JDK 21, then replace the `println("WARNING: …")` calls in `shared/core`.
-- [ ] `family-planner`: consumer ADR, then logging on the client and the Ktor server.
+- [ ] Adopt the libraries in each consumer, after aligning its toolchain on the latest stable versions.
