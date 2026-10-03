@@ -11,7 +11,7 @@ This repository publishes two Kotlin Multiplatform libraries meant to be shared 
 
 Rules that follow from being a library:
 
-- **The public API is a contract.** Any change to it goes through an ADR ([`git-and-collaboration.md`](docs/conventions/git-and-collaboration.md)) and is caught by the ABI validation.
+- **The public API is a contract.** Any change to it goes through an ADR ([`git-and-collaboration.md` §9](https://github.com/cyrillrx/coding-conventions/blob/main/collaboration/git-and-collaboration.md)) and is caught by the ABI validation.
 - **Privacy is a library guarantee, not a consumer's chore.** Third-party children send nothing without consent, and data goes through redaction before leaving the device ([ADR-003](docs/adr/adr-003-consent-and-redaction.md)).
 - **A misbehaving child never crashes the host app.**
 
