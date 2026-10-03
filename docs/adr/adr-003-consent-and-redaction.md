@@ -21,7 +21,7 @@ public enum class ConsentCategory { ANALYTICS, CRASH_REPORTING }
 
 ```kotlin
 public fun interface Redactor<T> {
-    /** Returns the sanitised value, or null to drop it. */
+    /** Returns the redacted value, or null to drop it. */
     public fun redact(value: T): T?
 }
 ```
