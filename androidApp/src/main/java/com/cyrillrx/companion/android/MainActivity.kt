@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
     private fun createTracker() = object : TrackerChild("dummy_tracker") {
         override fun doTrack(event: TrackEvent) {
-            Logger.info("Demo", "Tracking event: $event")
+            Logger.info("Demo", "Tracking event: ${event.name}")
         }
     }
 }
