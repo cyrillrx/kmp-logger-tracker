@@ -50,3 +50,7 @@ proguard/
 .externalNativeBuild
 .cxx
 xcuserdata
+
+# Claude Code
+.claude/worktrees/
+.claude/settings.local.json
