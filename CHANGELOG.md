@@ -6,8 +6,16 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 
 ## [Unreleased]
 
+### Added
+
+- `LogEntry`, the immutable record handed to every child: severity, tag, message, throwable, attributes and timestamp.
+- `RamLogChild`, an in-memory child for tests.
+
 ### Changed
 
+- `Severity` is ordered from the least to the most severe, `VERBOSE` to `FATAL`; its `level`, `label` and `emoji` properties are gone.
+- `LogChild` is an interface: `isLoggable(severity, tag)` filters, `log(entry)` writes.
+- `SeverityLogChild` takes the minimum severity it accepts.
 - Targets are Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. The `jvm` target emits Java 25 bytecode, the Android target Java 21.
 - The `desktop` target is renamed `jvm`.
 - `Clock` and `Instant` come from `kotlin.time`; the kotlinx-datetime dependency is gone.
