@@ -21,11 +21,11 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 1 — Build modernisation (~2-3 days)
 
-- [ ] Latest stable Kotlin, AGP, Gradle, ktlint plugin and Kover; latest JDK LTS supported by every target; latest compileSdk.
-- [ ] `com.android.kotlin.multiplatform.library` instead of `com.android.library`.
-- [ ] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
+- [x] Latest stable Kotlin, AGP, Gradle and ktlint plugin; JDK 25 for every compilation, Java 25 bytecode on `jvm()` and Java 21 on Android; latest compileSdk.
+- [x] `com.android.kotlin.multiplatform.library` instead of `com.android.library`.
+- [x] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
 - [ ] Convention plugins in `buildSrc`: `kmp-library` (targets, ktlint, Kover, `explicitApi()`, ABI validation, Dokka) and `published-library` (vanniktech, POM, signing, explicit `artifactId`).
-- [ ] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
+- [x] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
 - [x] `git mv shared/logger logger/core`, `git mv shared/tracker tracker/core` and `git mv shared/tracker-firebase tracker/firebase`.
 - [x] Remove `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device`, `notifier`, `androidApp`, `iosApp` and the dead catalog entries.
 - [ ] `CHANGELOG.md` in Keep a Changelog format replaces the `release_notes.txt` files.
@@ -79,6 +79,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] `:sample` for Android, iOS and Desktop, consuming the libraries through one umbrella iOS framework.
 - [ ] Demo screen: log levels, consent toggles, events.
 - [ ] Sample built in CI as an integration smoke test.
+- [ ] Raise the Android target to Java 25 bytecode once the sample's Android build dexes it; D8 in build-tools 36 still rejects it.
 
 ## Phase 8 — Conventions and consumers (~3-4 days)
 
