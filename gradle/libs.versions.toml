@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.4.20"
-ktlint = "12.1.2"
+ktlint = "14.2.0"
 agp = "9.4.1"
 
 # Tracker/logger extensions
