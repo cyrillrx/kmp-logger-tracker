@@ -10,19 +10,11 @@ actual fun getLinkToCurrentMethod(): String? {
     return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
 }
 
-private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
-    var lastWasLoggerClass = false
+internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
+    val lastLoggerIndex = indexOfLast { it?.className?.startsWith(LOGGER_PACKAGE) == true }
+    if (lastLoggerIndex == -1) return null
 
-    for (trace in this) {
-        trace ?: continue
-
-        val isLoggerClass = trace.className.startsWith(LOGGER_PACKAGE)
-        if (lastWasLoggerClass && !isLoggerClass) {
-            return trace
-        }
-        lastWasLoggerClass = isLoggerClass
-    }
-    return null
+    return drop(lastLoggerIndex + 1).firstOrNull { it != null }
 }
 
 private fun StackTraceElement?.linkableMethod(): String {
