@@ -13,6 +13,7 @@ kotlin {
     android {
         compileSdk = Version.COMPILE_SDK
         minSdk = Version.MIN_SDK
+        withHostTest {}
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Version.ANDROID_JVM_TARGET))
         }
