@@ -49,6 +49,42 @@ class LogHelperAndroidTest {
     }
 
     @Test
+    fun `links to the caller of a nested log call made by a child`() {
+        val stack = stackOf(
+            "java.lang.Thread",
+            "com.cyrillrx.logger.LogHelper",
+            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.LoggerKt",
+            "com.example.app.MyLogChild",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.LoggerKt",
+            CALLER,
+        )
+
+        assertEquals("com.example.app.MyLogChild", stack.findRelevantTrace()?.className)
+    }
+
+    @Test
+    fun `links to the child error handler that logs through the Log facade`() {
+        val stack = stackOf(
+            "java.lang.Thread",
+            "com.cyrillrx.logger.LogHelper",
+            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.Log",
+            "com.cyrillrx.logger.LoggerKt",
+            "com.example.app.ChildErrorHandler",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.Log",
+            "com.cyrillrx.logger.LoggerKt",
+            CALLER,
+        )
+
+        assertEquals("com.example.app.ChildErrorHandler", stack.findRelevantTrace()?.className)
+    }
+
+    @Test
     fun `finds no link without a library frame`() {
         val stack = stackOf("java.lang.Thread", CALLER)
 
