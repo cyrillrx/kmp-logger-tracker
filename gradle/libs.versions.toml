@@ -2,7 +2,6 @@
 kotlin = "2.0.21"
 ktlint = "12.1.2"
 agp = "8.7.3"
-googleServices = "4.4.2"
 
 ## KotlinX
 kotlinx-datetime = "0.6.1"
@@ -11,11 +10,7 @@ kotlinx-datetime = "0.6.1"
 firebaseCore = "21.1.1"
 
 [libraries]
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 
 ## KotlinX
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
