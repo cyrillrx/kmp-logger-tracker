@@ -24,7 +24,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] Latest stable Kotlin, AGP, Gradle and ktlint plugin; JDK 25 for every compilation, Java 25 bytecode on `jvm()` and Java 21 on Android; latest compileSdk.
 - [x] `com.android.kotlin.multiplatform.library` instead of `com.android.library`.
 - [x] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
-- [ ] Convention plugins in `buildSrc`: `kmp-library` (targets, ktlint, Kover, `explicitApi()`, ABI validation, Dokka) and `published-library` (vanniktech, POM, signing, explicit `artifactId`).
+- [x] `kmp-library` convention plugin in `buildSrc`: targets, toolchain, Android host tests, ktlint and Kover.
 - [x] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
 - [x] `git mv shared/logger logger/core`, `git mv shared/tracker tracker/core` and `git mv shared/tracker-firebase tracker/firebase`.
 - [x] Remove `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device`, `notifier`, `androidApp`, `iosApp` and the dead catalog entries.
@@ -43,11 +43,13 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Console children: `LogcatChild`, `OsLogChild` (subsystem and category), `ConsoleChild` (JVM, fixes the double print, shares the JVM stack walk).
 - [ ] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation, concurrent registration and formatting.
 - [ ] KDoc on every public declaration.
+- [ ] `explicitApi()` and ABI validation in `kmp-library`, once the new API is in place.
 
 ## Phase 3 — Publication and CI, release 1.0.0 (~1.5-2 days)
 
 - [ ] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
 - [ ] `ci.yml`: ktlint, JVM tests, ABI check and Kover on Linux; iOS simulator tests on macOS.
+- [ ] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
 - [ ] Dry run with `v1.0.0-rc1`, then release `io.github.cyrillrx:logger:1.0.0`.
 

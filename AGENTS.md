@@ -53,6 +53,8 @@ Modules are nested rather than given compound names ([ADR-004](docs/adr/adr-004-
 
 `:logger:sentry` and `:sample` do not exist yet, and `tracker/firebase` still holds the legacy Android-only module until phase 6 rewrites it.
 
+Library modules apply the `kmp-library` convention plugin from `buildSrc`, which holds the targets, the toolchain, ktlint and Kover; a module's own build script only sets what is specific to it.
+
 Every module ships the same version, published to Maven Central from a `vX.Y.Z` tag ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
 
 ## 4. Commands
@@ -62,6 +64,7 @@ All commands run from the repository root:
 ```bash
 ./gradlew build          # Build every target
 ./gradlew jvmTest        # Run the common tests on the JVM
+./gradlew koverXmlReport # Generate the coverage report
 ./gradlew ktlintCheck    # Check formatting
 ./gradlew ktlintFormat   # Auto-fix formatting
 ```
