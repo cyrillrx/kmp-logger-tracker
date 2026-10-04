@@ -6,10 +6,6 @@ import com.cyrillrx.logger.Severity
 import org.junit.AfterClass
 import org.junit.Test
 
-/**
- * @author Cyril Leroux
- *         Created on 03/05/2016.
- */
 class SystemOutLogTest {
 
     @Test

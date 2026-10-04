@@ -5,10 +5,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 import kotlin.test.fail
 
-/**
- * @author Cyril Leroux
- *      Created on 25/04/2016.
- */
 class TrackEventBuilderTest {
     @Test
     fun `build event with no parameters should fail`() {

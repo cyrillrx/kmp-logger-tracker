@@ -7,9 +7,6 @@ import com.cyrillrx.tracker.event.TrackEvent
 /**
  * A basic tracker able to filter events before processing them.
  * By default, all events are processed.
- *
- * @author Cyril Leroux
- *         Created on 11/11/2015.
  */
 abstract class TrackerChild(val name: String) {
 

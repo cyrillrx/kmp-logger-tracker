@@ -7,9 +7,6 @@ import kotlin.native.ObjCName
 /**
  * This class wraps instances of the {@link LogChild} interface.
  * It allows to customize the logging conditions.
- *
- * @author Cyril Leroux
- *         Created on 03/09/2012.
  */
 @OptIn(ExperimentalObjCName::class)
 @ObjCName("KMPLogger")

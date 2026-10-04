@@ -8,9 +8,6 @@ import com.cyrillrx.logger.SeverityLogChild
 
 /**
  * A ready-to-use severity-aware [LogChild] wrapping `System.out#println(String)` class.
- *
- * @author Cyril Leroux
- *         Created on 18/10/2015.
  */
 class SystemOutLog(minSeverity: Severity, private val clickableLogs: Boolean = false) : SeverityLogChild(minSeverity) {
 
