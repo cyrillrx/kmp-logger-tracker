@@ -55,7 +55,7 @@ A class can also receive a `Logger` and stay independent from the global `Log` f
 ### Tracker
 
 ```kotlin
-Tracker.setupExceptionCatcher { t -> Logger.error("Tracker", "Caught exception", t) }
+Tracker.setupExceptionCatcher { t -> Log.error("Tracker", throwable = t) { "Caught exception" } }
 Tracker.addChild(createTracker())
 
 val event = TrackEvent("Event Name")
