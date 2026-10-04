@@ -18,7 +18,7 @@ class LoggerTest {
 
         Logger.error(TAG, "message")
 
-        val entry = child.entries.single()
+        val entry = child.entries().single()
         assertEquals(Severity.ERROR, entry.severity)
         assertEquals(TAG, entry.tag)
         assertEquals("message", entry.message)
@@ -31,7 +31,7 @@ class LoggerTest {
 
         Logger.debug(TAG, "message")
 
-        assertTrue(child.entries.isEmpty())
+        assertTrue(child.entries().isEmpty())
     }
 
     private companion object {

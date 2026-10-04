@@ -30,7 +30,7 @@ class RamLogChildTest {
         child.log(first)
         child.log(second)
 
-        assertEquals(listOf(first, second), child.entries)
+        assertEquals(listOf(first, second), child.entries())
     }
 
     private companion object {
