@@ -1,7 +1,7 @@
 package com.cyrillrx.logger
 
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 /**
  * @author Cyril Leroux

@@ -3,8 +3,8 @@ package com.cyrillrx.logger.extension
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
 import com.cyrillrx.logger.SeverityLogChild
-import kotlinx.datetime.Clock
 import platform.Foundation.NSLog
+import kotlin.time.Clock
 
 class NsLogger(severity: Severity) : SeverityLogChild(severity) {
 
