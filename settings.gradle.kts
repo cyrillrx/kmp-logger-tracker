@@ -17,12 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "kmp-logger-tracker"
 
 include(
-    ":shared:notifier",
-    ":shared:device",
     ":shared:logger",
-    ":shared:logger-crashlytics",
     ":shared:tracker",
     ":shared:tracker-firebase",
-    ":shared:tracker-amplitude",
-    ":shared:tracker-segment",
 )

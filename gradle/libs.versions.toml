@@ -7,16 +7,8 @@ googleServices = "4.4.2"
 ## KotlinX
 kotlinx-datetime = "0.6.1"
 
-## AndroidX
-androidx-annotation = "1.9.1"
-
 # Tracker/logger extensions
-firebaseCrashlyticsGradle = "3.0.2"
-firebaseCrashlytics = "19.3.0"
 firebaseCore = "21.1.1"
-playServicesAnalytics = "18.1.1"
-segment = "4.11.3"
-amplitude = "3.35.1"
 
 [libraries]
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
@@ -28,16 +20,8 @@ google-services = { module = "com.google.gms:google-services", version.ref = "go
 ## KotlinX
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
-## AndroidX
-androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidx-annotation" }
-
 # Tracker/logger extensions
-logger-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
-logger-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 tracker-firebase = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
-tracker-google-analytics = { module = "com.google.android.gms:play-services-analytics", version.ref = "playServicesAnalytics" }
-tracker-segment = { module = "com.segment.analytics.android:analytics", version.ref = "segment" }
-tracker-amplitude = { module = "com.amplitude:android-sdk", version.ref = "amplitude" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
