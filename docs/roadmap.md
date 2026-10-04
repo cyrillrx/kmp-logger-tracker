@@ -26,7 +26,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
 - [ ] Convention plugins in `buildSrc`: `kmp-library` (targets, ktlint, Kover, `explicitApi()`, ABI validation, Dokka) and `published-library` (vanniktech, POM, signing, explicit `artifactId`).
 - [ ] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
-- [ ] `git mv shared/logger logger/core` and `git mv shared/tracker tracker/core`.
+- [x] `git mv shared/logger logger/core`, `git mv shared/tracker tracker/core` and `git mv shared/tracker-firebase tracker/firebase`.
 - [x] Remove `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device`, `notifier`, `androidApp`, `iosApp` and the dead catalog entries.
 - [ ] `CHANGELOG.md` in Keep a Changelog format replaces the `release_notes.txt` files.
 - [ ] Dependabot: drop `swift`, add `github-actions`.
