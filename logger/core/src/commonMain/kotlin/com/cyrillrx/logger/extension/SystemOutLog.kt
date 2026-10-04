@@ -1,6 +1,7 @@
 package com.cyrillrx.logger.extension
 
 import com.cyrillrx.logger.LogChild
+import com.cyrillrx.logger.LogEntry
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
 import com.cyrillrx.logger.SeverityLogChild
@@ -11,11 +12,11 @@ import com.cyrillrx.logger.SeverityLogChild
  * @author Cyril Leroux
  *         Created on 18/10/2015.
  */
-class SystemOutLog(maxSeverity: Severity, private val clickableLogs: Boolean = false) : SeverityLogChild(maxSeverity) {
+class SystemOutLog(minSeverity: Severity, private val clickableLogs: Boolean = false) : SeverityLogChild(minSeverity) {
 
-    override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
-        val enhancedMessage = createMessageWithTrace(message, throwable)
-        val finalMessage = LogHelper.formatLogWithDate(severity, tag, enhancedMessage).let(::println)
+    override fun log(entry: LogEntry) {
+        val enhancedMessage = createMessageWithTrace(entry.message, entry.throwable)
+        val finalMessage = LogHelper.formatLogWithDate(entry, enhancedMessage).let(::println)
         println(finalMessage)
     }
 

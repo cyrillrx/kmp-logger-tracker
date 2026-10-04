@@ -2,6 +2,7 @@ package com.cyrillrx.logger.extension
 
 import android.util.Log
 import com.cyrillrx.logger.LogChild
+import com.cyrillrx.logger.LogEntry
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
 import com.cyrillrx.logger.SeverityLogChild
@@ -14,10 +15,11 @@ import com.cyrillrx.logger.SeverityLogChild
  */
 class LogCat(severity: Severity, private val clickableLogs: Boolean) : SeverityLogChild(severity) {
 
-    override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
-        val finalMessage = createMessageWithTrace(message, throwable)
+    override fun log(entry: LogEntry) {
+        val finalMessage = createMessageWithTrace(entry.message, entry.throwable)
+        val tag = entry.tag
 
-        when (severity) {
+        when (entry.severity) {
             Severity.VERBOSE -> Log.println(Log.VERBOSE, tag, finalMessage)
             Severity.DEBUG -> Log.println(Log.DEBUG, tag, finalMessage)
             Severity.INFO -> Log.println(Log.INFO, tag, finalMessage)

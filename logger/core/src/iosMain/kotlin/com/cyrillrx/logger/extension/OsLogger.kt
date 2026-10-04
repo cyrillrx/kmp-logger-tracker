@@ -1,5 +1,6 @@
 package com.cyrillrx.logger.extension
 
+import com.cyrillrx.logger.LogEntry
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
 import com.cyrillrx.logger.SeverityLogChild
@@ -15,12 +16,12 @@ import platform.darwin.__dso_handle
 import platform.darwin._os_log_internal
 
 class OsLogger(severity: Severity) : SeverityLogChild(severity) {
-    override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
-        val enhancedMessage = createMessageWithTrace(message, throwable)
+    override fun log(entry: LogEntry) {
+        val enhancedMessage = createMessageWithTrace(entry.message, entry.throwable)
 
         log(
-            osLogSeverity = severity.toOsSeverity(),
-            message = "${severity.emoji} $tag - $enhancedMessage",
+            osLogSeverity = entry.severity.toOsSeverity(),
+            message = "${entry.severity.emoji()} ${entry.tag} - $enhancedMessage",
         )
     }
 
@@ -43,6 +44,15 @@ class OsLogger(severity: Severity) : SeverityLogChild(severity) {
             } else {
                 LogHelper.addClickableStackTrace(message, throwable)
             }
+        }
+
+        private fun Severity.emoji(): String = when (this) {
+            Severity.VERBOSE -> "🔍"
+            Severity.DEBUG -> "🐞"
+            Severity.INFO -> "ℹ️"
+            Severity.WARN -> "⚠️"
+            Severity.ERROR -> "❌"
+            Severity.FATAL -> "💥"
         }
 
         private fun Severity.toOsSeverity(): UByte = when (this) {

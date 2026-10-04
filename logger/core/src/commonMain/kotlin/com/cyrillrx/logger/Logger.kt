@@ -36,9 +36,12 @@ object Logger {
     }
 
     fun log(severity: Severity, tag: String, message: String, throwable: Throwable? = null) {
+        val entry = LogEntry(severity, tag, message, throwable)
         for (logger in loggers) {
             try {
-                logger.log(severity, tag, message, throwable)
+                if (logger.isLoggable(severity, tag)) {
+                    logger.log(entry)
+                }
             } catch (t: Throwable) {
                 try {
                     catcher?.catchException(t)
