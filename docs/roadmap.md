@@ -28,8 +28,8 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
 - [x] `git mv shared/logger logger/core`, `git mv shared/tracker tracker/core` and `git mv shared/tracker-firebase tracker/firebase`.
 - [x] Remove `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device`, `notifier`, `androidApp`, `iosApp` and the dead catalog entries.
-- [ ] `CHANGELOG.md` in Keep a Changelog format replaces the `release_notes.txt` files.
-- [ ] Dependabot: drop `swift`, add `github-actions`.
+- [x] `CHANGELOG.md` in Keep a Changelog format replaces the `release_notes.txt` files.
+- [x] Dependabot: drop `swift`, add `github-actions`.
 - [x] `.github/pull_request_template.md` replaced by the shared template from `cyrillrx/coding-conventions`.
 
 ## Phase 2 — Logger 1.0 (~3-4 days)
