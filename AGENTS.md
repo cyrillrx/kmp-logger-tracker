@@ -37,7 +37,7 @@ The conventions live in the shared [`cyrillrx/coding-conventions`](https://githu
 
 ### Technology-Specific Guidelines
 
-- **Kotlin Multiplatform Conventions**: [`kmp-conventions.md`](docs/conventions/kmp-conventions.md) _(+ project)_
+- **Kotlin Conventions**: [`kotlin-conventions.md`](docs/conventions/kotlin-conventions.md) _(+ project)_
 
 ## 3. Repository Structure
 
@@ -76,7 +76,7 @@ The Claude Code plugins declared in [`.claude/settings.json`](.claude/settings.j
 | Plugin               | Provides                                                        |
 |----------------------|-----------------------------------------------------------------|
 | `git-workflow`       | `/commit`, `/triage-findings`, `/address-review`                |
-| `kmp-conventions`    | `kmp-style` (auto-invoked)                                      |
+| `kotlin-conventions` | Points every session to the Kotlin conventions                  |
 | `coding-conventions` | Coding and documentation conventions, injected at session start |
 
 The plugin skills are derived from the convention documents. When a rule and a skill disagree, the document in `cyrillrx/coding-conventions` wins — report the drift there rather than working around it here.
