@@ -51,7 +51,7 @@ Target layout, reached during phase 1 of the [roadmap](docs/roadmap.md). Modules
 | `:tracker:firebase` | `tracker/firebase/` | `io.github.cyrillrx:tracker-firebase` |
 | `:sample`           | `sample/`           | Not published                         |
 
-Until phase 1 lands, the libraries still live in `shared/logger` and `shared/tracker`, next to legacy Android-only modules scheduled for removal.
+Until phase 1 lands, the libraries still live in `shared/logger` and `shared/tracker`, next to the legacy Android-only `shared/tracker-firebase`, rewritten in phase 6.
 
 Every module ships the same version, published to Maven Central from a `vX.Y.Z` tag ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
 
