@@ -1,76 +1,55 @@
 package com.cyrillrx.logger
 
-import kotlin.experimental.ExperimentalObjCName
-import kotlin.jvm.JvmStatic
-import kotlin.native.ObjCName
+interface Logger {
+    fun isLoggable(severity: Severity, tag: String): Boolean
 
-/**
- * This class wraps instances of the {@link LogChild} interface.
- * It allows to customize the logging conditions.
- */
-@OptIn(ExperimentalObjCName::class)
-@ObjCName("KMPLogger")
-object Logger {
-    private val loggers: MutableSet<LogChild> = HashSet()
-
-    private var catcher: ExceptionCatcher? = null
-
-    fun release() {
-        loggers.clear()
-    }
-
-    fun setCatcher(catcher: ExceptionCatcher) {
-        this.catcher = catcher
-    }
-
-    @JvmStatic
-    fun addChild(child: LogChild) {
-        loggers.add(child)
-    }
-
-    fun removeChild(child: LogChild) {
-        loggers.remove(child)
-    }
-
-    fun log(severity: Severity, tag: String, message: String, throwable: Throwable? = null) {
-        val entry = LogEntry(severity, tag, message, throwable)
-        for (logger in loggers) {
-            try {
-                if (logger.isLoggable(severity, tag)) {
-                    logger.log(entry)
-                }
-            } catch (t: Throwable) {
-                try {
-                    catcher?.catchException(t)
-                } catch (ignored: Exception) {
-                    // Prevent the catcher from throwing an exception
-                }
-            }
-        }
-    }
-
-    @JvmStatic
-    fun verbose(tag: String, message: String, throwable: Throwable? = null) {
-        log(Severity.VERBOSE, tag, message, throwable)
-    }
-
-    @JvmStatic
-    fun debug(tag: String, message: String, throwable: Throwable? = null) {
-        log(Severity.DEBUG, tag, message, throwable)
-    }
-
-    @JvmStatic
-    fun info(tag: String, message: String, throwable: Throwable? = null) {
-        log(Severity.INFO, tag, message, throwable)
-    }
-
-    @JvmStatic
-    fun warning(tag: String, message: String, throwable: Throwable? = null) {
-        log(Severity.WARN, tag, message, throwable)
-    }
-
-    @JvmStatic
-    fun error(tag: String, message: String, throwable: Throwable? = null) {
-        log(Severity.ERROR, tag, message, throwable)
-    }
+    fun log(
+        severity: Severity,
+        tag: String,
+        throwable: Throwable? = null,
+        attributes: Map<String, String> = emptyMap(),
+        message: () -> String,
+    )
 }
+
+fun Logger.verbose(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.VERBOSE, tag, throwable, attributes, message)
+
+fun Logger.debug(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.DEBUG, tag, throwable, attributes, message)
+
+fun Logger.info(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.INFO, tag, throwable, attributes, message)
+
+fun Logger.warn(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.WARN, tag, throwable, attributes, message)
+
+fun Logger.error(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.ERROR, tag, throwable, attributes, message)
+
+fun Logger.fatal(
+    tag: String,
+    throwable: Throwable? = null,
+    attributes: Map<String, String> = emptyMap(),
+    message: () -> String,
+) = log(Severity.FATAL, tag, throwable, attributes, message)

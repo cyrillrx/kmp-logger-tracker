@@ -1,6 +1,6 @@
 package com.cyrillrx.logger
 
-private val LOGGER_CLASS_NAME = Logger::class.java.name
+private const val LOGGER_PACKAGE = "com.cyrillrx.logger."
 
 actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
@@ -16,7 +16,7 @@ private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
     for (trace in this) {
         trace ?: continue
 
-        val isLoggerClass = trace.className.startsWith(LOGGER_CLASS_NAME)
+        val isLoggerClass = trace.className.startsWith(LOGGER_PACKAGE)
         if (lastWasLoggerClass && !isLoggerClass) {
             return trace
         }
