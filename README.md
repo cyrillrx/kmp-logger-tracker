@@ -30,14 +30,9 @@ cd kmp-logger-tracker
 
 ### Building the Project
 
-- For Android:
-
 ```sh
-./gradlew assembleDebug
+./gradlew build
 ```
-
-- For iOS:
-  Open the `iosApp` project in Xcode and build.
 
 ## Usage
 

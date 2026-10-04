@@ -17,7 +17,6 @@ dependencyResolutionManagement {
 rootProject.name = "kmp-logger-tracker"
 
 include(
-    ":androidApp",
     ":shared:notifier",
     ":shared:device",
     ":shared:logger",
