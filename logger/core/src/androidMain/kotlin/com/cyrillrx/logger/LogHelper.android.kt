@@ -1,7 +1,11 @@
 package com.cyrillrx.logger
 
 private const val LOGGER_PACKAGE = "com.cyrillrx.logger."
-private val ENTRY_POINT_CLASSES = setOf("com.cyrillrx.logger.LoggerKt", "com.cyrillrx.logger.Log")
+private val ENTRY_POINT_CLASSES = setOf(
+    "com.cyrillrx.logger.Logger",
+    "com.cyrillrx.logger.LoggerKt",
+    "com.cyrillrx.logger.Log",
+)
 
 actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
