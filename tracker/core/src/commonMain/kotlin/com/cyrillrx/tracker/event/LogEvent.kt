@@ -2,8 +2,8 @@ package com.cyrillrx.tracker.event
 
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 /**
  * @author Cyril Leroux
