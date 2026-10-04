@@ -9,10 +9,4 @@ kotlin {
     android {
         namespace = "com.cyrillrx.tracker"
     }
-
-    sourceSets {
-        commonMain.dependencies {
-            implementation(projects.logger.core)
-        }
-    }
 }

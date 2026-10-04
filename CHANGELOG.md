@@ -16,6 +16,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 
 - The `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device` and `notifier` modules.
 - The `iosX64` target.
+- `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.
 - The per-library iOS frameworks `KMPLogger` and `KMPTracker`; consumers expose their own umbrella framework.
 
 ## Before 1.0.0
