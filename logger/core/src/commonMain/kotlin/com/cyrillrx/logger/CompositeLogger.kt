@@ -57,6 +57,7 @@ class CompositeLogger(
         }
     }
 
+    // TODO(#33): make the guard per-thread so concurrent failures of the same child are not dropped.
     private fun startReporting(child: LogChild): Boolean {
         val before = reportingChildren.getAndUpdate { it + child }
         return child !in before
