@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.21"
 ktlint = "12.1.2"
-agp = "8.7.3"
+agp = "9.4.1"
 
 ## KotlinX
 kotlinx-datetime = "0.6.1"
