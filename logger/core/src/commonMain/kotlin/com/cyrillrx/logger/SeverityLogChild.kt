@@ -1,13 +1,5 @@
 package com.cyrillrx.logger
 
-/**
- * A [LogChild] wrapper aware of the log severity level.
- *
- * @author Cyril Leroux
- *         Created on 20/10/2015.
- */
-abstract class SeverityLogChild(private val maxSeverity: Severity) : LogChild() {
-
-    override fun shouldLog(severity: Severity, tag: String, message: String, throwable: Throwable?): Boolean =
-        maxSeverity.level >= severity.level
+abstract class SeverityLogChild(private val minSeverity: Severity) : LogChild {
+    override fun isLoggable(severity: Severity, tag: String): Boolean = severity >= minSeverity
 }

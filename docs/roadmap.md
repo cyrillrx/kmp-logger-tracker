@@ -34,9 +34,9 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 2 — Logger 1.0 (~3-4 days)
 
-- [ ] `Severity` in natural order: `VERBOSE < DEBUG < INFO < WARN < ERROR < FATAL`.
-- [ ] Immutable `LogEntry(severity, tag, message, throwable, attributes, timestamp)` using `kotlin.time`.
-- [ ] `LogChild` with `isLoggable(severity, tag)` and `log(entry)`.
+- [x] `Severity` in natural order: `VERBOSE < DEBUG < INFO < WARN < ERROR < FATAL`.
+- [x] Immutable `LogEntry(severity, tag, message, throwable, attributes, timestamp)` using `kotlin.time`.
+- [x] `LogChild` with `isLoggable(severity, tag)` and `log(entry)`.
 - [ ] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
 - [ ] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
 - [ ] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.

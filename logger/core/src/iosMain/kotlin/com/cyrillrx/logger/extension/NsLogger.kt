@@ -1,17 +1,17 @@
 package com.cyrillrx.logger.extension
 
+import com.cyrillrx.logger.LogEntry
 import com.cyrillrx.logger.LogHelper
 import com.cyrillrx.logger.Severity
 import com.cyrillrx.logger.SeverityLogChild
 import platform.Foundation.NSLog
-import kotlin.time.Clock
 
 class NsLogger(severity: Severity) : SeverityLogChild(severity) {
 
-    override fun doLog(severity: Severity, tag: String, message: String, throwable: Throwable?) {
-        val enhancedMessage = createMessageWithTrace(message, throwable)
+    override fun log(entry: LogEntry) {
+        val enhancedMessage = createMessageWithTrace(entry.message, entry.throwable)
 
-        NSLog("${currentDateTime()} - ${severity.label} - $tag - $enhancedMessage")
+        NSLog(LogHelper.formatLogWithDate(entry, enhancedMessage))
     }
 
     companion object {
@@ -22,7 +22,5 @@ class NsLogger(severity: Severity) : SeverityLogChild(severity) {
                 LogHelper.addClickableStackTrace(message, throwable)
             }
         }
-
-        private fun currentDateTime(): String = Clock.System.now().toString()
     }
 }
