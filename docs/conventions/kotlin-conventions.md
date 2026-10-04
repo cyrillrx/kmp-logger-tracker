@@ -1,9 +1,9 @@
-# Kotlin Multiplatform Conventions
+# Kotlin Conventions
 
 > [!IMPORTANT]
-> **Canonical source of truth** (shared, project-agnostic): [`conventions/kmp-conventions.md`](https://github.com/cyrillrx/coding-conventions/blob/main/conventions/kmp-conventions.md) — do not duplicate here.
+> **Canonical source of truth** (shared, project-agnostic): [`conventions/kotlin-conventions.md`](https://github.com/cyrillrx/coding-conventions/blob/main/conventions/kotlin-conventions.md) — do not duplicate here.
 
-The canonical document applies as-is. Its application-oriented sections (MVVM, navigation, lifecycle) only concern the `:sample` module.
+The canonical document applies as-is. The UI layer's [Compose conventions](https://github.com/cyrillrx/coding-conventions/blob/main/conventions/compose-conventions.md) (MVVM, navigation, lifecycle) only concern the `:sample` module, so the project does not enable their plugin.
 
 ## Project-specific additions
 
