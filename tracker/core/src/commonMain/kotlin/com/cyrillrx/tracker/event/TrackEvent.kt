@@ -5,24 +5,18 @@ import com.cyrillrx.tracker.event.TrackEvent.Builder.Companion.requireNotBlank
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-/**
- * @author Cyril Leroux
- *         Created on 11/11/2015.
- */
 open class TrackEvent(
     val name: String,
     val attributes: MutableMap<String, Any> = HashMap(),
 ) {
     lateinit var context: TrackerContext
 
-    /** Convenience method for iOS */
     constructor(name: String) : this(name = name, attributes = HashMap())
 
     init {
         requireNotBlank(name) { "Event name is mandatory." }
     }
 
-    /** Validates that an event is ready to be sent. */
     fun isValid(): Boolean = try {
         require(::context.isInitialized) { "TrackerContext is mandatory but was not set." }
         true

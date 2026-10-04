@@ -8,9 +8,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 
 /**
  * A Firebase Analytics {@link TrackerChild}.
- *
- * @author Cyril Leroux
- *         Created on 11/11/2015.
  */
 // Enable Firebase Debug View using "adb shell setprop debug.firebase.analytics.app com.printklub.polabox.debug"
 class FirebaseTracker(context: Context) : TrackerChild("Firebase") {

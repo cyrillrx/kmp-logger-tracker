@@ -16,9 +16,6 @@ import kotlin.native.ObjCName
  * It wraps a list of [Tracker] implementations.
  * It is responsible for updating the events before passing them to the trackers (e.g. to add some context).
  * It also prevents a crash of the app if one of the trackers raises an exception.
- *
- * @author Cyril Leroux
- *         Created on 17/04/2015
  */
 @OptIn(ExperimentalObjCName::class)
 @ObjCName("KMPTracker")

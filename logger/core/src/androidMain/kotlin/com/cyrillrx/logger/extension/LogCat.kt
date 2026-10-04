@@ -9,9 +9,6 @@ import com.cyrillrx.logger.SeverityLogChild
 
 /**
  * A ready-to-use severity-aware [LogChild] wrapping [Log] class.
- *
- * @author Cyril Leroux
- *         Created on 18/10/2015.
  */
 class LogCat(severity: Severity, private val clickableLogs: Boolean) : SeverityLogChild(severity) {
 
