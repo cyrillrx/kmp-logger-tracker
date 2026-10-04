@@ -15,6 +15,7 @@ actual fun getLinkToCurrentMethod(): String? {
     return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
 }
 
+// TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
 internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
     val entryPointIndex = indexOfFirst { it?.className in ENTRY_POINT_CLASSES }
     if (entryPointIndex != -1) return firstOutsideLoggerAfter(entryPointIndex)
