@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "kmp-logger-tracker"
 
 include(
-    ":shared:logger",
-    ":shared:tracker",
-    ":shared:tracker-firebase",
+    ":logger:core",
+    ":tracker:core",
+    ":tracker:firebase",
 )
