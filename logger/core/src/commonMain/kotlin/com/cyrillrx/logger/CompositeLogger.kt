@@ -18,7 +18,7 @@ class CompositeLogger(
     }
 
     override fun isLoggable(severity: Severity, tag: String): Boolean =
-        children.value.any { it.acceptsSafely(severity, tag) }
+        children.value.any { it.isLoggableSafely(severity, tag) }
 
     override fun log(
         severity: Severity,
@@ -27,16 +27,16 @@ class CompositeLogger(
         attributes: Map<String, String>,
         message: () -> String,
     ) {
-        val accepting = children.value.filter { it.acceptsSafely(severity, tag) }
-        if (accepting.isEmpty()) return
+        val loggableChildren = children.value.filter { it.isLoggableSafely(severity, tag) }
+        if (loggableChildren.isEmpty()) return
 
         val entry = LogEntry(severity, tag, message(), throwable, attributes)
-        accepting.forEach { child ->
+        loggableChildren.forEach { child ->
             runCatching { child.log(entry) }.onFailure { report(child, it) }
         }
     }
 
-    private fun LogChild.acceptsSafely(severity: Severity, tag: String): Boolean =
+    private fun LogChild.isLoggableSafely(severity: Severity, tag: String): Boolean =
         runCatching { isLoggable(severity, tag) }
             .onFailure { report(this, it) }
             .getOrDefault(false)
