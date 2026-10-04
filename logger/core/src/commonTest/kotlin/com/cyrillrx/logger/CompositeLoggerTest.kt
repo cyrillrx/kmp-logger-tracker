@@ -80,6 +80,33 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `does not recurse when the error handler logs through the same logger`() {
+        val failing = FailingLogChild()
+        val reported = mutableListOf<LogChild>()
+        lateinit var logger: CompositeLogger
+        logger = CompositeLogger(listOf(failing)) { child, _ ->
+            reported += child
+            logger.log(Severity.ERROR, TAG) { "child failed" }
+        }
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(listOf<LogChild>(failing), reported)
+    }
+
+    @Test
+    fun `reports a child again once its previous failure is reported`() {
+        val failing = FailingLogChild()
+        val reported = mutableListOf<LogChild>()
+        val logger = CompositeLogger(listOf(failing)) { child, _ -> reported += child }
+
+        logger.log(Severity.INFO, TAG) { "first" }
+        logger.log(Severity.INFO, TAG) { "second" }
+
+        assertEquals(listOf<LogChild>(failing, failing), reported)
+    }
+
+    @Test
     fun `stops dispatching to a removed child`() {
         val child = RamLogChild()
         val logger = CompositeLogger()

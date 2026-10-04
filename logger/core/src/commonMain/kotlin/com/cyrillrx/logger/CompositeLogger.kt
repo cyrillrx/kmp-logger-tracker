@@ -1,13 +1,19 @@
 package com.cyrillrx.logger
 
 import kotlinx.atomicfu.atomic
+import kotlinx.atomicfu.getAndUpdate
 import kotlinx.atomicfu.update
 
+/**
+ * @param onChildError called when a child throws. A failure raised while that child's previous failure is still being
+ * reported is dropped, so a handler that logs back through this logger cannot recurse.
+ */
 class CompositeLogger(
     children: List<LogChild> = emptyList(),
     private val onChildError: (LogChild, Throwable) -> Unit = { _, _ -> },
 ) : Logger {
     private val children = atomic(children.distinct())
+    private val reportingChildren = atomic(emptySet<LogChild>())
 
     fun add(child: LogChild) {
         children.update { if (child in it) it else it + child }
@@ -42,6 +48,17 @@ class CompositeLogger(
             .getOrDefault(false)
 
     private fun report(child: LogChild, error: Throwable) {
-        runCatching { onChildError(child, error) }
+        if (!startReporting(child)) return
+
+        try {
+            runCatching { onChildError(child, error) }
+        } finally {
+            reportingChildren.update { it - child }
+        }
+    }
+
+    private fun startReporting(child: LogChild): Boolean {
+        val before = reportingChildren.getAndUpdate { it + child }
+        return child !in before
     }
 }
