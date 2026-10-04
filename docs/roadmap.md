@@ -25,7 +25,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `com.android.kotlin.multiplatform.library` instead of `com.android.library`.
 - [x] Targets: Android, `iosArm64`, `iosSimulatorArm64`, `jvm()`. Drop `iosX64` and the `desktop` name.
 - [x] `kmp-library` convention plugin in `buildSrc`: targets, toolchain, Android host tests, ktlint and Kover.
-- [x] `.editorconfig` copied from `coding-conventions/configs/kotlin/`.
+- [x] `.editorconfig` copied from `coding-conventions/configs/`.
 - [x] `git mv shared/logger logger/core`, `git mv shared/tracker tracker/core` and `git mv shared/tracker-firebase tracker/firebase`.
 - [x] Remove `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device`, `notifier`, `androidApp`, `iosApp` and the dead catalog entries.
 - [x] `CHANGELOG.md` in Keep a Changelog format replaces the `release_notes.txt` files.
