@@ -92,6 +92,41 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `dispatches once to a child added twice`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger()
+        logger.add(child)
+        logger.add(child)
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(1, child.entries().size)
+    }
+
+    @Test
+    fun `dispatches once to a child passed twice to the constructor`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child, child))
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(1, child.entries().size)
+    }
+
+    @Test
+    fun `removes a child added twice in a single call`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger()
+        logger.add(child)
+        logger.add(child)
+
+        logger.remove(child)
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertTrue(child.entries().isEmpty())
+    }
+
+    @Test
     fun `is loggable when one child accepts the severity`() {
         val logger = CompositeLogger(listOf(RamLogChild(Severity.ERROR), RamLogChild(Severity.DEBUG)))
 

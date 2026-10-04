@@ -7,10 +7,10 @@ class CompositeLogger(
     children: List<LogChild> = emptyList(),
     private val onChildError: (LogChild, Throwable) -> Unit = { _, _ -> },
 ) : Logger {
-    private val children = atomic(children)
+    private val children = atomic(children.distinct())
 
     fun add(child: LogChild) {
-        children.update { it + child }
+        children.update { if (child in it) it else it + child }
     }
 
     fun remove(child: LogChild) {
