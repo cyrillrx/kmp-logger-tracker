@@ -1,5 +1,10 @@
 package com.cyrillrx.logger
 
+import kotlin.experimental.ExperimentalObjCName
+import kotlin.native.ObjCName
+
+@OptIn(ExperimentalObjCName::class)
+@ObjCName("KMPLogger")
 interface Logger {
     fun isLoggable(severity: Severity, tag: String): Boolean
 
