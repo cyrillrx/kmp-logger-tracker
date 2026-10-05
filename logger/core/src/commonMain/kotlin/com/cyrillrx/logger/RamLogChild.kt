@@ -1,14 +1,15 @@
 package com.cyrillrx.logger
 
-import kotlinx.atomicfu.atomic
-import kotlinx.atomicfu.update
+import kotlinx.atomicfu.locks.SynchronizedObject
+import kotlinx.atomicfu.locks.synchronized
 
 class RamLogChild(minSeverity: Severity = Severity.VERBOSE) : SeverityLogChild(minSeverity) {
-    private val recorded = atomic(emptyList<LogEntry>())
+    private val lock = SynchronizedObject()
+    private val recorded = mutableListOf<LogEntry>()
 
-    fun entries(): List<LogEntry> = recorded.value
+    fun entries(): List<LogEntry> = synchronized(lock) { recorded.toList() }
 
     override fun log(entry: LogEntry) {
-        recorded.update { it + entry }
+        synchronized(lock) { recorded += entry }
     }
 }
