@@ -60,6 +60,18 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `logs a placeholder when the message cannot be built`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child))
+
+        val failure = IllegalStateException("boom")
+
+        logger.log(Severity.INFO, TAG) { throw failure }
+
+        assertEquals("Failed to build the log message: $failure", child.entries().single().message)
+    }
+
+    @Test
     fun `isolates a failing child and reports it`() {
         val failing = FailingLogChild()
         val healthy = RamLogChild()
