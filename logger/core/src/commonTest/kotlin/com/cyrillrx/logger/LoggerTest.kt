@@ -1,37 +1,22 @@
 package com.cyrillrx.logger
 
-import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class LoggerTest {
-    @AfterTest
-    fun releaseLogger() {
-        Logger.release()
-    }
-
     @Test
-    fun `dispatches the entry to children that accept its severity`() {
-        val child = RamLogChild(minSeverity = Severity.INFO)
-        Logger.addChild(child)
+    fun `each shortcut logs at its own severity`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child))
 
-        Logger.error(TAG, "message")
+        logger.verbose(TAG) { "verbose" }
+        logger.debug(TAG) { "debug" }
+        logger.info(TAG) { "info" }
+        logger.warn(TAG) { "warn" }
+        logger.error(TAG) { "error" }
+        logger.fatal(TAG) { "fatal" }
 
-        val entry = child.entries().single()
-        assertEquals(Severity.ERROR, entry.severity)
-        assertEquals(TAG, entry.tag)
-        assertEquals("message", entry.message)
-    }
-
-    @Test
-    fun `skips children that reject the severity`() {
-        val child = RamLogChild(minSeverity = Severity.ERROR)
-        Logger.addChild(child)
-
-        Logger.debug(TAG, "message")
-
-        assertTrue(child.entries().isEmpty())
+        assertEquals(Severity.entries, child.entries().map { it.severity })
     }
 
     private companion object {

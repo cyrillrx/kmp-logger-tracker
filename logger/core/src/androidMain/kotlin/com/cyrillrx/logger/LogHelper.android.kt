@@ -1,6 +1,11 @@
 package com.cyrillrx.logger
 
-private val LOGGER_CLASS_NAME = Logger::class.java.name
+private const val LOGGER_PACKAGE = "com.cyrillrx.logger."
+private val ENTRY_POINT_CLASSES = setOf(
+    "com.cyrillrx.logger.Logger",
+    "com.cyrillrx.logger.LoggerKt",
+    "com.cyrillrx.logger.Log",
+)
 
 actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
@@ -10,20 +15,21 @@ actual fun getLinkToCurrentMethod(): String? {
     return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
 }
 
-private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
-    var lastWasLoggerClass = false
+// TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
+internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
+    val entryPointIndex = indexOfFirst { it?.className in ENTRY_POINT_CLASSES }
+    if (entryPointIndex != -1) return firstOutsideLoggerAfter(entryPointIndex)
 
-    for (trace in this) {
-        trace ?: continue
+    val lastLoggerIndex = indexOfLast { it.isLoggerFrame() }
+    if (lastLoggerIndex == -1) return null
 
-        val isLoggerClass = trace.className.startsWith(LOGGER_CLASS_NAME)
-        if (lastWasLoggerClass && !isLoggerClass) {
-            return trace
-        }
-        lastWasLoggerClass = isLoggerClass
-    }
-    return null
+    return drop(lastLoggerIndex + 1).firstOrNull { it != null }
 }
+
+private fun Array<StackTraceElement?>.firstOutsideLoggerAfter(index: Int): StackTraceElement? =
+    drop(index + 1).firstOrNull { it != null && !it.isLoggerFrame() }
+
+private fun StackTraceElement?.isLoggerFrame(): Boolean = this?.className?.startsWith(LOGGER_PACKAGE) == true
 
 private fun StackTraceElement?.linkableMethod(): String {
     if (this == null) return "trace is null"

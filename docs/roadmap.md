@@ -37,11 +37,11 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `Severity` in natural order: `VERBOSE < DEBUG < INFO < WARN < ERROR < FATAL`.
 - [x] Immutable `LogEntry(severity, tag, message, throwable, attributes, timestamp)` using `kotlin.time`.
 - [x] `LogChild` with `isLoggable(severity, tag)` and `log(entry)`.
-- [ ] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
-- [ ] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
-- [ ] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
+- [x] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
+- [x] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
+- [x] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
 - [ ] Console children: `LogcatChild`, `OsLogChild` (subsystem and category), `ConsoleChild` (JVM, fixes the double print, shares the JVM stack walk).
-- [ ] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation, concurrent registration and formatting.
+- [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation, concurrent registration and formatting.
 - [ ] KDoc on every public declaration.
 - [ ] `explicitApi()` and ABI validation in `kmp-library`, once the new API is in place.
 
