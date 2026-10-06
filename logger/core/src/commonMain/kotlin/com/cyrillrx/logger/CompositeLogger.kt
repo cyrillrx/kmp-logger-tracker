@@ -46,7 +46,9 @@ class CompositeLogger(
     }
 
     private fun buildMessageSafely(message: () -> String): String =
-        runCatching(message).getOrElse { "Failed to build the log message: ${it::class.simpleName}" }
+        runCatching(message).getOrElse {
+            "Failed to build the log message: ${it::class.simpleName ?: "an anonymous exception"}"
+        }
 
     private fun LogChild.isLoggableSafely(severity: Severity, tag: String): Boolean =
         runCatching { isLoggable(severity, tag) }

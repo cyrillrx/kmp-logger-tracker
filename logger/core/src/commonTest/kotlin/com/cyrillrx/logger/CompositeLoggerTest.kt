@@ -80,6 +80,16 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `logs a placeholder when the message fails with an anonymous exception`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child))
+
+        logger.log(Severity.INFO, TAG) { throw object : RuntimeException() {} }
+
+        assertEquals("Failed to build the log message: an anonymous exception", child.entries().single().message)
+    }
+
+    @Test
     fun `isolates a failing child and reports it`() {
         val failing = FailingLogChild()
         val healthy = RamLogChild()
