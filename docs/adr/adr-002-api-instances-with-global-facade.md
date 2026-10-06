@@ -90,7 +90,7 @@ Building a debug message costs string formatting on every call even when debug l
 ## Consequences
 
 - Every existing call site breaks: `Logger.info("TAG", "msg")` becomes `Log.info("TAG") { "msg" }`. Only the removed demo apps call the libraries today.
-- The Obj-C name `KMPLogger` moves to the `Logger` interface, so Swift call sites keep compiling. `KMPTracker` goes away; Swift callers go through the consumer's umbrella framework.
+- The Obj-C name `KMPLogger` moves to the `Logger` interface, so Swift keeps the type name; its members change like every other call site. `KMPTracker` goes away; Swift callers go through the consumer's umbrella framework.
 - `kotlinx-atomicfu` becomes a dependency of `:logger:core`.
 - `explicitApi()` and the ABI dump make each public declaration a deliberate choice.
 - The tracker's lifecycle callbacks (`onUserUpdated`, `onConnectivityChanged`, `onTrackerRemoved`) are reviewed when the tracker is rebuilt, so the two registries share one contract.
