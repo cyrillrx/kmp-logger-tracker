@@ -116,6 +116,18 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `isolates a failing child whose equality breaks once registered`() {
+        val unhashable = UnhashableFailingLogChild()
+        val healthy = RamLogChild()
+        val logger = CompositeLogger(listOf(unhashable, healthy))
+        unhashable.broken = true
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(1, healthy.entries().size)
+    }
+
+    @Test
     fun `swallows a failure of the error handler`() {
         val logger = CompositeLogger(listOf(FailingLogChild())) { _, error -> throw error }
 
@@ -231,6 +243,16 @@ class CompositeLoggerTest {
 
     private class FailingLogChild : LogChild {
         override fun log(entry: LogEntry) = error("failing child")
+    }
+
+    private class UnhashableFailingLogChild : LogChild {
+        var broken = false
+
+        override fun log(entry: LogEntry) = error("failing child")
+
+        override fun equals(other: Any?): Boolean = if (broken) error("failing equality") else this === other
+
+        override fun hashCode(): Int = if (broken) error("failing hash") else 0
     }
 
     private class FailingFilterLogChild : LogChild {
