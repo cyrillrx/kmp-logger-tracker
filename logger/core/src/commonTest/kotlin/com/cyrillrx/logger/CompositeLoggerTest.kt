@@ -64,11 +64,19 @@ class CompositeLoggerTest {
         val child = RamLogChild()
         val logger = CompositeLogger(listOf(child))
 
-        val failure = IllegalStateException("boom")
+        logger.log(Severity.INFO, TAG) { throw IllegalStateException("secret") }
 
-        logger.log(Severity.INFO, TAG) { throw failure }
+        assertEquals("Failed to build the log message: IllegalStateException", child.entries().single().message)
+    }
 
-        assertEquals("Failed to build the log message: $failure", child.entries().single().message)
+    @Test
+    fun `logs a placeholder when the message failure cannot be described`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child))
+
+        logger.log(Severity.INFO, TAG) { throw UndescribableException() }
+
+        assertEquals("Failed to build the log message: UndescribableException", child.entries().single().message)
     }
 
     @Test
@@ -175,6 +183,12 @@ class CompositeLoggerTest {
 
     private class FailingLogChild : LogChild {
         override fun log(entry: LogEntry) = error("failing child")
+    }
+
+    private class UndescribableException : RuntimeException() {
+        override val message: String get() = error("no message")
+
+        override fun toString(): String = error("no description")
     }
 
     private companion object {

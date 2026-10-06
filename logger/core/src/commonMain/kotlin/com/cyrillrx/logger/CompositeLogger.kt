@@ -5,7 +5,8 @@ import kotlinx.atomicfu.getAndUpdate
 import kotlinx.atomicfu.update
 
 /**
- * A message lambda that throws does not reach the caller: children receive a placeholder message naming the failure.
+ * A message lambda that throws does not reach the caller: children receive a placeholder message naming the failure
+ * type only, so the failure's own message never leaves through a child.
  *
  * @param onChildError called when a child throws. A failure raised while that child's previous failure is still being
  * reported is dropped, so a handler that logs back through this logger cannot recurse.
@@ -45,7 +46,7 @@ class CompositeLogger(
     }
 
     private fun buildMessageSafely(message: () -> String): String =
-        runCatching(message).getOrElse { "Failed to build the log message: $it" }
+        runCatching(message).getOrElse { "Failed to build the log message: ${it::class.simpleName}" }
 
     private fun LogChild.isLoggableSafely(severity: Severity, tag: String): Boolean =
         runCatching { isLoggable(severity, tag) }
