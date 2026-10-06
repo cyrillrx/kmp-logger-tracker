@@ -56,11 +56,8 @@ class CompositeLogger(
     private fun report(child: LogChild, error: Throwable) {
         if (!startReporting(child)) return
 
-        try {
-            runCatching { onChildError(child, error) }
-        } finally {
-            reportingChildren.update { it - child }
-        }
+        runCatching { onChildError(child, error) }
+        reportingChildren.update { it - child }
     }
 
     // TODO(#33): make the guard per-thread so concurrent failures of the same child are not dropped.
