@@ -121,6 +121,21 @@ class LogHelperAndroidTest {
     }
 
     @Test
+    fun `links to a caller declared in a subpackage of the library`() {
+        val caller = "com.cyrillrx.logger.sample.MainActivity"
+        val stack = stackOf(
+            "java.lang.Thread",
+            "com.cyrillrx.logger.LogHelper",
+            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.LoggerKt",
+            caller,
+        )
+
+        assertEquals(caller, stack.findRelevantTrace()?.className)
+    }
+
+    @Test
     fun `finds no link without a library frame`() {
         val stack = stackOf("java.lang.Thread", CALLER)
 
