@@ -93,6 +93,19 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `skips and reports a child whose filter fails`() {
+        val failing = FailingFilterLogChild()
+        val healthy = RamLogChild()
+        val reported = mutableListOf<LogChild>()
+        val logger = CompositeLogger(listOf(failing, healthy)) { child, _ -> reported += child }
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(1, healthy.entries().size)
+        assertEquals(listOf<LogChild>(failing), reported)
+    }
+
+    @Test
     fun `swallows a failure of the error handler`() {
         val logger = CompositeLogger(listOf(FailingLogChild())) { _, error -> throw error }
 
@@ -174,6 +187,31 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `lets a child register another child while it logs`() {
+        val added = RamLogChild()
+        val logger = CompositeLogger()
+        logger.add(RegisteringLogChild { logger.add(added) })
+
+        logger.log(Severity.INFO, TAG) { "first" }
+        logger.log(Severity.INFO, TAG) { "second" }
+
+        assertEquals(listOf("second"), added.entries().map { it.message })
+    }
+
+    @Test
+    fun `lets a child remove itself while it logs`() {
+        val logger = CompositeLogger()
+        lateinit var removing: RegisteringLogChild
+        removing = RegisteringLogChild { logger.remove(removing) }
+        logger.add(removing)
+
+        logger.log(Severity.INFO, TAG) { "first" }
+        logger.log(Severity.INFO, TAG) { "second" }
+
+        assertEquals(1, removing.calls)
+    }
+
+    @Test
     fun `is loggable when one child accepts the severity`() {
         val logger = CompositeLogger(listOf(RamLogChild(Severity.ERROR), RamLogChild(Severity.DEBUG)))
 
@@ -183,6 +221,22 @@ class CompositeLoggerTest {
 
     private class FailingLogChild : LogChild {
         override fun log(entry: LogEntry) = error("failing child")
+    }
+
+    private class FailingFilterLogChild : LogChild {
+        override fun isLoggable(severity: Severity, tag: String): Boolean = error("failing filter")
+
+        override fun log(entry: LogEntry) = Unit
+    }
+
+    private class RegisteringLogChild(private val register: () -> Unit) : LogChild {
+        var calls = 0
+            private set
+
+        override fun log(entry: LogEntry) {
+            calls++
+            register()
+        }
     }
 
     private class UndescribableException : RuntimeException() {
