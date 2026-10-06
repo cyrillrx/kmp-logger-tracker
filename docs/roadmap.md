@@ -41,7 +41,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
 - [x] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
 - [ ] Console children: `LogcatChild`, `OsLogChild` (subsystem and category), `ConsoleChild` (JVM, fixes the double print, shares the JVM stack walk).
-- [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation, concurrent registration and formatting.
+- [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration.
 - [ ] `explicitApi()` and ABI validation in `kmp-library`, once the new API is in place.
 
