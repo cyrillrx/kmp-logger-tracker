@@ -84,6 +84,24 @@ class LogHelperAndroidTest {
     }
 
     @Test
+    fun `links to the caller of a nested log call desugared for minSdk below 24`() {
+        val stack = stackOf(
+            "java.lang.Thread",
+            "com.cyrillrx.logger.LogHelper",
+            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.Logger\$-CC",
+            "com.example.app.MyLogChild",
+            "com.cyrillrx.logger.CompositeLogger",
+            "com.cyrillrx.logger.Log",
+            "com.cyrillrx.logger.LoggerKt",
+            CALLER,
+        )
+
+        assertEquals("com.example.app.MyLogChild", stack.findRelevantTrace()?.className)
+    }
+
+    @Test
     fun `links to the child error handler that logs through the Log facade`() {
         val stack = stackOf(
             "java.lang.Thread",

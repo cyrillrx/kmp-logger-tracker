@@ -3,6 +3,8 @@ package com.cyrillrx.logger
 private const val LOGGER_PACKAGE = "com.cyrillrx.logger."
 private val ENTRY_POINT_CLASSES = setOf(
     "com.cyrillrx.logger.Logger",
+    // D8 moves the interface's static methods there when desugaring for minSdk < 24.
+    "com.cyrillrx.logger.Logger\$-CC",
     "com.cyrillrx.logger.LoggerKt",
     "com.cyrillrx.logger.Log",
 )
