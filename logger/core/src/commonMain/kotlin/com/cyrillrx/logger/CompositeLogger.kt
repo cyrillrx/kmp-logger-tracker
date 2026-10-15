@@ -59,10 +59,6 @@ class CompositeLogger(
             .getOrDefault(false)
 
     private fun report(child: LogChild, error: Throwable) {
-        runCatching { reportOnce(child, error) }
-    }
-
-    private fun reportOnce(child: LogChild, error: Throwable) {
         if (!startReporting(child)) return
 
         runCatching { onChildError(child, error) }
