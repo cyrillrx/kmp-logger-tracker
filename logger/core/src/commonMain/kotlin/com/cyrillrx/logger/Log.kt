@@ -6,6 +6,7 @@ object Log : Logger {
     private val delegate = atomic<Logger>(CompositeLogger())
 
     fun install(logger: Logger) {
+        require(logger !== this) { "Log cannot delegate to itself" }
         delegate.value = logger
     }
 

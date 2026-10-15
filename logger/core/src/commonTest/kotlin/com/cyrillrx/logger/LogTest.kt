@@ -3,6 +3,7 @@ package com.cyrillrx.logger
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 class LogTest {
     @AfterTest
@@ -18,6 +19,11 @@ class LogTest {
         Log.info(TAG) { "message" }
 
         assertEquals("message", child.entries().single().message)
+    }
+
+    @Test
+    fun `refuses to delegate to itself`() {
+        assertFailsWith<IllegalArgumentException> { Log.install(Log) }
     }
 
     private companion object {
