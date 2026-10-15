@@ -36,12 +36,13 @@ class CompositeLogger(
         attributes: Map<String, String>,
         message: () -> String,
     ) {
-        val loggableChildren = children.value.filter { it.isLoggableSafely(severity, tag) }
-        if (loggableChildren.isEmpty()) return
+        var entry: LogEntry? = null
+        children.value.forEach { child ->
+            if (!child.isLoggableSafely(severity, tag)) return@forEach
 
-        val entry = LogEntry(severity, tag, buildMessageSafely(message), throwable, attributes.toMap())
-        loggableChildren.forEach { child ->
-            runCatching { child.log(entry) }.onFailure { report(child, it) }
+            val built = entry ?: LogEntry(severity, tag, buildMessageSafely(message), throwable, attributes.toMap())
+            entry = built
+            runCatching { child.log(built) }.onFailure { report(child, it) }
         }
     }
 
