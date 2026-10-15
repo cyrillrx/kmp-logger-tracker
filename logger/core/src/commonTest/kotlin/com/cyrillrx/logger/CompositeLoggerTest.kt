@@ -234,6 +234,32 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `removes a child while another child's equality is broken`() {
+        val unhashable = UnhashableFailingLogChild()
+        val removed = RamLogChild()
+        val logger = CompositeLogger(listOf(unhashable, removed))
+        unhashable.broken = true
+
+        logger.remove(removed)
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertTrue(removed.entries().isEmpty())
+    }
+
+    @Test
+    fun `dispatches to each of two equal children`() {
+        val first = EqualLogChild()
+        val second = EqualLogChild()
+        val logger = CompositeLogger(listOf(first))
+        logger.add(second)
+
+        logger.log(Severity.INFO, TAG) { "message" }
+
+        assertEquals(1, first.entries.size)
+        assertEquals(1, second.entries.size)
+    }
+
+    @Test
     fun `lets a child register another child while it logs`() {
         val added = RamLogChild()
         val logger = CompositeLogger()
@@ -278,6 +304,18 @@ class CompositeLoggerTest {
         override fun equals(other: Any?): Boolean = if (broken) error("failing equality") else this === other
 
         override fun hashCode(): Int = if (broken) error("failing hash") else 0
+    }
+
+    private class EqualLogChild : LogChild {
+        val entries = mutableListOf<LogEntry>()
+
+        override fun log(entry: LogEntry) {
+            entries += entry
+        }
+
+        override fun equals(other: Any?): Boolean = other is EqualLogChild
+
+        override fun hashCode(): Int = 0
     }
 
     private class FailingFilterLogChild : LogChild {

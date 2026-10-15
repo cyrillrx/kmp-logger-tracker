@@ -8,6 +8,8 @@ import kotlinx.atomicfu.update
  * A message lambda that throws does not reach the caller: children receive a placeholder message naming the failure
  * type only, so the failure's own message never leaves through a child.
  *
+ * Children are told apart by identity, so two equal children both receive the entries.
+ *
  * @param onChildError called when a child throws. A failure raised while that child's previous failure is still being
  * reported is dropped, so a handler that logs back through this logger cannot recurse.
  */
@@ -15,15 +17,15 @@ class CompositeLogger(
     children: List<LogChild> = emptyList(),
     private val onChildError: (LogChild, Throwable) -> Unit = { _, _ -> },
 ) : Logger {
-    private val children = atomic(children.distinct())
+    private val children = atomic(children.fold(emptyList<LogChild>()) { list, child -> list.withInstance(child) })
     private val reportingChildren = atomic(emptyList<LogChild>())
 
     fun add(child: LogChild) {
-        children.update { if (child in it) it else it + child }
+        children.update { it.withInstance(child) }
     }
 
     fun remove(child: LogChild) {
-        children.update { it - child }
+        children.update { it.withoutInstance(child) }
     }
 
     override fun isLoggable(severity: Severity, tag: String): Boolean =
@@ -64,15 +66,20 @@ class CompositeLogger(
         if (!startReporting(child)) return
 
         runCatching { onChildError(child, error) }
-        reportingChildren.update { reporting -> reporting.filterNot { it === child } }
+        reportingChildren.update { it.withoutInstance(child) }
     }
 
     // TODO(#33): make the guard per-thread so concurrent failures of the same child are not dropped.
-    // Children are compared by identity: a child's equality may throw or change while its failure is reported.
     private fun startReporting(child: LogChild): Boolean {
-        val before = reportingChildren.getAndUpdate { if (it.containsInstance(child)) it else it + child }
+        val before = reportingChildren.getAndUpdate { it.withInstance(child) }
         return !before.containsInstance(child)
     }
 
+    // Identity rather than equality: a child's equals may throw or change once it is registered.
     private fun List<LogChild>.containsInstance(child: LogChild): Boolean = any { it === child }
+
+    private fun List<LogChild>.withInstance(child: LogChild): List<LogChild> =
+        if (containsInstance(child)) this else this + child
+
+    private fun List<LogChild>.withoutInstance(child: LogChild): List<LogChild> = filterNot { it === child }
 }
