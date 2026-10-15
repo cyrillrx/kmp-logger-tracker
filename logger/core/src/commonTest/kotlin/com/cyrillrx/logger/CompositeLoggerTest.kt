@@ -24,6 +24,18 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `keeps the attributes the entry was logged with`() {
+        val child = RamLogChild()
+        val logger = CompositeLogger(listOf(child))
+        val attributes = mutableMapOf("id" to "1")
+
+        logger.log(Severity.INFO, TAG, attributes = attributes) { "message" }
+        attributes["id"] = "2"
+
+        assertEquals(mapOf("id" to "1"), child.entries().single().attributes)
+    }
+
+    @Test
     fun `skips children that reject the severity`() {
         val child = RamLogChild(minSeverity = Severity.ERROR)
         val logger = CompositeLogger(listOf(child))
