@@ -16,7 +16,7 @@ class CompositeLogger(
     private val onChildError: (LogChild, Throwable) -> Unit = { _, _ -> },
 ) : Logger {
     private val children = atomic(children.distinct())
-    private val reportingChildren = atomic(emptySet<LogChild>())
+    private val reportingChildren = atomic(emptyList<LogChild>())
 
     fun add(child: LogChild) {
         children.update { if (child in it) it else it + child }
@@ -63,12 +63,15 @@ class CompositeLogger(
         if (!startReporting(child)) return
 
         runCatching { onChildError(child, error) }
-        reportingChildren.update { it - child }
+        reportingChildren.update { reporting -> reporting.filterNot { it === child } }
     }
 
     // TODO(#33): make the guard per-thread so concurrent failures of the same child are not dropped.
+    // Children are compared by identity: a child's equality may throw or change while its failure is reported.
     private fun startReporting(child: LogChild): Boolean {
-        val before = reportingChildren.getAndUpdate { it + child }
-        return child !in before
+        val before = reportingChildren.getAndUpdate { if (it.containsInstance(child)) it else it + child }
+        return !before.containsInstance(child)
     }
+
+    private fun List<LogChild>.containsInstance(child: LogChild): Boolean = any { it === child }
 }

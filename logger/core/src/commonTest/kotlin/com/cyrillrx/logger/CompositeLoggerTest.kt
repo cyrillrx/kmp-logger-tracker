@@ -140,6 +140,19 @@ class CompositeLoggerTest {
     }
 
     @Test
+    fun `reports each failure of a child whose equality breaks once registered`() {
+        val unhashable = UnhashableFailingLogChild()
+        val reported = mutableListOf<LogChild>()
+        val logger = CompositeLogger(listOf(unhashable)) { child, _ -> reported += child }
+        unhashable.broken = true
+
+        logger.log(Severity.INFO, TAG) { "first" }
+        logger.log(Severity.INFO, TAG) { "second" }
+
+        assertEquals(2, reported.size)
+    }
+
+    @Test
     fun `swallows a failure of the error handler`() {
         val logger = CompositeLogger(listOf(FailingLogChild())) { _, error -> throw error }
 
