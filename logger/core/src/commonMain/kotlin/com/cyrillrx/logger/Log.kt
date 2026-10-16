@@ -5,6 +5,7 @@ import kotlinx.atomicfu.atomic
 object Log : Logger {
     private val delegate = atomic<Logger>(CompositeLogger())
 
+    // TODO(#37): also reject a delegate that forwards back to Log, which only a re-entrancy guard can detect.
     fun install(logger: Logger) {
         require(logger !== this) { "Log cannot delegate to itself" }
         delegate.value = logger

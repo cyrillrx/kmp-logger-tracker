@@ -31,6 +31,7 @@ class CompositeLogger(
     override fun isLoggable(severity: Severity, tag: String): Boolean =
         children.value.any { it.isLoggableSafely(severity, tag) }
 
+    // TODO(#37): guard against a child that logs back through this logger from its own log().
     override fun log(
         severity: Severity,
         tag: String,
