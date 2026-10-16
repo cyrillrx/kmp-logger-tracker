@@ -1,0 +1,32 @@
+package com.cyrillrx.logger
+
+import kotlin.test.AfterTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+
+class LogTest {
+    @AfterTest
+    fun restoreDefaultLogger() {
+        Log.install(CompositeLogger())
+    }
+
+    @Test
+    fun `delegates to the installed logger`() {
+        val child = RamLogChild()
+        Log.install(CompositeLogger(listOf(child)))
+
+        Log.info(TAG) { "message" }
+
+        assertEquals("message", child.entries().single().message)
+    }
+
+    @Test
+    fun `refuses to delegate to itself`() {
+        assertFailsWith<IllegalArgumentException> { Log.install(Log) }
+    }
+
+    private companion object {
+        const val TAG = "LogTest"
+    }
+}

@@ -1,6 +1,10 @@
 package com.cyrillrx.logger
 
+// Prefix of Logger, LoggerKt, Logger$DefaultImpls and Logger$-CC, which D8 generates when desugaring for minSdk < 24.
 private val LOGGER_CLASS_NAME = Logger::class.java.name
+private val LOG_CLASS_NAME = Log::class.java.name
+private val LOGGER_PACKAGE = LOGGER_CLASS_NAME.substringBeforeLast('.')
+private val LOGGER_PACKAGES = setOf(LOGGER_PACKAGE, "$LOGGER_PACKAGE.extension")
 
 actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
@@ -10,27 +14,28 @@ actual fun getLinkToCurrentMethod(): String? {
     return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
 }
 
-private fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
-    var lastWasLoggerClass = false
+// TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
+internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
+    val entryPointIndex = indexOfFirst { it.isEntryPoint() }
+    if (entryPointIndex != -1) return firstOutsideLoggerAfter(entryPointIndex)
 
-    for (trace in this) {
-        trace ?: continue
+    val lastLoggerIndex = indexOfLast { it.isLoggerFrame() }
+    if (lastLoggerIndex == -1) return null
 
-        val isLoggerClass = trace.className.startsWith(LOGGER_CLASS_NAME)
-        if (lastWasLoggerClass && !isLoggerClass) {
-            return trace
-        }
-        lastWasLoggerClass = isLoggerClass
-    }
-    return null
+    return drop(lastLoggerIndex + 1).firstOrNull { it != null }
 }
+
+private fun Array<StackTraceElement?>.firstOutsideLoggerAfter(index: Int): StackTraceElement? =
+    drop(index + 1).firstOrNull { it != null && !it.isLoggerFrame() }
+
+private fun StackTraceElement?.isEntryPoint(): Boolean {
+    val className = this?.className ?: return false
+    return className == LOG_CLASS_NAME || className.startsWith(LOGGER_CLASS_NAME)
+}
+
+private fun StackTraceElement?.isLoggerFrame(): Boolean = this?.className?.substringBeforeLast('.') in LOGGER_PACKAGES
 
 private fun StackTraceElement?.linkableMethod(): String {
     if (this == null) return "trace is null"
     return "$className.$methodName($fileName:$lineNumber)"
-}
-
-private fun StackTraceElement?.linkableLine(): String {
-    if (this == null) return "trace is null"
-    return "($fileName:$lineNumber)"
 }

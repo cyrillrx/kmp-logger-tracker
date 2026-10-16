@@ -39,16 +39,23 @@ cd kmp-logger-tracker
 ### Logger
 
 ```kotlin
-Logger.addChild(SystemOutLog(Severity.DEBUG))
-Logger.addChild(LogCat(Severity.DEBUG, true))
+Log.install(
+    CompositeLogger(
+        children = listOf(LogCat(Severity.DEBUG, clickableLogs = true)),
+        onChildError = { child, error -> println("$child failed: $error") },
+    ),
+)
 
-Logger.info("TAG", "Something happened")
+Log.info("Sync") { "Something happened" }
+Log.error("Sync", throwable = error, attributes = mapOf("item" to id)) { "Upload failed" }
 ```
+
+A class can also receive a `Logger` and stay independent from the global `Log` facade; tests then pass a `CompositeLogger` holding a `RamLogChild`.
 
 ### Tracker
 
 ```kotlin
-Tracker.setupExceptionCatcher { t -> Logger.error("Tracker", "Caught exception", t) }
+Tracker.setupExceptionCatcher { t -> Log.error("Tracker", throwable = t) { "Caught exception" } }
 Tracker.addChild(createTracker())
 
 val event = TrackEvent("Event Name")

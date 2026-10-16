@@ -10,6 +10,9 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 
 - `LogEntry`, the immutable record handed to every child: severity, tag, message, throwable, attributes and timestamp.
 - `RamLogChild`, an in-memory child for tests.
+- `Logger` interface with a lazy message, structured attributes, and `verbose` to `fatal` shortcuts.
+- `CompositeLogger`, which dispatches to its children, can be changed from any thread, and reports a failing child to `onChildError` instead of throwing.
+- `Log`, the global facade, delegating to the logger given to `Log.install`.
 
 ### Changed
 
@@ -22,6 +25,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 
 ### Removed
 
+- The `Logger` object, its `L` alias and `ExceptionCatcher`, replaced by `Log` and `CompositeLogger`.
 - The `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device` and `notifier` modules.
 - The `iosX64` target.
 - `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.

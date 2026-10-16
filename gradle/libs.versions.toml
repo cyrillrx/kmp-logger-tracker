@@ -3,11 +3,13 @@ kotlin = "2.4.20"
 ktlint = "14.2.0"
 agp = "9.4.1"
 kover = "0.9.11"
+atomicfu = "0.33.0"
 
 # Tracker/logger extensions
 firebaseCore = "21.1.1"
 
 [libraries]
+atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }

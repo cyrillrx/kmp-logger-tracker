@@ -9,4 +9,10 @@ kotlin {
     android {
         namespace = "com.cyrillrx.logger"
     }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(libs.atomicfu)
+        }
+    }
 }
