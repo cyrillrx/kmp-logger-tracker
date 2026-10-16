@@ -6,7 +6,8 @@ package com.cyrillrx.logger
  *
  * Attributes follow the message, and an entry with a throwable is followed by its stack trace.
  *
- * @param clickableLogs appends a link to the method that logged, which IDE consoles render as clickable.
+ * @param clickableLogs appends a link to the method that logged, which IDE consoles render as clickable. An entry with
+ * a throwable gets its stack trace instead, whose frames are already clickable.
  */
 class ConsoleChild(
     minSeverity: Severity = Severity.VERBOSE,
