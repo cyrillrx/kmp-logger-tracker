@@ -55,7 +55,7 @@ class ConsoleChildTest {
     fun `prints errors on the standard error`() {
         ConsoleChild().log(entryOf(severity = Severity.ERROR))
 
-        assertEquals(listOf("2026-10-04T10:00:00Z - ERROR - Sync - retrying"), printedLines(error))
+        assertEquals(listOf("$TIMESTAMP - ERROR - $TAG - retrying"), printedLines(error))
         assertTrue(printedLines().isEmpty())
     }
 
@@ -77,14 +77,16 @@ class ConsoleChildTest {
         attributes: Map<String, String> = emptyMap(),
     ) = LogEntry(
         severity = severity,
-        tag = "Sync",
+        tag = TAG,
         message = "retrying",
         throwable = throwable,
         attributes = attributes,
-        timestamp = Instant.parse("2026-10-04T10:00:00Z"),
+        timestamp = Instant.parse(TIMESTAMP),
     )
 
     private companion object {
-        const val PREFIX = "2026-10-04T10:00:00Z - WARN - Sync"
+        const val TIMESTAMP = "2026-10-04T10:00:00Z"
+        const val TAG = "Sync"
+        const val PREFIX = "$TIMESTAMP - WARN - $TAG"
     }
 }
