@@ -35,6 +35,13 @@ class ConsoleChildTest {
     }
 
     @Test
+    fun `prints the attributes after the message`() {
+        ConsoleChild().log(entryOf(attributes = mapOf("requestId" to "42")))
+
+        assertEquals(listOf("$PREFIX - retrying {requestId=42}"), printedLines())
+    }
+
+    @Test
     fun `prints the stack trace of an entry with a throwable`() {
         val failure = IllegalStateException("sync failed")
 
@@ -62,11 +69,16 @@ class ConsoleChildTest {
     private fun printedLines(stream: ByteArrayOutputStream = output): List<String> =
         stream.toString().lines().dropLast(1)
 
-    private fun entryOf(severity: Severity = Severity.WARN, throwable: Throwable? = null) = LogEntry(
+    private fun entryOf(
+        severity: Severity = Severity.WARN,
+        throwable: Throwable? = null,
+        attributes: Map<String, String> = emptyMap(),
+    ) = LogEntry(
         severity = severity,
         tag = "Sync",
         message = "retrying",
         throwable = throwable,
+        attributes = attributes,
         timestamp = Instant.parse("2026-10-04T10:00:00Z"),
     )
 
