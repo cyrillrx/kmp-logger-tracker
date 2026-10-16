@@ -1,5 +1,6 @@
 package com.cyrillrx.logger
 
+import com.example.console.ConsoleCaller
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import kotlin.test.AfterTest
@@ -59,10 +60,11 @@ class ConsoleChildTest {
     }
 
     @Test
-    fun `appends a link to the logging method when logs are clickable`() {
-        ConsoleChild(clickableLogs = true).log(entryOf())
+    fun `links to the logging method when logs are clickable`() {
+        ConsoleCaller().logWarning()
 
         val link = printedLines().last()
+        assertTrue(link.startsWith("com.example.console.ConsoleCaller.logWarning(ConsoleCaller.kt:"), link)
         assertTrue(link.endsWith("[thread: ${Thread.currentThread().name}]"), link)
     }
 
