@@ -1,3 +1,3 @@
 package com.cyrillrx.logger
 
-actual fun getLinkToCurrentMethod(): String? = null
+internal actual fun getLinkToCurrentMethod(): String? = null

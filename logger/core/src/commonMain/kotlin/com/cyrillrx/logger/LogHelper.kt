@@ -13,4 +13,4 @@ object LogHelper {
         "${entry.timestamp} - ${entry.severity.name} - ${entry.tag} - $message"
 }
 
-expect fun getLinkToCurrentMethod(): String?
+internal expect fun getLinkToCurrentMethod(): String?
