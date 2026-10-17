@@ -55,7 +55,11 @@ class ConsoleChildJvmTest {
     fun `links to the logging method when logs are clickable`() {
         ConsoleCaller().logWarning()
 
-        val link = printedLines().last()
+        val lines = printedLines()
+        assertEquals(2, lines.size, lines.toString())
+        val (header, link) = lines
+        assertTrue(header.endsWith(" - WARN - $TAG - retrying"), header)
+        assertTrue(printedLines(error).isEmpty())
         assertTrue(link.startsWith("com.example.console.ConsoleCaller.logWarning(ConsoleCaller.kt:"), link)
         assertTrue(link.endsWith("[thread: ${Thread.currentThread().name}]"), link)
     }
