@@ -1,7 +1,8 @@
 package com.cyrillrx.logger
 
 /**
- * Writes each entry to the platform console: the JVM standard output, and the standard error from [Severity.ERROR] up.
+ * Writes each entry to the platform's native console: Logcat on Android, `os_log` on iOS, and on the JVM the standard
+ * output, or the standard error from [Severity.ERROR] up.
  *
  * Attributes follow the message, and an entry with a throwable is followed by its stack trace.
  *
