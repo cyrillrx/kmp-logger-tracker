@@ -36,6 +36,18 @@ class ConsoleChildTest {
         assertEquals("retrying\n${failure.stackTraceToString()}", written.single().second)
     }
 
+    @Test
+    fun `writes the stack trace instead of a link after the attributes`() {
+        val clickable = ConsoleChild(Severity.VERBOSE, clickableLogs = true) { entry, body ->
+            written += entry to body
+        }
+        val failure = IllegalStateException("sync failed")
+
+        clickable.log(entryOf(throwable = failure, attributes = mapOf("requestId" to "42")))
+
+        assertEquals("retrying {requestId=42}\n${failure.stackTraceToString()}", written.single().second)
+    }
+
     private fun entryOf(throwable: Throwable? = null, attributes: Map<String, String> = emptyMap()) = LogEntry(
         severity = Severity.WARN,
         tag = "Sync",
