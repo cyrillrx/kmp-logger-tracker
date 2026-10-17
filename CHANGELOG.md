@@ -13,6 +13,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - `Logger` interface with a lazy message, structured attributes, and `verbose` to `fatal` shortcuts.
 - `CompositeLogger`, which dispatches to its children, can be changed from any thread, and reports a failing child to `onChildError` instead of throwing.
 - `Log`, the global facade, delegating to the logger given to `Log.install`.
+- `ConsoleChild`, one console child for every platform ([ADR-005](docs/adr/adr-005-one-common-type-per-child.md)). On the JVM it prints each entry once: errors on the standard error, the rest on the standard output.
 
 ### Changed
 
@@ -21,6 +22,8 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - `SeverityLogChild` takes the minimum severity it accepts.
 - Targets are Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. The `jvm` target emits Java 25 bytecode, the Android target Java 21.
 - The `desktop` target is renamed `jvm`.
+- Clickable links to the logging method work on the JVM too, not only on Android.
+- `getLinkToCurrentMethod` is internal; `LogHelper.addLinkToCurrentMethod` remains the public way to append the link.
 - `Clock` and `Instant` come from `kotlin.time`; the kotlinx-datetime dependency is gone.
 
 ### Removed
@@ -28,6 +31,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - The `Logger` object, its `L` alias and `ExceptionCatcher`, replaced by `Log` and `CompositeLogger`.
 - The `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device` and `notifier` modules.
 - The `iosX64` target.
+- `SystemOutLog`, which printed each entry twice; `ConsoleChild` replaces it.
 - `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.
 - The per-library iOS frameworks `KMPLogger` and `KMPTracker`; consumers expose their own umbrella framework.
 
