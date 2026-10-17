@@ -69,6 +69,7 @@ Servers, CI runners and IDE consoles tell the two streams apart, so errors can b
 
 - `ConsoleChild` is the only console child. Consumers replace `LogCat`, `NsLogger`, `OsLogger` and `SystemOutLog` with it, in common code.
 - A `jvmAndAndroid` source set shares the stack walk that builds the links.
+- The stack walk is an implementation detail: `getLinkToCurrentMethod` becomes internal, and `LogHelper.addLinkToCurrentMethod` remains the public way to append the link.
 - The emoji prefix of `OsLogger` goes away: the `os_log` type carries the severity.
 - `:logger:sentry` is a common class with no `expect`, since the Sentry SDK is multiplatform.
 - Whether `:tracker:firebase` needs an `expect` is settled by the spike [ADR-004](adr-004-supported-backends-and-module-layout.md) plans; either way its public type is common.
