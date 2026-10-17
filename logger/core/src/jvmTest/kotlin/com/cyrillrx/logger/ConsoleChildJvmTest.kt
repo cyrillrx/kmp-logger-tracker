@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlin.time.Instant
 
-class ConsoleChildTest {
+class ConsoleChildJvmTest {
     private val standardOutput = System.out
     private val standardError = System.err
     private val output = ByteArrayOutputStream()
@@ -36,26 +36,18 @@ class ConsoleChildTest {
     }
 
     @Test
-    fun `prints the attributes after the message`() {
-        ConsoleChild().log(entryOf(attributes = mapOf("requestId" to "42")))
-
-        assertEquals(listOf("$PREFIX - retrying {requestId=42}"), printedLines())
-    }
-
-    @Test
-    fun `prints the stack trace of an entry with a throwable`() {
-        val failure = IllegalStateException("sync failed")
-
-        ConsoleChild().log(entryOf(throwable = failure))
-
-        assertEquals("$PREFIX - retrying\n${failure.stackTraceToString()}".lines(), printedLines())
-    }
-
-    @Test
     fun `prints errors on the standard error`() {
         ConsoleChild().log(entryOf(severity = Severity.ERROR))
 
         assertEquals(listOf("$TIMESTAMP - ERROR - $TAG - retrying"), printedLines(error))
+        assertTrue(printedLines().isEmpty())
+    }
+
+    @Test
+    fun `prints fatal entries on the standard error`() {
+        ConsoleChild().log(entryOf(severity = Severity.FATAL))
+
+        assertEquals(listOf("$TIMESTAMP - FATAL - $TAG - retrying"), printedLines(error))
         assertTrue(printedLines().isEmpty())
     }
 
@@ -71,16 +63,10 @@ class ConsoleChildTest {
     private fun printedLines(stream: ByteArrayOutputStream = output): List<String> =
         stream.toString().lines().dropLast(1)
 
-    private fun entryOf(
-        severity: Severity = Severity.WARN,
-        throwable: Throwable? = null,
-        attributes: Map<String, String> = emptyMap(),
-    ) = LogEntry(
+    private fun entryOf(severity: Severity = Severity.WARN) = LogEntry(
         severity = severity,
         tag = TAG,
         message = "retrying",
-        throwable = throwable,
-        attributes = attributes,
         timestamp = Instant.parse(TIMESTAMP),
     )
 
