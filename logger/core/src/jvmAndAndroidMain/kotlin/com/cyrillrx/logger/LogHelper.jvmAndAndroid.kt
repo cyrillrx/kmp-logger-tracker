@@ -14,8 +14,9 @@ internal actual fun getLinkToCurrentMethod(): String? {
     return "${trace.linkableMethod()} [thread: ${currentThread.displayName()}]"
 }
 
-// A virtual thread is unnamed by default.
-private fun Thread.displayName(): String = name.ifEmpty { toString() }
+// A virtual thread is unnamed by default. threadId() replaces id on the JVM, but Android lacks it before API 36.
+@Suppress("DEPRECATION")
+private fun Thread.displayName(): String = name.ifEmpty { "#$id" }
 
 // TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
 internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
