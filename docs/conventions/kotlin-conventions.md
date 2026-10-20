@@ -10,6 +10,7 @@ The canonical document applies as-is. The UI layer's [Compose conventions](https
 - **Targets** — Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. These cover every consumer: Android, iOS, Desktop and JVM servers.
 - **Toolchain** — always the latest stable Kotlin, AGP, Gradle and JDK LTS. Consumers align on it ([ADR-001](../adr/adr-001-distribution-via-maven-central.md)).
 - **Public API** — `explicitApi()` is on, every public declaration carries KDoc, and the ABI dump is checked in CI.
+- **Java interop** — the API is designed for Kotlin callers, and Java callers adapt: no `@JvmOverloads`, `@JvmStatic` or `@JvmName` for their sake alone, and an `internal` declaration being public in bytecode is accepted ([ADR-002](../adr/adr-002-api-instances-with-global-facade.md)).
 - **Module naming** — nested modules instead of compound names: `:tracker:firebase`, not `:tracker-firebase`. The published `artifactId` is set explicitly ([ADR-004](../adr/adr-004-supported-backends-and-module-layout.md)).
 - **Package** — `com.cyrillrx.logger` and `com.cyrillrx.tracker`. The Maven `groupId` is `io.github.cyrillrx`.
 - **Test location** — tests live in each module's `src/commonTest/` and run on the JVM and iOS simulator targets. A test of a platform `actual` lives in the test source set of that platform, or of the intermediate source set that holds it. In-memory children are named `Ram*` and live in the main source set.
