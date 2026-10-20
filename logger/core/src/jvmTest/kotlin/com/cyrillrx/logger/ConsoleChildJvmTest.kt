@@ -53,10 +53,11 @@ class ConsoleChildJvmTest {
 
     @Test
     fun `links to the logging method when logs are clickable`() {
-        ConsoleCaller().logWarning()
+        val caller = ConsoleCaller()
+        caller.logWarning()
 
         val lines = printedLines()
-        assertEquals(2, lines.size, lines.toString())
+        assertEquals(2, lines.size, "$lines ${caller.childErrors}")
         val (header, link) = lines
         assertTrue(header.endsWith(" - WARN - $TAG - retrying"), header)
         assertTrue(printedLines(error).isEmpty())
@@ -66,11 +67,12 @@ class ConsoleChildJvmTest {
 
     @Test
     fun `names an unnamed virtual thread in the link`() {
-        val thread = Thread.ofVirtual().start { ConsoleCaller().logWarning() }
+        val caller = ConsoleCaller()
+        val thread = Thread.ofVirtual().start { caller.logWarning() }
         thread.join()
 
         val lines = printedLines()
-        assertEquals(2, lines.size, lines.toString())
+        assertEquals(2, lines.size, "$lines ${caller.childErrors}")
         assertTrue(lines.last().endsWith("[thread: #${thread.threadId()}]"), lines.last())
     }
 
