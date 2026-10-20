@@ -64,6 +64,14 @@ class ConsoleChildJvmTest {
         assertTrue(link.endsWith("[thread: ${Thread.currentThread().name}]"), link)
     }
 
+    @Test
+    fun `names an unnamed virtual thread in the link`() {
+        Thread.ofVirtual().start { ConsoleCaller().logWarning() }.join()
+
+        val link = printedLines().last()
+        assertTrue(link.contains("[thread: VirtualThread["), link)
+    }
+
     private fun printedLines(stream: ByteArrayOutputStream = output): List<String> =
         stream.toString().lines().dropLast(1)
 

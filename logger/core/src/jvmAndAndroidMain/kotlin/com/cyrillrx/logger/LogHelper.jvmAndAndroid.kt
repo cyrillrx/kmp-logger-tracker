@@ -11,8 +11,11 @@ internal actual fun getLinkToCurrentMethod(): String? {
     val stackTrace: Array<StackTraceElement?>? = currentThread.stackTrace
     val trace = stackTrace?.findRelevantTrace() ?: return null
 
-    return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
+    return "${trace.linkableMethod()} [thread: ${currentThread.displayName()}]"
 }
+
+// A virtual thread is unnamed by default.
+private fun Thread.displayName(): String = name.ifEmpty { toString() }
 
 // TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
 internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
