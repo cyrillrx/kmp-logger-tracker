@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-class LogHelperAndroidTest {
+class RelevantTraceTest {
     @Test
     fun `links to the caller of a built-in child`() {
         val stack = stackOf(

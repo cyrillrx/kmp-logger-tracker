@@ -6,13 +6,17 @@ private val LOG_CLASS_NAME = Log::class.java.name
 private val LOGGER_PACKAGE = LOGGER_CLASS_NAME.substringBeforeLast('.')
 private val LOGGER_PACKAGES = setOf(LOGGER_PACKAGE, "$LOGGER_PACKAGE.extension")
 
-actual fun getLinkToCurrentMethod(): String? {
+internal actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
     val stackTrace: Array<StackTraceElement?>? = currentThread.stackTrace
     val trace = stackTrace?.findRelevantTrace() ?: return null
 
-    return "${trace.linkableMethod()} [thread: ${currentThread.name}]"
+    return "${trace.linkableMethod()} [thread: ${currentThread.displayName()}]"
 }
+
+// A virtual thread is unnamed by default. threadId() replaces id on the JVM, but Android lacks it before API 36.
+@Suppress("DEPRECATION")
+private fun Thread.displayName(): String = name.ifEmpty { "#$id" }
 
 // TODO(#34): skip consumer loggers that forward to the Log facade instead of linking to them.
 internal fun Array<StackTraceElement?>.findRelevantTrace(): StackTraceElement? {
