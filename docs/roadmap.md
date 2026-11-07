@@ -55,7 +55,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`, as a prerelease for `-rcN` tags.
 - [ ] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
 - [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer after aligning its toolchain.
-- [ ] Release `io.github.cyrillrx:logger:1.0.0` once a release candidate is adopted with no open regression; a fix made after a candidate goes out in a new candidate before `1.0.0`.
+- [ ] Release `io.github.cyrillrx:logger:1.0.0` once its last release candidate is adopted with no open regression.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
 
@@ -92,4 +92,4 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 ## Phase 8 — Conventions and consumers (~3-4 days)
 
 - [ ] PR to `cyrillrx/coding-conventions`: `logging-conventions.md`, library publishing rules, the latest-toolchain policy, nested module naming.
-- [ ] Adopt the libraries in the other consumers, after aligning their toolchains on the latest stable versions.
+- [ ] Adopt the released libraries in each consumer, after aligning their toolchains on the latest stable versions.
