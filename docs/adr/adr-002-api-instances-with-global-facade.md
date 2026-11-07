@@ -49,7 +49,8 @@ public object Log : Logger { public fun install(logger: Logger) }
 - `Severity` is in natural order: a higher ordinal is more severe, and filters read `severity >= minSeverity`.
 - `message` is a lambda. `CompositeLogger` evaluates it once, and only when at least one child accepts the entry.
 - **Thread safety**: `CompositeLogger` keeps its children in an immutable list held by an `kotlinx-atomicfu` atomic reference. `add` and `remove` swap the list; `log` iterates a snapshot. Registering a child from any thread, or from inside a child, is safe.
-- **Failure isolation**: an exception thrown by a child is caught per child and handed to `onChildError`. It never reaches the caller, and the other children still receive the entry.
+- **Failure isolation**: an exception thrown by a child is caught per child and handed to `onChildError`. It never reaches the caller, and the other children still receive the entry. By default `onChildError` drops the failure: a default that writes it out would go through an output that can fail too.
+- **Attributes are strings.** Log attributes stay `Map<String, String>` in 1.0, even though the tracker's events carry typed values: log attributes are read by people and by Sentry breadcrumbs, which take strings. Typing them later is a major version.
 - `Log` delegates to a default `CompositeLogger` until `install` replaces it. The `L` typealias is removed.
 - In-memory children for tests are named `RamLogChild`, and `RamTracker` for the tracker, and live in the main source set so consumers can use them.
 
