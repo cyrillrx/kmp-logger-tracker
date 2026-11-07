@@ -51,7 +51,9 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] `ci.yml`: ktlint, JVM tests, ABI check and Kover on Linux; iOS simulator tests on macOS.
 - [ ] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
-- [ ] Dry run with `v1.0.0-rc1`, then release `io.github.cyrillrx:logger:1.0.0`.
+- [ ] A single `VERSION_NAME` in `gradle.properties`, checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
+- [ ] Release `v1.0.0-rc1` as the beta, adopted by a first consumer.
+- [ ] Release `io.github.cyrillrx:logger:1.0.0` once #33 and #37 are fixed, `ConsoleChild` writes to Logcat (#40) and `os_log` (#41), and every public declaration has its KDoc.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
 
