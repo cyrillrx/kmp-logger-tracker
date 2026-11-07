@@ -49,7 +49,8 @@ public object Log : Logger { public fun install(logger: Logger) }
 - `Severity` is in natural order: a higher ordinal is more severe, and filters read `severity >= minSeverity`.
 - `message` is a lambda. `CompositeLogger` evaluates it once, and only when at least one child accepts the entry.
 - **Thread safety**: `CompositeLogger` keeps its children in an immutable list held by an `kotlinx-atomicfu` atomic reference. `add` and `remove` swap the list; `log` iterates a snapshot. Registering a child from any thread, or from inside a child, is safe.
-- **Failure isolation**: an exception thrown by a child is caught per child and handed to `onChildError`. It never reaches the caller, and the other children still receive the entry.
+- **Failure isolation**: an exception thrown by a child is caught per child and handed to `onChildError`. It never reaches the caller, and the other children still receive the entry. By default `onChildError` drops the failure: a default that writes it out would go through an output that can fail too.
+- **Attributes are strings.** Log attributes stay `Map<String, String>` in 1.0, even though the tracker's events carry typed values: log attributes are formatted into the line people read on the console, Logcat and `os_log`, where a typed value becomes a string anyway. Typing them later is a major version.
 - `Log` delegates to a default `CompositeLogger` until `install` replaces it. The `L` typealias is removed.
 - In-memory children for tests are named `RamLogChild`, and `RamTracker` for the tracker, and live in the main source set so consumers can use them.
 
@@ -93,6 +94,7 @@ Building a debug message costs string formatting on every call even when debug l
 - The Obj-C name `KMPLogger` moves to the `Logger` interface, so Swift keeps the type name; its members change like every other call site. `KMPTracker` goes away; Swift callers go through the consumer's umbrella framework.
 - Java callers lose the static shortcuts: they call `LoggerKt.info(Log.INSTANCE, …)` or `Log.INSTANCE.log(…)` with every argument.
 - `kotlinx-atomicfu` becomes a dependency of `:logger:core`.
+- With the default `onChildError`, a failing child loses its entries without a trace. A consumer that wants to know passes its own handler, including to the `CompositeLogger` it installs in `Log`.
 - `explicitApi()` and the ABI dump make each public declaration a deliberate choice.
 - The tracker's lifecycle callbacks (`onUserUpdated`, `onConnectivityChanged`, `onTrackerRemoved`) are reviewed when the tracker is rebuilt, so the two registries share one contract.
 

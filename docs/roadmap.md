@@ -6,7 +6,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 | Topic        | Decision                                                                                      | Reference                                                      |
 |--------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| Distribution | Maven Central, `groupId` `io.github.cyrillrx`, one version for every module, published on tag | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
+| Distribution | Maven Central, `io.github.cyrillrx`, one version, published on tag, a beta before `1.0.0`     | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | Toolchain    | Latest stable Kotlin, AGP, Gradle and JDK LTS; consumers align                                | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | API model    | Injectable instances plus an optional global facade, thread-safe                              | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
 | Privacy      | Third-party children opt in per consent category; redaction before any send                   | [ADR-003](adr/adr-003-consent-and-redaction.md)                |
@@ -40,9 +40,11 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
 - [x] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
 - [x] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
-- [ ] `ConsoleChild`, one common type writing to the JVM console, Logcat and `os_log` ([ADR-005](adr/adr-005-one-common-type-per-child.md)); it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [ ] `ConsoleChild` ([ADR-005](adr/adr-005-one-common-type-per-child.md)), one common type writing to the JVM console, Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)); it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [ ] A per-thread `onChildError` recursion guard ([#33](https://github.com/cyrillrx/kmp-logger-tracker/issues/33)) and a guard against re-entrant logging ([#37](https://github.com/cyrillrx/kmp-logger-tracker/issues/37)).
 - [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration.
+- [ ] `LogHelper` internal ([ADR-005](adr/adr-005-one-common-type-per-child.md)).
 - [ ] `explicitApi()` and ABI validation in `kmp-library`, once the new API is in place.
 
 ## Phase 3 — Publication and CI, release 1.0.0 (~1.5-2 days)
@@ -50,8 +52,10 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
 - [ ] `ci.yml`: ktlint, JVM tests, ABI check and Kover on Linux; iOS simulator tests on macOS.
 - [ ] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
-- [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
-- [ ] Dry run with `v1.0.0-rc1`, then release `io.github.cyrillrx:logger:1.0.0`.
+- [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`, as a prerelease for `-rcN` tags.
+- [ ] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
+- [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer after aligning its toolchain.
+- [ ] Release `io.github.cyrillrx:logger:1.0.0` once its last release candidate is adopted with no open regression.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
 
@@ -76,6 +80,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Spike: `dev.gitlive:firebase-analytics` (preferred, matches the consumers' `firebase-kotlin-sdk`) against a native Android implementation with an iOS bridge; record the outcome in ADR-004.
 - [ ] Firebase limits enforced by truncation and a logged warning, never by a swallowed exception.
 - [ ] Collection disabled until `ANALYTICS` consent is granted.
+- [ ] Release 1.1.0, with `published-library` applied to `:tracker:core`, `:logger:sentry` and `:tracker:firebase`.
 
 ## Phase 7 — Compose Multiplatform sample (~2 days)
 
@@ -87,4 +92,4 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 ## Phase 8 — Conventions and consumers (~3-4 days)
 
 - [ ] PR to `cyrillrx/coding-conventions`: `logging-conventions.md`, library publishing rules, the latest-toolchain policy, nested module naming.
-- [ ] Adopt the libraries in each consumer, after aligning its toolchain on the latest stable versions.
+- [ ] Adopt the released libraries in each consumer, after aligning their toolchains on the latest stable versions.
