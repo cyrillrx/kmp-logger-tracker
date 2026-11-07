@@ -14,7 +14,7 @@ The libraries are published to **Maven Central** under the `groupId` **`io.githu
 | `:tracker:firebase` | `io.github.cyrillrx:tracker-firebase` |
 
 - **One version for every module.** A `vX.Y.Z` tag on `main` publishes all of them. Versioning follows semver and restarts at `1.0.0`, since the coordinates are new. A module joins the train at the version it is first published with: the logger at `1.0.0`, the tracker and the integrations at `1.1.0`. Until then a tag does not publish it.
-- **Release candidates are the betas.** `X.Y.Z-rcN` versions are published to Central like any release, and consumers adopt them to validate the version before `X.Y.Z` ships.
+- **Release candidates are the betas.** `X.Y.Z-rcN` versions are published to Central like any release, and consumers adopt them to validate the version before `X.Y.Z` ships. A candidate is required before `1.0.0`; after it, a release goes through one only when it carries a stability risk.
 - **One source for the version.** A single version committed in the build holds it for every module, and the release fails when the tag does not match it.
 - **Tooling.** The `com.vanniktech.maven.publish` plugin, applied through the `published-library` convention plugin in `buildSrc`, publishes to the Central Portal and signs in memory. `.github/workflows/release.yml` runs `publishAndReleaseToMavenCentral` on tags and creates the GitHub Release from `CHANGELOG.md` (Keep a Changelog).
 - **Latest toolchain.** The libraries are always built with the latest stable Kotlin, AGP, Gradle and JDK LTS. Consumers align on it; the libraries never level down to the oldest consumer. Dependabot keeps the build current.
@@ -62,7 +62,7 @@ Kotlin/Native klibs compiled with a newer compiler are not guaranteed to be read
 
 - **Manual prerequisites** before the first release: a Central Portal account, the `io.github.cyrillrx` namespace verified, a GPG key published on a keyserver, and the repository secrets `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_IN_MEMORY_KEY` and `SIGNING_IN_MEMORY_KEY_PASSWORD`.
 - **Nested modules need an explicit `artifactId`**, otherwise `:logger:core` and `:tracker:core` would both publish as `core`. The `published-library` plugin sets it ([ADR-004](adr-004-supported-backends-and-module-layout.md)).
-- **A release is irreversible.** A version published to Central cannot be deleted. Each release goes through at least one release candidate (`v1.0.0-rc1`) adopted by a consumer, and `publishToMavenLocal` is inspected first. A release, a patch included, therefore waits for that adoption, and every candidate stays on Central too.
+- **A release is irreversible.** A version published to Central cannot be deleted. `publishToMavenLocal` is inspected before each release. `1.0.0` waits for a consumer to adopt its candidate (`v1.0.0-rc1`); a later release, a hotfix included, does not have to. Every candidate stays on Central.
 - **A consumer behind the latest toolchain upgrades first**, before it adopts the libraries or a new release of them.
 - **A Kotlin release can force a library release** when a consumer moves first. Dependabot pull requests on the build are merged promptly for that reason.
 - **Public API changes are versioned**: the ABI dump checked in CI makes a breaking change visible, and a breaking change means a major version.
@@ -78,6 +78,8 @@ Kotlin/Native klibs compiled with a newer compiler are not guaranteed to be read
 **`com.cyrillrx` as `groupId`** — Rejected: ties a permanent identifier to a domain that may not be renewed.
 
 **Release candidates as private rehearsals.** Rejected: no consumer runs the version before `X.Y.Z`, so its first real use is already permanent on Central.
+
+**A candidate before every release.** Rejected: a hotfix would wait for a consumer to adopt it.
 
 **Snapshots.** Rejected: they live in a separate repository the consumers do not resolve from, and a snapshot changes under its consumer.
 
