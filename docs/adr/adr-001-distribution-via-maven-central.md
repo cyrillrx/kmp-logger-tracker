@@ -62,7 +62,7 @@ Kotlin/Native klibs compiled with a newer compiler are not guaranteed to be read
 
 - **Manual prerequisites** before the first release: a Central Portal account, the `io.github.cyrillrx` namespace verified, a GPG key published on a keyserver, and the repository secrets `MAVEN_CENTRAL_USERNAME`, `MAVEN_CENTRAL_PASSWORD`, `SIGNING_IN_MEMORY_KEY` and `SIGNING_IN_MEMORY_KEY_PASSWORD`.
 - **Nested modules need an explicit `artifactId`**, otherwise `:logger:core` and `:tracker:core` would both publish as `core`. The `published-library` plugin sets it ([ADR-004](adr-004-supported-backends-and-module-layout.md)).
-- **A release is irreversible.** A version published to Central cannot be deleted. `publishToMavenLocal` is inspected before each release. `1.0.0` waits for a consumer to adopt its candidate (`v1.0.0-rc1`); a later release, a hotfix included, does not have to. Every candidate stays on Central.
+- **A release is irreversible.** A version published to Central cannot be deleted. `publishToMavenLocal` is inspected before each release. `1.0.0` waits for a consumer to adopt its candidate (`v1.0.0-rcN`); a later release, a hotfix included, does not have to. Every candidate stays on Central. `X.Y.Z` is rebuilt from its last candidate's code with only the version changed, so a candidate validates the code rather than the published artifact.
 - **A consumer behind the latest toolchain upgrades first**, before it adopts the libraries or a new release of them.
 - **A Kotlin release can force a library release** when a consumer moves first. Dependabot pull requests on the build are merged promptly for that reason.
 - **Public API changes are versioned**: the ABI dump checked in CI makes a breaking change visible, and a breaking change means a major version.
