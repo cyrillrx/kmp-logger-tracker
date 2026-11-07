@@ -6,7 +6,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 | Topic        | Decision                                                                                      | Reference                                                      |
 |--------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| Distribution | Maven Central, `groupId` `io.github.cyrillrx`, one version for every module, published on tag | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
+| Distribution | Maven Central, `io.github.cyrillrx`, one version for all modules, release candidates as betas | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | Toolchain    | Latest stable Kotlin, AGP, Gradle and JDK LTS; consumers align                                | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | API model    | Injectable instances plus an optional global facade, thread-safe                              | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
 | Privacy      | Third-party children opt in per consent category; redaction before any send                   | [ADR-003](adr/adr-003-consent-and-redaction.md)                |
@@ -44,6 +44,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] A per-thread `onChildError` recursion guard ([#33](https://github.com/cyrillrx/kmp-logger-tracker/issues/33)) and a guard against re-entrant logging ([#37](https://github.com/cyrillrx/kmp-logger-tracker/issues/37)).
 - [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration.
+- [ ] `LogHelper` internal ([ADR-005](adr/adr-005-one-common-type-per-child.md)).
 - [ ] `explicitApi()` and ABI validation in `kmp-library`, once the new API is in place.
 
 ## Phase 3 — Publication and CI, release 1.0.0 (~1.5-2 days)
@@ -53,7 +54,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`, as a prerelease for `-rcN` tags.
 - [ ] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
-- [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer.
+- [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer after aligning its toolchain.
 - [ ] Release `io.github.cyrillrx:logger:1.0.0` once a release candidate is adopted with no open regression; a fix made after a candidate goes out in a new one first.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
@@ -79,7 +80,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Spike: `dev.gitlive:firebase-analytics` (preferred, matches the consumers' `firebase-kotlin-sdk`) against a native Android implementation with an iOS bridge; record the outcome in ADR-004.
 - [ ] Firebase limits enforced by truncation and a logged warning, never by a swallowed exception.
 - [ ] Collection disabled until `ANALYTICS` consent is granted.
-- [ ] Release 1.1.0 through a release candidate, with `published-library` applied to `:tracker:core`, `:logger:sentry` and `:tracker:firebase`.
+- [ ] Release 1.1.0, with `published-library` applied to `:tracker:core`, `:logger:sentry` and `:tracker:firebase`.
 
 ## Phase 7 — Compose Multiplatform sample (~2 days)
 
@@ -91,4 +92,4 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 ## Phase 8 — Conventions and consumers (~3-4 days)
 
 - [ ] PR to `cyrillrx/coding-conventions`: `logging-conventions.md`, library publishing rules, the latest-toolchain policy, nested module naming.
-- [ ] Adopt the libraries in each consumer, after aligning its toolchain on the latest stable versions.
+- [ ] Adopt the libraries in the other consumers, after aligning its toolchain on the latest stable versions.
