@@ -26,10 +26,6 @@ public abstract interface class com/cyrillrx/logger/LogChild {
 	public abstract fun log (Lcom/cyrillrx/logger/LogEntry;)V
 }
 
-public final class com/cyrillrx/logger/LogChild$DefaultImpls {
-	public static fun isLoggable (Lcom/cyrillrx/logger/LogChild;Lcom/cyrillrx/logger/Severity;Ljava/lang/String;)Z
-}
-
 public final class com/cyrillrx/logger/LogEntry {
 	public fun <init> (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/time/Instant;)V
 	public synthetic fun <init> (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/time/Instant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -55,10 +51,6 @@ public final class com/cyrillrx/logger/LogEntry {
 public abstract interface class com/cyrillrx/logger/Logger {
 	public abstract fun isLoggable (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;)Z
 	public abstract fun log (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/jvm/functions/Function0;)V
-	public static synthetic fun log$default (Lcom/cyrillrx/logger/Logger;Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
-}
-
-public final class com/cyrillrx/logger/Logger$DefaultImpls {
 	public static synthetic fun log$default (Lcom/cyrillrx/logger/Logger;Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
 }
 

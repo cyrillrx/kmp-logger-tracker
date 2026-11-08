@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
@@ -21,6 +22,7 @@ kotlin {
         withHostTest {}
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Version.ANDROID_JVM_TARGET))
+            jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
         }
     }
 
@@ -30,6 +32,7 @@ kotlin {
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Version.JVM_TARGET))
+            jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
         }
     }
 
