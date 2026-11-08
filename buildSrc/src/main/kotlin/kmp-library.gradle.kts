@@ -11,6 +11,8 @@ plugins {
 
 version = providers.gradleProperty("VERSION_NAME").get()
 
+base.archivesName.set(path.removePrefix(":").replace(':', '-').removeSuffix("-core"))
+
 kotlin {
     jvmToolchain(Version.JDK)
     explicitApi()

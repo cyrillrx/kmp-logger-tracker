@@ -10,13 +10,10 @@ plugins {
 }
 
 private val repositoryUrl = "https://github.com/cyrillrx/kmp-logger-tracker"
-private val artifactId = path.removePrefix(":").replace(':', '-').removeSuffix("-core")
-
-base.archivesName.set(artifactId)
 
 mavenPublishing {
     configure(KotlinMultiplatform(JavadocJar.Dokka("dokkaGeneratePublicationHtml"), SourcesJar.Sources()))
-    coordinates(artifactId = artifactId)
+    coordinates(artifactId = base.archivesName.get())
     publishToMavenCentral()
     signAllPublications()
 
