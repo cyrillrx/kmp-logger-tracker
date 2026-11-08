@@ -1,7 +1,7 @@
 package com.cyrillrx.logger
 
-interface LogChild {
-    fun isLoggable(severity: Severity, tag: String): Boolean = true
+public interface LogChild {
+    public fun isLoggable(severity: Severity, tag: String): Boolean = true
 
-    fun log(entry: LogEntry)
+    public fun log(entry: LogEntry)
 }

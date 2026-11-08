@@ -5,10 +5,10 @@ import kotlin.native.ObjCName
 
 @OptIn(ExperimentalObjCName::class)
 @ObjCName("KMPLogger")
-interface Logger {
-    fun isLoggable(severity: Severity, tag: String): Boolean
+public interface Logger {
+    public fun isLoggable(severity: Severity, tag: String): Boolean
 
-    fun log(
+    public fun log(
         severity: Severity,
         tag: String,
         throwable: Throwable? = null,
@@ -17,44 +17,44 @@ interface Logger {
     )
 }
 
-fun Logger.verbose(
+public fun Logger.verbose(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.VERBOSE, tag, throwable, attributes, message)
+): Unit = log(Severity.VERBOSE, tag, throwable, attributes, message)
 
-fun Logger.debug(
+public fun Logger.debug(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.DEBUG, tag, throwable, attributes, message)
+): Unit = log(Severity.DEBUG, tag, throwable, attributes, message)
 
-fun Logger.info(
+public fun Logger.info(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.INFO, tag, throwable, attributes, message)
+): Unit = log(Severity.INFO, tag, throwable, attributes, message)
 
-fun Logger.warn(
+public fun Logger.warn(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.WARN, tag, throwable, attributes, message)
+): Unit = log(Severity.WARN, tag, throwable, attributes, message)
 
-fun Logger.error(
+public fun Logger.error(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.ERROR, tag, throwable, attributes, message)
+): Unit = log(Severity.ERROR, tag, throwable, attributes, message)
 
-fun Logger.fatal(
+public fun Logger.fatal(
     tag: String,
     throwable: Throwable? = null,
     attributes: Map<String, String> = emptyMap(),
     message: () -> String,
-) = log(Severity.FATAL, tag, throwable, attributes, message)
+): Unit = log(Severity.FATAL, tag, throwable, attributes, message)

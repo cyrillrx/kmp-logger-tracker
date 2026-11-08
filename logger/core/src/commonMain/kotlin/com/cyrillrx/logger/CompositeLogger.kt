@@ -13,18 +13,18 @@ import kotlinx.atomicfu.update
  * @param onChildError called when a child throws. A failure raised while that child's previous failure is still being
  * reported is dropped, so a handler that logs back through this logger cannot recurse.
  */
-class CompositeLogger(
+public class CompositeLogger(
     children: List<LogChild> = emptyList(),
     private val onChildError: (LogChild, Throwable) -> Unit = { _, _ -> },
 ) : Logger {
     private val children = atomic(children.fold(emptyList<LogChild>()) { list, child -> list.withInstance(child) })
     private val reportingChildren = atomic(emptyList<LogChild>())
 
-    fun add(child: LogChild) {
+    public fun add(child: LogChild) {
         children.update { it.withInstance(child) }
     }
 
-    fun remove(child: LogChild) {
+    public fun remove(child: LogChild) {
         children.update { it.withoutInstance(child) }
     }
 
