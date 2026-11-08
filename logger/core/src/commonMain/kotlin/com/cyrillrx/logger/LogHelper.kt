@@ -1,6 +1,6 @@
 package com.cyrillrx.logger
 
-object LogHelper {
+internal object LogHelper {
     fun addClickableStackTrace(message: String, throwable: Throwable): String =
         "$message\n${throwable.stackTraceToString()}"
 

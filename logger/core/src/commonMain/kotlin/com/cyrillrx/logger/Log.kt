@@ -2,11 +2,11 @@ package com.cyrillrx.logger
 
 import kotlinx.atomicfu.atomic
 
-object Log : Logger {
+public object Log : Logger {
     private val delegate = atomic<Logger>(CompositeLogger())
 
     // TODO(#37): also reject a delegate that forwards back to Log, which only a re-entrancy guard can detect.
-    fun install(logger: Logger) {
+    public fun install(logger: Logger) {
         require(logger !== this) { "Log cannot delegate to itself" }
         delegate.value = logger
     }
@@ -19,5 +19,5 @@ object Log : Logger {
         throwable: Throwable?,
         attributes: Map<String, String>,
         message: () -> String,
-    ) = delegate.value.log(severity, tag, throwable, attributes, message)
+    ): Unit = delegate.value.log(severity, tag, throwable, attributes, message)
 }

@@ -1,4 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmDefaultMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -9,6 +11,10 @@ plugins {
 
 kotlin {
     jvmToolchain(Version.JDK)
+    explicitApi()
+
+    @OptIn(ExperimentalAbiValidation::class)
+    abiValidation {}
 
     android {
         compileSdk = Version.COMPILE_SDK
@@ -16,6 +22,7 @@ kotlin {
         withHostTest {}
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Version.ANDROID_JVM_TARGET))
+            jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
         }
     }
 
@@ -25,6 +32,7 @@ kotlin {
     jvm {
         compilerOptions {
             jvmTarget.set(JvmTarget.fromTarget(Version.JVM_TARGET))
+            jvmDefault.set(JvmDefaultMode.NO_COMPATIBILITY)
         }
     }
 

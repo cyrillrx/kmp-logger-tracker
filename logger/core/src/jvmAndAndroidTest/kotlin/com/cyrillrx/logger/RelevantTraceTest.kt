@@ -10,7 +10,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.LoggerKt",
             CALLER,
@@ -38,7 +38,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.example.app.PrefixedLogger",
             "com.cyrillrx.logger.LoggerKt",
@@ -53,7 +53,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.LoggerKt",
             "com.example.app.MyLogChild",
@@ -70,7 +70,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.Logger",
             "com.example.app.MyLogChild",
@@ -88,7 +88,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.Logger\$-CC",
             "com.example.app.MyLogChild",
@@ -106,7 +106,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.Log",
             "com.cyrillrx.logger.LoggerKt",
@@ -126,7 +126,7 @@ class RelevantTraceTest {
         val stack = stackOf(
             "java.lang.Thread",
             "com.cyrillrx.logger.LogHelper",
-            "com.cyrillrx.logger.extension.LogCat",
+            "com.cyrillrx.logger.ConsoleChild",
             "com.cyrillrx.logger.CompositeLogger",
             "com.cyrillrx.logger.LoggerKt",
             caller,

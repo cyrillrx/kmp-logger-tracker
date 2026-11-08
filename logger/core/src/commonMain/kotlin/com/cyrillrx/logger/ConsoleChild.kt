@@ -6,7 +6,7 @@ package com.cyrillrx.logger
  *
  * Attributes follow the message, and an entry with a throwable is followed by its stack trace.
  */
-class ConsoleChild internal constructor(
+public class ConsoleChild internal constructor(
     minSeverity: Severity,
     private val clickableLogs: Boolean,
     private val write: (LogEntry, String) -> Unit,
@@ -16,7 +16,7 @@ class ConsoleChild internal constructor(
      * @param clickableLogs appends a link to the method that logged, which IDE consoles render as clickable. An entry
      * with a throwable gets its stack trace instead, whose frames are already clickable. It has no effect on iOS.
      */
-    constructor(
+    public constructor(
         minSeverity: Severity = Severity.VERBOSE,
         clickableLogs: Boolean = false,
     ) : this(minSeverity, clickableLogs, ::writeToConsole)

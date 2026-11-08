@@ -23,7 +23,8 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - Targets are Android, `iosArm64`, `iosSimulatorArm64` and `jvm`. The `jvm` target emits Java 25 bytecode, the Android target Java 21.
 - The `desktop` target is renamed `jvm`.
 - Clickable links to the logging method work on the JVM too, not only on Android.
-- `getLinkToCurrentMethod` is internal; `LogHelper.addLinkToCurrentMethod` remains the public way to append the link.
+- On the JVM and Android, interfaces use default methods; the `DefaultImpls` compatibility classes are gone.
+- `LogHelper` and `getLinkToCurrentMethod` are internal; `ConsoleChild(clickableLogs = true)` appends the link to the logging method.
 - `Clock` and `Instant` come from `kotlin.time`; the kotlinx-datetime dependency is gone.
 
 ### Removed
@@ -32,6 +33,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - The `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device` and `notifier` modules.
 - The `iosX64` target.
 - `SystemOutLog`, which printed each entry twice; `ConsoleChild` replaces it.
+- `LogCat`, `NsLogger` and `OsLogger`; `ConsoleChild` replaces them on every platform.
 - `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.
 - The per-library iOS frameworks `KMPLogger` and `KMPTracker`; consumers expose their own umbrella framework.
 

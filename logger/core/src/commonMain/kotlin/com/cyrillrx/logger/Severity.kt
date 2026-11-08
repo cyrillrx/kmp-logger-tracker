@@ -3,7 +3,7 @@ package com.cyrillrx.logger
 import kotlin.experimental.ExperimentalObjCName
 import kotlin.native.ObjCName
 
-enum class Severity {
+public enum class Severity {
     VERBOSE,
 
     @OptIn(ExperimentalObjCName::class)

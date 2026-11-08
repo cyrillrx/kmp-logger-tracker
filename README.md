@@ -41,7 +41,7 @@ cd kmp-logger-tracker
 ```kotlin
 Log.install(
     CompositeLogger(
-        children = listOf(LogCat(Severity.DEBUG, clickableLogs = true)),
+        children = listOf(ConsoleChild(Severity.DEBUG, clickableLogs = true)),
         onChildError = { child, error -> println("$child failed: $error") },
     ),
 )

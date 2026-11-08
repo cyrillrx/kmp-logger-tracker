@@ -1,0 +1,101 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <kmp-logger-tracker.logger:logger>
+final enum class com.cyrillrx.logger/Severity : kotlin/Enum<com.cyrillrx.logger/Severity> { // com.cyrillrx.logger/Severity|null[0]
+    enum entry DEBUG // com.cyrillrx.logger/Severity.DEBUG|null[0]
+    enum entry ERROR // com.cyrillrx.logger/Severity.ERROR|null[0]
+    enum entry FATAL // com.cyrillrx.logger/Severity.FATAL|null[0]
+    enum entry INFO // com.cyrillrx.logger/Severity.INFO|null[0]
+    enum entry VERBOSE // com.cyrillrx.logger/Severity.VERBOSE|null[0]
+    enum entry WARN // com.cyrillrx.logger/Severity.WARN|null[0]
+
+    final val entries // com.cyrillrx.logger/Severity.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.cyrillrx.logger/Severity> // com.cyrillrx.logger/Severity.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.cyrillrx.logger/Severity // com.cyrillrx.logger/Severity.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.cyrillrx.logger/Severity> // com.cyrillrx.logger/Severity.values|values#static(){}[0]
+}
+
+abstract interface com.cyrillrx.logger/LogChild { // com.cyrillrx.logger/LogChild|null[0]
+    abstract fun log(com.cyrillrx.logger/LogEntry) // com.cyrillrx.logger/LogChild.log|log(com.cyrillrx.logger.LogEntry){}[0]
+    open fun isLoggable(com.cyrillrx.logger/Severity, kotlin/String): kotlin/Boolean // com.cyrillrx.logger/LogChild.isLoggable|isLoggable(com.cyrillrx.logger.Severity;kotlin.String){}[0]
+}
+
+abstract interface com.cyrillrx.logger/Logger { // com.cyrillrx.logger/Logger|null[0]
+    abstract fun isLoggable(com.cyrillrx.logger/Severity, kotlin/String): kotlin/Boolean // com.cyrillrx.logger/Logger.isLoggable|isLoggable(com.cyrillrx.logger.Severity;kotlin.String){}[0]
+    abstract fun log(com.cyrillrx.logger/Severity, kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/Logger.log|log(com.cyrillrx.logger.Severity;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+}
+
+abstract class com.cyrillrx.logger/SeverityLogChild : com.cyrillrx.logger/LogChild { // com.cyrillrx.logger/SeverityLogChild|null[0]
+    constructor <init>(com.cyrillrx.logger/Severity) // com.cyrillrx.logger/SeverityLogChild.<init>|<init>(com.cyrillrx.logger.Severity){}[0]
+
+    open fun isLoggable(com.cyrillrx.logger/Severity, kotlin/String): kotlin/Boolean // com.cyrillrx.logger/SeverityLogChild.isLoggable|isLoggable(com.cyrillrx.logger.Severity;kotlin.String){}[0]
+}
+
+final class com.cyrillrx.logger/CompositeLogger : com.cyrillrx.logger/Logger { // com.cyrillrx.logger/CompositeLogger|null[0]
+    constructor <init>(kotlin.collections/List<com.cyrillrx.logger/LogChild> = ..., kotlin/Function2<com.cyrillrx.logger/LogChild, kotlin/Throwable, kotlin/Unit> = ...) // com.cyrillrx.logger/CompositeLogger.<init>|<init>(kotlin.collections.List<com.cyrillrx.logger.LogChild>;kotlin.Function2<com.cyrillrx.logger.LogChild,kotlin.Throwable,kotlin.Unit>){}[0]
+
+    final fun add(com.cyrillrx.logger/LogChild) // com.cyrillrx.logger/CompositeLogger.add|add(com.cyrillrx.logger.LogChild){}[0]
+    final fun isLoggable(com.cyrillrx.logger/Severity, kotlin/String): kotlin/Boolean // com.cyrillrx.logger/CompositeLogger.isLoggable|isLoggable(com.cyrillrx.logger.Severity;kotlin.String){}[0]
+    final fun log(com.cyrillrx.logger/Severity, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/CompositeLogger.log|log(com.cyrillrx.logger.Severity;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+    final fun remove(com.cyrillrx.logger/LogChild) // com.cyrillrx.logger/CompositeLogger.remove|remove(com.cyrillrx.logger.LogChild){}[0]
+}
+
+final class com.cyrillrx.logger/ConsoleChild : com.cyrillrx.logger/SeverityLogChild { // com.cyrillrx.logger/ConsoleChild|null[0]
+    constructor <init>(com.cyrillrx.logger/Severity = ..., kotlin/Boolean = ...) // com.cyrillrx.logger/ConsoleChild.<init>|<init>(com.cyrillrx.logger.Severity;kotlin.Boolean){}[0]
+
+    final fun log(com.cyrillrx.logger/LogEntry) // com.cyrillrx.logger/ConsoleChild.log|log(com.cyrillrx.logger.LogEntry){}[0]
+}
+
+final class com.cyrillrx.logger/LogEntry { // com.cyrillrx.logger/LogEntry|null[0]
+    constructor <init>(com.cyrillrx.logger/Severity, kotlin/String, kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin.time/Instant = ...) // com.cyrillrx.logger/LogEntry.<init>|<init>(com.cyrillrx.logger.Severity;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.time.Instant){}[0]
+
+    final val attributes // com.cyrillrx.logger/LogEntry.attributes|{}attributes[0]
+        final fun <get-attributes>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.cyrillrx.logger/LogEntry.attributes.<get-attributes>|<get-attributes>(){}[0]
+    final val message // com.cyrillrx.logger/LogEntry.message|{}message[0]
+        final fun <get-message>(): kotlin/String // com.cyrillrx.logger/LogEntry.message.<get-message>|<get-message>(){}[0]
+    final val severity // com.cyrillrx.logger/LogEntry.severity|{}severity[0]
+        final fun <get-severity>(): com.cyrillrx.logger/Severity // com.cyrillrx.logger/LogEntry.severity.<get-severity>|<get-severity>(){}[0]
+    final val tag // com.cyrillrx.logger/LogEntry.tag|{}tag[0]
+        final fun <get-tag>(): kotlin/String // com.cyrillrx.logger/LogEntry.tag.<get-tag>|<get-tag>(){}[0]
+    final val throwable // com.cyrillrx.logger/LogEntry.throwable|{}throwable[0]
+        final fun <get-throwable>(): kotlin/Throwable? // com.cyrillrx.logger/LogEntry.throwable.<get-throwable>|<get-throwable>(){}[0]
+    final val timestamp // com.cyrillrx.logger/LogEntry.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin.time/Instant // com.cyrillrx.logger/LogEntry.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun component1(): com.cyrillrx.logger/Severity // com.cyrillrx.logger/LogEntry.component1|component1(){}[0]
+    final fun component2(): kotlin/String // com.cyrillrx.logger/LogEntry.component2|component2(){}[0]
+    final fun component3(): kotlin/String // com.cyrillrx.logger/LogEntry.component3|component3(){}[0]
+    final fun component4(): kotlin/Throwable? // com.cyrillrx.logger/LogEntry.component4|component4(){}[0]
+    final fun component5(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.cyrillrx.logger/LogEntry.component5|component5(){}[0]
+    final fun component6(): kotlin.time/Instant // com.cyrillrx.logger/LogEntry.component6|component6(){}[0]
+    final fun copy(com.cyrillrx.logger/Severity = ..., kotlin/String = ..., kotlin/String = ..., kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin.time/Instant = ...): com.cyrillrx.logger/LogEntry // com.cyrillrx.logger/LogEntry.copy|copy(com.cyrillrx.logger.Severity;kotlin.String;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.time.Instant){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.cyrillrx.logger/LogEntry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.cyrillrx.logger/LogEntry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.cyrillrx.logger/LogEntry.toString|toString(){}[0]
+}
+
+final class com.cyrillrx.logger/RamLogChild : com.cyrillrx.logger/SeverityLogChild { // com.cyrillrx.logger/RamLogChild|null[0]
+    constructor <init>(com.cyrillrx.logger/Severity = ...) // com.cyrillrx.logger/RamLogChild.<init>|<init>(com.cyrillrx.logger.Severity){}[0]
+
+    final fun entries(): kotlin.collections/List<com.cyrillrx.logger/LogEntry> // com.cyrillrx.logger/RamLogChild.entries|entries(){}[0]
+    final fun log(com.cyrillrx.logger/LogEntry) // com.cyrillrx.logger/RamLogChild.log|log(com.cyrillrx.logger.LogEntry){}[0]
+}
+
+final object com.cyrillrx.logger/Log : com.cyrillrx.logger/Logger { // com.cyrillrx.logger/Log|null[0]
+    final fun install(com.cyrillrx.logger/Logger) // com.cyrillrx.logger/Log.install|install(com.cyrillrx.logger.Logger){}[0]
+    final fun isLoggable(com.cyrillrx.logger/Severity, kotlin/String): kotlin/Boolean // com.cyrillrx.logger/Log.isLoggable|isLoggable(com.cyrillrx.logger.Severity;kotlin.String){}[0]
+    final fun log(com.cyrillrx.logger/Severity, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/Log.log|log(com.cyrillrx.logger.Severity;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+}
+
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/debug(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/debug|debug@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/error(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/error|error@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/fatal(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/fatal|fatal@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/info(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/info|info@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/verbose(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/verbose|verbose@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
+final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/warn(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/warn|warn@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
