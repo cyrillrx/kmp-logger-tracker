@@ -37,5 +37,5 @@ mavenPublishing {
 }
 
 signing {
-    isRequired = gradle.startParameter.taskNames.none { it.endsWith("ToMavenLocal") }
+    isRequired = !gradle.startParameter.taskNames.all { it.endsWith("ToMavenLocal") }
 }
