@@ -5,7 +5,7 @@
 // - Show manifest properties: true
 // - Show declarations: true
 
-// Library unique name: <io.github.cyrillrx:logger>
+// Library unique name: <kmp-logger-tracker.logger:logger>
 final enum class com.cyrillrx.logger/Severity : kotlin/Enum<com.cyrillrx.logger/Severity> { // com.cyrillrx.logger/Severity|null[0]
     enum entry DEBUG // com.cyrillrx.logger/Severity.DEBUG|null[0]
     enum entry ERROR // com.cyrillrx.logger/Severity.ERROR|null[0]

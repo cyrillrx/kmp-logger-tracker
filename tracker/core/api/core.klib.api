@@ -5,7 +5,7 @@
 // - Show manifest properties: true
 // - Show declarations: true
 
-// Library unique name: <io.github.cyrillrx:tracker>
+// Library unique name: <kmp-logger-tracker.tracker:tracker>
 final enum class com.cyrillrx.tracker.context/Connectivity : kotlin/Enum<com.cyrillrx.tracker.context/Connectivity> { // com.cyrillrx.tracker.context/Connectivity|null[0]
     enum entry INTERNET // com.cyrillrx.tracker.context/Connectivity.INTERNET|null[0]
     enum entry NO_CONNECTION // com.cyrillrx.tracker.context/Connectivity.NO_CONNECTION|null[0]
