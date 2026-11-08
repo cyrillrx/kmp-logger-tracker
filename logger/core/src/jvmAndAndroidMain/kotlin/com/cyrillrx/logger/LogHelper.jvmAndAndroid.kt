@@ -4,7 +4,6 @@ package com.cyrillrx.logger
 private val LOGGER_CLASS_NAME = Logger::class.java.name
 private val LOG_CLASS_NAME = Log::class.java.name
 private val LOGGER_PACKAGE = LOGGER_CLASS_NAME.substringBeforeLast('.')
-private val LOGGER_PACKAGES = setOf(LOGGER_PACKAGE, "$LOGGER_PACKAGE.extension")
 
 internal actual fun getLinkToCurrentMethod(): String? {
     val currentThread = Thread.currentThread()
@@ -37,7 +36,7 @@ private fun StackTraceElement?.isEntryPoint(): Boolean {
     return className == LOG_CLASS_NAME || className.startsWith(LOGGER_CLASS_NAME)
 }
 
-private fun StackTraceElement?.isLoggerFrame(): Boolean = this?.className?.substringBeforeLast('.') in LOGGER_PACKAGES
+private fun StackTraceElement?.isLoggerFrame(): Boolean = this?.className?.substringBeforeLast('.') == LOGGER_PACKAGE
 
 private fun StackTraceElement?.linkableMethod(): String {
     if (this == null) return "trace is null"

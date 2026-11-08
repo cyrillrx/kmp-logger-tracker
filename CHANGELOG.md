@@ -32,6 +32,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - The `logger-crashlytics`, `tracker-amplitude`, `tracker-segment`, `device` and `notifier` modules.
 - The `iosX64` target.
 - `SystemOutLog`, which printed each entry twice; `ConsoleChild` replaces it.
+- `LogCat`, `NsLogger` and `OsLogger`; `ConsoleChild` replaces them on every platform.
 - `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.
 - The per-library iOS frameworks `KMPLogger` and `KMPTracker`; consumers expose their own umbrella framework.
 
