@@ -1,6 +1,6 @@
 package com.cyrillrx.logger
 
-// Prefix of Logger, LoggerKt, Logger$DefaultImpls and Logger$-CC, which D8 generates when desugaring for minSdk < 24.
+// Prefix of Logger, LoggerKt and Logger$-CC, which D8 generates when desugaring for minSdk < 24.
 private val LOGGER_CLASS_NAME = Logger::class.java.name
 private val LOG_CLASS_NAME = Log::class.java.name
 private val LOGGER_PACKAGE = LOGGER_CLASS_NAME.substringBeforeLast('.')
