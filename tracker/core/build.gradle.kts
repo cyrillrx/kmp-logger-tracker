@@ -5,7 +5,6 @@ plugins {
 }
 
 base.archivesName.set("tracker")
-project.version = Version.TRACKER_VERSION
 
 kotlin {
     // TODO(phase 4): drop this opt-out once the tracker API is rewritten.

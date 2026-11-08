@@ -9,6 +9,8 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
+version = providers.gradleProperty("VERSION_NAME").get()
+
 kotlin {
     jvmToolchain(Version.JDK)
     explicitApi()
