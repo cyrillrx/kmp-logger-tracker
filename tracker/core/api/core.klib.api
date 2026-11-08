@@ -1,0 +1,144 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <kmp-logger-tracker.tracker:tracker>
+final enum class com.cyrillrx.tracker.context/Connectivity : kotlin/Enum<com.cyrillrx.tracker.context/Connectivity> { // com.cyrillrx.tracker.context/Connectivity|null[0]
+    enum entry INTERNET // com.cyrillrx.tracker.context/Connectivity.INTERNET|null[0]
+    enum entry NO_CONNECTION // com.cyrillrx.tracker.context/Connectivity.NO_CONNECTION|null[0]
+    enum entry UNKNOWN // com.cyrillrx.tracker.context/Connectivity.UNKNOWN|null[0]
+
+    final val entries // com.cyrillrx.tracker.context/Connectivity.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.cyrillrx.tracker.context/Connectivity> // com.cyrillrx.tracker.context/Connectivity.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.cyrillrx.tracker.context/Connectivity // com.cyrillrx.tracker.context/Connectivity.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.cyrillrx.tracker.context/Connectivity> // com.cyrillrx.tracker.context/Connectivity.values|values#static(){}[0]
+}
+
+abstract interface com.cyrillrx.tracker.context/TrackingUser // com.cyrillrx.tracker.context/TrackingUser|null[0]
+
+abstract class com.cyrillrx.tracker.context/TrackingDevice { // com.cyrillrx.tracker.context/TrackingDevice|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // com.cyrillrx.tracker.context/TrackingDevice.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val model // com.cyrillrx.tracker.context/TrackingDevice.model|{}model[0]
+        final fun <get-model>(): kotlin/String // com.cyrillrx.tracker.context/TrackingDevice.model.<get-model>|<get-model>(){}[0]
+    final val os // com.cyrillrx.tracker.context/TrackingDevice.os|{}os[0]
+        final fun <get-os>(): kotlin/String // com.cyrillrx.tracker.context/TrackingDevice.os.<get-os>|<get-os>(){}[0]
+}
+
+abstract class com.cyrillrx.tracker/TrackerChild { // com.cyrillrx.tracker/TrackerChild|null[0]
+    constructor <init>(kotlin/String) // com.cyrillrx.tracker/TrackerChild.<init>|<init>(kotlin.String){}[0]
+
+    final val name // com.cyrillrx.tracker/TrackerChild.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.cyrillrx.tracker/TrackerChild.name.<get-name>|<get-name>(){}[0]
+
+    abstract fun doTrack(com.cyrillrx.tracker.event/TrackEvent) // com.cyrillrx.tracker/TrackerChild.doTrack|doTrack(com.cyrillrx.tracker.event.TrackEvent){}[0]
+    final fun track(com.cyrillrx.tracker.event/TrackEvent) // com.cyrillrx.tracker/TrackerChild.track|track(com.cyrillrx.tracker.event.TrackEvent){}[0]
+    open fun onConnectivityChanged(com.cyrillrx.tracker.context/Connectivity) // com.cyrillrx.tracker/TrackerChild.onConnectivityChanged|onConnectivityChanged(com.cyrillrx.tracker.context.Connectivity){}[0]
+    open fun onTrackerRemoved() // com.cyrillrx.tracker/TrackerChild.onTrackerRemoved|onTrackerRemoved(){}[0]
+    open fun onUserUpdated(com.cyrillrx.tracker.context/TrackingUser) // com.cyrillrx.tracker/TrackerChild.onUserUpdated|onUserUpdated(com.cyrillrx.tracker.context.TrackingUser){}[0]
+    open fun shouldTrack(com.cyrillrx.tracker.event/TrackEvent): kotlin/Boolean // com.cyrillrx.tracker/TrackerChild.shouldTrack|shouldTrack(com.cyrillrx.tracker.event.TrackEvent){}[0]
+}
+
+final class com.cyrillrx.tracker.context/IOSTrackingDevice : com.cyrillrx.tracker.context/TrackingDevice { // com.cyrillrx.tracker.context/IOSTrackingDevice|null[0]
+    constructor <init>() // com.cyrillrx.tracker.context/IOSTrackingDevice.<init>|<init>(){}[0]
+}
+
+final class com.cyrillrx.tracker.context/TrackerContext { // com.cyrillrx.tracker.context/TrackerContext|null[0]
+    constructor <init>(com.cyrillrx.tracker.context/TrackingApp, com.cyrillrx.tracker.context/TrackingUser, com.cyrillrx.tracker.context/TrackingDevice, com.cyrillrx.tracker.context/Connectivity) // com.cyrillrx.tracker.context/TrackerContext.<init>|<init>(com.cyrillrx.tracker.context.TrackingApp;com.cyrillrx.tracker.context.TrackingUser;com.cyrillrx.tracker.context.TrackingDevice;com.cyrillrx.tracker.context.Connectivity){}[0]
+
+    final val device // com.cyrillrx.tracker.context/TrackerContext.device|{}device[0]
+        final fun <get-device>(): com.cyrillrx.tracker.context/TrackingDevice // com.cyrillrx.tracker.context/TrackerContext.device.<get-device>|<get-device>(){}[0]
+
+    final var app // com.cyrillrx.tracker.context/TrackerContext.app|{}app[0]
+        final fun <get-app>(): com.cyrillrx.tracker.context/TrackingApp // com.cyrillrx.tracker.context/TrackerContext.app.<get-app>|<get-app>(){}[0]
+        final fun <set-app>(com.cyrillrx.tracker.context/TrackingApp) // com.cyrillrx.tracker.context/TrackerContext.app.<set-app>|<set-app>(com.cyrillrx.tracker.context.TrackingApp){}[0]
+    final var connectivity // com.cyrillrx.tracker.context/TrackerContext.connectivity|{}connectivity[0]
+        final fun <get-connectivity>(): com.cyrillrx.tracker.context/Connectivity // com.cyrillrx.tracker.context/TrackerContext.connectivity.<get-connectivity>|<get-connectivity>(){}[0]
+        final fun <set-connectivity>(com.cyrillrx.tracker.context/Connectivity) // com.cyrillrx.tracker.context/TrackerContext.connectivity.<set-connectivity>|<set-connectivity>(com.cyrillrx.tracker.context.Connectivity){}[0]
+    final var user // com.cyrillrx.tracker.context/TrackerContext.user|{}user[0]
+        final fun <get-user>(): com.cyrillrx.tracker.context/TrackingUser // com.cyrillrx.tracker.context/TrackerContext.user.<get-user>|<get-user>(){}[0]
+        final fun <set-user>(com.cyrillrx.tracker.context/TrackingUser) // com.cyrillrx.tracker.context/TrackerContext.user.<set-user>|<set-user>(com.cyrillrx.tracker.context.TrackingUser){}[0]
+}
+
+final class com.cyrillrx.tracker.context/TrackingApp { // com.cyrillrx.tracker.context/TrackingApp|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // com.cyrillrx.tracker.context/TrackingApp.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val name // com.cyrillrx.tracker.context/TrackingApp.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.cyrillrx.tracker.context/TrackingApp.name.<get-name>|<get-name>(){}[0]
+    final val version // com.cyrillrx.tracker.context/TrackingApp.version|{}version[0]
+        final fun <get-version>(): kotlin/String // com.cyrillrx.tracker.context/TrackingApp.version.<get-version>|<get-version>(){}[0]
+
+    final object Companion { // com.cyrillrx.tracker.context/TrackingApp.Companion|null[0]
+        final val UNDEFINED // com.cyrillrx.tracker.context/TrackingApp.Companion.UNDEFINED|{}UNDEFINED[0]
+            final fun <get-UNDEFINED>(): com.cyrillrx.tracker.context/TrackingApp // com.cyrillrx.tracker.context/TrackingApp.Companion.UNDEFINED.<get-UNDEFINED>|<get-UNDEFINED>(){}[0]
+    }
+}
+
+final class com.cyrillrx.tracker.context/TrackingDeviceFactory { // com.cyrillrx.tracker.context/TrackingDeviceFactory|null[0]
+    constructor <init>() // com.cyrillrx.tracker.context/TrackingDeviceFactory.<init>|<init>(){}[0]
+
+    final fun create(): com.cyrillrx.tracker.context/TrackingDevice // com.cyrillrx.tracker.context/TrackingDeviceFactory.create|create(){}[0]
+}
+
+open class com.cyrillrx.tracker.event/TrackEvent { // com.cyrillrx.tracker.event/TrackEvent|null[0]
+    constructor <init>(kotlin/String) // com.cyrillrx.tracker.event/TrackEvent.<init>|<init>(kotlin.String){}[0]
+    constructor <init>(kotlin/String, kotlin.collections/MutableMap<kotlin/String, kotlin/Any> = ...) // com.cyrillrx.tracker.event/TrackEvent.<init>|<init>(kotlin.String;kotlin.collections.MutableMap<kotlin.String,kotlin.Any>){}[0]
+
+    final val attributes // com.cyrillrx.tracker.event/TrackEvent.attributes|{}attributes[0]
+        final fun <get-attributes>(): kotlin.collections/MutableMap<kotlin/String, kotlin/Any> // com.cyrillrx.tracker.event/TrackEvent.attributes.<get-attributes>|<get-attributes>(){}[0]
+    final val name // com.cyrillrx.tracker.event/TrackEvent.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.cyrillrx.tracker.event/TrackEvent.name.<get-name>|<get-name>(){}[0]
+
+    final var context // com.cyrillrx.tracker.event/TrackEvent.context|{}context[0]
+        final fun <get-context>(): com.cyrillrx.tracker.context/TrackerContext // com.cyrillrx.tracker.event/TrackEvent.context.<get-context>|<get-context>(){}[0]
+        final fun <set-context>(com.cyrillrx.tracker.context/TrackerContext) // com.cyrillrx.tracker.event/TrackEvent.context.<set-context>|<set-context>(com.cyrillrx.tracker.context.TrackerContext){}[0]
+
+    final fun <#A1: kotlin/Any?> getAttribute(kotlin/String?): #A1? // com.cyrillrx.tracker.event/TrackEvent.getAttribute|getAttribute(kotlin.String?){0§<kotlin.Any?>}[0]
+    final fun addAttribute(kotlin/String, kotlin/Any) // com.cyrillrx.tracker.event/TrackEvent.addAttribute|addAttribute(kotlin.String;kotlin.Any){}[0]
+    final fun addAttributes(kotlin.collections/Map<kotlin/String, kotlin/Any>) // com.cyrillrx.tracker.event/TrackEvent.addAttributes|addAttributes(kotlin.collections.Map<kotlin.String,kotlin.Any>){}[0]
+    final fun getAttributesAsDictionary(): kotlin.collections/Map<kotlin/String, kotlin/Any> // com.cyrillrx.tracker.event/TrackEvent.getAttributesAsDictionary|getAttributesAsDictionary(){}[0]
+    final fun isValid(): kotlin/Boolean // com.cyrillrx.tracker.event/TrackEvent.isValid|isValid(){}[0]
+
+    final class Builder { // com.cyrillrx.tracker.event/TrackEvent.Builder|null[0]
+        constructor <init>() // com.cyrillrx.tracker.event/TrackEvent.Builder.<init>|<init>(){}[0]
+
+        final fun <#A2: kotlin/Any> addAttributes(kotlin.collections/Map<kotlin/String, #A2>): com.cyrillrx.tracker.event/TrackEvent.Builder // com.cyrillrx.tracker.event/TrackEvent.Builder.addAttributes|addAttributes(kotlin.collections.Map<kotlin.String,0:0>){0§<kotlin.Any>}[0]
+        final fun addAttribute(kotlin/String, kotlin/Any): com.cyrillrx.tracker.event/TrackEvent.Builder // com.cyrillrx.tracker.event/TrackEvent.Builder.addAttribute|addAttribute(kotlin.String;kotlin.Any){}[0]
+        final fun addAttributes(kotlin/Function1<kotlin.collections/MutableMap<kotlin/String, kotlin/Any>, kotlin/Unit>): com.cyrillrx.tracker.event/TrackEvent.Builder // com.cyrillrx.tracker.event/TrackEvent.Builder.addAttributes|addAttributes(kotlin.Function1<kotlin.collections.MutableMap<kotlin.String,kotlin.Any>,kotlin.Unit>){}[0]
+        final fun build(): com.cyrillrx.tracker.event/TrackEvent // com.cyrillrx.tracker.event/TrackEvent.Builder.build|build(){}[0]
+        final fun setName(kotlin/String): com.cyrillrx.tracker.event/TrackEvent.Builder // com.cyrillrx.tracker.event/TrackEvent.Builder.setName|setName(kotlin.String){}[0]
+
+        final object Companion { // com.cyrillrx.tracker.event/TrackEvent.Builder.Companion|null[0]
+            final inline fun requireNotBlank(kotlin/String?, kotlin/Function0<kotlin/Any>): kotlin/String // com.cyrillrx.tracker.event/TrackEvent.Builder.Companion.requireNotBlank|requireNotBlank(kotlin.String?;kotlin.Function0<kotlin.Any>){}[0]
+        }
+    }
+}
+
+final object com.cyrillrx.tracker.context/UnknownUser : com.cyrillrx.tracker.context/TrackingUser // com.cyrillrx.tracker.context/UnknownUser|null[0]
+
+final object com.cyrillrx.tracker/Tracker { // com.cyrillrx.tracker/Tracker|null[0]
+    final val context // com.cyrillrx.tracker/Tracker.context|{}context[0]
+        final fun <get-context>(): com.cyrillrx.tracker.context/TrackerContext // com.cyrillrx.tracker/Tracker.context.<get-context>|<get-context>(){}[0]
+
+    final fun addChild(com.cyrillrx.tracker/TrackerChild) // com.cyrillrx.tracker/Tracker.addChild|addChild(com.cyrillrx.tracker.TrackerChild){}[0]
+    final fun addChildren(kotlin/Array<out com.cyrillrx.tracker/TrackerChild?>...) // com.cyrillrx.tracker/Tracker.addChildren|addChildren(kotlin.Array<out|com.cyrillrx.tracker.TrackerChild?>...){}[0]
+    final fun applyConsent(kotlin/Boolean, com.cyrillrx.tracker/TrackerChild) // com.cyrillrx.tracker/Tracker.applyConsent|applyConsent(kotlin.Boolean;com.cyrillrx.tracker.TrackerChild){}[0]
+    final fun clear() // com.cyrillrx.tracker/Tracker.clear|clear(){}[0]
+    final fun getTrackerCount(): kotlin/Int // com.cyrillrx.tracker/Tracker.getTrackerCount|getTrackerCount(){}[0]
+    final fun hasChild(kotlin/String): kotlin/Boolean // com.cyrillrx.tracker/Tracker.hasChild|hasChild(kotlin.String){}[0]
+    final fun init(com.cyrillrx.tracker.context/TrackingApp, kotlin/Function1<kotlin/Throwable, kotlin/Unit>) // com.cyrillrx.tracker/Tracker.init|init(com.cyrillrx.tracker.context.TrackingApp;kotlin.Function1<kotlin.Throwable,kotlin.Unit>){}[0]
+    final fun logoutUser() // com.cyrillrx.tracker/Tracker.logoutUser|logoutUser(){}[0]
+    final fun removeChild(com.cyrillrx.tracker/TrackerChild) // com.cyrillrx.tracker/Tracker.removeChild|removeChild(com.cyrillrx.tracker.TrackerChild){}[0]
+    final fun removeChild(kotlin/String) // com.cyrillrx.tracker/Tracker.removeChild|removeChild(kotlin.String){}[0]
+    final fun setupApp(com.cyrillrx.tracker.context/TrackingApp) // com.cyrillrx.tracker/Tracker.setupApp|setupApp(com.cyrillrx.tracker.context.TrackingApp){}[0]
+    final fun setupExceptionCatcher(kotlin/Function1<kotlin/Throwable, kotlin/Unit>) // com.cyrillrx.tracker/Tracker.setupExceptionCatcher|setupExceptionCatcher(kotlin.Function1<kotlin.Throwable,kotlin.Unit>){}[0]
+    final fun track(com.cyrillrx.tracker.event/TrackEvent) // com.cyrillrx.tracker/Tracker.track|track(com.cyrillrx.tracker.event.TrackEvent){}[0]
+    final fun updateConnectivity(com.cyrillrx.tracker.context/Connectivity) // com.cyrillrx.tracker/Tracker.updateConnectivity|updateConnectivity(com.cyrillrx.tracker.context.Connectivity){}[0]
+    final fun updateUser(com.cyrillrx.tracker.context/TrackingUser) // com.cyrillrx.tracker/Tracker.updateUser|updateUser(com.cyrillrx.tracker.context.TrackingUser){}[0]
+}
+
+final fun com.cyrillrx.tracker.context/createTrackingDevice(): com.cyrillrx.tracker.context/TrackingDevice // com.cyrillrx.tracker.context/createTrackingDevice|createTrackingDevice(){}[0]

@@ -1,0 +1,118 @@
+public final class com/cyrillrx/tracker/Tracker {
+	public static final field INSTANCE Lcom/cyrillrx/tracker/Tracker;
+	public final fun addChild (Lcom/cyrillrx/tracker/TrackerChild;)V
+	public final fun addChildren ([Lcom/cyrillrx/tracker/TrackerChild;)V
+	public final fun applyConsent (ZLcom/cyrillrx/tracker/TrackerChild;)V
+	public final fun clear ()V
+	public final fun getContext ()Lcom/cyrillrx/tracker/context/TrackerContext;
+	public final fun getTrackerCount ()I
+	public final fun hasChild (Ljava/lang/String;)Z
+	public final fun init (Lcom/cyrillrx/tracker/context/TrackingApp;Lkotlin/jvm/functions/Function1;)V
+	public final fun logoutUser ()V
+	public final fun removeChild (Lcom/cyrillrx/tracker/TrackerChild;)V
+	public final fun removeChild (Ljava/lang/String;)V
+	public final fun setupApp (Lcom/cyrillrx/tracker/context/TrackingApp;)V
+	public final fun setupExceptionCatcher (Lkotlin/jvm/functions/Function1;)V
+	public final fun track (Lcom/cyrillrx/tracker/event/TrackEvent;)V
+	public final fun updateConnectivity (Lcom/cyrillrx/tracker/context/Connectivity;)V
+	public final fun updateUser (Lcom/cyrillrx/tracker/context/TrackingUser;)V
+}
+
+public abstract class com/cyrillrx/tracker/TrackerChild {
+	public fun <init> (Ljava/lang/String;)V
+	protected abstract fun doTrack (Lcom/cyrillrx/tracker/event/TrackEvent;)V
+	public final fun getName ()Ljava/lang/String;
+	public fun onConnectivityChanged (Lcom/cyrillrx/tracker/context/Connectivity;)V
+	public fun onTrackerRemoved ()V
+	public fun onUserUpdated (Lcom/cyrillrx/tracker/context/TrackingUser;)V
+	public fun shouldTrack (Lcom/cyrillrx/tracker/event/TrackEvent;)Z
+	public final fun track (Lcom/cyrillrx/tracker/event/TrackEvent;)V
+}
+
+public final class com/cyrillrx/tracker/context/AndroidTrackingDevice : com/cyrillrx/tracker/context/TrackingDevice {
+	public fun <init> ()V
+}
+
+public final class com/cyrillrx/tracker/context/AndroidTrackingDeviceKt {
+	public static final fun createTrackingDevice ()Lcom/cyrillrx/tracker/context/TrackingDevice;
+}
+
+public final class com/cyrillrx/tracker/context/Connectivity : java/lang/Enum {
+	public static final field INTERNET Lcom/cyrillrx/tracker/context/Connectivity;
+	public static final field NO_CONNECTION Lcom/cyrillrx/tracker/context/Connectivity;
+	public static final field UNKNOWN Lcom/cyrillrx/tracker/context/Connectivity;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/cyrillrx/tracker/context/Connectivity;
+	public static fun values ()[Lcom/cyrillrx/tracker/context/Connectivity;
+}
+
+public final class com/cyrillrx/tracker/context/TrackerContext {
+	public fun <init> (Lcom/cyrillrx/tracker/context/TrackingApp;Lcom/cyrillrx/tracker/context/TrackingUser;Lcom/cyrillrx/tracker/context/TrackingDevice;Lcom/cyrillrx/tracker/context/Connectivity;)V
+	public final fun getApp ()Lcom/cyrillrx/tracker/context/TrackingApp;
+	public final fun getConnectivity ()Lcom/cyrillrx/tracker/context/Connectivity;
+	public final fun getDevice ()Lcom/cyrillrx/tracker/context/TrackingDevice;
+	public final fun getUser ()Lcom/cyrillrx/tracker/context/TrackingUser;
+	public final fun setApp (Lcom/cyrillrx/tracker/context/TrackingApp;)V
+	public final fun setConnectivity (Lcom/cyrillrx/tracker/context/Connectivity;)V
+	public final fun setUser (Lcom/cyrillrx/tracker/context/TrackingUser;)V
+}
+
+public final class com/cyrillrx/tracker/context/TrackingApp {
+	public static final field Companion Lcom/cyrillrx/tracker/context/TrackingApp$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getName ()Ljava/lang/String;
+	public final fun getVersion ()Ljava/lang/String;
+}
+
+public final class com/cyrillrx/tracker/context/TrackingApp$Companion {
+	public final fun getUNDEFINED ()Lcom/cyrillrx/tracker/context/TrackingApp;
+}
+
+public abstract class com/cyrillrx/tracker/context/TrackingDevice {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getModel ()Ljava/lang/String;
+	public final fun getOs ()Ljava/lang/String;
+}
+
+public final class com/cyrillrx/tracker/context/TrackingDeviceFactory {
+	public fun <init> ()V
+	public final fun create ()Lcom/cyrillrx/tracker/context/TrackingDevice;
+}
+
+public abstract interface class com/cyrillrx/tracker/context/TrackingUser {
+}
+
+public final class com/cyrillrx/tracker/context/UnknownUser : com/cyrillrx/tracker/context/TrackingUser {
+	public static final field INSTANCE Lcom/cyrillrx/tracker/context/UnknownUser;
+}
+
+public class com/cyrillrx/tracker/event/TrackEvent {
+	public field context Lcom/cyrillrx/tracker/context/TrackerContext;
+	public fun <init> (Ljava/lang/String;)V
+	public fun <init> (Ljava/lang/String;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun addAttribute (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun addAttributes (Ljava/util/Map;)V
+	public final fun getAttribute (Ljava/lang/String;)Ljava/lang/Object;
+	public final fun getAttributes ()Ljava/util/Map;
+	public final fun getAttributesAsDictionary ()Ljava/util/Map;
+	public final fun getContext ()Lcom/cyrillrx/tracker/context/TrackerContext;
+	public final fun getName ()Ljava/lang/String;
+	public final fun isValid ()Z
+	public final fun setContext (Lcom/cyrillrx/tracker/context/TrackerContext;)V
+}
+
+public final class com/cyrillrx/tracker/event/TrackEvent$Builder {
+	public static final field Companion Lcom/cyrillrx/tracker/event/TrackEvent$Builder$Companion;
+	public fun <init> ()V
+	public final fun addAttribute (Ljava/lang/String;Ljava/lang/Object;)Lcom/cyrillrx/tracker/event/TrackEvent$Builder;
+	public final fun addAttributes (Ljava/util/Map;)Lcom/cyrillrx/tracker/event/TrackEvent$Builder;
+	public final fun addAttributes (Lkotlin/jvm/functions/Function1;)Lcom/cyrillrx/tracker/event/TrackEvent$Builder;
+	public final fun build ()Lcom/cyrillrx/tracker/event/TrackEvent;
+	public final fun setName (Ljava/lang/String;)Lcom/cyrillrx/tracker/event/TrackEvent$Builder;
+}
+
+public final class com/cyrillrx/tracker/event/TrackEvent$Builder$Companion {
+	public final fun requireNotBlank (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Ljava/lang/String;
+}
+

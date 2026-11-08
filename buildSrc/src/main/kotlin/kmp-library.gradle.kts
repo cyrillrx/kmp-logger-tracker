@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -9,6 +10,10 @@ plugins {
 
 kotlin {
     jvmToolchain(Version.JDK)
+    explicitApi()
+
+    @OptIn(ExperimentalAbiValidation::class)
+    abiValidation {}
 
     android {
         compileSdk = Version.COMPILE_SDK
