@@ -52,11 +52,6 @@ public final class com/cyrillrx/logger/LogEntry {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/cyrillrx/logger/LogHelper {
-	public static final field INSTANCE Lcom/cyrillrx/logger/LogHelper;
-	public final fun addLinkToCurrentMethod (Ljava/lang/String;)Ljava/lang/String;
-}
-
 public abstract interface class com/cyrillrx/logger/Logger {
 	public abstract fun isLoggable (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;)Z
 	public abstract fun log (Lcom/cyrillrx/logger/Severity;Ljava/lang/String;Ljava/lang/Throwable;Ljava/util/Map;Lkotlin/jvm/functions/Function0;)V

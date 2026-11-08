@@ -44,7 +44,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] A per-thread `onChildError` recursion guard ([#33](https://github.com/cyrillrx/kmp-logger-tracker/issues/33)) and a guard against re-entrant logging ([#37](https://github.com/cyrillrx/kmp-logger-tracker/issues/37)).
 - [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration.
-- [ ] `LogHelper` internal ([ADR-005](adr/adr-005-one-common-type-per-child.md)).
+- [x] `LogHelper` internal ([ADR-005](adr/adr-005-one-common-type-per-child.md)).
 - [x] `explicitApi()` and ABI validation in `kmp-library`; the legacy tracker opts out of `explicitApi()` until phase 4.
 
 ## Phase 3 — Publication and CI, release 1.0.0 (~1.5-2 days)

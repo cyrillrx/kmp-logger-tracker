@@ -93,10 +93,6 @@ final object com.cyrillrx.logger/Log : com.cyrillrx.logger/Logger { // com.cyril
     final fun log(com.cyrillrx.logger/Severity, kotlin/String, kotlin/Throwable?, kotlin.collections/Map<kotlin/String, kotlin/String>, kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/Log.log|log(com.cyrillrx.logger.Severity;kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
 }
 
-final object com.cyrillrx.logger/LogHelper { // com.cyrillrx.logger/LogHelper|null[0]
-    final fun addLinkToCurrentMethod(kotlin/String): kotlin/String // com.cyrillrx.logger/LogHelper.addLinkToCurrentMethod|addLinkToCurrentMethod(kotlin.String){}[0]
-}
-
 final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/debug(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/debug|debug@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
 final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/error(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/error|error@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
 final fun (com.cyrillrx.logger/Logger).com.cyrillrx.logger/fatal(kotlin/String, kotlin/Throwable? = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ..., kotlin/Function0<kotlin/String>) // com.cyrillrx.logger/fatal|fatal@com.cyrillrx.logger.Logger(kotlin.String;kotlin.Throwable?;kotlin.collections.Map<kotlin.String,kotlin.String>;kotlin.Function0<kotlin.String>){}[0]
