@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
-    id("kmp-library")
     id("published-library")
 }
 

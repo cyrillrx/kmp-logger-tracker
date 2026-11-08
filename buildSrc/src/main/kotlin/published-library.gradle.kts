@@ -3,6 +3,7 @@ import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SourcesJar
 
 plugins {
+    id("kmp-library")
     base
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
