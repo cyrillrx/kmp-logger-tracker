@@ -41,5 +41,5 @@ mavenPublishing {
 }
 
 signing {
-    isRequired = gradle.startParameter.taskNames.any { "MavenCentral" in it }
+    isRequired = gradle.startParameter.taskNames.none { it.endsWith("ToMavenLocal") }
 }
