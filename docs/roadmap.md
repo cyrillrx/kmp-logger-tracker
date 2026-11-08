@@ -51,7 +51,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 - [ ] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
 - [ ] `ci.yml`: ktlint, JVM tests, ABI check and Kover on Linux; iOS simulator tests on macOS.
-- [ ] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
+- [x] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [ ] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`, as a prerelease for `-rcN` tags.
 - [ ] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
 - [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer after aligning its toolchain.
