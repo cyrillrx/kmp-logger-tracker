@@ -9,6 +9,7 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
+group = providers.gradleProperty("GROUP").get()
 version = providers.gradleProperty("VERSION_NAME").get()
 
 kotlin {
