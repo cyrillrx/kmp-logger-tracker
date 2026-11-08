@@ -1,6 +1,5 @@
 plugins {
     id("kmp-library")
-    base
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
     signing
