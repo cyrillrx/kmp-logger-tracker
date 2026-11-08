@@ -3,14 +3,19 @@ import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SourcesJar
 
 plugins {
+    base
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
 }
 
 private val repositoryUrl = "https://github.com/cyrillrx/kmp-logger-tracker"
+private val artifactId = path.removePrefix(":").replace(':', '-').removeSuffix("-core")
+
+base.archivesName.set(artifactId)
 
 mavenPublishing {
     configure(KotlinMultiplatform(JavadocJar.Dokka("dokkaGeneratePublicationHtml"), SourcesJar.Sources()))
+    coordinates(artifactId = artifactId)
     publishToMavenCentral()
     // Local publications stay unsigned; the release workflow provides the key, and Central rejects unsigned artifacts.
     if (providers.gradleProperty("signingInMemoryKey").isPresent) {

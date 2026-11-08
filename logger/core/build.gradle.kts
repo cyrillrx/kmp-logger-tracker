@@ -5,8 +5,6 @@ plugins {
     id("published-library")
 }
 
-base.archivesName.set("logger")
-
 kotlin {
     applyDefaultHierarchyTemplate {
         common {
