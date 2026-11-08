@@ -6,6 +6,7 @@ plugins {
     base
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
+    signing
 }
 
 private val repositoryUrl = "https://github.com/cyrillrx/kmp-logger-tracker"
@@ -17,10 +18,7 @@ mavenPublishing {
     configure(KotlinMultiplatform(JavadocJar.Dokka("dokkaGeneratePublicationHtml"), SourcesJar.Sources()))
     coordinates(artifactId = artifactId)
     publishToMavenCentral()
-    // Local publications stay unsigned; the release workflow provides the key, and Central rejects unsigned artifacts.
-    if (providers.gradleProperty("signingInMemoryKey").isPresent) {
-        signAllPublications()
-    }
+    signAllPublications()
 
     pom {
         url.set(repositoryUrl)
@@ -43,4 +41,8 @@ mavenPublishing {
             developerConnection.set("scm:git:ssh://git@github.com/cyrillrx/kmp-logger-tracker.git")
         }
     }
+}
+
+signing {
+    isRequired = gradle.startParameter.taskNames.any { "MavenCentral" in it }
 }
