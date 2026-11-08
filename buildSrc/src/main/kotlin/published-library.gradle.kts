@@ -1,7 +1,3 @@
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SourcesJar
-
 plugins {
     id("kmp-library")
     base
@@ -13,7 +9,6 @@ plugins {
 private val repositoryUrl = "https://github.com/cyrillrx/kmp-logger-tracker"
 
 mavenPublishing {
-    configure(KotlinMultiplatform(JavadocJar.Dokka(taskName = "dokkaGeneratePublicationHtml"), SourcesJar.Sources()))
     coordinates(artifactId = base.archivesName.get())
     publishToMavenCentral()
     signAllPublications()
