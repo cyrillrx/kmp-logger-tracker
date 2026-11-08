@@ -4,6 +4,8 @@ ktlint = "14.2.0"
 agp = "9.4.1"
 kover = "0.9.11"
 atomicfu = "0.33.0"
+mavenPublish = "0.37.0"
+dokka = "2.3.0"
 
 # Tracker/logger extensions
 firebaseCore = "21.1.1"
@@ -14,6 +16,8 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 ktlint-gradle-plugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 kover-gradle-plugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPublish" }
+dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 
 # Tracker/logger extensions
 tracker-firebase = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
