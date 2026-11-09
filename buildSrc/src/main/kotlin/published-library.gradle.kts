@@ -7,6 +7,10 @@ plugins {
 
 private val repositoryUrl = "https://github.com/cyrillrx/kmp-logger-tracker"
 
+dokka {
+    moduleName.set(base.archivesName)
+}
+
 mavenPublishing {
     coordinates(artifactId = base.archivesName.get())
     publishToMavenCentral()
