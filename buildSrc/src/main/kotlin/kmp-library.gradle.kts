@@ -9,6 +9,11 @@ plugins {
     id("org.jetbrains.kotlinx.kover")
 }
 
+version = providers.gradleProperty("VERSION_NAME").get()
+
+// TODO(#48): name the published klibs after GROUP rather than the Gradle default group.
+base.archivesName.set(path.removePrefix(":").replace(':', '-').removeSuffix("-core"))
+
 kotlin {
     jvmToolchain(Version.JDK)
     explicitApi()

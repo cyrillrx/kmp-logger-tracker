@@ -51,9 +51,9 @@ Modules are nested rather than given compound names ([ADR-004](docs/adr/adr-004-
 | `:tracker:firebase` | `tracker/firebase/` | `io.github.cyrillrx:tracker-firebase` |
 | `:sample`           | `sample/`           | Not published                         |
 
-`:logger:sentry` and `:sample` do not exist yet, and `tracker/firebase` still holds the legacy Android-only module until phase 6 rewrites it.
+`:logger:sentry` and `:sample` do not exist yet, `:tracker:core` is published only from `1.1.0` ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)), and `tracker/firebase` still holds the legacy Android-only module until phase 6 rewrites it.
 
-Library modules apply the `kmp-library` convention plugin from `buildSrc`, which holds the targets, the toolchain, ktlint and Kover; a module's own build script only sets what is specific to it.
+Library modules apply the `kmp-library` convention plugin from `buildSrc`, which holds the targets, the toolchain, ktlint, Kover, the shared version and the archive name derived from the module path. Published modules apply `published-library` instead, which applies `kmp-library` and adds the Maven Central publication with that archive name as the `artifactId`. A module's own build script only sets what is specific to it.
 
 Every module ships the same version, published to Maven Central from a `vX.Y.Z` tag ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
 

@@ -1,11 +1,8 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
-    id("kmp-library")
+    id("published-library")
 }
-
-base.archivesName.set("logger")
-project.version = Version.LOGGER_VERSION
 
 kotlin {
     applyDefaultHierarchyTemplate {
