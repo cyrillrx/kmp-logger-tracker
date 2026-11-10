@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
           java-version: 25
       - uses: gradle/actions/setup-gradle@v6
-      - run: ./gradlew ktlintCheck jvmTest testAndroidHostTest checkKotlinAbi koverXmlReport
+      - run: ./gradlew ktlintCheck jvmTest testAndroidHostTest checkKotlinAbi koverXmlReport --continue
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -43,4 +43,4 @@ jobs:
           distribution: temurin
           java-version: 25
       - uses: gradle/actions/setup-gradle@v6
-      - run: ./gradlew assemble checkKotlinAbi iosSimulatorArm64Test
+      - run: ./gradlew assemble checkKotlinAbi iosSimulatorArm64Test --continue
