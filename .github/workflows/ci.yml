@@ -33,7 +33,7 @@ jobs:
           if-no-files-found: ignore
 
   ios:
-    name: iOS simulator tests
+    name: Build every target, iOS ABI and simulator tests
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
@@ -43,4 +43,4 @@ jobs:
           distribution: temurin
           java-version: 25
       - uses: gradle/actions/setup-gradle@v6
-      - run: ./gradlew iosSimulatorArm64Test
+      - run: ./gradlew assemble checkKotlinAbi iosSimulatorArm64Test
