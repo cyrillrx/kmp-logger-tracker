@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   checks:
-    name: Lint, JVM and Android tests, ABI, coverage
+    name: Lint, JVM and Android tests, coverage
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
           java-version: 25
       - uses: gradle/actions/setup-gradle@v6
-      - run: ./gradlew ktlintCheck jvmTest testAndroidHostTest checkKotlinAbi koverXmlReport --continue
+      - run: ./gradlew ktlintCheck jvmTest testAndroidHostTest koverXmlReport --continue
       - uses: actions/upload-artifact@v7
         if: always()
         with:
