@@ -46,5 +46,6 @@ jobs:
         with:
           path: ~/.konan
           key: konan-${{ runner.os }}-${{ hashFiles('gradle/libs.versions.toml') }}
+          restore-keys: konan-${{ runner.os }}-
       - uses: gradle/actions/setup-gradle@v6
       - run: ./gradlew assemble checkKotlinAbi iosSimulatorArm64Test --continue
