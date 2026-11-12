@@ -32,7 +32,7 @@ jobs:
           path: "**/build/reports/kover/report.xml"
           if-no-files-found: ignore
 
-  ios:
+  macos:
     name: Build every target, iOS ABI and simulator tests
     runs-on: macos-latest
     timeout-minutes: 30
