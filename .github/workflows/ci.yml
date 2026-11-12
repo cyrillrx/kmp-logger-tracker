@@ -33,7 +33,7 @@ jobs:
           if-no-files-found: ignore
 
   macos:
-    name: Build every target, iOS ABI and simulator tests
+    name: Build every target, ABI and iOS simulator tests
     runs-on: macos-latest
     timeout-minutes: 30
     steps:
