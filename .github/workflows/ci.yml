@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   checks:
-    name: Lint, JVM and Android tests, coverage
+    name: Lint, JVM and Android host tests, coverage
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
