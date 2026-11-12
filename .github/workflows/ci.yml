@@ -26,7 +26,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v6
       - run: ./gradlew ktlintCheck jvmTest testAndroidHostTest koverXmlReport --continue
       - uses: actions/upload-artifact@v7
-        if: always()
+        if: ${{ !cancelled() }}
         with:
           name: kover-report
           path: "**/build/reports/kover/report.xml"
