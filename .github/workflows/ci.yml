@@ -30,7 +30,6 @@ jobs:
         with:
           name: kover-report
           path: "**/build/reports/kover/report.xml"
-          if-no-files-found: warn
 
   macos:
     name: Build every target, ABI and iOS simulator tests
