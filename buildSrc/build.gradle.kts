@@ -1,3 +1,4 @@
+// TODO(#52): apply ktlint to buildSrc.
 plugins {
     `kotlin-dsl`
 }
