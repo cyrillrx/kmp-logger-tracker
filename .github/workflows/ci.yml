@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   checks:
+    # TODO(#50): upload the test reports when a check fails.
     name: Lint, JVM and Android host tests, coverage
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -32,6 +33,7 @@ jobs:
           path: "**/build/reports/kover/report.xml"
 
   macos:
+    # TODO(#51): cache ~/.konan/dependencies.
     name: Build every target, ABI and iOS simulator tests
     runs-on: macos-latest
     timeout-minutes: 30
