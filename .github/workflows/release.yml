@@ -47,7 +47,7 @@ jobs:
             found && /^## / { exit }
             found { print }
           ' CHANGELOG.md \
-            | sed -E "s#\]\(([^):]+)\)#](https://github.com/$GITHUB_REPOSITORY/blob/$GITHUB_REF_NAME/\1)#g" \
+            | sed -E "s#\]\(([^):#][^):]*)\)#](https://github.com/$GITHUB_REPOSITORY/blob/$GITHUB_REF_NAME/\1)#g" \
             > release-notes.md
           if ! grep -q '[^[:space:]]' release-notes.md; then
             echo "::error::CHANGELOG.md has no section for $VERSION"
