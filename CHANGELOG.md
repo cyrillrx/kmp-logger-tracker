@@ -2,7 +2,7 @@
 
 All notable changes to the libraries are recorded here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
-From 0.1.0 onwards, every module shares one version and is published to Maven Central under `io.github.cyrillrx` ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
+From 0.1.0 onwards, the modules share one version and are published to Maven Central under `io.github.cyrillrx`, each from the version [ADR-001](docs/adr/adr-001-distribution-via-maven-central.md) sets.
 
 ## [Unreleased]
 
