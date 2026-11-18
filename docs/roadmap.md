@@ -6,7 +6,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 | Topic        | Decision                                                                                      | Reference                                                      |
 |--------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| Distribution | Maven Central, `io.github.cyrillrx`, one version, published on tag, a beta before `1.0.0`     | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
+| Distribution | Maven Central, `io.github.cyrillrx`, one version, published on tag, `0.x` betas before `1.0.0`     | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | Toolchain    | Latest stable Kotlin, AGP, Gradle and JDK LTS; consumers align                                | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
 | API model    | Injectable instances plus an optional global facade, thread-safe                              | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
 | Privacy      | Third-party children opt in per consent category; redaction before any send                   | [ADR-003](adr/adr-003-consent-and-redaction.md)                |
@@ -52,10 +52,10 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [ ] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
 - [x] `ci.yml`: ktlint, JVM and Android host tests and Kover on Linux; build of every target, ABI check and iOS simulator tests on macOS.
 - [x] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
-- [x] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`, as a prerelease for `-rcN` tags.
+- [x] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
 - [x] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
-- [ ] Inspect `publishToMavenLocal`, then release `v1.0.0-rc1` as the beta, adopted by a first consumer after aligning its toolchain.
-- [ ] Release `io.github.cyrillrx:logger:1.0.0` once its last release candidate is adopted with no open regression.
+- [ ] Inspect `publishToMavenLocal`, then release `v0.1.0` as the beta, adopted by a first consumer after aligning its toolchain.
+- [ ] Release `io.github.cyrillrx:logger:1.0.0` from the last `0.x` once a consumer has adopted it with no open regression.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
 

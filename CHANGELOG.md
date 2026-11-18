@@ -2,7 +2,7 @@
 
 All notable changes to the libraries are recorded here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/).
 
-From 1.0.0 onwards, every module shares one version and is published to Maven Central under `io.github.cyrillrx` ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
+From 0.1.0 onwards, every module shares one version and is published to Maven Central under `io.github.cyrillrx` ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
 
 ## [Unreleased]
 
@@ -37,7 +37,7 @@ From 1.0.0 onwards, every module shares one version and is published to Maven Ce
 - `LogEvent`, which nothing used and whose name broke Firebase's 40-character limit; the tracker no longer depends on the logger.
 - The per-library iOS frameworks `KMPLogger` and `KMPTracker`; consumers expose their own umbrella framework.
 
-## Before 1.0.0
+## Before Maven Central
 
 The libraries were never published under the current coordinates. Their earlier history, kept per module in `release_notes.txt` files until this changelog replaced them, is summarised below; the full notes remain in the git history.
 
