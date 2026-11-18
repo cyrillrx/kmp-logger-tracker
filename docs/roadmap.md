@@ -4,14 +4,14 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Decisions
 
-| Topic        | Decision                                                                                      | Reference                                                      |
-|--------------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| Distribution | Maven Central, `io.github.cyrillrx`, one version, published on tag, `0.x` betas before `1.0.0`     | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
-| Toolchain    | Latest stable Kotlin, AGP, Gradle and JDK LTS; consumers align                                | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
-| API model    | Injectable instances plus an optional global facade, thread-safe                              | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
-| Privacy      | Third-party children opt in per consent category; redaction before any send                   | [ADR-003](adr/adr-003-consent-and-redaction.md)                |
-| Backends     | Sentry and Firebase Analytics; legacy modules removed; nested modules; CMP sample             | [ADR-004](adr/adr-004-supported-backends-and-module-layout.md) |
-| Logger       | Kept in-house and modernised rather than replaced by Kermit                                   | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
+| Topic        | Decision                                                                                       | Reference                                                      |
+|--------------|------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| Distribution | Maven Central, `io.github.cyrillrx`, one version, published on tag, `0.x` betas before `1.0.0` | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
+| Toolchain    | Latest stable Kotlin, AGP, Gradle and JDK LTS; consumers align                                 | [ADR-001](adr/adr-001-distribution-via-maven-central.md)       |
+| API model    | Injectable instances plus an optional global facade, thread-safe                               | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
+| Privacy      | Third-party children opt in per consent category; redaction before any send                    | [ADR-003](adr/adr-003-consent-and-redaction.md)                |
+| Backends     | Sentry and Firebase Analytics; legacy modules removed; nested modules; CMP sample              | [ADR-004](adr/adr-004-supported-backends-and-module-layout.md) |
+| Logger       | Kept in-house and modernised rather than replaced by Kermit                                    | [ADR-002](adr/adr-002-api-instances-with-global-facade.md)     |
 
 ## Phase 0 — Hygiene and documents (~1 day)
 
