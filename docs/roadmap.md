@@ -54,7 +54,7 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [x] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
 - [x] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
-- [ ] Inspect `publishToMavenLocal`, then release `v0.1.0` as the beta, adopted by a first consumer after aligning its toolchain.
+- [ ] Inspect `publishToMavenLocal`, then release `v0.1.0` as the first beta, adopted by a first consumer after aligning its toolchain.
 - [ ] Release `io.github.cyrillrx:logger:1.0.0` from the last `0.x` once a consumer has adopted it with no open regression.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
