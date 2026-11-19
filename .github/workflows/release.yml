@@ -100,7 +100,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ needs.preflight.outputs.version }}
         run: |
-          prerelease=""
-          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
           gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --verify-tag \
-            --title "$VERSION" --notes-file release-notes.md $prerelease
+            --title "$VERSION" --notes-file release-notes.md
