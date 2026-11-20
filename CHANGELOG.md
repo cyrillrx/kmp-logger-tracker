@@ -6,6 +6,8 @@ From 0.1.0 onwards, the modules share one version and are published to Maven Cen
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-19
+
 ### Added
 
 - `LogEntry`, the immutable record handed to every child: severity, tag, message, throwable, attributes and timestamp.
