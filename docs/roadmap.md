@@ -40,7 +40,8 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
 - [x] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
 - [x] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
-- [ ] `ConsoleChild` ([ADR-005](adr/adr-005-one-common-type-per-child.md)), one common type writing to the JVM console, Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)); it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [x] `ConsoleChild` ([ADR-005](adr/adr-005-one-common-type-per-child.md)), one common type on every platform, writing to the console until the native backends land; it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [ ] `ConsoleChild` writes to Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)).
 - [ ] A per-thread `onChildError` recursion guard ([#33](https://github.com/cyrillrx/kmp-logger-tracker/issues/33)) and a guard against re-entrant logging ([#37](https://github.com/cyrillrx/kmp-logger-tracker/issues/37)).
 - [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration ([#46](https://github.com/cyrillrx/kmp-logger-tracker/issues/46)).
