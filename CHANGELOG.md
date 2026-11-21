@@ -6,7 +6,7 @@ From 0.1.0 onwards, the modules share one version and are published to Maven Cen
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-11-19
+## [0.1.0] - 2026-11-20
 
 ### Added
 
@@ -15,7 +15,7 @@ From 0.1.0 onwards, the modules share one version and are published to Maven Cen
 - `Logger` interface with a lazy message, structured attributes, and `verbose` to `fatal` shortcuts.
 - `CompositeLogger`, which dispatches to its children, can be changed from any thread, and reports a failing child to `onChildError` instead of throwing.
 - `Log`, the global facade, delegating to the logger given to `Log.install`.
-- `ConsoleChild`, one console child for every platform ([ADR-005](docs/adr/adr-005-one-common-type-per-child.md)). On the JVM it prints each entry once: errors on the standard error, the rest on the standard output.
+- `ConsoleChild`, one console child for every platform ([ADR-005](docs/adr/adr-005-one-common-type-per-child.md)). On the JVM it prints each entry once: errors on the standard error, the rest on the standard output. On Android and iOS it prints to the standard output until the Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)) backends land.
 
 ### Changed
 
@@ -60,3 +60,6 @@ The libraries were never published under the current coordinates. Their earlier 
 ### Firebase tracker
 
 - **0.4.1** (2016-11-17) — Last release of the Android-only extension, plugged into Firebase Analytics; rewritten in phase 6 of the [roadmap](docs/roadmap.md).
+
+[Unreleased]: https://github.com/cyrillrx/kmp-logger-tracker/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/cyrillrx/kmp-logger-tracker/releases/tag/v0.1.0

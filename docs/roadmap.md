@@ -40,7 +40,8 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 - [x] `Logger` interface with a lazy `message: () -> String`, structured attributes, and `verbose` … `fatal` extensions.
 - [x] `CompositeLogger`: atomically swapped immutable child list, per-child failure isolation routed to `onChildError`.
 - [x] `object Log` global facade with `Log.install(logger)`; the `L` typealias goes.
-- [ ] `ConsoleChild` ([ADR-005](adr/adr-005-one-common-type-per-child.md)), one common type writing to the JVM console, Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)); it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [x] `ConsoleChild` ([ADR-005](adr/adr-005-one-common-type-per-child.md)), one common type on every platform, writing to the console until the native backends land; it replaces `SystemOutLog`, `LogCat`, `NsLogger` and `OsLogger`.
+- [ ] `ConsoleChild` writes to Logcat ([#40](https://github.com/cyrillrx/kmp-logger-tracker/issues/40)) and `os_log` ([#41](https://github.com/cyrillrx/kmp-logger-tracker/issues/41)).
 - [ ] A per-thread `onChildError` recursion guard ([#33](https://github.com/cyrillrx/kmp-logger-tracker/issues/33)) and a guard against re-entrant logging ([#37](https://github.com/cyrillrx/kmp-logger-tracker/issues/37)).
 - [x] `RamLogChild` in the main source set; `commonTest` coverage of filtering, laziness, failure isolation and formatting; JVM coverage of concurrent registration.
 - [ ] KDoc on every public declaration ([#46](https://github.com/cyrillrx/kmp-logger-tracker/issues/46)).
@@ -49,12 +50,13 @@ Brings the repository from the state recorded in [`audit-2026-10.md`](audit-2026
 
 ## Phase 3 — Publication and CI, release 1.0.0 (~1.5-2 days)
 
-- [ ] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
+- [x] Manual prerequisites: Central Portal account, `io.github.cyrillrx` namespace verified, GPG key published, repository secrets set.
 - [x] `ci.yml`: ktlint, JVM and Android host tests and Kover on Linux; build of every target, ABI check and iOS simulator tests on macOS.
 - [x] `published-library` convention plugin in `buildSrc`: vanniktech, POM, signing, explicit `artifactId`, Dokka.
 - [x] `release.yml`: publish to Maven Central on `v*` tags and create the GitHub Release from `CHANGELOG.md`.
 - [x] A single `VERSION_NAME` in `gradle.properties`, replacing `LOGGER_VERSION` and `TRACKER_VERSION` in `Version.kt` and checked against the tag by `release.yml`; `published-library` applied to `:logger:core` only.
-- [ ] Inspect `publishToMavenLocal`, then release `v0.1.0` as the first beta, adopted by a first consumer after aligning its toolchain.
+- [x] Inspect `publishToMavenLocal`, then release `v0.1.0` as the first beta.
+- [ ] Adopt `v0.1.0` in a first consumer after aligning its toolchain.
 - [ ] Release `io.github.cyrillrx:logger:1.0.0` from the last `0.x` once a consumer has adopted it with no open regression.
 
 ## Phase 4 — Tracker (~3-4 days, released in 1.1.0)
