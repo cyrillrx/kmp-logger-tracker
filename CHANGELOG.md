@@ -60,3 +60,6 @@ The libraries were never published under the current coordinates. Their earlier 
 ### Firebase tracker
 
 - **0.4.1** (2016-11-17) — Last release of the Android-only extension, plugged into Firebase Analytics; rewritten in phase 6 of the [roadmap](docs/roadmap.md).
+
+[Unreleased]: https://github.com/cyrillrx/kmp-logger-tracker/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/cyrillrx/kmp-logger-tracker/releases/tag/v0.1.0
