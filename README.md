@@ -1,5 +1,7 @@
 # Logger and Tracker project
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.cyrillrx/logger)](https://central.sonatype.com/artifact/io.github.cyrillrx/logger)
+
 ## Overview
 
 The project consists of two Kotlin Multiplatform (KMP) libraries: Logger and Tracker.
@@ -18,19 +20,27 @@ device-specific functionalities.
 
 ### Installation
 
-1. Clone the repository:
+The Logger is published on Maven Central. Add it to the common source set of a Kotlin Multiplatform module:
 
-```sh
-git clone https://github.com/cyrillrx/kmp-logger-tracker.git
-cd kmp-logger-tracker
+```kotlin
+kotlin {
+    sourceSets {
+        commonMain.dependencies {
+            implementation("io.github.cyrillrx:logger:<version>")
+        }
+    }
+}
 ```
 
-2. Open the project in Android Studio.
-3. Sync the project with Gradle files.
+It targets Android, the JVM, `iosArm64` and `iosSimulatorArm64`, and is built with the latest stable toolchain: a consumer aligns on it before adopting a release ([ADR-001](docs/adr/adr-001-distribution-via-maven-central.md)).
+
+The Tracker is not published yet.
 
 ### Building the Project
 
 ```sh
+git clone https://github.com/cyrillrx/kmp-logger-tracker.git
+cd kmp-logger-tracker
 ./gradlew build
 ```
 
